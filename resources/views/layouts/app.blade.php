@@ -6,9 +6,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/primer.css') }}" rel="stylesheet">
+    <style type="text/css">
+        .ui-datepicker {
+            z-index: 100 !important;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -29,6 +34,57 @@ $('.toggle-finder').on('click', function() {
     $this.addClass('btn-light').removeClass('btn-dark opacity-6').find('i').addClass('text-teal');
     $this.siblings().addClass('btn-dark opacity-6').removeClass('btn-light').find('i').removeClass('text-teal');
 });
+</script>
+<script>
+/* Brazilian initialisation for the jQuery UI date picker plugin. */
+/* Written by Leonildo Costa Silva (leocsilva@gmail.com). */
+( function( factory ) {
+    if ( typeof define === "function" && define.amd ) {
+
+        // AMD. Register as an anonymous module.
+        define( [ "../widgets/datepicker" ], factory );
+    } else {
+
+        // Browser globals
+        factory( jQuery.datepicker );
+    }
+}( function( datepicker ) {
+
+datepicker.regional[ "pt-BR" ] = {
+    closeText: "Fechar",
+    prevText: "&#x3C;Anterior",
+    nextText: "Próximo&#x3E;",
+    currentText: "Hoje",
+    monthNames: [ "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+    "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro" ],
+    monthNamesShort: [ "Jan","Fev","Mar","Abr","Mai","Jun",
+    "Jul","Ago","Set","Out","Nov","Dez" ],
+    dayNames: [
+        "Domingo",
+        "Segunda-feira",
+        "Terça-feira",
+        "Quarta-feira",
+        "Quinta-feira",
+        "Sexta-feira",
+        "Sábado"
+    ],
+    dayNamesShort: [ "Dom","Seg","Ter","Qua","Qui","Sex","Sáb" ],
+    dayNamesMin: [ "Dom","Seg","Ter","Qua","Qui","Sex","Sáb" ],
+    weekHeader: "Sm",
+    dateFormat: "DD, d 'de' MM 'de' yy",
+    firstDay: 0,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix: "" };
+datepicker.setDefaults( datepicker.regional[ "pt-BR" ] );
+
+return datepicker.regional[ "pt-BR" ];
+
+} ) );
+$( function() {
+    today = moment().locale('pt').format("dddd, D [de] MMMM [de] YYYY");
+    $( "#datepicker" ).val(today).datepicker();
+} );
 </script>
 </body>
 </html>

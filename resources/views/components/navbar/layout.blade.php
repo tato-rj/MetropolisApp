@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Metrópolis</a>
+<nav class="navbar navbar-expand-lg navbar-dark position-absolute w-100 z-20 py-4 px-5">
+  <a class="navbar-brand" href="#"><img src="{{asset('images/logo1.svg')}}" width="60"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -8,16 +8,17 @@
     <ul class="navbar-nav mr-auto">
         @include('components.navbar.link', ['title' => 'Quem Somos', 'url' => '#'])
         @include('components.navbar.link', ['title' => 'O Ambiente', 'url' => '#'])
-        @include('components.navbar.dropdown', ['title' => 'Serviços', 'items' => [
-                ['title' => 'Mesas de Trabalho', 'url' => '#'],
-                ['title' => 'Sala de Reunião', 'url' => '#']
-        ]])
+        @include('components.navbar.link', ['title' => 'Planos', 'url' => '#'])
         @include('components.navbar.link', ['title' => 'Contato', 'url' => '#'])
 
     </ul>
-    <form>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Área do Cliente</button>
+    @guest
+    <form method="GET" action="{{route('login')}}">
+      <button class="btn btn-red rounded-0 my-2 my-sm-0" type="submit"><strong>Área do Cliente</strong></button>
     </form>
+    @else
+    LOGGED IN!
+    @endguest
   </div>
 </nav>
 {{-- <nav class="navbar navbar-expand-md navbar-light navbar-laravel">

@@ -30272,22 +30272,9 @@ module.exports = __webpack_require__(169);
 /* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 __webpack_require__(138);
 
 window.Vue = __webpack_require__(162);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 Vue.component('example-component', __webpack_require__(165));
 
@@ -30298,7 +30285,6 @@ Vue.component('example-component', __webpack_require__(165));
 /***/ }),
 /* 138 */
 /***/ (function(module, exports, __webpack_require__) {
-
 
 window._ = __webpack_require__(139);
 window.Popper = __webpack_require__(6).default;

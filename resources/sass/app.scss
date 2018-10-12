@@ -1,10 +1,4 @@
-
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
+@import 'bootstrap';
 @import 'variables';
-
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-@import '~jquery-ui-bundle/jquery-ui.min';
+@import 'responsive';
+@import 'components/calendar';

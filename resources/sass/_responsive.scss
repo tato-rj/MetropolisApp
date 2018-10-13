@@ -2,6 +2,10 @@
 	.toggle-finder {
 		width: 100%;
 	}
+
+	.step-icon {
+	    width: 4rem !important;
+	}
 }
 @include media-breakpoint-down(md) {
 

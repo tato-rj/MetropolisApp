@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark position-absolute w-100 z-20 py-4 px-5">
-  <a class="navbar-brand" href="#"><img src="{{asset('images/logo1.svg')}}" width="60"></a>
+<nav class="navbar animated animation-fast navbar-expand-lg navbar-dark position-absolute w-100 z-20 py-4 px-5">
+  <a class="navbar-brand" href="/"><img src="{{asset('images/logo1.svg')}}" width="60"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,14 +7,15 @@
   <div class="collapse navbar-collapse" id="navbar-menu">
     <ul class="navbar-nav mr-auto">
 
-        @include('components.navbar.link', ['title' => 'Quem Somos', 'url' => '#'])
-        @include('components.navbar.link', ['title' => 'O Ambiente', 'url' => '#'])
-        @include('components.navbar.link', ['title' => 'Planos', 'url' => '#'])
-        @include('components.navbar.link', ['title' => 'Contato', 'url' => '#'])
+        @include('components.navbar.link', ['title' => 'Quem Somos', 'url' => '/'])
+        @include('components.navbar.link', ['title' => 'O Ambiente', 'url' => '/'])
+        @include('components.navbar.link', ['title' => 'Workshops', 'url' => '/'])
+        @include('components.navbar.link', ['title' => 'Planos', 'url' => '/'])
+        @include('components.navbar.link', ['title' => 'Contato', 'url' => '/'])
 
     </ul>
     @guest
-    <form method="GET" action="{{route('login')}}">
+    <form method="GET" action="/">
       <button class="btn btn-red rounded-0 my-2 my-sm-0" type="submit"><strong>Área do Cliente</strong></button>
     </form>
     @else

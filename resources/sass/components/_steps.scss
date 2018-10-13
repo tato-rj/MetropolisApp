@@ -1,0 +1,42 @@
+.step {
+  list-style: none;
+  margin: 0;
+}
+
+.step-item {
+  display: flex;
+  padding: 1rem 0;
+}
+
+.step-icon {
+  position: relative;
+  width: 7rem;
+  flex-shrink: 0;
+  text-align: center;
+
+  .iconbox {
+    @extend .iconbox-lg;
+    color: $grey-dark;
+    background-color: $grey-lightest;
+    font-size: 1.5rem;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 2.5rem;
+    bottom: -2rem;
+    margin-left: -1px;
+    border-left: 2px dashed $grey-lightest;
+  }
+}
+
+.step-content {
+  margin-left: 1rem;
+}
+
+.step .step-item:last-child .step-icon::before {
+  bottom: 1rem;
+  //display: none;
+}

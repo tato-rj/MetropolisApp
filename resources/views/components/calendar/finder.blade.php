@@ -7,7 +7,7 @@
 				<i class="fas fa-users mr-2"></i>SALA DE REUNIÃO</button>
 		</div>
 		<div class="px-4 py-3 bg-light">
-			<form>
+			<form method="GET" action="/">
 				<div class="row w-100 mx-auto">
 					<div class="date-input position-relative col-lg-6 col-12 p-0">
 						<input class="form-control rounded-0 border cursor-pointer"  type="text" id="datepicker" data-now="{{now()}}">

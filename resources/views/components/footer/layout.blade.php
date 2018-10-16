@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-10 col-md-8 mx-auto">
           <div class="mb-5 text-light">
-            <img src="{{asset('images/logo1.svg')}}" width="60">
+            <img src="{{asset('images/logo.svg')}}" width="60">
           </div>
 
           <div class="mb-3 text-light">

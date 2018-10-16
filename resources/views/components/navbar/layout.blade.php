@@ -1,5 +1,5 @@
 <nav class="navbar animated animation-fast navbar-expand-lg navbar-dark position-absolute w-100 z-20 py-4 px-5">
-  <a class="navbar-brand" href="/"><img src="{{asset('images/logo1.svg')}}" width="60"></a>
+  <a class="navbar-brand" href="/"><img src="{{asset('images/logo.svg')}}" width="60"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -15,9 +15,9 @@
 
     </ul>
     @guest
-    <form method="GET" action="/">
-      <button class="btn btn-red rounded-0 my-2 my-sm-0" type="submit"><strong>Área do Cliente</strong></button>
-    </form>
+
+      <a class="btn btn-red rounded-0 my-2 my-sm-0" href="{{route('login')}}"><strong>Área do Cliente</strong></a>
+
     @else
     LOGGED IN!
     @endguest

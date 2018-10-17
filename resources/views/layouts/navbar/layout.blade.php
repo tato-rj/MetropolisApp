@@ -7,11 +7,11 @@
   <div class="collapse navbar-collapse" id="navbar-menu">
     <ul class="navbar-nav mr-auto">
 
-        @include('components.navbar.link', ['title' => 'Quem Somos', 'url' => '/'])
-        @include('components.navbar.link', ['title' => 'O Ambiente', 'url' => '/'])
-        @include('components.navbar.link', ['title' => 'Workshops', 'url' => '/'])
-        @include('components.navbar.link', ['title' => 'Planos', 'url' => '/'])
-        @include('components.navbar.link', ['title' => 'Contato', 'url' => '/'])
+        @include('layouts.navbar.link', ['title' => 'Quem Somos', 'url' => '/quem-somos'])
+        @include('layouts.navbar.link', ['title' => 'Planos', 'url' => '/'])
+        @include('layouts.navbar.link', ['title' => 'Consultoria', 'url' => '/'])
+        @include('layouts.navbar.link', ['title' => 'Workshops', 'url' => '/'])
+        @include('layouts.navbar.link', ['title' => 'Contato', 'url' => '/contato'])
 
     </ul>
     @guest

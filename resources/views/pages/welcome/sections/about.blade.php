@@ -1,4 +1,4 @@
-<section id="scroll-mark" class="py-4 mb-8 bg-light">
+<section class="py-4 mb-8 bg-light">
   <div class="container">
     <div class="row">
 

@@ -5,3 +5,12 @@
 @import 'components/steps';
 @import 'components/icons';
 @import 'components/custom';
+
+.col-default {
+	@extend .col-lg-8, .col-md-10, .col-12, .mx-auto;
+}
+
+.head-bar {
+	@extend .p-4;
+	margin-top: -5.5em;
+}

@@ -4,7 +4,7 @@
 
 @include('pages.welcome.sections.main')
 @include('pages.welcome.sections.about')
-@include('pages.welcome.sections.video')
+@include('pages.welcome.sections.steps')
 @include('pages.welcome.sections.icons')
 @include('pages.welcome.sections.grid')
 @include('pages.welcome.sections.partners')

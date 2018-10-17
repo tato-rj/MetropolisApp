@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('pages.welcome.index');
 });
 
+Route::get('/quem-somos', function () {
+    return view('pages.about.index');
+});
+
+Route::get('/contato', function () {
+    return view('pages.contact.index');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

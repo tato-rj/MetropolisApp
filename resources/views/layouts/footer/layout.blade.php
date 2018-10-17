@@ -8,13 +8,20 @@
             <img src="{{asset('images/logo.svg')}}" width="60">
           </div>
 
-          <div class="mb-3 text-light">
-            <p class="mb-1 ">Av. Rio Branco, nº 185 Sala 1025</p>
-            <p class="mb-1 ">Centro, Rio de Janeiro/RJ</p>
-          </div>
           <div class="mb-5 text-light">
-            <p class="mb-1 ">Telefone: +55 21 3199-1377 | +55 21 3429-1377</p>
-            <p class="mb-1 ">Email: contato@metropolis.com</p>
+            <div class="mb-3">
+              <p class="mb-1"><strong>Endereço</strong></p>
+              <p class="mb-1">Av. Rio Branco, nº 185 Sala 1025</p>
+              <p class="m-0">Centro, Rio de Janeiro/RJ</p>
+            </div>
+            <div class="mb-3">
+              <p class="mb-1"><strong>Telefone</strong></p>
+              <p class="m-0">+55 21 3199-1377 | +55 21 3429-1377</p>
+            </div>
+            <div class="mb-3">
+              <p class="mb-1"><strong>Email</strong></p>
+              <p class="m-0">contato@metropolis.com</p>
+            </div>
           </div>
 
           <div class="text-light">

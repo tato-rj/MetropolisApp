@@ -7,7 +7,7 @@
             <a href="/" class="btn-back-thin"></a>
             <div class="d-flex flex-center h-100">
                 <div class="row">
-                    <div class="col-12 mb-4 text-center">
+                    <div class="col-12 mb-2 text-center">
                         <img src="{{asset('images/logo.svg')}}" width="100" class="mb-3">
                         <p class="lead-lg">ÁREA DO CLIENTE</p>
                     </div>
@@ -17,20 +17,13 @@
                             <div class="form-group">
                                 <input type="email" name="email" class="form-control rounded-0 {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Meu e-mail" value="{{old('email')}}">
 
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                                @include('components/form/error', ['field' => 'email'])
                             </div>
 
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control rounded-0 {{ $errors->has('password') ? ' is-invalid' : '' }}" aria-describedby="password" placeholder="Password">
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                                
+                                @include('components/form/error', ['field' => 'password'])
                             </div>
 
                             <button type="submit" class="btn btn-red rounded-0 btn-block">LOGIN</button>
@@ -45,7 +38,7 @@
                                 <small>Esqueceu o seu passowrd? <span class="text-blue"><a href="/" class="link-no-blue">Clique aqui</a></span></small>
                             </p>
                             <p class="m-0">
-                                <small>Ainda não é membro? <span class="text-blue"><a href="/" class="link-no-blue">Criar a minha conta</a></span></small>
+                                <small>Ainda não é membro? <span class="text-blue"><a href="{{route('register')}}" class="link-no-blue">Criar a minha conta</a></span></small>
                             </p>
                         </div>
                     </div>

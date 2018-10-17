@@ -71459,17 +71459,33 @@ var CustomDatePicker = function () {
     }, {
         key: 'enableTogglers',
         value: function enableTogglers(finders) {
+            var object = this;
             $(finders).on('click', function () {
                 var $this = $(this);
-                var background = $this.attr('data-background');
 
-                if (background) $('#lead').css('background-image', background);
-
-                $this.addClass('btn-light').removeClass('btn-dark opacity-6').find('i').addClass('text-teal');
-                $this.siblings().addClass('btn-dark opacity-6').removeClass('btn-light').find('i').removeClass('text-teal');
+                object._updateBackground($this.attr('data-background'));
+                object._updateSelect($this.attr('data-target'));
+                object._updateButtons($this);
             });
 
             return this;
+        }
+    }, {
+        key: '_updateSelect',
+        value: function _updateSelect(target) {
+            $('select.capacity').not('#select-' + target).hide();
+            $('#select-' + target).show();
+        }
+    }, {
+        key: '_updateButtons',
+        value: function _updateButtons(button) {
+            button.addClass('btn-light').removeClass('btn-dark opacity-6').find('i').addClass('text-teal');
+            button.siblings().addClass('btn-dark opacity-6').removeClass('btn-light').find('i').removeClass('text-teal');
+        }
+    }, {
+        key: '_updateBackground',
+        value: function _updateBackground(background) {
+            if (background) $('#lead').css('background-image', background);
         }
     }]);
 

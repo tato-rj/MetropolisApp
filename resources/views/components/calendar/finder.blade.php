@@ -1,9 +1,9 @@
 <div class="row">
 	<div class="col-10 mx-auto">
 		<div class="d-flex flex-wrap">
-			<button class="toggle-finder btn btn-light rounded-0 btn-wide py-2" data-background="url({{asset('images/co-working.jpg')}})">
+			<button class="toggle-finder btn btn-light rounded-0 btn-wide py-2" data-target="co-working" data-background="url({{asset('images/co-working.jpg')}})">
 				<i class="text-teal fas fa-laptop mr-2"></i>CO-WORKING</button>
-			<button class="toggle-finder btn btn-dark opacity-6 rounded-0 btn-wide py-2" data-background="url({{asset('images/conference-room.jpg')}})">
+			<button class="toggle-finder btn btn-dark opacity-6 rounded-0 btn-wide py-2" data-target="conference-room" data-background="url({{asset('images/conference-room.jpg')}})">
 				<i class="fas fa-users mr-2"></i>SALA DE REUNIÃO</button>
 		</div>
 		<div class="px-4 py-3 bg-light">
@@ -19,9 +19,15 @@
 						<option>Tarde</option>
 						<option>Noite</option>
 					</select>
-					<select class="col-lg-2 col-4 form-control rounded-0 border">
+					<select id="select-co-working" class="capacity col-lg-2 col-4 form-control rounded-0 border">
 						<option>1 pessoa</option>
-						@for($i=2; $i<=20; $i++)
+						@for($i=2; $i<=12; $i++)
+						<option>{{$i}} pessoas</option>
+						@endfor
+					</select>
+					<select style="display: none;" id="select-conference-room" class="capacity col-lg-2 col-4 form-control rounded-0 border">
+						<option>1 pessoa</option>
+						@for($i=2; $i<=6; $i++)
 						<option>{{$i}} pessoas</option>
 						@endfor
 					</select>

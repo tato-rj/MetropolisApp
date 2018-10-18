@@ -656,6 +656,7 @@ pre code {
 .col-11,
 .col-12,
 .col-default,
+.plans .cover,
 .col,
 .col-auto,
 .col-sm-1,
@@ -816,7 +817,8 @@ pre code {
 }
 
 .col-12,
-.col-default {
+.col-default,
+.plans .cover {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 100%;
           flex: 0 0 100%;
@@ -1479,7 +1481,8 @@ pre code {
     max-width: 25%;
   }
 
-  .col-lg-4 {
+  .col-lg-4,
+  .plans .cover {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 33.33333333%;
             flex: 0 0 33.33333333%;
@@ -8711,7 +8714,8 @@ button.bg-dark:focus {
 }
 
 .mr-5,
-.mx-5 {
+.mx-5,
+.plans .description {
   margin-right: 3rem !important;
 }
 
@@ -8721,7 +8725,8 @@ button.bg-dark:focus {
 }
 
 .ml-5,
-.mx-5 {
+.mx-5,
+.plans .description {
   margin-left: 3rem !important;
 }
 
@@ -17697,12 +17702,34 @@ readers do not read off random characters that represent icons */
 }
 
 @media (max-width: 767.98px) {
+  .mb-4-sm {
+    margin-bottom: 1.5rem !important;
+  }
+
   .toggle-finder {
     width: 100%;
   }
 
   .step-icon {
     width: 4rem !important;
+  }
+
+  .plans .icons {
+    margin-bottom: 1.5em !important;
+  }
+
+  .plans .description {
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .plans .cover {
+    height: 250px;
+  }
+
+  .plans .description {
+    margin-right: 0 !important;
   }
 }
 
@@ -18586,6 +18613,12 @@ video {
   width: 100%;
   height: 100%;
   z-index: -100;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .head-bar {

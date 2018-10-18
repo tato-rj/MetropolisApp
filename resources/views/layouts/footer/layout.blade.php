@@ -1,5 +1,5 @@
 <section>
-  <div class="row no-gutters">
+  <div class="row no-gutters d-none d-md-flex">
     <div class="position-relative col-md-6 py-8 bg-align-center" style="background-image: url({{asset('images/footer.jpg')}})">
       <div class="overlay-darkest"></div>
       <div class="row">

@@ -71454,7 +71454,11 @@ var CustomDatePicker = function () {
     _createClass(CustomDatePicker, [{
         key: 'create',
         value: function create() {
-            this.element.val(this.today).datepicker();
+            this.element.val(this.today).datepicker({
+                onSelect: function onSelect(dateText, date) {
+                    $('input[name="date"]').val(date.selectedYear + '-' + date.selectedMonth + '-' + date.selectedDay);
+                }
+            });
         }
     }, {
         key: 'enableTogglers',
@@ -71465,10 +71469,16 @@ var CustomDatePicker = function () {
 
                 object._updateBackground($this.attr('data-background'));
                 object._updateSelect($this.attr('data-target'));
+                object._updateSpace($this.attr('data-target'));
                 object._updateButtons($this);
             });
 
             return this;
+        }
+    }, {
+        key: '_updateSpace',
+        value: function _updateSpace(space) {
+            $('input[name="space"]').val(space);
         }
     }, {
         key: '_updateSelect',

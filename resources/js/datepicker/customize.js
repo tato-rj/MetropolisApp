@@ -6,7 +6,11 @@ class CustomDatePicker
     }
 
     create() {
-        this.element.val(this.today).datepicker();
+        this.element.val(this.today).datepicker({
+            onSelect: function(dateText, date) {
+                $('input[name="date"]').val(date.selectedYear + '-' + date.selectedMonth + '-' + date.selectedDay);
+            }
+        });
     }
 
     enableTogglers(finders) {
@@ -16,10 +20,15 @@ class CustomDatePicker
 
 		    object._updateBackground($this.attr('data-background'));
 			object._updateSelect($this.attr('data-target'));
+            object._updateSpace($this.attr('data-target'));
 			object._updateButtons($this);
 		});
 
 		return this;
+    }
+
+    _updateSpace(space) {
+        $('input[name="space"]').val(space);
     }
 
     _updateSelect(target) {

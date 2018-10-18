@@ -14,3 +14,13 @@
 	@extend .p-4;
 	margin-top: -5.5em;
 }
+
+.plans {
+	.cover {
+		@extend .col-lg-4, .col-12;
+	}
+
+	.description {
+		@extend .mx-5;
+	}
+}

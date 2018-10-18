@@ -1,4 +1,8 @@
 @include media-breakpoint-down(sm) {
+	.mb-4-sm {
+		margin-bottom: 1.5rem !important;
+	}
+
 	.toggle-finder {
 		width: 100%;
 	}
@@ -6,9 +10,26 @@
 	.step-icon {
 	    width: 4rem !important;
 	}
+
+	.plans {
+		.icons {
+			margin-bottom: 1.5em !important; 
+		}
+		.description {
+			margin: 0 !important;
+		}
+	}
 }
 @include media-breakpoint-down(md) {
+	.plans {
+		.cover {
+			height: 250px;
+		}
 
+		.description {
+			margin-right: 0 !important;
+		}
+	}
 }
 @include media-breakpoint-down(lg) {
 

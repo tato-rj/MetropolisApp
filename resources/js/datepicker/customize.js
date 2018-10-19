@@ -2,7 +2,7 @@ class CustomDatePicker
 {
     constructor(element) {
     	this.element = $(element);
-        this.today = moment(this.element.attr('data-now')).locale('pt').format("dddd, D [de] MMMM [de] YYYY");
+        this.today = moment(this.element.attr('data-now')).locale('pt').format("D [de] MMMM [de] YYYY");
     }
 
     create() {

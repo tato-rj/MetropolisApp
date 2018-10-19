@@ -11,8 +11,8 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="text-center" style="margin-top: -40px">
-        <div class="border-pill px-3 py-1 bg-white border-{{$color}}-light d-inline-block border border-1x text-{{$color}}"><small><strong>desconto de {{$discount}}%</strong></small></div>
+      <div class="text-center" style="margin-top: -37px">
+        <div class="border-pill px-3 py-1 bg-white border-{{$color}}-light d-inline-block border text-{{$color}}"><small><strong>desconto de {{$discount}}%</strong></small></div>
       </div>            
       <div class="p-3 text-muted">
         {{$slot}}

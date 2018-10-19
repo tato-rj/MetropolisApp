@@ -22,14 +22,7 @@
 						])
 					</div>
 					<div class="flex-grow description">
-						@include('pages/plans/sections/list', [ 
-							'items' => [
-								['type' => 'co-working', 'duration' => '1 hora', 'price' => '20'],
-								['type' => 'co-working', 'duration' => '2 horas', 'price' => '30'],
-								['type' => 'co-working', 'duration' => '4 horas', 'price' => '50'],
-								['type' => 'co-working', 'duration' => 'Dia inteiro', 'price' => '80']
-							]
-						])
+						@include('pages/plans/sections/list', ['space' => 'co-working'])
 					</div>
 				</div>
 			</div>		
@@ -60,14 +53,7 @@
 						])
 					</div>
 					<div class="flex-grow description">
-						@include('pages/plans/sections/list', [ 
-							'items' => [
-								['type' => 'conference', 'duration' => '1 hora', 'price' => '50'],
-								['type' => 'conference', 'duration' => '2 horas', 'price' => '65'],
-								['type' => 'conference', 'duration' => '4 horas', 'price' => '120'],
-								['type' => 'conference', 'duration' => 'Dia inteiro', 'price' => '220']
-							]
-						])
+						@include('pages/plans/sections/list', ['space' => 'conference'])
 					</div>
 				</div>
 			</div>		

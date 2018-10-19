@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\SpaceSearchForm;
 use Carbon\Carbon;
 
 class SpacesController extends Controller
@@ -33,12 +34,14 @@ class SpacesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function search()
+    public function search(Request $request, SpaceSearchForm $form)
     {
-        $complete = request()->has(['space', 'date', 'time', 'duration', 'participants']);
-        $allDay = request()->duration == 'day';
-        $status = $complete || $allDay;
-        return view('pages.search.index', compact('status'));
+        if ($request->has('search'))
+            return view('pages.search.index');
+        
+        $available = true;
+
+        return view('pages.search.index', compact('available'));
     }
 
     /**

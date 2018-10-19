@@ -36,9 +36,11 @@
         <div class="col-lg-6 col-md-6 col-12">
           <form method="GET" action="/procurar">
             <input type="hidden" name="space" value="{{$type}}">
-            <input type="hidden" name="date" value="{{now()}}">
+            <input type="hidden" name="date" value="{{now()->format('Y-m-d')}}">
+            <input type="hidden" name="time" value="8">
             <input type="hidden" name="participants" value="1">
-            <input type="hidden" name="time" value="all_day">
+            <input type="hidden" name="duration" value="8">
+            <input type="hidden" name="search" value="true">
            <button class="btn btn-block btn-red rounded-0"><strong>Solicitar uma reserva</strong></button>
           </form>
         </div>

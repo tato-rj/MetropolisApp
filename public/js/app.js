@@ -71448,7 +71448,7 @@ var CustomDatePicker = function () {
         _classCallCheck(this, CustomDatePicker);
 
         this.element = $(element);
-        this.today = moment(this.element.attr('data-now')).locale('pt').format("dddd, D [de] MMMM [de] YYYY");
+        this.today = moment(this.element.attr('data-now')).locale('pt').format("D [de] MMMM [de] YYYY");
     }
 
     _createClass(CustomDatePicker, [{
@@ -71612,7 +71612,7 @@ module.exports = __webpack_require__("./resources/sass/app.scss");
                 dayNamesShort: [ "Dom","Seg","Ter","Qua","Qui","Sex","Sáb" ],
                 dayNamesMin: [ "Dom","Seg","Ter","Qua","Qui","Sex","Sáb" ],
                 weekHeader: "Sm",
-                dateFormat: "DD, d 'de' MM 'de' yy",
+                dateFormat: "d 'de' MMMM 'de' yy",
                 firstDay: 0,
                 isRTL: false,
                 showMonthAfterYear: false,

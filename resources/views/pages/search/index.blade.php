@@ -4,19 +4,25 @@
 
 @include('pages.search.sections.main')
 
-<div class="container">
+<div class="container mb-5">
 	<div class="row">
 		<div class="col-default pb-6 pt-5">
 			<div class="mb-4">
-				@if($status)
-				@include('components.alerts.success', ['message' => 'O espaço que você solicitou está disponível!'])
+				@if($errors->any() || empty($available) || ! $available)
+					@include('pages.search.form')
 				@else
-				<h5>Nós precisamos de algumas informações a mais...</h5>
+					@include('pages.search.confirm')
 				@endif
 			</div>
-			@include('pages.search.steps.schedule')
 		</div>
-	</div>	
+	</div>
+
+    <div class="text-center mb-4">
+      <h3 class="text-center mb-4">Planos especiais</h3>
+      <p class="lead m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor.</p>
+    </div>
+	@include('components.plans.all')
 </div>
 
 @endsection
@@ -24,13 +30,14 @@
 @push('scripts')
 <script type="text/javascript">
 (new CustomDatePicker('#datepicker')).enableSelect('select[name="space"]').create();
-$('#search select, #search input').on('change', function() {
-	$('.form-group').removeClass('hover-grayscale-out');
-	$('button[name="refresh"]').show();
-	$('button[name="continue"]').hide();
-});
-$('button[name="refresh"], button[name="continue"]').on('click', function() {
+$('button[name="search"]').on('click', function() {
 	$('form#search').submit();
 });
+
+$('#review #date').text(
+	moment(
+		$('#review #date').attr('data-date')
+	).locale('pt').format("D [de] MMMM [de] YYYY")
+);
 </script>
 @endpush

@@ -30,7 +30,9 @@ $('#modal-co-working, #modal-conference').on('show.bs.modal', function (e) {
 	let $modal = $(e.target);
 	
 	$modal.find('.price').text($button.attr('data-price'));
-	$modal.find('.duration').text($button.attr('data-duration')); 
+	$modal.find('.duration').text($button.attr('data-duration-string'));
+
+	$modal.find('input[name="duration"]').val($button.attr('data-duration'));
 })
 </script>
 @endpush

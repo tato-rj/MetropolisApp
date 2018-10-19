@@ -71448,7 +71448,7 @@ var CustomDatePicker = function () {
         _classCallCheck(this, CustomDatePicker);
 
         this.element = $(element);
-        this.today = moment().locale('pt').format("dddd, D [de] MMMM [de] YYYY");
+        this.today = moment(this.element.attr('data-now')).locale('pt').format("dddd, D [de] MMMM [de] YYYY");
     }
 
     _createClass(CustomDatePicker, [{
@@ -71456,14 +71456,18 @@ var CustomDatePicker = function () {
         value: function create() {
             this.element.val(this.today).datepicker({
                 onSelect: function onSelect(dateText, date) {
-                    $('input[name="date"]').val(date.selectedYear + '-' + date.selectedMonth + '-' + date.selectedDay);
-                }
+                    var month = parseInt(date.selectedMonth) + 1;
+                    var string = date.selectedYear + '-' + month + '-' + date.selectedDay;
+                    $('input[name="date"]').val(string).trigger('change');
+                },
+                beforeShowDay: $.datepicker.noWeekends
             });
         }
     }, {
         key: 'enableTogglers',
         value: function enableTogglers(finders) {
             var object = this;
+
             $(finders).on('click', function () {
                 var $this = $(this);
 
@@ -71476,6 +71480,19 @@ var CustomDatePicker = function () {
             return this;
         }
     }, {
+        key: 'enableSelect',
+        value: function enableSelect(element) {
+            var object = this;
+
+            $(element).on('change', function () {
+                var $this = $(this).find(':selected');
+
+                object._updateSelect($this.attr('data-target'));
+            });
+
+            return this;
+        }
+    }, {
         key: '_updateSpace',
         value: function _updateSpace(space) {
             $('input[name="space"]').val(space);
@@ -71483,8 +71500,8 @@ var CustomDatePicker = function () {
     }, {
         key: '_updateSelect',
         value: function _updateSelect(target) {
-            $('select.capacity').not('#select-' + target).hide();
-            $('#select-' + target).show();
+            $('select.participants').not('#select-participants-' + target).removeAttr('name').hide();
+            $('#select-participants-' + target).attr('name', 'participants').show();
         }
     }, {
         key: '_updateButtons',

@@ -24,10 +24,10 @@
 					<div class="flex-grow description">
 						@include('pages/plans/sections/list', [ 
 							'items' => [
-								['type' => 'co-working', 'duration' => '2 horas', 'price' => '25'],
-								['type' => 'co-working', 'duration' => '4 horas', 'price' => '45'],
-								['type' => 'co-working', 'duration' => 'Dia inteiro', 'price' => '80'],
-								['type' => 'co-working', 'duration' => 'Plano mensal', 'price' => '760']
+								['type' => 'co-working', 'duration' => '1 hora', 'price' => '20'],
+								['type' => 'co-working', 'duration' => '2 horas', 'price' => '30'],
+								['type' => 'co-working', 'duration' => '4 horas', 'price' => '50'],
+								['type' => 'co-working', 'duration' => 'Dia inteiro', 'price' => '80']
 							]
 						])
 					</div>
@@ -73,5 +73,4 @@
 			</div>		
 		</div>
 	</div>
-
 </section>

@@ -2,19 +2,23 @@ class CustomDatePicker
 {
     constructor(element) {
     	this.element = $(element);
-        this.today = moment().locale('pt').format("dddd, D [de] MMMM [de] YYYY");
+        this.today = moment(this.element.attr('data-now')).locale('pt').format("dddd, D [de] MMMM [de] YYYY");
     }
 
     create() {
         this.element.val(this.today).datepicker({
             onSelect: function(dateText, date) {
-                $('input[name="date"]').val(date.selectedYear + '-' + date.selectedMonth + '-' + date.selectedDay);
-            }
+                let month = parseInt(date.selectedMonth)+1;
+                let string = date.selectedYear + '-' + month + '-' + date.selectedDay;
+                $('input[name="date"]').val(string).trigger('change');
+            },
+            beforeShowDay: $.datepicker.noWeekends
         });
     }
 
     enableTogglers(finders) {
     	let object = this;
+
 		$(finders).on('click', function() {
 		    let $this = $(this);
 
@@ -27,13 +31,25 @@ class CustomDatePicker
 		return this;
     }
 
+    enableSelect(element) {
+        let object = this;
+
+        $(element).on('change', function() {
+            let $this = $(this).find(':selected');
+            
+            object._updateSelect($this.attr('data-target'));
+        });
+
+        return this;
+    }
+
     _updateSpace(space) {
         $('input[name="space"]').val(space);
     }
 
     _updateSelect(target) {
-		$('select.capacity').not('#select-'+target).hide();
-		$('#select-'+target).show();
+		$('select.participants').not('#select-participants-'+target).removeAttr('name').hide();
+		$('#select-participants-'+target).attr('name', 'participants').show();
     }
 
     _updateButtons(button) {

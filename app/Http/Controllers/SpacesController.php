@@ -33,9 +33,12 @@ class SpacesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request)
+    public function search()
     {
-        return $request->all();
+        $complete = request()->has(['space', 'date', 'time', 'duration', 'participants']);
+        $allDay = request()->duration == 'day';
+        $status = $complete || $allDay;
+        return view('pages.search.index', compact('status'));
     }
 
     /**

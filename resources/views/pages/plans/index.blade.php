@@ -4,10 +4,12 @@
 
 @include('pages.plans.sections.main')
 @include('pages.plans.sections.description')
+@include('pages.plans.sections.plans')
 @include('pages.contact.sections.faq')
 
 @include('pages.plans.sections.modals.co-working')
 @include('pages.plans.sections.modals.conference')
+
 @endsection
 
 @push('scripts')

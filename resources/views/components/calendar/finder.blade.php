@@ -7,34 +7,36 @@
 				<i class="fas fa-users mr-2"></i>SALA DE REUNIÃO</button>
 		</div>
 		<div class="px-4 py-3 bg-light">
-			<form method="POST" action="/buscar">
-				@csrf
+			<form method="GET" action="/procurar">
 				<input type="hidden" name="space" value="co-working">
-				<input type="hidden" name="date" value="{{now()}}">
+				<input type="hidden" name="date" value="{{now()->format('Y-m-d')}}">
 				<div class="row w-100 mx-auto">
-					<div class="date-input position-relative col-lg-6 col-12 p-0">
-						<input class="form-control rounded-0 border cursor-pointer" type="text" id="datepicker" data-now="{{now()}}">
-						<i class="text-teal fas fa-calendar-alt"></i>
+					
+					<div class="col-lg-6 col-12 p-0">
+						@include('components.calendar.input')
 					</div>
-					<select name="time" class="col-lg-2 col-4 form-control rounded-0 border-0 border-y">
-						<option value="all_day">Dia inteiro</option>
-						<option value="morning">Manhã</option>
-						<option value="afternoon">Tarde</option>
-						<option value="evening">Noite</option>
+					
+					<select name="duration" class="col-lg-2 col-4 form-control rounded-0 border-0 border-y">
+						<option value="1">1 horas</option>
+						<option value="2">2 horas</option>
+						<option value="4">4 horas</option>
+						<option value="day">Dia inteiro</option>
 					</select>
-					<select id="select-co-working" name="participants" class="capacity col-lg-2 col-4 form-control rounded-0 border">
+
+					<select id="select-participants-co-working" name="participants" class="participants col-lg-2 col-4 form-control rounded-0 border">
 						<option value="1">1 pessoa</option>
 						@for($i=2; $i<=12; $i++)
 						<option value="{{$i}}">{{$i}} pessoas</option>
 						@endfor
 					</select>
-					<select style="display: none;" name="participants" id="select-conference" class="capacity col-lg-2 col-4 form-control rounded-0 border">
+
+					<select style="display: none;" id="select-participants-conference" class="participants col-lg-2 col-4 form-control rounded-0 border">
 						<option value="1">1 pessoa</option>
 						@for($i=2; $i<=6; $i++)
 						<option value="{{$i}}">{{$i}} pessoas</option>
 						@endfor
 					</select>
-					<button type="submit" class="col-lg-2 col-4 btn btn-teal rounded-0"><strong>Buscar</strong></button>
+					<button type="submit" class="col-lg-2 col-4 btn btn-teal rounded-0"><strong>Procurar</strong></button>
 				</div>
 			</form>
 		</div>

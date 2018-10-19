@@ -34,8 +34,7 @@
           <span class="mx-2">Tem alguma dúvida? <a href="/contato" class="link-teal">Clique aqui</a></span>
         </div>        
         <div class="col-lg-6 col-md-6 col-12">
-          <form method="POST" action="/buscar">
-            @csrf
+          <form method="GET" action="/procurar">
             <input type="hidden" name="space" value="{{$type}}">
             <input type="hidden" name="date" value="{{now()}}">
             <input type="hidden" name="participants" value="1">

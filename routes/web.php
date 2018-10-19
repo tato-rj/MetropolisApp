@@ -18,6 +18,6 @@ Route::get('/planos', function () {
     return view('pages.plans.index');
 });
 
-Route::post('/buscar', 'SpacesController@search');
+Route::get('/procurar', 'SpacesController@search');
 
 Route::get('/home', 'HomeController@index')->name('home');

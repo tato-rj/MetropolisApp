@@ -39,9 +39,19 @@ class SpacesController extends Controller
         if ($request->has('search'))
             return view('pages.search.index');
         
-        $available = true;
+        $available = Carbon::parse($request->date)->isSameDay(now()->addDay());
 
         return view('pages.search.index', compact('available'));
+    }
+
+    /**
+     * Payment for a single transaction
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function pay(Request $request)
+    {
+        return $request->all();
     }
 
     /**

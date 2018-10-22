@@ -6,6 +6,8 @@ Route::get('/', function () {
     return view('pages.welcome.index');
 });
 
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/quem-somos', function () {
     return view('pages.about.index');
 });
@@ -20,4 +22,4 @@ Route::get('/planos', function () {
 
 Route::get('/procurar', 'SpacesController@search');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/reservar', 'SpacesController@pay')->middleware('auth');

@@ -12,6 +12,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/primer.css') }}" rel="stylesheet">
 
+    @stack('header')
 
 </head>
 

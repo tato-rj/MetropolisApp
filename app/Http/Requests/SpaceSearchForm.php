@@ -27,7 +27,7 @@ class SpaceSearchForm extends FormRequest
             'space' => 'required|in:co-working,conference',
             'date' => 'required|date',
             'time' => 'required|numeric',
-            'duration' => 'required|in:1,2,4,8',
+            'duration' => 'required|in:1,2,4,'.config('office.day_length'),
             'participants' => 'required|numeric'
         ];
     }

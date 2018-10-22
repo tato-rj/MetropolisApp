@@ -8826,8 +8826,7 @@ button.bg-dark:focus {
   padding-left: 1rem !important;
 }
 
-.p-4,
-.head-bar {
+.p-4 {
   padding: 1.5rem !important;
 }
 
@@ -17777,17 +17776,6 @@ html .ui-button.ui-state-disabled:active {
   color: #389d94;
 }
 
-.date-input i {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: .7em;
-}
-
-.date-input input {
-  padding-left: 2.05em;
-}
-
 .ui-corner-all {
   border-radius: 0 !important;
 }
@@ -18403,6 +18391,17 @@ html .ui-button.ui-state-disabled:active {
   font-style: normal;
 }
 
+.icon-input i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: .7em;
+}
+
+.icon-input input {
+  padding-left: 2.2em;
+}
+
 .section-header {
   text-align: center;
   max-width: 70%;
@@ -18613,9 +18612,5 @@ video {
   width: 100%;
   height: 100%;
   z-index: -100;
-}
-
-.head-bar {
-  margin-top: -5.5em;
 }
 

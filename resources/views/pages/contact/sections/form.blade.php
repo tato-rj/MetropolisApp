@@ -1,22 +1,31 @@
-<section class="container mb-8 mt-5">
-	<div class="row">
-		<div class="col-default">
-			<div class="d-flex justify-content-between head-bar bg-light mb-4 shadow-center">
-				<div class="mx-2 my-1">
-					<div class="mb-3"><i class="fas fa-building fa-lg mr-3 text-teal"></i>Av. Rio Branco, nº 185 Sala 1025 - Centro, Rio de Janeiro/RJ</div>
-					<div><i class="fab fa-whatsapp fa-lg mr-3 text-teal"></i>+55 21 3199-1377 | +55 21 3429-1377</div>
-				</div>
-				<div class="d-flex mx-2 my-1">
-		            <a class="link-facebook t-2 ml-3" href="#"><i class="fab fa-facebook-f fa-lg"></i></a>
-		            <a class="link-instagram t-2 ml-3" href="#"><i class="fab fa-instagram fa-lg"></i></a>
-		            <a class="link-twitter t-2 ml-3" href="#"><i class="fab fa-twitter fa-lg"></i></a>
+<section class="py-4 mb-5 bg-light">
+	<div class="container">
+		<div class="row">
+			<div class="col-default">
+				<div class=" d-flex">
+					<div class=" flex-grow">
+						<div class="mb-3"><i class="fas fa-building fa-lg mr-3 text-muted"></i><strong>Av. Rio Branco, nº 185 Sala 1025 - Centro, Rio de Janeiro/RJ</strong></div>
+						<div><i class="fab fa-whatsapp fa-lg mr-3 text-muted"></i><strong>+55 21 3199-1377 | +55 21 3429-1377</strong></div>
+					</div>
+					<div class=" d-flex">
+			            <a class="link-teal t-2 ml-3" href="#"><i class="fab fa-facebook-f fa-lg"></i></a>
+			            <a class="link-teal t-2 ml-3" href="#"><i class="fab fa-instagram fa-lg"></i></a>
+			            <a class="link-teal t-2 ml-3" href="#"><i class="fab fa-twitter fa-lg"></i></a>
+					</div>
 				</div>
 			</div>
-
+		</div>
+	</div>
+</section>
+<section class="container mb-8">
+	<div class="row">
+		<div class="col-default">
+			<div class="mb-5">
+				<p class="lead">Estamos aqui para atender a qualquer dúvida, pergunta ou sugestão. Deixe abaixo a sua mensagem e retornaremos em breve.</p>
+				<p>Se preferir, pode enviar o seu contato por email para <a href="" class="link-blue">contato@metropolis.com.br</a>.</p>
+			</div>
 			<form method="POST" action="">
 				{{csrf_field()}}
-				<p>Estamos aqui para atender a qualquer dúvida, pergunta ou sugestão. Deixe abaixo a sua mensagem e retornaremos em breve.</p>
-				<p class="mb-4">Se preferir, pode enviar o seu contato por email para <a href="" class="link-teal">contato@metropolis.com.br</a>.</p>
 				<div class="form-group">
 					<input type="text" class="form-control rounded-0" name="name" aria-describedby="emailHelp" placeholder="Nome completo">
 				</div>

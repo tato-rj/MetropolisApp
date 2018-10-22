@@ -11,7 +11,7 @@ function pt($word)
 
 function durationToString($number)
 {
-	if ($number == 8) return 'Dia inteiro';
+	if ($number == config('office.day_length')) return 'Dia inteiro';
 
 	return $number == 1 ? $number.' hora' : $number.' horas';
 }
@@ -19,4 +19,17 @@ function durationToString($number)
 function feeToString($number)
 {
 	return 'R$ ' . number_format($number,2,",",".");
+}
+
+function totalCost($space, $duration, $participants)
+{
+	$fee;
+	foreach (config("office.spaces.{$space}.prices") as $price) {
+		if ($price['duration'] == $duration) {
+			$fee = $price['fee'];
+			break;
+		}
+	}
+
+	return $space == 'co-working' ? $fee * $participants : $fee;
 }

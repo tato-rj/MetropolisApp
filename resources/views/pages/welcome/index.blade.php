@@ -3,7 +3,7 @@
 @section('content')
 
 @include('pages.welcome.sections.main')
-@include('pages.welcome.sections.about')
+@include('pages.about.sections.highlight')
 @include('pages.welcome.sections.steps')
 @include('pages.welcome.sections.icons')
 @include('pages.welcome.sections.grid')

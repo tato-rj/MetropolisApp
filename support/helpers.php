@@ -33,3 +33,14 @@ function totalCost($space, $duration, $participants)
 
 	return $space == 'co-working' ? $fee * $participants : $fee;
 }
+
+function applyDiscount($cost, $discount)
+{
+	$difference = $cost * ($discount / 100);
+	return $cost - $difference;
+}
+
+function monthly()
+{
+	return config('office.spaces.co-working.prices')[3]['fee']*20;
+}

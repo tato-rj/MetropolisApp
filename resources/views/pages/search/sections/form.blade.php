@@ -1,11 +1,5 @@
-@if(request()->has('search'))
-	<h5 class="mb-4 text-center">Faça aqui a sua reserva para a {{pt(request()->space)}}</h5>
-@else
-	@include('components.alerts.error', ['message' => 'Infelizmente o espaço que você procurou não está disponível.'])
-	<h5 class="my-4 text-center">Vamos tentar novamente!</h5>
-@endif
 <div class="mb-4 pb-2 bg-light p-4">
-	<form id="search" method="GET" action="/procurar">
+	<form id="search" method="GET" action="/agendar">
 		<input type="hidden" name="date" value="{{request()->date ?? now()->format('Y-m-d')}}">
 		<div class="form-group">
 			<label for="space"><small><strong>Para quando gostaria de fazer a reserva?</strong></small></label>

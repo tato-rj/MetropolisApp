@@ -40,7 +40,6 @@
             <input type="hidden" name="time" value="8">
             <input type="hidden" name="participants" value="1">
             <input type="hidden" name="duration" value="8">
-            <input type="hidden" name="search" value="true">
            <button class="btn btn-block btn-red rounded-0"><strong>Solicitar uma reserva</strong></button>
           </form>
         </div>

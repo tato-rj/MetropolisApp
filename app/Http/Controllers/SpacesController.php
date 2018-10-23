@@ -34,14 +34,24 @@ class SpacesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request, SpaceSearchForm $form)
+    public function search(Request $request)
     {
-        if ($request->has('search'))
-            return view('pages.search.index');
-        
+        return view('pages.search.index');
+    }
+
+    /**
+     * Checks if the space is free for booking.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function confirm(Request $request, SpaceSearchForm $form)
+    {
         $available = Carbon::parse($request->date)->isSameDay(now()->addDay());
 
-        return view('pages.search.index', compact('available'));
+        $page = $available ? 'success' : 'fail';
+
+        return view("pages.search.{$page}", compact('available'));
     }
 
     /**

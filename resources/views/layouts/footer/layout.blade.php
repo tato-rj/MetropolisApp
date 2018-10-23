@@ -41,6 +41,6 @@
 
   </div>
   <div class="bg-dark text-grey text-center p-2">
-    <p class="m-0"><small>Copyright © 2018 Todos os direitos reservados.</small></p>
+    <small>Copyright © 2018 Todos os direitos reservados.</small>
   </div>
 </section>

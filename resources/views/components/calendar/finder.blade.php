@@ -7,7 +7,7 @@
 				<i class="fas fa-users mr-2"></i>SALA DE REUNIÃO</button>
 		</div>
 		<div class="px-4 py-3 bg-light">
-			<form method="GET" action="/procurar">
+			<form method="GET" action="/agendar">
 				<input type="hidden" name="space" value="co-working">
 				<input type="hidden" name="date" value="{{now()->format('Y-m-d')}}">
 				<div class="row w-100 mx-auto">

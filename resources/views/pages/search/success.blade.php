@@ -11,8 +11,7 @@
 <div class="container ">
 	<div class="row">
 		<div class="col-default pb-6 pt-5">
-			<h5 class="mb-4 text-center">Faça aqui a sua reserva</h5>
-			@include('pages.search.sections.form')
+			@include('pages.search.sections.confirm')
 		</div>
 	</div>
 </div>

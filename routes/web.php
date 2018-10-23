@@ -21,5 +21,6 @@ Route::get('/planos', function () {
 });
 
 Route::get('/procurar', 'SpacesController@search');
+Route::get('/agendar', 'SpacesController@confirm');
 
 Route::post('/reservar', 'SpacesController@pay')->middleware('auth');

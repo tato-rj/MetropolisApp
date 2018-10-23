@@ -11,7 +11,8 @@
 <div class="container ">
 	<div class="row">
 		<div class="col-default pb-6 pt-5">
-			<h5 class="mb-4 text-center">Faça aqui a sua reserva</h5>
+			@include('components.alerts.error', ['message' => 'Infelizmente o espaço que você procurou não está disponível nessa data.'])
+			<h5 class="my-4 text-center">Vamos tentar novamente!</h5>
 			@include('pages.search.sections.form')
 		</div>
 	</div>

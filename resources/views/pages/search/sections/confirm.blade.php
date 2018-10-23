@@ -1,40 +1,33 @@
 <div class="mb-5 mt-2">
 	<h5 class="text-green text-center">O espaço que você solicitou está disponível!</h5>
-	<div class="check_mark">
-		<div class="sa-icon sa-success animate">
-			<span class="sa-line sa-tip animateSuccessTip"></span>
-			<span class="sa-line sa-long animateSuccessLong"></span>
-			<div class="sa-placeholder"></div>
-			<div class="sa-fix"></div>
-		</div>
-	</div>
+	@include('components.animations.success-icon')
 </div>
 <form method="POST" action="/reservar">
 	@csrf
 	<div class="bg-light border-top border-teal-light border-1x mb-4">
 		<ul class="list-flat p-4" id="review">
 			<li class="mb-2">
-				<span class="text-teal"><strong>Data</strong></span>
+				<span class="text-teal mr-1"><strong>Data</strong></span>
 				<span id="date" data-date="{{request()->date}}"></span>
 				<input type="hidden" name="date" value="{{request()->date}}">
 			</li>
 			<li class="mb-2">
-				<span class="text-teal"><strong>Espaço</strong></span>
+				<span class="text-teal mr-1"><strong>Espaço</strong></span>
 				<span>{{pt(request()->space)}}</span>
 				<input type="hidden" name="space" value="{{request()->space}}">
 			</li>
 			<li class="mb-2">
-				<span class="text-teal"><strong>Duração</strong></span>
+				<span class="text-teal mr-1"><strong>Duração</strong></span>
 				<span>{{request()->duration == config('office.day_length') ? 'Dia inteiro' : request()->duration.'h'}}</span>
 				<input type="hidden" name="duration" value="{{request()->duration}}">
 			</li>
 			<li class="mb-2">
-				<span class="text-teal"><strong>Hora de chegada</strong></span>
+				<span class="text-teal mr-1"><strong>Hora de chegada</strong></span>
 				<span>{{request()->time}}:00 horas</span>
 				<input type="hidden" name="time" value="{{request()->time}}">
 			</li>
 			<li>
-				<span class="text-teal"><strong>Número de participantes</strong></span>
+				<span class="text-teal mr-1"><strong>Número de participantes</strong></span>
 				<span>{{request()->participants}} {{trans_choice('words.pessoas', request()->participants)}}</span>
 				<input type="hidden" name="participants" value="{{request()->participants}}">
 			</li>

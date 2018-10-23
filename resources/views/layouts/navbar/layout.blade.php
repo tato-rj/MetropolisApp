@@ -14,13 +14,7 @@
         @include('layouts.navbar.link', ['title' => 'Contato', 'url' => '/contato'])
 
     </ul>
-    @guest
-
-      <a class="btn btn-red rounded-0 my-2 my-sm-0" href="{{route('login')}}"><strong>Área do Cliente</strong></a>
-
-    @else
-    LOGGED IN!
-    @endguest
+    <a class="btn btn-red rounded-0 my-2 my-sm-0" href="{{route('client.home')}}"><strong>Área do Cliente</strong></a>
   </div>
 </nav>
 {{-- <nav class="navbar navbar-expand-md navbar-light navbar-laravel">

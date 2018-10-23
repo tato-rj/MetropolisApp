@@ -1,12 +1,14 @@
 <?php
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
+Route::prefix('/cliente')->name('client.')->middleware('verified')->group(function() {
+	Route::get('', 'HomeController@index')->name('home');
+});
 
 Route::get('/', function () {
     return view('pages.welcome.index');
 });
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/quem-somos', function () {
     return view('pages.about.index');

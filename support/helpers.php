@@ -44,3 +44,17 @@ function monthly()
 {
 	return config('office.spaces.co-working.prices')[3]['fee']*20;
 }
+
+function greeting()
+{
+	$now = (int) now()->format('h');
+
+	if ($now >= 6 && $now < 12)
+		return 'Bom dia';
+
+	if ($now >= 12 && $now < 18)
+		return 'Boa tarde';
+
+	if ($now < 6 || $now >= 18)
+		return 'Boa noite';
+}

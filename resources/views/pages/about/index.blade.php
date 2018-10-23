@@ -37,7 +37,7 @@ blockquote:after {
 
 @section('content')
 
-@include('pages.about.sections.main')
+@include('pages.about.sections._lead')
 @include('pages.about.sections.highlight')
 @include('pages.about.sections.description')
 @include('pages.welcome.sections.grid')

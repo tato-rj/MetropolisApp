@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('pages.contact.sections.main')
+@include('pages.contact.sections._lead')
 @include('pages.contact.sections.form')
 @include('pages.contact.sections.faq')
 

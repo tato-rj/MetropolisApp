@@ -1,5 +1,5 @@
 <div class="col-lg-8 col-10 mx-auto">
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('register') }}">
         @csrf
         <div class="form-group">
             <input type="text" name="name" class="form-control rounded-0 {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Nome completo" value="{{old('name')}}">
@@ -22,7 +22,7 @@
         </div>
 
         <div class="form-group">
-            <input type="password" name="password-confirm" class="form-control rounded-0 {{ $errors->has('password-confirm') ? ' is-invalid' : '' }}" aria-describedby="password-confirm" placeholder="Confirme o seu password">
+            <input type="password" name="password_confirmation" class="form-control rounded-0 {{ $errors->has('password-confirm') ? ' is-invalid' : '' }}" aria-describedby="password-confirm" placeholder="Confirme o seu password">
         </div>
 
         <button type="submit" class="btn btn-red rounded-0 btn-block">CONTINUAR</button>

@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('pages.plans.sections.main')
+@include('pages.plans.sections._lead')
 @include('pages.plans.sections.description')
 @include('pages.plans.sections.plans')
 @include('pages.contact.sections.faq')

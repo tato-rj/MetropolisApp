@@ -6,7 +6,7 @@
 
 @section('content')
 
-@include('pages.search.sections.main')
+@include('pages.search.sections._lead')
 
 <div class="container ">
 	<div class="row">

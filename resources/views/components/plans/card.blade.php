@@ -1,6 +1,6 @@
 <div class="col-lg-4 col-md-6 col-sm-10 col-12 mx-auto my-3">
-  <div class="card rounded-0 border-0 shadow-light">
-    <div class="card-header bg-{{$color}} text-white border-0 rounded-0 text-center p-2">
+  <div class="card border-0 shadow-light">
+    <div class="card-header bg-{{$color}} text-white border-0 text-center p-2">
       <label class="m-0"><strong>{{$title}}</strong></label>
     </div>
     <div class="bg-{{$color}}-light text-white text-center pb-3">
@@ -17,7 +17,7 @@
       <div class="p-3 text-muted">
         {{$slot}}
       </div>
-      <a href="#" class="btn btn-{{$color}} btn-block rounded-0"><strong>Assinar</strong></a>
+      <a href="#" class="btn btn-{{$color}} btn-block"><strong>Assinar</strong></a>
     </div>
   </div>
 </div>

@@ -47,13 +47,13 @@
 				<div>
 					<div class="icon-input position-relative mb-2">
 					<input type="text" placeholder="Você receberá um email automaticamente" disabled 
-						class="form-control rounded-0 border-grey bg-transparent" style="border: none; border-bottom: 1px solid">
+						class="form-control border-grey bg-transparent" style="border: none; border-bottom: 1px solid">
 						<i class="text-grey opacity-8 fas fa-envelope"></i>
 					</div>
 					@for($i=2; $i<=request()->participants; $i++)
 					<div class="icon-input position-relative mb-2">
 					<input type="email" name="emails[]" placeholder="Participante {{$i}}" 
-						class="form-control rounded-0 border-grey bg-transparent" style="border: none; border-bottom: 1px solid">
+						class="form-control border-grey bg-transparent" style="border: none; border-bottom: 1px solid">
 						<i class="text-grey opacity-8 fas fa-envelope"></i>
 					</div>
 					@endfor
@@ -61,10 +61,12 @@
 			</li>
 			@endif
 		</ul>
-		<div class="bg-teal text-white d-flex">
+		<div class="bg-teal text-white d-flex flex-wrap">
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
-			<div class="p-3 bg-teal-dark"><strong>{{feeTostring(totalCost(request()->space, request()->duration, request()->participants))}}</strong></div>
-			<div><button type="submit" class="btn btn-red rounded-0 h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button></div>
+			<div class="d-flex xs-w-100">
+				<div class="p-3 bg-teal-dark flex-grow"><strong>{{feeTostring(totalCost(request()->space, request()->duration, request()->participants))}}</strong></div>
+				<button type="submit" class="btn btn-red h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>
+			</div>
 		</div>
 	</div>
 </form>

@@ -1,4 +1,11 @@
 @include media-breakpoint-down(sm) {
+	.xs-w-100 {
+		width: 100%;
+	}
+
+	.display-4 {
+	    font-size: 2.5rem;
+	}
 	.mb-4-sm {
 		margin-bottom: 1.5rem !important;
 	}

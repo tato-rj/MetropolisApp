@@ -47,7 +47,7 @@ function monthly()
 
 function greeting()
 {
-	$now = (int) now()->format('h');
+	$now = (int) now()->format('H');
 
 	if ($now >= 6 && $now < 12)
 		return 'Bom dia';

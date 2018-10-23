@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@push('header')
-
-@endpush
-
 @section('content')
 
 @include('pages.search.sections._lead')

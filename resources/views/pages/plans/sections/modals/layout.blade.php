@@ -1,7 +1,7 @@
 <div class="modal fade" id="modal-{{$type}}" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content rounded-0">
-      <div class="modal-header border-0 rounded-0 bg-grey-lighter text-dark">
+    <div class="modal-content">
+      <div class="modal-header border-0 bg-grey-lighter text-dark">
         <h5 class="modal-title"><strong>{{$title}}</strong></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -40,7 +40,7 @@
             <input type="hidden" name="time" value="8">
             <input type="hidden" name="participants" value="1">
             <input type="hidden" name="duration" value="8">
-           <button class="btn btn-block btn-red rounded-0"><strong>Solicitar uma reserva</strong></button>
+           <button class="btn btn-block btn-red"><strong>Solicitar uma reserva</strong></button>
           </form>
         </div>
       </div>

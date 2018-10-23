@@ -45,12 +45,12 @@ $(document).ready(function() {
 });
 
 if ($('#scroll-mark').length > 0) {
-  let $logo = $('.navbar-brand img');
   let $navbar = $('.navbar');
   let $navHeight = $navbar.outerHeight();
   let $scrollMark = $('#scroll-mark').offset().top;
   let $limit = $scrollMark - $navHeight;
   let $itemsToShow = $('.show-on-scroll');
+  let $logoutButton = $navbar.find('button#logout');
   let $cookieAlert = $('#cookie-alert');
 
   $(window).scroll(function() {
@@ -58,8 +58,7 @@ if ($('#scroll-mark').length > 0) {
 
     if ($scrollTop > $limit){
       $navbar.addClass('navbar-light position-fixed bg-white shadow-sm py-2 px-4 slideInDown').removeClass('navbar-dark py-4 px-5');
-      // $bell.addClass('text-muted').removeClass('text-white');
-      // $whiteLogo.hide();
+      $logoutButton.addClass('btn-red-outline').removeClass('btn-light');
       $itemsToShow.fadeIn();
       
       if (! getCookie('cookie_consent'))
@@ -67,10 +66,8 @@ if ($('#scroll-mark').length > 0) {
       
     } else {
       $navbar.removeClass('navbar-light bg-white shadow-sm position-fixed py-2 px-4 slideInDown').addClass('navbar-dark py-4 px-5');
-      // $bell.removeClass('text-muted').addClass('text-white');
-      // $whiteLogo.show();
+      $logoutButton.addClass('btn-light').removeClass('btn-red-outline');
       $itemsToShow.fadeOut();
-      // $('#help-button .animated').fadeOut();
     }
   });
 }

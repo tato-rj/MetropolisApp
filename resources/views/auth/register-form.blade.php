@@ -2,18 +2,18 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
         <div class="form-group">
-            <input type="text" name="name" class="form-control rounded-0 {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Nome completo" value="{{old('name')}}">
+            <input type="text" name="name" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Nome completo" value="{{old('name')}}">
 
             @include('components/form/error', ['field' => 'name'])
         </div>
         <div class="form-group">
-            <input type="email" name="email" class="form-control rounded-0 {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Email" value="{{old('email')}}">
+            <input type="email" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Email" value="{{old('email')}}">
 
             @include('components/form/error', ['field' => 'email'])
         </div>
 
         <div class="form-group">
-            <input type="password" name="password" class="form-control rounded-0 {{ $errors->has('password') ? ' is-invalid' : '' }}" aria-describedby="password" placeholder="Password">
+            <input type="password" name="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" aria-describedby="password" placeholder="Password">
             @if ($errors->has('password'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('password') }}</strong>
@@ -22,15 +22,15 @@
         </div>
 
         <div class="form-group">
-            <input type="password" name="password_confirmation" class="form-control rounded-0 {{ $errors->has('password-confirm') ? ' is-invalid' : '' }}" aria-describedby="password-confirm" placeholder="Confirme o seu password">
+            <input type="password" name="password_confirmation" class="form-control {{ $errors->has('password-confirm') ? ' is-invalid' : '' }}" aria-describedby="password-confirm" placeholder="Confirme o seu password">
         </div>
 
-        <button type="submit" class="btn btn-red rounded-0 btn-block">CONTINUAR</button>
+        <button type="submit" class="btn btn-red btn-block">CONTINUAR</button>
     </form>
     <div class="mb-4">
         <p class="lead text-muted text-center my-3">- ou se preferir -</p>
-        <a href="" class="btn btn-facebook btn-block rounded-0 text-left"><i class="fab fa-facebook fa-lg border-right mr-3" style="width: 34px"></i>Continuar com Facebook</a>
-        <a href="" class="btn btn-google btn-block rounded-0 text-left"><i class="fab fa-google border-right mr-3" style="width: 34px"></i>Continuar com Google</a>
+        <a href="" class="btn btn-facebook btn-block text-left"><i class="fab fa-facebook fa-lg border-right mr-3" style="width: 34px"></i>Continuar com Facebook</a>
+        <a href="" class="btn btn-google btn-block text-left"><i class="fab fa-google border-right mr-3" style="width: 34px"></i>Continuar com Google</a>
     </div>
     <div>
         <p class="m-0">

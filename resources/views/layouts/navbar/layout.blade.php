@@ -14,7 +14,19 @@
         @include('layouts.navbar.link', ['title' => 'Contato', 'url' => '/contato'])
 
     </ul>
-    <a class="btn btn-red rounded-0 my-2 my-sm-0" href="{{route('client.home')}}"><strong>Área do Cliente</strong></a>
+    @guest
+    <a class="btn btn-red my-2 my-sm-0" href="{{route('client.home')}}"><strong>Área do Cliente</strong></a>
+    @else
+    <div class="btn-group">
+        <a class="btn btn-red my-2 my-sm-0" href="{{route('client.home')}}"><strong>Painel de Controle</strong></a>
+        <form method="POST" action="{{route('logout')}}">
+            @csrf
+            <button type="submit" id="logout" class="btn btn-light my-2 my-sm-0" href="{{route('logout')}}">
+                <strong>Sair</strong>
+            </button>
+        </form>
+    </div>
+    @endguest
   </div>
 </nav>
 {{-- <nav class="navbar navbar-expand-md navbar-light navbar-laravel">

@@ -1,13 +1,17 @@
-@extends('layouts.raw')
+@extends('layouts.app')
 
 @section('content')
-<div class="w-100 h-100vh d-flex justify-content-center align-items-center">
-	<div class="text-center">
-		<p>Bem vindo {{auth()->user()->name}}</p>
-		<form method="POST" action="{{route('logout')}}">
-			@csrf
-			<button class="btn btn-red rounded-0">Sair</button>
-		</form>
-	</div>
-</div>
+
+@include('pages.user.home.sections._lead')
+@include('pages.about.sections.highlight')
+@include('pages.welcome.sections.steps')
+@include('pages.welcome.sections.icons')
+@include('pages.welcome.sections.grid')
+@include('pages.welcome.sections.partners')
+@include('pages.welcome.sections.contact')
+
 @endsection
+
+@push('scripts')
+
+@endpush

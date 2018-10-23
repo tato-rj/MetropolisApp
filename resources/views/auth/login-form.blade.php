@@ -2,23 +2,23 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
         <div class="form-group">
-            <input type="email" name="email" class="form-control rounded-0 {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Meu e-mail" value="{{old('email')}}">
+            <input type="email" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Meu e-mail" value="{{old('email')}}">
 
             @include('components/form/error', ['field' => 'email'])
         </div>
 
         <div class="form-group">
-            <input type="password" name="password" class="form-control rounded-0 {{ $errors->has('password') ? ' is-invalid' : '' }}" aria-describedby="password" placeholder="Password">
+            <input type="password" name="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" aria-describedby="password" placeholder="Password">
 
             @include('components/form/error', ['field' => 'password'])
         </div>
 
-        <button type="submit" class="btn btn-red rounded-0 btn-block">LOGIN</button>
+        <button type="submit" class="btn btn-red btn-block">LOGIN</button>
     </form>
     <div class="mb-4">
         <p class="lead text-muted text-center my-3">- ou se preferir -</p>
-        <a href="" class="btn btn-facebook btn-block rounded-0 text-left"><i class="fab fa-facebook fa-lg border-right mr-3" style="width: 34px"></i>Login com Facebook</a>
-        <a href="" class="btn btn-google btn-block rounded-0 text-left"><i class="fab fa-google border-right mr-3" style="width: 34px"></i>Login com Google</a>
+        <a href="" class="btn btn-facebook btn-block text-left"><i class="fab fa-facebook fa-lg border-right mr-3" style="width: 34px"></i>Login com Facebook</a>
+        <a href="" class="btn btn-google btn-block text-left"><i class="fab fa-google border-right mr-3" style="width: 34px"></i>Login com Google</a>
     </div>
     <div>
         <p class="mb-0">

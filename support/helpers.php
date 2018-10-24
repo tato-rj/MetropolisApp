@@ -1,8 +1,13 @@
 <?php 
 
+function office()
+{
+	return new \App\Office\Office;
+}
+
 function pt($word)
 {
-	$dictionary = ['conference' => 'Sala de reunião', 'co-working' => 'Mesa compartilhada'];
+	$dictionary = ['conference' => 'Sala de reunião', 'coworking' => 'Mesa compartilhada'];
 	if (! array_key_exists($word, $dictionary))
 		return $word;
 
@@ -19,30 +24,6 @@ function durationToString($number)
 function feeToString($number)
 {
 	return 'R$ ' . number_format($number,2,",",".");
-}
-
-function totalCost($space, $duration, $participants)
-{
-	$fee;
-	foreach (config("office.spaces.{$space}.prices") as $price) {
-		if ($price['duration'] == $duration) {
-			$fee = $price['fee'];
-			break;
-		}
-	}
-
-	return $space == 'co-working' ? $fee * $participants : $fee;
-}
-
-function applyDiscount($cost, $discount)
-{
-	$difference = $cost * ($discount / 100);
-	return $cost - $difference;
-}
-
-function monthly()
-{
-	return config('office.spaces.co-working.prices')[3]['fee']*20;
 }
 
 function greeting()

@@ -1,7 +1,7 @@
 <section class="container mb-8 mt-6">
 	<div class="row mb-5 plans">
 		<div class="cover mb-4-sm">
-			@include('pages.plans.sections.carousel.co-working')
+			@include('pages.plans.sections.carousel.coworking')
 		</div>
 		<div class="col-lg-8 col-12 px-3">
 			<div class="mb-4">
@@ -22,7 +22,7 @@
 						])
 					</div>
 					<div class="flex-grow description">
-						@include('pages/plans/sections/list', ['space' => 'co-working'])
+						@include('pages/plans/sections/list', ['space' => 'coworking'])
 					</div>
 				</div>
 			</div>		

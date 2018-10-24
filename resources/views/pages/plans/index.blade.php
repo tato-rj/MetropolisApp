@@ -7,7 +7,7 @@
 @include('pages.plans.sections.plans')
 @include('pages.contact.sections.faq')
 
-@include('pages.plans.sections.modals.co-working')
+@include('pages.plans.sections.modals.coworking')
 @include('pages.plans.sections.modals.conference')
 
 @endsection

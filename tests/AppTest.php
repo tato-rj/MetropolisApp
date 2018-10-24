@@ -4,6 +4,7 @@ namespace Tests;
 
 use Tests\Utilities\ExceptionHandling;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Office\Conference;
 
 abstract class AppTest extends TestCase
 {
@@ -14,6 +15,8 @@ abstract class AppTest extends TestCase
         parent::setUp();
 
         $this->disableExceptionHandling();
+
+        $this->event = create('App\Event', ['type' => get_class(new Conference)]);
     }
     
     protected function signIn($user = null)

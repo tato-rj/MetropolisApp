@@ -2,9 +2,17 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Office\Conference;
 
-class Event extends Model
+class Event extends Metropolis
 {
-    //
+	public function creator()
+	{
+		return $this->belongsTo(User::class);
+	}
+
+    public function space()
+    {
+    	return new $this->type;
+    }
 }

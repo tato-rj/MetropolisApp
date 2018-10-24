@@ -1,5 +1,5 @@
     <div class="row">
-      @component('components.plans.card', ['title' => 'MENSAL', 'price' => applyDiscount(monthly(), 30), 'discount' => 30, 'color' => 'indigo'])
+      @component('components.plans.card', ['title' => 'MENSAL', 'price' => office()->monthly($discount = 30), 'discount' => 30, 'color' => 'indigo'])
         <p><i class="fas fa-door-open fa-fw mr-3 opacity-8"></i>Co-working ilimitado</p>
         <p><i class="fas fa-wifi fa-fw mr-3 opacity-8"></i>Wifi de alta velocidade</p>
         <p><i class="fas fa-print fa-fw mr-3 opacity-8"></i>Acesso ilimitado à impressora</p>
@@ -7,7 +7,7 @@
         <p><i class="fas fa-piggy-bank mr-3 opacity-8"></i>Descontos exclusivos</p>
       @endcomponent
 
-      @component('components.plans.card', ['title' => 'SEMESTRAL', 'price' => applyDiscount(monthly(), 40), 'discount' => 40, 'color' => 'orange'])
+      @component('components.plans.card', ['title' => 'SEMESTRAL', 'price' => office()->monthly($discount = 35), 'discount' => 35, 'color' => 'orange'])
         <p><i class="fas fa-door-open fa-fw mr-3 opacity-8"></i>Co-working ilimitado</p>
         <p><i class="fas fa-wifi fa-fw mr-3 opacity-8"></i>Wifi de alta velocidade</p>
         <p><i class="fas fa-print fa-fw mr-3 opacity-8"></i>Acesso ilimitado à impressora</p>
@@ -16,7 +16,7 @@
         <p><i class="fas fa-briefcase fa-fw mr-3 opacity-8"></i>Sala de reunião por 2 h/mês</p>
       @endcomponent
 
-      @component('components.plans.card', ['title' => 'ANUAL', 'price' => applyDiscount(monthly(), 50), 'discount' => 50, 'color' => 'green'])
+      @component('components.plans.card', ['title' => 'ANUAL', 'price' => office()->monthly($discount = 40), 'discount' => 40, 'color' => 'green'])
         <p><i class="fas fa-door-open fa-fw mr-3 opacity-8"></i>Co-working ilimitado</p>
         <p><i class="fas fa-wifi fa-fw mr-3 opacity-8"></i>Wifi de alta velocidade</p>
         <p><i class="fas fa-print fa-fw mr-3 opacity-8"></i>Acesso ilimitado à impressora</p>

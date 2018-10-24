@@ -1,4 +1,4 @@
-@component('pages.plans.sections.modals.layout', ['title' => 'Mesa Compartilhada', 'type' => 'co-working', 'count' => 6])
+@component('pages.plans.sections.modals.layout', ['title' => 'Mesa Compartilhada', 'type' => 'coworking', 'count' => 6])
   <div class="alert-teal alert-accent-left alert mb-3">
     <div class="d-flex justify-content-between border-bottom mb-2 pb-2">
       <div class="text-muted"><strong>Duração</strong></div>

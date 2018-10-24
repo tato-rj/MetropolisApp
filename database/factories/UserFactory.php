@@ -25,6 +25,10 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Event::class, function(Faker $faker) {
 	return [
+        'creator_id' => function() {
+            return create('App\User')->id;
+        },
+        'type' => get_class(new \App\Office\Conference),
 		'starts_at' => now(),
 		'ends_at' => now()->addHour()
 	];

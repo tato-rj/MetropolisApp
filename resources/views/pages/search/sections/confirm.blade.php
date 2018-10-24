@@ -18,7 +18,7 @@
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Duração</strong></span>
-				<span>{{request()->duration == config('office.day_length') ? 'Dia inteiro' : request()->duration.'h'}}</span>
+				<span>{{request()->duration == office()->day_length ? 'Dia inteiro' : request()->duration.'h'}}</span>
 				<input type="hidden" name="duration" value="{{request()->duration}}">
 			</li>
 			<li class="mb-2">
@@ -64,7 +64,7 @@
 		<div class="bg-teal text-white d-flex flex-wrap">
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
 			<div class="d-flex xs-w-100">
-				<div class="p-3 bg-teal-dark flex-grow"><strong>{{feeTostring(totalCost(request()->space, request()->duration, request()->participants))}}</strong></div>
+				<div class="p-3 bg-teal-dark flex-grow"><strong>{{feeTostring($totalCost)}}</strong></div>
 				<button type="submit" class="btn btn-red h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>
 			</div>
 		</div>

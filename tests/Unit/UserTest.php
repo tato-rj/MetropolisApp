@@ -20,10 +20,8 @@ class UserTest extends AppTest
 	{
 		$this->signIn();
 
-		$event = create(Event::class);
-
-		auth()->user()->events()->save($event);
-
+		auth()->user()->events()->save($this->event);
+		
 		$this->assertInstanceOf(Event::class, auth()->user()->events()->first()); 
 	}
 }

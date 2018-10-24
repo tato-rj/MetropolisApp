@@ -10,14 +10,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -31,6 +24,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getFirstNameAttribute()
     {
         $array = explode(' ',trim($this->name));
-        echo $array[0];
+        return $array[0];
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
     }
 }

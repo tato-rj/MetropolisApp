@@ -17,6 +17,7 @@ abstract class AppTest extends TestCase
         $this->disableExceptionHandling();
 
         $this->event = create('App\Event', ['type' => get_class(new Conference)]);
+        $this->plan = create('App\Plan');
     }
     
     protected function signIn($user = null)

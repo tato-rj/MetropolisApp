@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Office\Conference;
-
 class Event extends Metropolis
 {
 	protected $dates = ['starts_at', 'ends_at'];

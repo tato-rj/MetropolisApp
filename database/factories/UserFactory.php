@@ -34,3 +34,12 @@ $factory->define(App\Event::class, function(Faker $faker) {
 		'ends_at' => now()->addDay()->addHour()
 	];
 });
+
+$factory->define(App\Plan::class, function(Faker $faker) {
+    return [
+        'name' => $faker->word,
+        'discount' => $faker->numberBetween(30, 50),
+        'rate' => 10000,
+        'duration' => 1
+    ];
+});

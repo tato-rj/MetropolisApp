@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\AppTest;
-use App\{User, Event};
+use App\{User, Event, Plan, Membership};
 
 class UserTest extends AppTest
 {
@@ -23,6 +23,26 @@ class UserTest extends AppTest
 		auth()->user()->events()->save($this->event);
 		
 		$this->assertInstanceOf(Event::class, auth()->user()->events()->first()); 
+	}
+
+	/** @test */
+	public function it_knows_how_to_subscribe()
+	{
+		$this->signIn();
+
+		auth()->user()->subscribe($this->plan);
+
+		$this->assertTrue(auth()->user()->membership()->exists());
+	}
+
+	/** @test */
+	public function it_has_a_plan()
+	{
+		$this->signIn();
+
+		auth()->user()->subscribe($this->plan);
+
+		$this->assertInstanceOf(Plan::class, auth()->user()->membership->plan);
 	}
 
 	/** @test */

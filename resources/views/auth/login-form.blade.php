@@ -22,7 +22,7 @@
     </div>
     <div>
         <p class="mb-0">
-            <small>Esqueceu o seu passowrd? <span class="text-blue"><a href="/" class="link-no-blue">Clique aqui</a></span></small>
+            <small>Esqueceu o seu password? <span class="text-blue"><a href="/" class="link-no-blue">Clique aqui</a></span></small>
         </p>
         <p class="m-0">
             <small>Ainda não é membro? <span class="text-blue"><a href="{{route('register')}}" class="link-no-blue">Criar a minha conta</a></span></small>

@@ -32,6 +32,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Event::class, 'creator_id');
     }
 
+    public function membership()
+    {
+        return $this->belongsTo(Membership::class);
+    }
+
+    public function subscribe(Plan $plan)
+    {
+        $newAccount = Membership::create(['plan_id' => $plan->id]);
+
+        return $this->membership()->associate($newAccount);
+    }
+
     public function getPastEventsAttribute()
     {
         return $this->events()->whereDate('ends_at', '<=', now()->toDateTimeString())->get();

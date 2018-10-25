@@ -31,4 +31,22 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Event::class, 'creator_id');
     }
+
+    public function getPastEventsAttribute()
+    {
+        return $this->events()->whereDate('ends_at', '<=', now()->toDateTimeString())->get();
+    }
+
+    public function getCurrentEventsAttribute()
+    {
+        return $this->events()
+                    ->whereDate('starts_at', '<=', now()->toDateTimeString())
+                    ->whereDate('ends_at', '>=', now()->toDateTimeString())
+                    ->get();
+    }
+
+    public function getUpcomingEventsAttribute()
+    {
+        return $this->events()->whereDate('starts_at', '>', now()->toDateTimeString())->get();
+    }
 }

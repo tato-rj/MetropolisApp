@@ -15,7 +15,7 @@
 @push('scripts')
 <script type="text/javascript">
 
-$('#modal-co-working .thumb, #modal-conference .thumb').on('mouseenter', function() {
+$('#modal-coworking .thumb, #modal-conference .thumb').on('mouseenter', function() {
 	$thumb = $(this);
 	$modal = $($thumb.attr('data-modal'));
 	$image = $thumb.css('background-image');
@@ -25,7 +25,7 @@ $('#modal-co-working .thumb, #modal-conference .thumb').on('mouseenter', functio
 	$modal.find('.cover').css('background-image', $image);
 });
 
-$('#modal-co-working, #modal-conference').on('show.bs.modal', function (e) {
+$('#modal-coworking, #modal-conference').on('show.bs.modal', function (e) {
 	let $button = $(e.relatedTarget);
 	let $modal = $(e.target);
 	

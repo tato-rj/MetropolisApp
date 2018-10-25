@@ -7,8 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }} | O seu espaço de co-working no RJ</title>
-    <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/primer.css') }}" rel="stylesheet">
 
@@ -27,17 +27,6 @@
     </div>
 
 <script src="{{ mix('js/app.js') }}"></script>
-{{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj8Se-1C_l46OGIKF4QwcgzUm7axrkBeE&callback=officeMap"></script> --}}
-<script type="text/javascript">
-function officeMap() {
-    let escritorio = {lat: -22.907347, lng: -43.176417};
-
-    let map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 17, center: escritorio});
-
-    let marker = new google.maps.Marker({position: escritorio, map: map});
-}
-</script>
 
 <script type="text/javascript">
 $(document).ready(function() {

@@ -5,6 +5,16 @@ function office()
 	return new \App\Office\Office;
 }
 
+function conference()
+{
+	return new \App\Office\Conference;
+}
+
+function coworking()
+{
+	return new \App\Office\CoWorking;
+}
+
 function pt($word)
 {
 	$dictionary = ['conference' => 'Sala de reunião', 'coworking' => 'Mesa compartilhada'];
@@ -16,14 +26,24 @@ function pt($word)
 
 function durationToString($number)
 {
-	if ($number == config('office.day_length')) return 'Dia inteiro';
+	if ($number == office()->day_length) return 'Dia inteiro';
 
 	return $number == 1 ? $number.' hora' : $number.' horas';
 }
 
 function feeToString($number)
 {
-	return 'R$ ' . number_format($number,2,",",".");
+	return 'R$ ' . number_format($number, 2, ',', '.');
+}
+
+function fromCents($cents)
+{
+	return $cents / 100;
+}
+
+function toCents($currency)
+{
+	return $currency * 100;
 }
 
 function greeting()

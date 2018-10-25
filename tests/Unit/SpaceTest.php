@@ -37,4 +37,10 @@ class SpaceTest extends AppTest
 	{
 		$this->assertTrue(count($this->space->fees()) > 1);
 	}
+
+	/** @test */
+	public function it_knows_its_total_capacity()
+	{
+		$this->assertInternalType('int', $this->space->capacity());
+	}
 }

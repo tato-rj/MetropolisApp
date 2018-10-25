@@ -24,7 +24,7 @@ class SpaceSearchForm extends FormRequest
     public function rules()
     {
         return [
-            'space' => 'required|in:coworking,conference',
+            'type' => 'required|in:coworking,conference',
             'date' => 'required|date',
             'time' => 'required|numeric',
             'duration' => 'required|in:1,2,4,'.office()->day_length,

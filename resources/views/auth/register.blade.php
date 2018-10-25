@@ -8,7 +8,7 @@
             <div class="d-flex flex-center h-100">
                 <div class="row">
                     <div class="col-12 mb-2 text-center">
-                        <img src="{{asset('images/logo.svg')}}" width="100" class="mb-3">
+                        <img src="{{asset('images/brand/logo.svg')}}" width="100" class="mb-3">
                         <p class="lead-lg">NOVO CADASTRO</p>
                     </div>
 

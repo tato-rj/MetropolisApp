@@ -8,9 +8,9 @@
 
 		<div class="form-group">
 			<label><small><strong>Qual tipo de espaço está procurando?</strong></small></label>
-			<select class="cursor-pointer form-control px-1" name="space">
-				<option value="coworking" data-target="coworking" {{request()->space == 'coworking' ? 'selected' : null}}>Co-working</option>
-				<option value="conference" data-target="conference" {{request()->space == 'conference' ? 'selected' : null}}>Sala de reunião</option>
+			<select class="cursor-pointer form-control px-1" name="type">
+				<option value="coworking" data-target="coworking" {{request()->type == 'coworking' ? 'selected' : null}}>Co-working</option>
+				<option value="conference" data-target="conference" {{request()->type == 'conference' ? 'selected' : null}}>Sala de reunião</option>
 			</select>
 		</div>
 
@@ -19,7 +19,7 @@
 			<select class="cursor-pointer form-control px-1 participants" 
 				@if(! request()->has('space') || request()->space == 'coworking') name="participants" @else style="display: none;" @endif
 				id="select-participants-coworking">
-				@for($i = 1; $i <= office()->coworking()->capacity(); $i++)
+				@for($i = 1; $i <= coworking()->capacity(); $i++)
 				<option value="{{$i}}" {{request()->space == 'coworking' && request()->participants == $i ? 'selected' : null}}>{{$i .' '. trans_choice('words.pessoas', $i)}}</option>
 				@endfor
 			</select>
@@ -27,7 +27,7 @@
 			<select class="cursor-pointer form-control px-1 participants" 
 				@if(request()->space == 'conference') name="participants" @else style="display: none;" @endif
 				id="select-participants-conference">
-				@for($i = 1; $i <= office()->conference()->capacity(); $i++)
+				@for($i = 1; $i <= conference()->capacity(); $i++)
 				<option value="{{$i}}" {{request()->space == 'conference' && request()->participants == $i ? 'selected' : null}}>{{$i .' '. trans_choice('words.pessoas', $i)}}</option>
 				@endfor
 			</select>

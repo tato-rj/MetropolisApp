@@ -14,19 +14,14 @@ class Office
 		}
 	}
 
-	public function conference()
+	public function space(Space $space)
 	{
-		return new Conference;
-	}
-
-	public function coworking()
-	{
-		return new CoWorking;
+		return new $space;
 	}
 
 	public function monthly($discount = 100)
 	{
-		$fees = $this->coworking()->fees();
+		$fees = $this->space(new CoWorking)->fees();
 
 		$cost = end($fees)['fee'] * 20;
 		

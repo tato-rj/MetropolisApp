@@ -8,7 +8,7 @@
 		</div>
 		<div class="px-4 py-3 bg-light">
 			<form method="GET" action="/agendar">
-				<input type="hidden" name="space" value="coworking">
+				<input type="hidden" name="type" value="coworking">
 				<input type="hidden" name="date" value="{{now()->format('Y-m-d')}}">
 				<div class="row w-100 mx-auto">
 					
@@ -30,13 +30,13 @@
 					</select>
 
 					<select id="select-participants-coworking" name="participants" class="participants col-lg-2 col-6 form-control border-left-0 border-right-0">
-						@for($i = 1; $i <= office()->coworking()->capacity(); $i++)
+						@for($i = 1; $i <= coworking()->capacity(); $i++)
 						<option value="{{$i}}">{{$i .' '. trans_choice('words.pessoas', $i)}}</option>
 						@endfor
 					</select>
 
 					<select style="display: none;" id="select-participants-conference" class="participants col-lg-2 col-6 form-control border-0 border-y">
-						@for($i = 1; $i <= office()->conference()->capacity(); $i++)
+						@for($i = 1; $i <= conference()->capacity(); $i++)
 						<option value="{{$i}}">{{$i .' '. trans_choice('words.pessoas', $i)}}</option>
 						@endfor
 					</select>

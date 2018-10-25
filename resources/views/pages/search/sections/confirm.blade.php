@@ -13,8 +13,8 @@
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Espaço</strong></span>
-				<span>{{pt(request()->space)}}</span>
-				<input type="hidden" name="space" value="{{request()->space}}">
+				<span>{{pt(request()->type)}}</span>
+				<input type="hidden" name="type" value="{{request()->type}}">
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Duração</strong></span>
@@ -46,7 +46,7 @@
 			<li class="mt-3" id="emails" style="display: none;">
 				<div>
 					<div class="icon-input position-relative mb-2">
-					<input type="text" placeholder="Você receberá um email automaticamente" disabled 
+					<input type="text" placeholder="O seu email será enviado automaticamente" disabled 
 						class="form-control border-grey bg-transparent" style="border: none; border-bottom: 1px solid">
 						<i class="text-grey opacity-8 fas fa-envelope"></i>
 					</div>
@@ -65,6 +65,7 @@
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
 			<div class="d-flex xs-w-100">
 				<div class="p-3 bg-teal-dark flex-grow"><strong>{{feeTostring($totalCost)}}</strong></div>
+				<input type="hidden" name="fee" value="{{toCents($totalCost)}}">
 				<button type="submit" class="btn btn-red h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>
 			</div>
 		</div>

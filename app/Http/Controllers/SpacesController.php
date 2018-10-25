@@ -27,9 +27,9 @@ class SpacesController extends Controller
      */
     public function confirm(Request $request, SpaceSearchForm $form)
     {
-        $space = request()->space;
+        $type = request()->type;
         
-        $totalCost = office()->$space()->fee(
+        $totalCost = $type()->fee(
             request()->duration,
             request()->participants
         );

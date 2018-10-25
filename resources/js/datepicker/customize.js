@@ -44,7 +44,7 @@ class CustomDatePicker
     }
 
     _updateSpace(space) {
-        $('input[name="space"]').val(space);
+        $('input[name="type"]').val(space);
     }
 
     _updateSelect(target) {

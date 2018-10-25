@@ -20,7 +20,7 @@ class CoWorking extends Space
 				['duration' => 1, 'fee' => 20],
 				['duration' => 2, 'fee' => 35],
 				['duration' => 4, 'fee' => 60],
-				['duration' => $this->day_length, 'fee' => 100]
+				['duration' => $this->office->day_length, 'fee' => 100]
 			];
 	}
 

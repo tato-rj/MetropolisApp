@@ -20,7 +20,7 @@ class Conference extends Space
 				['duration' => 1, 'fee' => 80],
 				['duration' => 2, 'fee' => 140],
 				['duration' => 4, 'fee' => 220],
-				['duration' => $this->day_length, 'fee' => 400]
+				['duration' => $this->office->day_length, 'fee' => 400]
 			];
 	}
 

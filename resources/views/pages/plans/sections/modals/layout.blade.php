@@ -35,7 +35,7 @@
         </div>        
         <div class="col-lg-6 col-md-6 col-12">
           <form method="GET" action="/procurar">
-            <input type="hidden" name="space" value="{{$type}}">
+            <input type="hidden" name="type" value="{{$type}}">
             <input type="hidden" name="date" value="{{now()->format('Y-m-d')}}">
             <input type="hidden" name="time" value="8">
             <input type="hidden" name="participants" value="1">

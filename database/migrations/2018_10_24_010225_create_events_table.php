@@ -17,6 +17,9 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('creator_id');
             $table->string('type');
+            $table->unsignedInteger('fee');
+            $table->unsignedInteger('participants')->default(1);
+            $table->json('guests')->nullable();
             $table->timestamp('starts_at');
             $table->timestamp('ends_at');
             $table->timestamps();

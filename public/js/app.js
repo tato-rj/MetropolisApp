@@ -71495,7 +71495,7 @@ var CustomDatePicker = function () {
     }, {
         key: '_updateSpace',
         value: function _updateSpace(space) {
-            $('input[name="space"]').val(space);
+            $('input[name="type"]').val(space);
         }
     }, {
         key: '_updateSelect',

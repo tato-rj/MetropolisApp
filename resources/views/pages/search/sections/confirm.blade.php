@@ -2,29 +2,30 @@
 	<h5 class="text-green text-center">O espaço que você solicitou está disponível!</h5>
 	@include('components.animations.success-icon')
 </div>
-<form method="POST" action="/reservar">
+<form method="POST" action="{{route('events.pay')}}">
 	@csrf
 	<div class="bg-light border-top border-teal-light border-1x mb-4">
 		<ul class="list-flat p-4" id="review">
+			<li class="mb-2">
+				<span class="text-teal mr-1"><strong>Espaço</strong></span>
+				<span>{{$selectedSpace->name}}</span>
+				<input type="hidden" name="type" value="{{request()->type}}">
+			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Data</strong></span>
 				<span id="date" data-date="{{request()->date}}"></span>
 				<input type="hidden" name="date" value="{{request()->date}}">
 			</li>
 			<li class="mb-2">
-				<span class="text-teal mr-1"><strong>Espaço</strong></span>
-				<span>{{pt(request()->type)}}</span>
-				<input type="hidden" name="type" value="{{request()->type}}">
-			</li>
-			<li class="mb-2">
-				<span class="text-teal mr-1"><strong>Duração</strong></span>
-				<span>{{request()->duration == office()->day_length ? 'Dia inteiro' : request()->duration.'h'}}</span>
-				<input type="hidden" name="duration" value="{{request()->duration}}">
-			</li>
-			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Hora de chegada</strong></span>
 				<span>{{request()->time}}:00 horas</span>
 				<input type="hidden" name="time" value="{{request()->time}}">
+			</li>
+			<li class="mb-2">
+				<span class="text-teal mr-1"><strong>Duração</strong></span>
+				<span class="mr-1">{{request()->duration == office()->day_length ? 'Dia inteiro' : request()->duration.'h'}}</span>
+				<span class="text-muted text-italic"><small>(o escritório fecha às <u>{{durationToString(office()->day_ends_at)}}</u>)</small></span>
+				<input type="hidden" name="duration" value="{{request()->duration}}">
 			</li>
 			<li>
 				<span class="text-teal mr-1"><strong>Número de participantes</strong></span>
@@ -64,8 +65,8 @@
 		<div class="bg-teal text-white d-flex flex-wrap">
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
 			<div class="d-flex xs-w-100">
-				<div class="p-3 bg-teal-dark flex-grow"><strong>{{feeTostring($totalCost)}}</strong></div>
-				<input type="hidden" name="fee" value="{{toCents($totalCost)}}">
+				<div class="p-3 bg-teal-dark flex-grow"><strong>{{feeTostring(fromCents($selectedSpace->priceFor(request()->participants)))}}</strong></div>
+				<input type="hidden" name="fee" value="{{$selectedSpace->priceFor(request()->participants)}}">
 				<button type="submit" class="btn btn-red h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>
 			</div>
 		</div>

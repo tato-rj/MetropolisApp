@@ -1,14 +1,18 @@
 <div class="row">
 	<div class="col-10 mx-auto">
 		<div class="d-flex flex-wrap">
-			<button class="toggle-finder btn btn-light btn-wide py-2" data-target="coworking" data-background="url({{asset('images/coworking.jpg')}})">
-				<i class="text-teal fas fa-laptop mr-2"></i>CO-WORKING</button>
-			<button class="toggle-finder btn btn-dark opacity-6 btn-wide py-2" data-target="conference" data-background="url({{asset('images/conference.jpg')}})">
-				<i class="fas fa-users mr-2"></i>SALA DE REUNIÃO</button>
+			@foreach($spaces as $space)
+			<button 
+				class="toggle-finder btn {{$loop->first ? 'btn-light' : 'btn-dark opacity-6'}} btn-wide py-2 text-uppercase" 
+				data-target="{{$space->slug}}" 
+				data-background="url({{asset("images/covers/{$space->slug}.jpg")}})">
+				<i class="text-teal fas fa-{{$space->icon}} mr-2"></i>{{$space->name}}
+			</button>
+			@endforeach
 		</div>
 		<div class="px-4 py-3 bg-light">
-			<form method="GET" action="/agendar">
-				<input type="hidden" name="type" value="coworking">
+			<form method="GET" action="{{route('events.search')}}">
+				<input type="hidden" name="type" value="{{$spaces->first()->slug}}">
 				<input type="hidden" name="date" value="{{now()->format('Y-m-d')}}">
 				<div class="row w-100 mx-auto">
 					
@@ -26,20 +30,22 @@
 						<option value="1">1 hora</option>
 						<option value="2">2 horas</option>
 						<option value="4">4 horas</option>
+						<option value="6">6 horas</option>
 						<option value="{{office()->day_length}}">Dia inteiro</option>
 					</select>
 
-					<select id="select-participants-coworking" name="participants" class="participants col-lg-2 col-6 form-control border-left-0 border-right-0">
-						@for($i = 1; $i <= coworking()->capacity(); $i++)
+					@foreach($spaces as $space)
+					<select 
+						name="{{$loop->first ? 'participants' : null}}" 
+						id="select-participants-{{$space->slug}}" 
+						class="participants col-lg-2 col-6 form-control border-left-0 border-right-0"
+						style="{{! $loop->first ? 'display: none' : null}}">
+						@for($i = 1; $i <= $space->capacity; $i++)
 						<option value="{{$i}}">{{$i .' '. trans_choice('words.pessoas', $i)}}</option>
 						@endfor
 					</select>
+					@endforeach
 
-					<select style="display: none;" id="select-participants-conference" class="participants col-lg-2 col-6 form-control border-0 border-y">
-						@for($i = 1; $i <= conference()->capacity(); $i++)
-						<option value="{{$i}}">{{$i .' '. trans_choice('words.pessoas', $i)}}</option>
-						@endfor
-					</select>
 					<button type="submit" class="col-lg-2 col-6 btn btn-teal"><strong>Procurar</strong></button>
 				</div>
 			</form>

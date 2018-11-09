@@ -7,7 +7,11 @@
 <div class="container ">
 	<div class="row">
 		<div class="col-default pb-6 pt-5">
-			@include('components.alerts.error', ['message' => 'Infelizmente o espaço que você procurou não está disponível nessa data.'])
+			@include('components.alerts.error', ['message' => 
+				empty($response['participantsLeft']) ? 
+					'Infelizmente o espaço que você procurou não está disponível nessa data.' : 
+					'Temos apenas <strong>'.$response['participantsLeft'].'</strong> lugares disponíveis entre os horários que você procurou.'
+			])
 			<h5 class="my-4 text-center">Vamos tentar novamente!</h5>
 			@include('pages.search.sections.form')
 		</div>

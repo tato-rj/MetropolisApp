@@ -22,7 +22,9 @@ Route::get('/planos', function () {
     return view('pages.plans.index');
 });
 
-Route::get('/procurar', 'SpacesController@search');
-Route::get('/agendar', 'SpacesController@confirm');
+Route::prefix('eventos')->name('events.')->group(function() {
+	Route::get('/buscar', 'EventsController@search')->name('search');
+	Route::post('/reservar', 'EventsController@pay')->name('pay')->middleware('auth');
+});
 
-Route::post('/reservar', 'SpacesController@pay')->middleware('auth');
+Route::get('/planos/{plan}/assinar', 'PlanController@subscribe')->middleware('auth');

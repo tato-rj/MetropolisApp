@@ -16,14 +16,16 @@ class CustomDatePicker
         });
     }
 
-    enableTogglers(finders) {
+    enableTogglers(finders, toggleBg = true) {
     	let object = this;
 
 		$(finders).on('click', function() {
 		    let $this = $(this);
 
-		    object._updateBackground($this.attr('data-background'));
-			object._updateSelect($this.attr('data-target'));
+            if (toggleBg)
+		      object._updateBackground($this.attr('data-background'));
+			
+            object._updateSelect($this.attr('data-target'));
             object._updateSpace($this.attr('data-target'));
 			object._updateButtons($this);
 		});

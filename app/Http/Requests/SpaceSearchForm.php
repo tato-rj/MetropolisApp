@@ -24,11 +24,11 @@ class SpaceSearchForm extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required|in:coworking,conference',
+            'type' => 'required|exists:spaces,slug',
             'date' => 'required|date',
-            'time' => 'required|numeric',
-            'duration' => 'required|in:1,2,4,'.office()->day_length,
-            'participants' => 'required|numeric'
+            'time' => 'required|integer',
+            'duration' => 'required|integer',
+            'participants' => 'required|integer'
         ];
     }
 }

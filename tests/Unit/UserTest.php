@@ -20,13 +20,13 @@ class UserTest extends AppTest
 	{
 		$this->signIn();
 
-		auth()->user()->events()->save($this->event);
+		auth()->user()->events()->save($this->currentEvent);
 		
 		$this->assertInstanceOf(Event::class, auth()->user()->events()->first()); 
 	}
 
 	/** @test */
-	public function it_knows_how_to_subscribe()
+	public function it_knows_how_to_subscribe_to_a_plan()
 	{
 		$this->signIn();
 

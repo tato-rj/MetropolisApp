@@ -2,11 +2,11 @@
 
 namespace App\Office;
 
-class CoWorking extends Space
+class Workstation extends Space
 {
 	public function type()
 	{
-		return 'coworking';
+		return 'workstation';
 	}
 
 	public function capacity()

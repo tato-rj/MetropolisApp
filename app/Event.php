@@ -13,7 +13,7 @@ class Event extends Metropolis
 
     public function space()
     {
-    	return new $this->type;
+    	return $this->belongsTo(Space::class);
     }
 
     public function getHasPassedAttribute()

@@ -4,43 +4,94 @@ namespace Tests\Unit;
 
 use Tests\AppTest;
 use App\Office\{Conference, CoWorking};
-use App\Event;
+use App\{Event, Space};
 
 class SpaceTest extends AppTest
 {
-	public function setUp()
-	{
-        parent::setUp();
-		$this->space = new Conference;
-		$this->event = create('App\Event', ['type' => get_class($this->space)]);
-	}
 	/** @test */
 	public function it_has_many_events()
 	{
+		$this->space->events()->save($this->currentEvent);
 		$this->assertInstanceOf(Event::class, $this->space->events()->first());
 	}
 
 	/** @test */
 	public function it_knows_its_day_length()
 	{
-		$this->assertInternalType('int', $this->space->office->day_length);
+		$this->assertInternalType('int', $this->space->day_length);
 	}
 
 	/** @test */
 	public function it_knows_its_starting_and_ending_hours()
 	{
-		$this->assertTrue($this->space->office->day_starts_at < $this->space->office->day_ends_at);
+		$this->assertTrue($this->space->day_starts_at < $this->space->day_ends_at);
 	}
 
 	/** @test */
-	public function it_knows_its_fees()
+	public function it_can_calcultate_the_cost_of_a_reservation()
 	{
-		$this->assertTrue(count($this->space->fees()) > 1);
+		$workstation = create(Space::class, ['is_shared' => true]);
+		$conference = create(Space::class, ['is_shared' => false]);
+
+		$this->assertEquals($workstation->priceFor(4), $workstation->fee * 4);
+		$this->assertEquals($conference->priceFor(4), $conference->fee);
 	}
 
 	/** @test */
-	public function it_knows_its_total_capacity()
+	public function it_knows_if_it_is_available_on_any_given_time()
 	{
-		$this->assertInternalType('int', $this->space->capacity());
+		$this->space->events()->save($this->pastEvent);
+
+		$this->space->events()->save($this->futureEvent);
+
+		$this->assertTrue($this->space->checkAvailability(now(), $duration = 1)['status']);
+
+		$this->space->events()->save($this->currentEvent);
+
+		$this->assertFalse($this->space->checkAvailability(now(), $duration = 1)['status']);
+	}
+
+	/** @test */
+	public function it_keeps_track_of_its_total_capacity()
+	{
+		$this->assertEquals($this->workspace->participantsLeftOn(now(), $duration = 1), 12);
+
+		create(Event::class, [
+			'space_id' => $this->workspace->id,
+			'participants' => 4,
+			'starts_at' => now()->copy()->subHour(),
+			'ends_at' => now()->copy()->addHour()
+		]);
+
+		$this->assertEquals($this->workspace->participantsLeftOn(now(), $duration = 1), 8);
+		
+		$this->assertTrue($this->workspace->checkAvailability(now(), $duration = 1, $participants = 4)['status']);
+
+		create(Event::class, [
+			'space_id' => $this->workspace->id,
+			'participants' => 3,
+			'starts_at' => now()->copy()->subHour(),
+			'ends_at' => now()->copy()->addHour()
+		]);
+
+		$this->assertEquals($this->workspace->participantsLeftOn(now(), $duration = 1), 5);
+
+		$this->assertFalse($this->workspace->checkAvailability(now(), $duration = 1, $participants = 8)['status']);
+	}
+
+	/** @test */
+	public function if_it_reaches_its_limit_it_knows_how_many_participants_it_can_still_accept()
+	{
+		create(Event::class, [
+			'space_id' => $this->workspace->id,
+			'participants' => 8,
+			'starts_at' => now()->copy()->subHour(),
+			'ends_at' => now()->copy()->addHour()
+		]);
+
+		$request = $this->workspace->checkAvailability(now(), $duration = 1, $participants = 8);
+
+		$this->assertFalse($request['status']);
+		$this->assertEquals($request['participantsLeft'], 4);
 	}
 }

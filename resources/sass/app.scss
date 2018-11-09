@@ -34,7 +34,7 @@ blockquote:after {
   text-align: right;
   font-size: 0.875em;
   margin-top: 0.5em;
-  color: #e74c3c;
+  color: $teal;
 }
 
 .btn, .alert, .form-control, .card, .card-header, .modal-content, .modal-header {
@@ -53,4 +53,20 @@ blockquote:after {
 	.description {
 		@extend .mx-5;
 	}
+}
+
+.price {
+  &:before {
+    content: 'R$';
+    font-weight: bold;
+    opacity: 0.6;
+    font-size: .215em;
+    vertical-align: top;
+  }
+
+  &:after {
+    content: attr(data-label);
+    font-size: .25em;
+    vertical-align: initial;    
+  }
 }

@@ -1,5 +1,18 @@
 @extends('layouts.app')
 
+@push('header')
+<style type="text/css">
+.modal-dialog {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+</style>
+@endpush
+
 @section('content')
 
 @include('pages.plans.sections._lead')
@@ -7,15 +20,22 @@
 @include('pages.plans.sections.plans')
 @include('pages.contact.sections.faq')
 
-@include('pages.plans.sections.modals.coworking')
-@include('pages.plans.sections.modals.conference')
+@include('components.calendar.modal')
 
 @endsection
 
 @push('scripts')
 <script type="text/javascript">
 
-$('#modal-coworking .thumb, #modal-conference .thumb').on('mouseenter', function() {
+(new CustomDatePicker('#datepicker')).enableTogglers('.toggle-finder', toggleBg = false).create();
+
+$('.description button').on('click', function() {
+	type = $(this).attr('data-type');
+
+	$('#search-modal .toggle-finder[data-target="'+type+'"]').trigger('click');
+});
+
+$('#modal-workstation .thumb, #modal-conference .thumb').on('mouseenter', function() {
 	$thumb = $(this);
 	$modal = $($thumb.attr('data-modal'));
 	$image = $thumb.css('background-image');
@@ -25,7 +45,7 @@ $('#modal-coworking .thumb, #modal-conference .thumb').on('mouseenter', function
 	$modal.find('.cover').css('background-image', $image);
 });
 
-$('#modal-coworking, #modal-conference').on('show.bs.modal', function (e) {
+$('#modal-workstation, #modal-conference').on('show.bs.modal', function (e) {
 	let $button = $(e.relatedTarget);
 	let $modal = $(e.target);
 	

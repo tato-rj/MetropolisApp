@@ -1,4 +1,4 @@
-@component('layouts.header.partial', ['background' => 'coworking'])
+@component('layouts.header.partial', ['background' => 'workstation'])
 	<div class="container text-white">
 		<div class="row">
 			<div class="col-default">

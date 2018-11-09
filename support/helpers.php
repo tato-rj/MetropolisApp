@@ -2,22 +2,12 @@
 
 function office()
 {
-	return new \App\Office\Office;
-}
-
-function conference()
-{
-	return new \App\Office\Conference;
-}
-
-function coworking()
-{
-	return new \App\Office\CoWorking;
+	return new \App\Space;
 }
 
 function pt($word)
 {
-	$dictionary = ['conference' => 'Sala de reunião', 'coworking' => 'Mesa compartilhada'];
+	$dictionary = ['conference' => 'Sala de reunião', 'workstation' => 'Mesa compartilhada'];
 	if (! array_key_exists($word, $dictionary))
 		return $word;
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
+use App\{Event, Space};
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Requests\SpaceSearchForm;
 
-class EventController extends Controller
+class EventsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,6 +38,23 @@ class EventController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    /**
+     * Checks if the space is free for booking.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request, SpaceSearchForm $form)
+    {
+        $selectedSpace = Space::where('slug', $request->type)->first();
+
+        $date = Carbon::parse($request->date)->setTime($request->time,0,0);
+
+        $response = $selectedSpace->checkAvailability($date, $request->duration, $request->participants);
+
+        return view("pages.search.results", compact(['response', 'selectedSpace']));
     }
 
     /**

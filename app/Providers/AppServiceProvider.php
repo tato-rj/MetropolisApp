@@ -14,7 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \View::composer('*', function($view) {
+            $view->with([
+                'spaces' => \App\Space::all(),
+                'basicPlans' => \App\Plan::where('type', 'basic')->get(),
+                'completePlans' => \App\Plan::where('type', 'complete')->get()
+            ]);
+        });
     }
 
     /**

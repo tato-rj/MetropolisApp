@@ -1,4 +1,4 @@
-@component('layouts.header.full', ['background' => 'coworking'])
+@component('layouts.header.full', ['background' => 'workstation'])
 	<div class="container text-white z-10 mb-4">
 		<div class="row">
 			<div class="col-10 mx-auto">
@@ -7,7 +7,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container text-white z-10">
+	<div class="container text-white z-10 intro">
 		@include('components.calendar.finder')
 	</div>
 @endcomponent

@@ -21,7 +21,7 @@ class Office
 
 	public function monthly($discount = 100)
 	{
-		$fees = $this->space(new CoWorking)->fees();
+		$fees = $this->space(new Workstation)->fees();
 
 		$cost = end($fees)['fee'] * 20;
 		

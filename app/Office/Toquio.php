@@ -2,7 +2,7 @@
 
 namespace App\Office;
 
-class Conference extends Space
+class Toquio extends Space
 {
 	public function type()
 	{
@@ -11,16 +11,16 @@ class Conference extends Space
 
 	public function capacity()
 	{
-		return 6;
+		return 4;
 	}
 
 	public function fees()
 	{
 		return [
-				['duration' => 1, 'fee' => 80],
-				['duration' => 2, 'fee' => 140],
-				['duration' => 4, 'fee' => 220],
-				['duration' => $this->office->day_length, 'fee' => 400]
+				['duration' => 1, 'fee' => 49],
+				['duration' => 2, 'fee' => 89],
+				['duration' => 4, 'fee' => 169],
+				['duration' => $this->office->day_length, 'fee' => 249]
 			];
 	}
 

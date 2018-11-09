@@ -71466,12 +71466,15 @@ var CustomDatePicker = function () {
     }, {
         key: 'enableTogglers',
         value: function enableTogglers(finders) {
+            var toggleBg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
             var object = this;
 
             $(finders).on('click', function () {
                 var $this = $(this);
 
-                object._updateBackground($this.attr('data-background'));
+                if (toggleBg) object._updateBackground($this.attr('data-background'));
+
                 object._updateSelect($this.attr('data-target'));
                 object._updateSpace($this.attr('data-target'));
                 object._updateButtons($this);

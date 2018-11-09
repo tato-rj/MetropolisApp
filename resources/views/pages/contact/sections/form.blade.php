@@ -1,23 +1,4 @@
-<section class="py-4 mb-5 bg-light">
-	<div class="container">
-		<div class="row">
-			<div class="col-default">
-				<div class=" d-flex">
-					<div class=" flex-grow">
-						<div class="mb-3"><i class="fas fa-building fa-lg mr-3 text-muted"></i><strong>Av. Rio Branco, nº 185 Sala 1025 - Centro, Rio de Janeiro/RJ</strong></div>
-						<div><i class="fab fa-whatsapp fa-lg mr-3 text-muted"></i><strong>+55 21 3199-1377 | +55 21 3429-1377</strong></div>
-					</div>
-					<div class=" d-flex">
-			            <a class="link-teal t-2 ml-3" href="#"><i class="fab fa-facebook-f fa-lg"></i></a>
-			            <a class="link-teal t-2 ml-3" href="#"><i class="fab fa-instagram fa-lg"></i></a>
-			            <a class="link-teal t-2 ml-3" href="#"><i class="fab fa-twitter fa-lg"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<section class="container mb-8">
+<section class="container mt-5 mb-7">
 	<div class="row">
 		<div class="col-default">
 			<div class="mb-5">

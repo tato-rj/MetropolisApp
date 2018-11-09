@@ -1,5 +1,9 @@
-.ui-datepicker {
+.intro .ui-datepicker {
     z-index: 100 !important;
+}
+
+.modal .ui-datepicker {
+    z-index: 1051 !important;
 }
 
 .ui-datepicker {

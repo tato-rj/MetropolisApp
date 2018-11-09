@@ -4,7 +4,7 @@ namespace Tests;
 
 use Tests\Utilities\ExceptionHandling;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Office\Conference;
+use App\{Space, Event, Plan};
 
 abstract class AppTest extends TestCase
 {
@@ -16,8 +16,28 @@ abstract class AppTest extends TestCase
 
         $this->disableExceptionHandling();
 
-        $this->event = create('App\Event', ['type' => get_class(new Conference)]);
-        $this->plan = create('App\Plan');
+        $this->space = create(Space::class, ['is_shared' => false]);
+        $this->workspace = create(Space::class, ['is_shared' => true, 'capacity' => 12]);
+
+        $this->pastEvent = create(Event::class, [
+            'space_id' => 100,
+            'starts_at' => now()->copy()->subHours(5),
+            'ends_at' => now()->copy()->subHours(2),
+        ]);
+
+        $this->currentEvent = create(Event::class, [
+            'space_id' => 100,
+            'starts_at' => now()->copy()->subHour(),
+            'ends_at' => now()->copy()->addHour(),
+        ]);
+        
+        $this->futureEvent = create(Event::class, [
+            'space_id' => 100,
+            'starts_at' => now()->copy()->addHours(5),
+            'ends_at' => now()->copy()->addHours(8),
+        ]);
+
+        $this->plan = create(Plan::class);
     }
     
     protected function signIn($user = null)

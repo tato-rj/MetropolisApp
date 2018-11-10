@@ -52,9 +52,9 @@ class EventsController extends Controller
 
         $date = Carbon::parse($request->date)->setTime($request->time,0,0);
 
-        $response = $selectedSpace->checkAvailability($date, $request->duration, $request->participants);
+        $report = $selectedSpace->checkAvailability($date, $request->duration, $request->participants);
 
-        return view("pages.search.results", compact(['response', 'selectedSpace']));
+        return view("pages.search.results", compact(['report', 'selectedSpace']));
     }
 
     /**

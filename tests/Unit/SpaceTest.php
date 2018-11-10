@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use Tests\AppTest;
-use App\Office\{Conference, CoWorking};
 use App\{Event, Space};
 
 class SpaceTest extends AppTest
@@ -44,11 +43,11 @@ class SpaceTest extends AppTest
 
 		$this->space->events()->save($this->futureEvent);
 
-		$this->assertTrue($this->space->checkAvailability(now(), $duration = 1)['status']);
+		$this->assertTrue($this->space->checkAvailability(now(), $duration = 1)->status);
 
 		$this->space->events()->save($this->currentEvent);
 
-		$this->assertFalse($this->space->checkAvailability(now(), $duration = 1)['status']);
+		$this->assertFalse($this->space->checkAvailability(now(), $duration = 1)->status);
 	}
 
 	/** @test */
@@ -65,7 +64,7 @@ class SpaceTest extends AppTest
 
 		$this->assertEquals($this->workspace->participantsLeftOn(now(), $duration = 1), 8);
 		
-		$this->assertTrue($this->workspace->checkAvailability(now(), $duration = 1, $participants = 4)['status']);
+		$this->assertTrue($this->workspace->checkAvailability(now(), $duration = 1, $participants = 4)->status);
 
 		create(Event::class, [
 			'space_id' => $this->workspace->id,
@@ -76,7 +75,7 @@ class SpaceTest extends AppTest
 
 		$this->assertEquals($this->workspace->participantsLeftOn(now(), $duration = 1), 5);
 
-		$this->assertFalse($this->workspace->checkAvailability(now(), $duration = 1, $participants = 8)['status']);
+		$this->assertFalse($this->workspace->checkAvailability(now(), $duration = 1, $participants = 8)->status);
 	}
 
 	/** @test */
@@ -89,9 +88,9 @@ class SpaceTest extends AppTest
 			'ends_at' => now()->copy()->addHour()
 		]);
 
-		$request = $this->workspace->checkAvailability(now(), $duration = 1, $participants = 8);
+		$report = $this->workspace->checkAvailability(now(), $duration = 1, $participants = 8);
 
-		$this->assertFalse($request['status']);
-		$this->assertEquals($request['participantsLeft'], 4);
+		$this->assertFalse($report->status);
+		$this->assertEquals($report->participantsLeft, 4);
 	}
 }

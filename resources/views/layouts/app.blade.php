@@ -12,6 +12,12 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/primer.css') }}" rel="stylesheet">
 
+    <script>
+        window.app = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
+
     @stack('header')
 
 </head>

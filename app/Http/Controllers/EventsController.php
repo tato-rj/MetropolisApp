@@ -16,6 +16,7 @@ class EventsController extends Controller
      */
     public function index()
     {
+        $events = json_encode([['title' => 'Test!', 'start' => '2018-11-12T09:00:00', 'end' => '2018-11-12T11:00:00']]);
         return view('pages.user.schedule.index');
     }
 
@@ -47,12 +48,12 @@ class EventsController extends Controller
             'space_id' => $request->space_id,
             'fee' => $space->priceFor($request->participants, $request->duration),
             'participants' => $request->participants,
-            'emails' => $request->emails ? serialize($request->emails) : null,
+            // 'emails' => $request->emails ? serialize($request->emails) : null,
             'starts_at' => $starts_at,
             'ends_at' => $ends_at
         ]);
 
-        return redirect()->route('client.home')->with('status', 'A sua reserva foi confirmada com sucesso.');
+        return redirect()->route('client.events.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
     }
 
     /**
@@ -81,6 +82,12 @@ class EventsController extends Controller
     public function show(Event $event)
     {
         //
+    }
+
+    public function ajax(Request $request)
+    {
+        $event = Event::find($request->event_id);
+        return view('components.calendar.event', compact('event'))->render();
     }
 
     /**

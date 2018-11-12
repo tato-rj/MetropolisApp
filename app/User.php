@@ -61,4 +61,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->events()->whereDate('starts_at', '>', now()->toDateTimeString())->get();
     }
+
+    public function getEventsArrayAttribute()
+    {
+        return $this->events->map(function ($item, $key) {
+            return $item->only(['id', 'title', 'start', 'end']);
+        });
+    }
 }

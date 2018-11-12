@@ -9,9 +9,9 @@ function calculateEndingTime(\Carbon\Carbon $starts_at, $duration)
 {
 	$office_ending_hour = office()->day_ends_at;
 
-	$ends_at = $starts_at->addHours($duration);
+	$ends_at = $starts_at->copy()->addHours($duration);
 
-	if ($ends_at->hour > $office_ending_hour);
+	if ($ends_at->hour > $office_ending_hour)
 		return $ends_at->setTime($office_ending_hour, 0, 0);
 
 	return $ends_at;

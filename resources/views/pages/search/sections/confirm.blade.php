@@ -4,11 +4,13 @@
 </div>
 <form method="POST" action="{{route('client.events.store')}}">
 	@csrf
+	<input type="hidden" name="creator_id" value="{{auth()->check() ? auth()->user()->id : null}}">
 	<input type="hidden" name="space_id" value="{{$selectedSpace->id}}">
 	<input type="hidden" name="date" value="{{request()->date}}">
 	<input type="hidden" name="time" value="{{request()->time}}">
 	<input type="hidden" name="duration" value="{{request()->duration}}">
 	<input type="hidden" name="participants" value="{{request()->participants}}">
+	<input type="hidden" name="emails">
 
 	<div class="bg-light border-top border-teal-light border-1x mb-4">
 		<ul class="list-flat p-4" id="review">

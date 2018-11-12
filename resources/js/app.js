@@ -1,8 +1,13 @@
 require('./bootstrap');
 require('./helpers/cookie');
 require('./datepicker/customize');
+require('fullcalendar/dist/locale/pt-br.js');
 
-
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': app.csrfToken
+    }
+});
 
 // window.Vue = require('vue');
 

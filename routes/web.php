@@ -7,6 +7,7 @@ Route::prefix('/cliente')->name('client.')->middleware(['auth', 'verified'])->gr
 
 	Route::prefix('agenda')->name('events.')->group(function() {
 		Route::get('', 'EventsController@index')->name('index');
+		Route::post('/ajax', 'EventsController@ajax')->name('ajax');
 		Route::post('', 'EventsController@store')->name('store');
 	});
 });

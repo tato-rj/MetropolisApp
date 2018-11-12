@@ -31,9 +31,10 @@ class SpaceTest extends AppTest
 	{
 		$workstation = create(Space::class, ['is_shared' => true]);
 		$conference = create(Space::class, ['is_shared' => false]);
+		$duration = 2;
 
-		$this->assertEquals($workstation->priceFor(4), $workstation->fee * 4);
-		$this->assertEquals($conference->priceFor(4), $conference->fee);
+		$this->assertEquals($workstation->priceFor(4, $duration), $workstation->fee * 4 * 2);
+		$this->assertEquals($conference->priceFor(4, $duration), $conference->fee * 2);
 	}
 
 	/** @test */

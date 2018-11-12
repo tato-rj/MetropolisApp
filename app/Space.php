@@ -29,11 +29,19 @@ class Space extends Model
     	return $this->type == 'workstation' ? 'laptop' : 'users';
     }
 
-    public function priceFor($participants)
+    public function getCapacityAttribute($capacity)
+    {
+        if ($this->is_shared)
+            return $capacity - Membership::count();
+
+        return $capacity;
+    }
+
+    public function priceFor($participants, $duration)
     {
         if (! $this->is_shared)
-            return $this->fee;
+            return $this->fee * $duration;
 
-        return $this->fee * $participants;
+        return $this->fee * $participants * $duration;
     }
 }

@@ -2,35 +2,36 @@
 	<h5 class="text-green text-center">O espaço que você solicitou está disponível!</h5>
 	@include('components.animations.success-icon')
 </div>
-<form method="POST" action="{{route('events.pay')}}">
+<form method="POST" action="{{route('client.events.store')}}">
 	@csrf
+	<input type="hidden" name="space_id" value="{{$selectedSpace->id}}">
+	<input type="hidden" name="date" value="{{request()->date}}">
+	<input type="hidden" name="time" value="{{request()->time}}">
+	<input type="hidden" name="duration" value="{{request()->duration}}">
+	<input type="hidden" name="participants" value="{{request()->participants}}">
+
 	<div class="bg-light border-top border-teal-light border-1x mb-4">
 		<ul class="list-flat p-4" id="review">
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Espaço</strong></span>
 				<span>{{$selectedSpace->name}}</span>
-				<input type="hidden" name="type" value="{{request()->type}}">
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Data</strong></span>
 				<span id="date" data-date="{{request()->date}}"></span>
-				<input type="hidden" name="date" value="{{request()->date}}">
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Hora de chegada</strong></span>
 				<span>{{request()->time}}:00 horas</span>
-				<input type="hidden" name="time" value="{{request()->time}}">
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Duração</strong></span>
 				<span class="mr-1">{{request()->duration == office()->day_length ? 'Dia inteiro' : request()->duration.'h'}}</span>
 				<span class="text-muted text-italic"><small>(o escritório fecha às <u>{{durationToString(office()->day_ends_at)}}</u>)</small></span>
-				<input type="hidden" name="duration" value="{{request()->duration}}">
 			</li>
 			<li>
 				<span class="text-teal mr-1"><strong>Número de participantes</strong></span>
 				<span>{{request()->participants}} {{trans_choice('words.pessoas', request()->participants)}}</span>
-				<input type="hidden" name="participants" value="{{request()->participants}}">
 			</li>
 			@if(request()->participants > 1)
 			<div class="mt-3 border-top pt-3">
@@ -65,8 +66,7 @@
 		<div class="bg-teal text-white d-flex flex-wrap">
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
 			<div class="d-flex xs-w-100">
-				<div class="p-3 bg-teal-dark flex-grow"><strong>{{feeTostring(fromCents($selectedSpace->priceFor(request()->participants)))}}</strong></div>
-				<input type="hidden" name="fee" value="{{$selectedSpace->priceFor(request()->participants)}}">
+				<div class="p-3 bg-teal-dark flex-grow"><strong>{{feeTostring(fromCents($selectedSpace->priceFor(request()->participants, request()->duration)))}}</strong></div>
 				<button type="submit" class="btn btn-red h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>
 			</div>
 		</div>

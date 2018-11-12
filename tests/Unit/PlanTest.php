@@ -16,4 +16,16 @@ class PlanTest extends AppTest
 
 		$this->assertInstanceOf(Membership::class, $this->plan->memberships->first());
 	}
+
+	/** @test */
+	public function it_decreases_the_capacity_for_the_workstation()
+	{
+		$this->signIn();
+		
+		$this->assertEquals($this->workspace->capacity, 12);
+
+		auth()->user()->subscribe($this->plan);
+
+		$this->assertEquals($this->workspace->capacity, 11);
+	}
 }

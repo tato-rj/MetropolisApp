@@ -45,4 +45,19 @@ abstract class AppTest extends TestCase
     	$user = ($user) ?: create('App\User');
     	return $this->actingAs($user);
     }
+
+    public function postNewEvent($user = null)
+    {
+        $user = $user ?? auth()->user();
+
+        return $this->post(route('client.events.store'), [
+            'creator_id' => $user->id,
+            'space_id' => $this->space->id,
+            'participants' => 1,
+            'guests' => null,
+            'date' => now(),
+            'time' => now()->hour,
+            'duration' => 2
+        ]);
+    }
 }

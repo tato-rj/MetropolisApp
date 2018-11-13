@@ -5,7 +5,7 @@ namespace App;
 class Event extends Metropolis
 {
 	protected $dates = ['starts_at', 'ends_at'];
-    protected $appends = ['title', 'start', 'end'];
+    protected $appends = ['title', 'start', 'end', 'duration'];
 
 	public function creator()
 	{
@@ -40,5 +40,15 @@ class Event extends Metropolis
     public function getEndAttribute()
     {
         return $this->ends_at->toDateTimeString();
+    }
+
+    public function getDurationAttribute()
+    {
+        return $this->ends_at->hour - $this->starts_at->hour;
+    }
+
+    public function getEmailsAttribute($emails)
+    {
+        return unserialize($emails);
     }
 }

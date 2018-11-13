@@ -65,7 +65,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getEventsArrayAttribute()
     {
         return $this->events->map(function ($item, $key) {
-            return $item->only(['id', 'title', 'start', 'end']);
+            return $item->only(['allDay', 'id', 'title', 'start', 'end']);
         });
     }
 }

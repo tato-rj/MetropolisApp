@@ -19,7 +19,7 @@ class CreateEventsTable extends Migration
             $table->unsignedInteger('creator_id');
             $table->unsignedInteger('fee');
             $table->unsignedInteger('participants')->default(1);
-            $table->json('emails')->nullable();
+            $table->text('emails')->nullable();
             $table->timestamp('starts_at')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->timestamps();

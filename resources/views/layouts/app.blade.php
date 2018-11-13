@@ -11,7 +11,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/primer.css') }}" rel="stylesheet">
-
+    <style type="text/css">
+    .fixed-bottom-right {
+      position: fixed;
+      bottom: .65em;
+      right: 1em;
+    }
+    </style>
     <script>
         window.app = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -32,12 +38,21 @@
         @include('layouts.footer.layout')
     </div>
 
+@if(session()->has('status'))
+@include('components.alerts.success', ['message' => session('status')])
+@endif
 <script src="{{ mix('js/app.js') }}"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
   // May need this
 });
+
+$('#event-modal').on('hidden.bs.modal', function (e) {
+  $(this).find('.modal-body > div:first-child').html('');
+  $(this).find('#loading').show();
+  $(this).find('.modal-footer').hide();
+})
 
 if ($('#scroll-mark').length > 0) {
   let $navbar = $('.navbar');

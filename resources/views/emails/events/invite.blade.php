@@ -6,7 +6,7 @@ Este é um convite de {{$event->creator->name}} para o seguinte evento:
 @component('mail::panel')
 <ul>
 	<li><strong>Espaço:</strong> {{$event->space->name}}</li>
-	<li><strong>Data:</strong> {{$event->starts_at->toFormattedDateString()}}</li>
+	<li><strong>Data:</strong> {{$event->starts_at->format('d/m/Y')}}</li>
 	<li><strong>Hora da chegada:</strong> {{$event->starts_at->hour}}:00</li>
 	<li><strong>Hora da saída:</strong> {{$event->ends_at->hour}}:00</li>
 	<li><strong>Número de participantes:</strong> {{$event->participants}}</li>

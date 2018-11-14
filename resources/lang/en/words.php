@@ -3,6 +3,7 @@
 return [
 
     'pessoas' => 'pessoa|pessoas',
-    'horas' => 'hora|horas'
+    'horas' => 'hora|horas',
+    'dias' => 'dia|dias'
 
 ];

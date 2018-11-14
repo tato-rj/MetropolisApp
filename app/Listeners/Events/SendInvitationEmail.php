@@ -20,7 +20,8 @@ class SendInvitationEmail
     {
         if ($event->event->emails) {
             foreach ($event->event->emails as $email) {
-                Mail::to($email)->send(new InviteToEvent($event->event));
+                if ($email)
+                    Mail::to($email)->send(new InviteToEvent($event->event));
             }
         }
     }

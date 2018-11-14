@@ -3,6 +3,7 @@
 				<span class="text-teal mr-1"><strong>Espaço</strong></span>
 				<span>{{$event->space->name}}</span>
 			</li>
+			@if($event->starts_at->isSameDay($event->ends_at))
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Data</strong></span>
 				<span id="date" data-date="{{$event->starts_at->format('Y-m-d')}}"></span>
@@ -12,15 +13,29 @@
 				<span>{{$event->starts_at->hour}}:00 horas</span>
 			</li>
 			<li class="mb-2">
+				<span class="text-teal mr-1"><strong>Hora da saída</strong></span>
+				<span>{{$event->ends_at->hour}}:00 horas</span>
+			</li>
+			@else
+			<li class="mb-2">
+				<span class="text-teal mr-1"><strong>Começa</strong></span>
+				<span>dia {{$event->starts_at->day}} às {{$event->starts_at->hour}}:00 horas</span>
+			</li>
+			<li class="mb-2">
+				<span class="text-teal mr-1"><strong>Termina</strong></span>
+				<span>dia {{$event->ends_at->day}} às {{$event->ends_at->hour}}:00 horas</span>
+			</li>
+			@endif
+			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Duração</strong></span>
-				<span class="mr-1">{{$event->duration}} {{trans_choice('words.horas', $event->duration)}}</span>
+				<span class="mr-1">{{$event->duration}}</span>
 				<span class="text-muted text-italic"><small>(o escritório fecha às <u>{{durationToString(office()->day_ends_at)}}</u>)</small></span>
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Status</strong></span>
 				<span class="">Confirmado</span>
 			</li>
-			<li>
+			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Número de participantes</strong></span>
 				<span 
 					class="cursor-pointer"
@@ -32,23 +47,30 @@
 					<div class="collapse mt-2" id="emails">
 						<div class="bg-light px-4 py-3">
 							<ul class="list-flat">
-								<li class="mb-2"><span class="text-muted"><small><i class="fas fa-user mr-2"></i>{{auth()->user()->email}}</small></span></li>
+								<li><span class="text-muted"><small><i class="fas fa-user mr-2"></i>{{auth()->user()->email}}</small></span></li>
 								@if($event->emails)
-									@foreach($event->emails as $email)
-									<li class="d-flex justify-content-between align-items-baseline">
-										<input class="form-control-plaintext form-control-sm event-email m-0" 
-										autocomplete="new-password"
-											readonly 
-											placeholder="Insira o email aqui..." 
-											type="email" 
-											value="{{$email}}">
-										<span class="ml-2 text-warning edit cursor-pointer"><strong>editar</strong></span>
-										<span class="ml-2 text-success save cursor-pointer" data-url="{{route('client.events.update.emails', $event->id)}}" style="display: none;"><strong>salvar</strong></span>
-									</li>
-									@endforeach
+									<div class="mt-3 pt-2 border-top"> 
+										@foreach($event->emails as $email)
+										<li class="d-flex justify-content-between align-items-baseline">
+											<span class="text-muted mr-3"><small>{{$loop->iteration}}</small></span>
+											<input class="form-control-plaintext form-control-sm event-email m-0" 
+												autocomplete="new-password"
+												readonly 
+												placeholder="Insira o email aqui..." 
+												type="email" 
+												value="{{$email}}">
+											<span class="ml-3 text-teal edit font-weight-bold cursor-pointer">editar</span>
+											<span class="ml-3 text-warning save font-weight-bold cursor-pointer" data-url="{{route('client.events.update.emails', $event->id)}}" style="display: none;">salvar</span>
+											<span class="text-teal ml-3 saved" style="display: none;"><i class="fas fa-check-circle"></i></span>
+										</li>
+										@endforeach
+									</div>
 								@endif
 							</ul>
 						</div>
 					</div>
+			</li>
+			<li>
+				<span class="text-muted"><small>Para cancelar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></span>
 			</li>
 		</ul>

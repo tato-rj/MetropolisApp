@@ -44,7 +44,13 @@ class Event extends Metropolis
 
     public function getDurationAttribute()
     {
-        return $this->ends_at->hour - $this->starts_at->hour;
+        if ($this->starts_at->isSameDay($this->ends_at)) {
+            $duration = $this->starts_at->diffInHours($this->ends_at);
+            return "$duration ". trans_choice('words.horas', $duration);
+        }
+        
+        $duration = $this->starts_at->diffInDays($this->ends_at);
+        return "$duration ". trans_choice('words.dias', $duration);
     }
 
     public function getEmailsAttribute($emails)

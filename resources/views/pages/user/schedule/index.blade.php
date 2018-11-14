@@ -62,13 +62,19 @@ $(function() {
 
   $('#calendar').fullCalendar({
     weekends: false,
-    minTime: '06:00:00',
-    maxTime: '20:00:00',
+    minTime: '08:00',
+    maxTime: '18:00',
+    allDaySlot: false,
+    businessHours: {
+      start: '08:00',
+      end: '18:00',
+    },
     header: {
     	left: 'prev,next today',
     	center: 'title',
     	right:  'month,agendaWeek,agendaDay'
     },
+    selectConstraint: "businessHours",
     views: {
     	agenda: {
     		titleFormat: 'MMMM YYYY'
@@ -102,6 +108,9 @@ $(function() {
     eventMouseout: function() {
       $(this).css('background-color', '#4dc0b5');
     },
+    eventAfterAllRender: function (view) {
+        $('#calendar-loading').remove();
+    }
   })
 });
 </script>
@@ -138,6 +147,15 @@ function resetButtons(edit, save)
     save.hide();
 }
 
+function finishTask(element)
+{
+  $('.modal-body .event-email').attr('readonly', true).addClass('form-control-plaintext').removeClass('form-control');
+  element.siblings('.saved').show();
+  resetInput(element.closest('input'));
+  element.siblings('.edit').remove();
+  element.remove();
+}
+
 $('.modal-body').on('click', '.edit', function() {
   $input = $(this).siblings('input');
   toggleInput($input);
@@ -145,20 +163,25 @@ $('.modal-body').on('click', '.edit', function() {
 });
 
 $('.modal-body').on('click', '.save', function() {
-  $input = $(this).siblings('input');
-  url = $(this).attr('data-url');
+  $save = $(this);
+  $input = $save.siblings('input');
+  address = $save.attr('data-url');
   emails = [];
+
+  $save.text('salvando');
+
   $('.event-email').each(function() {
     emails.push($(this).val());
   });
 
-  $.post(url, {field: 'emails', emails: JSON.stringify(emails)}, function(data, status) {
+  $.post(address, {field: 'emails', emails: JSON.stringify(emails)}, function(data, status) {
     $('body').append(data);
+    finishTask($save);
   });
 });
 
 $(document).click(function(e) {
-    if ($(e.target).closest('.edit, .event-email').length === 0) {
+    if ($(e.target).closest('.edit, .event-email, .save').length === 0) {
         $('.modal-body .event-email').attr('readonly', true).addClass('form-control-plaintext').removeClass('form-control');
         toggleButtonsFor();
     }

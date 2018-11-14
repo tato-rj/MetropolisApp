@@ -8,7 +8,7 @@
       	<div class="container text-white z-10">
       		<div class="row">
       			<div class="col-10 mx-auto">
-      				<h3 class="mb-4">Faça aqui a sua pesquisa</h3>
+      				<h3 class="mb-5">Para quando precisa deste espaço?</h3>
       			</div>
       		</div>
       		@include('components.calendar.finder')

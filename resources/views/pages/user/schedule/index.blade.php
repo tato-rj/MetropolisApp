@@ -22,15 +22,16 @@
   box-shadow: none;
 }
 .fc-content { 
-	cursor: pointer;
 	color: white;
 	padding: 0 .25em;
 }
 .fc-event {
+  cursor: pointer;
 	border: 0;
 	border-radius: 0;
   background-color: #4dc0b5;
-      box-shadow: 0 0 1rem rgba(0,0,0,.1);
+  box-shadow: 0 0 1rem rgba(0,0,0,.1);
+  transition: 0.12s;
 }
 
 .fc-title { font-weight: bold }
@@ -79,22 +80,28 @@ $(function() {
     	$.post(ajaxUrl, {event_id: event.id},
 	    	function(data, status){
 	    		$modal.find('.modal-body > div:first-child').html(data);
+          
+          $modal.find('.modal-footer input[name="event_id"]').val(event.id);
+          
           $modal.find('#date').text(
             moment(
               $(this).attr('data-date')
             ).locale('pt').format("D [de] MMMM [de] YYYY")
           );
+          
           $modal.find('#loading').hide();
-	    		$modal.find('.modal-footer').show();
+
+          if ($modal.find('#participants').attr('data-participants') > 1)
+  	    		$modal.find('.modal-footer').show();
 	    	}
 	    );
     },
-    eventRender: function(event, element) {
-      // console.log(event);
+    eventMouseover: function() {
+      $(this).css('background-color', '#389d94');
     },
-      selectOverlap: function(event) {
-    return event.rendering === 'background';
-  }
+    eventMouseout: function() {
+      $(this).css('background-color', '#4dc0b5');
+    },
   })
 });
 </script>

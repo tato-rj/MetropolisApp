@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\EventCreated;
 use App\{Event, Space, User};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\{SpaceSearchForm, CreateEventForm};
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InviteToEvent;
 
 class EventsController extends Controller
 {
@@ -43,7 +46,7 @@ class EventsController extends Controller
         $starts_at = Carbon::parse($request->date)->setTime($request->time, 0, 0);
         $ends_at = calculateEndingTime($starts_at, $request->duration);
 
-        $user->events()->create([
+        $event = $user->events()->create([
             'space_id' => $request->space_id,
             'fee' => $space->priceFor($request->participants, $request->duration),
             'participants' => $request->participants,
@@ -52,7 +55,20 @@ class EventsController extends Controller
             'ends_at' => $ends_at
         ]);
 
+        event(new EventCreated($event));
+
         return redirect()->route('client.events.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
+    }
+
+    public function invite(Request $request)
+    {
+        $event = Event::find($request->event_id);
+
+        foreach ($event->emails as $email) {
+            if ($email) Mail::to($email)->send(new InviteToEvent($event));
+        }
+
+        return redirect()->back()->with('status', 'Os convites foram re-enviados com sucesso.');
     }
 
     /**

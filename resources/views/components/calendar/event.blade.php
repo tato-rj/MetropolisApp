@@ -24,6 +24,8 @@
 				<span class="text-teal mr-1"><strong>Número de participantes</strong></span>
 				<span 
 					class="cursor-pointer"
+					id="participants" 
+					data-participants="{{$event->participants}}"
 					data-toggle="collapse" href="#emails">
 					{{$event->participants}} {{trans_choice('words.pessoas', $event->participants)}} 
 					<small class="text-teal"><i class="fas fa-caret-down"></i></small></span>
@@ -31,17 +33,20 @@
 						<div class="bg-light px-4 py-3">
 							<ul class="list-flat">
 								<li class="mb-2"><span class="text-muted"><small><i class="fas fa-user mr-2"></i>{{auth()->user()->email}}</small></span></li>
-								@foreach($event->emails as $email)
-								<li class="d-flex justify-content-between align-items-baseline">
-									<input class="form-control-plaintext form-control-sm event-email m-0" 
-										readonly 
-										placeholder="Insira o email aqui..." 
-										type="email" 
-										value="{{$email}}">
-									<span class="ml-2 text-warning edit cursor-pointer"><strong>editar</strong></span>
-									<span class="ml-2 text-success save cursor-pointer" data-url="{{route('client.events.update.emails', $event->id)}}" style="display: none;"><strong>salvar</strong></span>
-								</li>
-								@endforeach
+								@if($event->emails)
+									@foreach($event->emails as $email)
+									<li class="d-flex justify-content-between align-items-baseline">
+										<input class="form-control-plaintext form-control-sm event-email m-0" 
+										autocomplete="new-password"
+											readonly 
+											placeholder="Insira o email aqui..." 
+											type="email" 
+											value="{{$email}}">
+										<span class="ml-2 text-warning edit cursor-pointer"><strong>editar</strong></span>
+										<span class="ml-2 text-success save cursor-pointer" data-url="{{route('client.events.update.emails', $event->id)}}" style="display: none;"><strong>salvar</strong></span>
+									</li>
+									@endforeach
+								@endif
 							</ul>
 						</div>
 					</div>

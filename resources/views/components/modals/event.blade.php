@@ -20,7 +20,11 @@
       <div class="modal-footer border-0 bg-light" style="display: none;">
         <div class="d-flex align-items-center justify-content-between w-100">
           <span class="text-muted"><strong>Re-enviar os emails de convite?</strong></span>
-          <a href="" class="btn btn-xs btn-teal rounded-circle"><i class="fas fa-envelope mr-2"></i><strong>Sim!</strong></a>
+          <form method="POST" action="{{route('client.events.invite')}}">
+            @csrf
+            <input type="hidden" name="event_id">
+            <button type="submit" class="btn btn-xs btn-teal rounded-circle"><i class="fas fa-envelope mr-2"></i><strong>Sim!</strong></button>
+          </form>
         </div>
       </div>
     </div>

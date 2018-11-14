@@ -7,16 +7,22 @@ Route::prefix('/cliente')->name('client.')->middleware(['auth', 'verified'])->gr
 
 	Route::prefix('agenda')->name('events.')->group(function() {
 		Route::get('', 'EventsController@index')->name('index');
+	
 		Route::post('/ajax', 'EventsController@ajax')->name('ajax');
+
+		Route::post('/convidar', 'EventsController@invite')->name('invite');
+
 		Route::post('/{event}', 'EventsController@update')->name('update');
+	
 		Route::post('/{event}/emails', 'EventsController@updateEmails')->name('update.emails');
+	
 		Route::post('', 'EventsController@store')->name('store');
 	});
 });
 
 Route::get('/', function () {
     return view('pages.welcome.index');
-});
+})->name('welcome');
 
 Route::get('/quem-somos', function () {
     return view('pages.about.index');
@@ -32,7 +38,12 @@ Route::get('/planos', function () {
 
 Route::prefix('eventos')->name('events.')->group(function() {
 	Route::get('/buscar', 'EventsController@search')->name('search');
+
 	Route::post('/reservar', 'EventsController@pay')->name('pay')->middleware('auth');
 });
 
 Route::get('/planos/{plan}/assinar', 'PlanController@subscribe')->middleware('auth');
+
+Route::get('/mail/confirm', function() {
+	return new \App\Mail\ConfirmEvent;
+});

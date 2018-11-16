@@ -24,6 +24,6 @@ class Report extends Office
 		if ($this->participantsLeft)
 			return 'Temos apenas <strong>'.$this->participantsLeft.'</strong> lugares disponíveis entre os horários que você procurou.';
 
-		return 'Infelizmente a '.$this->space->name.' não está disponível nesse horário.';
+		return 'Infelizmente a <strong>'.$this->space->name.'</strong> não está disponível nesse horário.';
 	}
 }

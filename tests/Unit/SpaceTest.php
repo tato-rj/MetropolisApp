@@ -96,6 +96,22 @@ class SpaceTest extends AppTest
 	}
 
 	/** @test */
+	public function if_ignores_memberships_when_checking_if_the_workstation_is_full()
+	{
+		create(Event::class, [
+			'space_id' => $this->workspace->id,
+			'participants' => 8,
+			'starts_at' => now()->copy()->subHour(),
+			'ends_at' => now()->copy()->addHour()
+		]);
+
+		$report = $this->workspace->checkAvailability(now(), $duration = 1, $participants = 8);
+
+		$this->assertFalse($report->status);
+		$this->assertEquals($report->participantsLeft, 4);
+	}
+
+	/** @test */
 	public function it_knows_when_is_the_next_business_day()
 	{
 		$this->assertTrue(office()->nextBusinessDay()->isWeekDay());

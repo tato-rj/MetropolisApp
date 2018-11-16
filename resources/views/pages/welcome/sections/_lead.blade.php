@@ -11,3 +11,8 @@
 		@include('components.calendar.finder')
 	</div>
 @endcomponent
+<div style="display: none;">
+	<img src="{{asset("images/covers/workstation.jpg")}}">
+	<img src="{{asset("images/covers/toquio.jpg")}}">
+	<img src="{{asset("images/covers/vale-do-silicio.jpg")}}">
+</div>

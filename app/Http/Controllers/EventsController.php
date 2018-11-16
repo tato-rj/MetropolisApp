@@ -33,6 +33,23 @@ class EventsController extends Controller
     }
 
     /**
+     * Checks if the space is free for booking.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request, SpaceSearchForm $form)
+    {
+        $selectedSpace = Space::where('slug', $request->type)->first();
+
+        $date = Carbon::parse($request->date)->setTime($request->time,0,0);
+
+        $report = $selectedSpace->checkAvailability($date, $request->duration, $request->participants);
+
+        return view("pages.search.results", compact(['report', 'selectedSpace']));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -40,22 +57,16 @@ class EventsController extends Controller
      */
     public function store(Request $request, CreateEventForm $form)
     {
-        $user = User::find($request->creator_id);
-        $space = Space::find($request->space_id);
-
-        $starts_at = Carbon::parse($request->date)->setTime($request->time, 0, 0);
-        $ends_at = calculateEndingTime($starts_at, $request->duration);
-
-        $event = $user->events()->create([
-            'space_id' => $request->space_id,
-            'fee' => $space->priceFor($request->participants, $request->duration, $user->bonusesLeft($space)),
-            'participants' => $request->participants,
-            'emails' => serialize($request->emails),
-            'starts_at' => $starts_at,
-            'ends_at' => $ends_at
+        $event = $form->user->events()->create([
+            'space_id' => $form->space_id,
+            'fee' => $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space)),
+            'participants' => $form->participants,
+            'emails' => serialize($form->emails),
+            'starts_at' => $form->starts_at,
+            'ends_at' => $form->ends_at
         ]);
 
-        $user->useBonus($event, $request->duration);
+        $form->user->useBonus($event, $form->duration);
 
         event(new EventCreated($event));
 
@@ -71,23 +82,6 @@ class EventsController extends Controller
         }
 
         return redirect()->back()->with('status', 'Os convites foram re-enviados com sucesso.');
-    }
-
-    /**
-     * Checks if the space is free for booking.
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request, SpaceSearchForm $form)
-    {
-        $selectedSpace = Space::where('slug', $request->type)->first();
-
-        $date = Carbon::parse($request->date)->setTime($request->time,0,0);
-
-        $report = $selectedSpace->checkAvailability($date, $request->duration, $request->participants);
-
-        return view("pages.search.results", compact(['report', 'selectedSpace']));
     }
 
     /**

@@ -3,9 +3,13 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\{User, Space};
+use Carbon\Carbon;
 
 class CreateEventForm extends FormRequest
 {
+    public $user, $space, $starts_at, $ends_at;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +17,23 @@ class CreateEventForm extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        $this->setFields();
+
+        return auth()->check() && $this->getReport()->status;
+    }
+
+    public function getReport()
+    {
+        return $this->space->checkAvailability($this->starts_at, $this->duration, $this->participants);
+    }
+
+    public function setFields()
+    {
+        $this->user = User::find($this->creator_id);
+        $this->space = Space::find($this->space_id);
+
+        $this->starts_at = Carbon::parse($this->date)->setTime($this->time, 0, 0);
+        $this->ends_at = calculateEndingTime($this->starts_at, $this->duration); 
     }
 
     /**

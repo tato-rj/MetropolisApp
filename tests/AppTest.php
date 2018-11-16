@@ -16,8 +16,8 @@ abstract class AppTest extends TestCase
 
         $this->disableExceptionHandling();
 
-        $this->space = create(Space::class, ['is_shared' => false]);
         $this->workspace = create(Space::class, ['is_shared' => true, 'capacity' => 12]);
+        $this->space = create(Space::class, ['is_shared' => false]);
 
         $this->pastEvent = create(Event::class, [
             'space_id' => 100,

@@ -7,8 +7,10 @@
 <div class="container ">
 	<div class="row">
 		<div class="col-default pb-6 pt-5">
-			<h5 class="text-center text-danger mb-3">{{$report->getMessage()}}</h5>
-			<h5 class="mb-4 text-center">Vamos tentar novamente!</h5>
+			<div class="mb-5 mt-2 text-center text-danger">
+				<h5 class="mb-4">{!! $report->getMessage() !!}</h5>
+				<div class="icon-calendar opacity-8" style="font-size: 4.5em"></div>
+			</div>
 			@include('pages.search.sections.form')
 		</div>
 	</div>

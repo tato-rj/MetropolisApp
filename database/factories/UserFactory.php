@@ -32,8 +32,8 @@ $factory->define(App\Event::class, function(Faker $faker) {
             return create('App\User')->id;
         },
         'fee' => 100,
-		'starts_at' => now()->addDay(),
-		'ends_at' => now()->addDay()->addHour()
+		'starts_at' => now(),
+		'ends_at' => now()->addHour()
 	];
 });
 

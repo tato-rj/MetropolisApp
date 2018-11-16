@@ -7,7 +7,7 @@
 		<ul class="list-flat p-4" id="review">
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Data de início</strong></span>
-				<span>{{toFormattedDateString(now())}}</span>
+				<span>{{toFormattedDateStringPt(now())}}</span>
 			</li>
 			<li>
 				<span class="text-teal mr-1"><strong>Renovação automática a cada</strong></span>

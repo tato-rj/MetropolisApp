@@ -15,7 +15,7 @@ trait Scheduler
             return new Report($this, $date, $status = $this->eventsOn($date, $duration)->isEmpty());
 
         $participantsLeft = $this->participantsLeftOn($date, $duration);
-        
+
         if ($participantsLeft >= $participants)
             return new Report($this, $date, $status = true);
 
@@ -27,7 +27,7 @@ trait Scheduler
         $startDate = $date;
         $endDate = $date->copy()->addHours($duration);
 
-        $events = $this->events()->where([
+        $events = $this->events()->doesnthave('plan')->where([
             ['space_id', $this->id],
             ['starts_at', '<=', $date],
             ['ends_at', '>', $date]

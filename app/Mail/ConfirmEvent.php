@@ -31,6 +31,6 @@ class ConfirmEvent extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->markdown('emails.events.confirm');
+        return $this->subject('Marque na sua agenda!')->markdown('emails.events.confirm');
     }
 }

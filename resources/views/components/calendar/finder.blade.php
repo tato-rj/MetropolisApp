@@ -50,5 +50,10 @@
 				</div>
 			</form>
 		</div>
+		@auth
+		<div class="bg-light text-muted border-top px-4 pt-1 pb-2">
+			<small>{!! auth()->user()->bonusNotice() !!}</small>
+		</div>
+		@endauth
 	</div>
 </div>

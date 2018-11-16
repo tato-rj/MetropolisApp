@@ -48,12 +48,14 @@ class EventsController extends Controller
 
         $event = $user->events()->create([
             'space_id' => $request->space_id,
-            'fee' => $space->priceFor($request->participants, $request->duration),
+            'fee' => $space->priceFor($request->participants, $request->duration, $user->bonusesLeft($space)),
             'participants' => $request->participants,
             'emails' => serialize($request->emails),
             'starts_at' => $starts_at,
             'ends_at' => $ends_at
         ]);
+
+        $user->useBonus($event, $request->duration);
 
         event(new EventCreated($event));
 
@@ -103,7 +105,10 @@ class EventsController extends Controller
     {
         $event = Event::find($request->event_id);
 
-        return view('components.calendar.event', compact('event'))->render();
+        if ($event->plan()->exists())
+            return view('components.modals.results.recurring', compact('event'))->render();
+    
+        return view('components.modals.results.standalone', compact('event'))->render();
     }
 
     /**

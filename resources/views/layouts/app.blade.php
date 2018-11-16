@@ -21,6 +21,11 @@
     <script>
         window.app = <?php echo json_encode([
             'csrfToken' => csrf_token(),
+            'office' => [
+              'day_length' => office()->day_length,
+              'day_starts_at' => office()->day_starts_at,
+              'day_ends_at' => office()->day_ends_at
+            ]
         ]); ?>
     </script>
 

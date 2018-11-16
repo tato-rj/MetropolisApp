@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use App\Events\EventCreated;
-use App\Listeners\Events\{SendConfirmationEmail, SendInvitationEmail};
+use App\Events\{EventCreated, MembershipCreated};
+use App\Listeners\Events\SendInvitationEmail;
+use App\Listeners\Events\SendConfirmationEmail as SendEventConfirmationEmail;
+use App\Listeners\Memberships\SendConfirmationEmail as SendMembershipConfirmationEmail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -21,9 +23,12 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         EventCreated::class => [
-            SendConfirmationEmail::class,
+            SendEventConfirmationEmail::class,
             SendInvitationEmail::class
-        ]
+        ],
+        MembershipCreated::class => [
+            SendMembershipConfirmationEmail::class
+        ],
     ];
 
     /**

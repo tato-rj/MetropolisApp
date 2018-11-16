@@ -1,41 +1,44 @@
 		<ul class="list-flat px-3 py-2">
+			@if($event->bonus()->exists())
+			<div class="alert alert-green border-0 text-center p-2" role="alert">
+				Você usou <strong>{{$event->bonus->duration}} {{trans_choice('words.horas', $event->bonus->duration)}}</strong> de bônus nessa reserva!
+			</div>
+			@endif
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Espaço</strong></span>
 				<span>{{$event->space->name}}</span>
 			</li>
-			@if($event->starts_at->isSameDay($event->ends_at))
+
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Data</strong></span>
 				<span id="date" data-date="{{$event->starts_at->format('Y-m-d')}}"></span>
 			</li>
+
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Hora de chegada</strong></span>
 				<span>{{$event->starts_at->hour}}:00 horas</span>
 			</li>
+
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Hora da saída</strong></span>
 				<span>{{$event->ends_at->hour}}:00 horas</span>
 			</li>
-			@else
-			<li class="mb-2">
-				<span class="text-teal mr-1"><strong>Começa</strong></span>
-				<span>dia {{$event->starts_at->day}} às {{$event->starts_at->hour}}:00 horas</span>
-			</li>
-			<li class="mb-2">
-				<span class="text-teal mr-1"><strong>Termina</strong></span>
-				<span>dia {{$event->ends_at->day}} às {{$event->ends_at->hour}}:00 horas</span>
-			</li>
-			@endif
+
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Duração</strong></span>
 				<span class="mr-1">{{$event->duration}}</span>
 				<span class="text-muted text-italic"><small>(o escritório fecha às <u>{{durationToString(office()->day_ends_at)}}</u>)</small></span>
 			</li>
+
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Status</strong></span>
-				<span class="">Confirmado</span>
+				<span class="text-green">Confirmado</span> 
+				<small class="text-muted">({{$event->fee == 0 ? 
+					'reserva sem custos adicionais' : 
+					feeToString(fromCents($event->fee)) . ' pagos no dia' . $event->created_at->format('d/m')}})</small>
 			</li>
-			<li class="mb-2">
+
+			<li class="mb-3">
 				<span class="text-teal mr-1"><strong>Número de participantes</strong></span>
 				<span 
 					class="cursor-pointer"
@@ -70,6 +73,7 @@
 						</div>
 					</div>
 			</li>
+			
 			<li>
 				<span class="text-muted"><small>Para cancelar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></span>
 			</li>

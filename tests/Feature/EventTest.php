@@ -6,17 +6,20 @@ use Tests\AppTest;
 use App\{Event, User};
 use App\Mail\{ConfirmEvent, InviteToEvent};
 use Illuminate\Support\Facades\Mail;
+use App\Events\EventCreated;
 
 class EventTest extends AppTest
 {
 	/** @test */
 	public function authenticated_users_can_create_an_event()
 	{
+		$this->expectsEvents(EventCreated::class);
+
 		$this->signIn();
 
 		$this->assertFalse(auth()->user()->events()->exists());
 
-		$this->postNewEvent()->assertSessionHas('status');
+		$this->createNewEvent()->assertSessionHas('status');
 
 		$this->assertTrue(auth()->user()->fresh()->events()->exists());
 	}
@@ -28,7 +31,7 @@ class EventTest extends AppTest
 
 		$unauthenticatedUser = create(User::class);
 		
-		$this->postNewEvent($unauthenticatedUser);
+		$this->createNewEvent($unauthenticatedUser);
 	}
 
 	/** @test */
@@ -38,7 +41,7 @@ class EventTest extends AppTest
 
 		$this->signIn();
 
-		$this->postNewEvent();
+		$this->createNewEvent();
 
 		Mail::assertQueued(ConfirmEvent::class);
 	}

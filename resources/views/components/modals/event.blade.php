@@ -23,7 +23,7 @@
           <form method="POST" action="{{route('client.events.invite')}}">
             @csrf
             <input type="hidden" name="event_id">
-            <button type="submit" class="btn btn-xs btn-teal rounded-circle"><i class="fas fa-envelope mr-2"></i><strong>Sim!</strong></button>
+            <button type="submit" class="btn btn-xs btn-teal"><i class="fas fa-envelope mr-2"></i><strong>Sim!</strong></button>
           </form>
         </div>
       </div>

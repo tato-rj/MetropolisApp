@@ -18929,10 +18929,6 @@ a.fc-more:hover {
   z-index: 100 !important;
 }
 
-.modal .ui-datepicker {
-  z-index: 1051 !important;
-}
-
 .ui-datepicker {
   border-radius: 0;
   background-color: #fff;
@@ -19022,6 +19018,70 @@ html .ui-button.ui-state-disabled:active {
 .ui-datepicker-next-hover {
   right: 2px !important;
   top: 5px !important;
+}
+
+.fc-toolbar {
+  text-transform: capitalize;
+}
+
+.fc-event-container,
+.fc-event {
+  margin: 0 !important;
+}
+
+.fc-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-state-default {
+  background-color: #e9605c;
+  background-image: none;
+}
+
+.fc-state-active,
+.fc-next-button,
+.fc-prev-button,
+.fc-today-button {
+  background-color: #e3342f;
+}
+
+.fc-state-disabled {
+  background-color: #f4afad;
+}
+
+.fc-button {
+  color: white;
+  text-shadow: none;
+  border-radius: 0 !important;
+  border: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.fc-content {
+  color: white;
+  padding: 0 .25em;
+}
+
+.fc-event {
+  cursor: pointer;
+  border: 0;
+  border-radius: 0;
+  background-color: #4dc0b5;
+  -webkit-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  -webkit-transition: 0.12s;
+  transition: 0.12s;
+}
+
+.fc-title {
+  font-weight: bold;
+}
+
+.fc-unthemed td.fc-today {
+  background-color: #e0f4f2;
 }
 
 .step {

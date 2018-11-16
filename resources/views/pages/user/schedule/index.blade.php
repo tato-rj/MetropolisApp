@@ -1,44 +1,5 @@
 @extends('layouts.app')
 
-@push('header')
-<style type="text/css">
-.fc-toolbar { text-transform: capitalize; }
-.fc-title {
-      white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.fc-state-default { 
-  background-color: #e9605c;
-  background-image: none;
-}
-.fc-state-active, .fc-next-button, .fc-prev-button, .fc-today-button { background-color: #e3342f; }
-.fc-state-disabled { background-color: #f4afad; }
-.fc-button {
-  color: white;
-  text-shadow: none;
-  border-radius: 0 !important;
-  border: 0;
-  box-shadow: none;
-}
-.fc-content { 
-	color: white;
-	padding: 0 .25em;
-}
-.fc-event {
-  cursor: pointer;
-	border: 0;
-	border-radius: 0;
-  background-color: #4dc0b5;
-  box-shadow: 0 0 1rem rgba(0,0,0,.1);
-  transition: 0.12s;
-}
-
-.fc-title { font-weight: bold }
-.fc-unthemed td.fc-today { background-color: #e0f4f2 }
-</style>
-@endpush
-
 @section('content')
 
 @include('pages.user.schedule.sections._lead')
@@ -47,6 +8,7 @@
 @include('pages.welcome.sections.contact')
 
 @include('components.modals.event')
+@include('components.modals.plan')
 
 @endsection
 
@@ -56,9 +18,8 @@
 </script>
 <script type="text/javascript">
 $(function() {
-  $modal = $('#event-modal');
-  schedule = $('#calendar').attr('data-events');
-  ajaxUrl = $('#calendar').attr('data-ajax');
+  let schedule = $('#calendar').attr('data-events');
+  let ajaxUrl = $('#calendar').attr('data-ajax');
 
   $('#calendar').fullCalendar({
     weekends: false,
@@ -66,8 +27,8 @@ $(function() {
     maxTime: '18:00',
     allDaySlot: false,
     businessHours: {
-      start: '08:00',
-      end: '18:00',
+      start: app.office.day_starts_at+':00',
+      end: app.office.day_ends_at+':00',
     },
     header: {
     	left: 'prev,next today',
@@ -81,9 +42,13 @@ $(function() {
     	}
     },
     events: JSON.parse(schedule),
-    eventClick: function(event) {
+    eventClick: function(event, jsEvent, view) {
+      let modalId = $(this).attr('data-modal');
+      let $modal = $(modalId);
+
     	$modal.modal('show');
-    	$.post(ajaxUrl, {event_id: event.id},
+    	
+      $.post(ajaxUrl, {event_id: event.id},
 	    	function(data, status){
 	    		$modal.find('.modal-body > div:first-child').html(data);
           
@@ -103,10 +68,25 @@ $(function() {
 	    );
     },
     eventMouseover: function() {
-      $(this).css('background-color', '#389d94');
+      if ($(this).css('background-color') != 'rgb(211, 211, 211)') {
+        $(this).css('background-color', '#389d94');
+      }
     },
     eventMouseout: function() {
-      $(this).css('background-color', '#4dc0b5');
+      if ($(this).css('background-color') != 'rgb(211, 211, 211)') {
+        $(this).css('background-color', '#4dc0b5');
+      }
+    },
+    eventRender: function( event, element, view ) {
+      if (event.end.isBefore(moment())) {
+        $(element).css('background-color', 'lightgrey');
+      }
+
+      if (event.plan_id === null) {
+        $(element).attr('data-modal', '#event-modal');
+      } else {
+        $(element).attr('data-modal', '#plan-modal');
+      }
     },
     eventAfterAllRender: function (view) {
         $('#calendar-loading').remove();

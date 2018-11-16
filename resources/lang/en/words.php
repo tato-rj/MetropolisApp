@@ -4,6 +4,7 @@ return [
 
     'pessoas' => 'pessoa|pessoas',
     'horas' => 'hora|horas',
-    'dias' => 'dia|dias'
+    'dias' => 'dia|dias',
+    'gratuitas' => 'gratuita|gratuitas'
 
 ];

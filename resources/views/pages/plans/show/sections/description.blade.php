@@ -1,7 +1,7 @@
 <section class="container mb-8 mt-6">
 	<div class="row plans mb-6">
 		<div class="cover mb-4-sm">
-			@include('pages.plans.sections.carousel.workstation')
+			@include('pages.plans.show.sections.carousel.workstation')
 		</div>
 		<div class="col-lg-8 col-12 px-3">
 			<div class="mb-4">
@@ -11,7 +11,7 @@
 			<div>
 				<div class="d-flex flex-wrap">
 					<div class="icons">
-						@include('pages/plans/sections/icons', [
+						@include('pages.plans.show.sections.icons', [
 							'items' => [
 								'Estação compartilhada' => 'users',
 								'Café, chá e água' => 'coffee',
@@ -21,7 +21,7 @@
 							]
 						])
 					</div>
-					@include('pages.plans.sections.fee', ['space' => $spaces->find(1)])
+					@include('pages.plans.show.sections.fee', ['space' => $spaces->find(1)])
 				</div>
 			</div>		
 		</div>
@@ -29,7 +29,7 @@
 
 	<div class="row plans mb-6">
 		<div class="cover mb-4-sm">
-			@include('pages.plans.sections.carousel.toquio')
+			@include('pages.plans.show.sections.carousel.toquio')
 		</div>
 		<div class="col-lg-8 col-12 px-3">
 			<div class="mb-4">
@@ -39,7 +39,7 @@
 			<div>
 				<div class="d-flex flex-wrap">
 					<div class="icons">
-						@include('pages/plans/sections/icons', [
+						@include('pages.plans.show.sections./icons', [
 							'items' => [
 								'Espaço para até 4 pessoas' => 'users',
 								'Acesso privado' => 'door-closed',
@@ -50,7 +50,7 @@
 							]
 						])
 					</div>
-					@include('pages.plans.sections.fee', ['space' => $spaces->find(2)])
+					@include('pages.plans.show.sections.fee', ['space' => $spaces->find(2)])
 				</div>
 			</div>		
 		</div>
@@ -58,7 +58,7 @@
 
 	<div class="row plans mb-6">
 		<div class="cover mb-4-sm">
-			@include('pages.plans.sections.carousel.vale-do-silicio')
+			@include('pages.plans.show.sections.carousel.vale-do-silicio')
 		</div>
 		<div class="col-lg-8 col-12 px-3">
 			<div class="mb-4">
@@ -68,7 +68,7 @@
 			<div>
 				<div class="d-flex flex-wrap">
 					<div class="icons">
-						@include('pages/plans/sections/icons', [
+						@include('pages.plans.show.sections./icons', [
 							'items' => [
 								'Espaço para até 6 pessoas' => 'users',
 								'Acesso privado' => 'door-closed',
@@ -80,7 +80,7 @@
 							]
 						])
 					</div>
-					@include('pages.plans.sections.fee', ['space' => $spaces->find(3)])
+					@include('pages.plans.show.sections.fee', ['space' => $spaces->find(3)])
 				</div>
 			</div>		
 		</div>

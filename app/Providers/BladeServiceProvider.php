@@ -13,7 +13,13 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \Blade::if('subscribed', function () {
+            return auth()->check() && auth()->user()->membership()->exists();
+        });
+
+        \Blade::if('bonus', function(\App\Space $space) {
+            return auth()->check() && auth()->user()->bonusesLeft($space);
+        });
     }
 
     /**

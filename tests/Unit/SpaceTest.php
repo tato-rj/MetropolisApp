@@ -94,4 +94,10 @@ class SpaceTest extends AppTest
 		$this->assertFalse($report->status);
 		$this->assertEquals($report->participantsLeft, 4);
 	}
+
+	/** @test */
+	public function it_knows_when_is_the_next_business_day()
+	{
+		$this->assertTrue(office()->nextBusinessDay()->isWeekDay());
+	}
 }

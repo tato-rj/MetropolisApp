@@ -64,11 +64,25 @@
 				</div>
 			</li>
 			@endif
+			@bonus($selectedSpace)
+			<li class="mt-2">
+				<span class="text-red mr-1">Você tem <strong>{{auth()->user()->bonusesLeft($selectedSpace)}} {{trans_choice('horas', auth()->user()->bonusesLeft($selectedSpace))}}</strong> de bônus para usar nessa reserva!</span>
+			</li>
+			@endbonus
 		</ul>
 		<div class="bg-teal text-white d-flex flex-wrap">
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
 			<div class="d-flex xs-w-100">
-				<div class="p-3 bg-teal-dark flex-grow"><strong>{{feeTostring(fromCents($selectedSpace->priceFor(request()->participants, request()->duration)))}}</strong></div>
+				<div class="p-3 bg-teal-dark flex-grow"><strong>
+					@bonus($selectedSpace)
+					<span class="opacity-6 mr-2" style="text-decoration: line-through;">
+						{{feeToString(fromCents($selectedSpace->priceFor(request()->participants, request()->duration, $discount = 0)))}}
+					</span>
+					{{feeToString(fromCents($selectedSpace->priceFor(request()->participants, request()->duration, $discount = auth()->user()->bonusesLeft($selectedSpace))))}}
+					@else
+					{{feeToString(fromCents($selectedSpace->priceFor(request()->participants, request()->duration)))}}
+					@endbonus
+				</strong></div>
 				<button type="submit" class="btn btn-red h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>
 			</div>
 		</div>

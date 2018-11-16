@@ -31,6 +31,6 @@ class InviteToEvent extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->markdown('emails.events.invite');
+        return $this->subject('Evento no dia '.$this->event->starts_at->format('d/m'))->markdown('emails.events.invite');
     }
 }

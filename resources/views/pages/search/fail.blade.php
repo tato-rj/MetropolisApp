@@ -7,14 +7,14 @@
 <div class="container ">
 	<div class="row">
 		<div class="col-default pb-6 pt-5">
-			@include('components.alerts.error', ['message' => $report->getMessage()])
+			<h5 class="text-center text-danger mb-3">{{$report->getMessage()}}</h5>
 			<h5 class="mb-4 text-center">Vamos tentar novamente!</h5>
 			@include('pages.search.sections.form')
 		</div>
 	</div>
 </div>
 
-@include('pages.plans.sections.plans')
+@include('pages.plans.show.sections.plans')
 @include('pages.welcome.sections.partners')
 @endsection
 

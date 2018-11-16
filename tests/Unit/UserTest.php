@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\AppTest;
-use App\{User, Event, Plan, Membership};
+use App\{User, Event, Plan, Membership, Bonus};
 
 class UserTest extends AppTest
 {
@@ -23,6 +23,18 @@ class UserTest extends AppTest
 		auth()->user()->events()->save($this->currentEvent);
 		
 		$this->assertInstanceOf(Event::class, auth()->user()->events()->first()); 
+	}
+
+	/** @test */
+	public function it_may_have_many_bonuses()
+	{
+		$this->signIn();
+		
+		$bonus = create(Bonus::class);
+
+		auth()->user()->bonuses()->save($bonus);
+		
+		$this->assertInstanceOf(Bonus::class, auth()->user()->bonuses()->first()); 		 
 	}
 
 	/** @test */
@@ -97,5 +109,50 @@ class UserTest extends AppTest
 		$this->assertCount(0, auth()->user()->upcomingEvents);
 		$this->assertEmpty(auth()->user()->currentEvents);
 		$this->assertCount(1, auth()->user()->pastEvents);
+	}
+
+	/** @test */
+	public function it_knows_how_many_bonus_hours_it_has_left()
+	{
+		$this->signIn();
+
+		$plan = create(Plan::class, [
+			'bonus_spaces' => $this->space->id,
+			'bonus_limit' => 3
+		]);
+
+		$this->assertNull(auth()->user()->bonusesLeft($this->space));
+
+		$this->subscribeToNewPlan($plan);
+		
+		$this->assertEquals(auth()->user()->bonusesLeft($this->space), $plan->bonus_limit);
+
+        $this->post(route('client.events.store'), [
+            'creator_id' => auth()->user()->id,
+            'space_id' => $this->space->id,
+            'participants' => 3,
+            'emails' => ['guest1@email.com', 'guest2@email.com'],
+            'date' => now(),
+            'time' => now()->hour,
+            'duration' => 2
+        ]);
+        
+        $this->assertEquals(auth()->user()->fresh()->bonusesLeft($this->space), 1);
+	}
+
+	/** @test */
+	public function it_knows_how_to_use_a_bonus()
+	{
+		$this->signIn();
+
+		$plan = create(Plan::class, ['bonus_limit' => 2, 'bonus_spaces' => $this->space]);
+
+		$this->subscribeToNewPlan($plan);
+
+		$this->createNewEvent();
+
+		auth()->user()->useBonus(auth()->user()->events->last(), $duration = 1);
+
+		$this->assertCount(1, auth()->user()->bonuses);
 	}
 }

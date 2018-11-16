@@ -17,6 +17,16 @@ class Event extends Metropolis
     	return $this->belongsTo(Space::class);
     }
 
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
+
+    public function bonus()
+    {
+        return $this->hasOne(Bonus::class);
+    }
+
     public function getHasPassedAttribute()
     {
     	return $this->ends_at < now();

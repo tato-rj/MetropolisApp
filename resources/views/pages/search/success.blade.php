@@ -12,7 +12,7 @@
 	</div>
 </div>
 
-@include('pages.plans.sections.plans')
+@include('pages.plans.show.sections.plans')
 @include('pages.welcome.sections.partners')
 @endsection
 

@@ -10,7 +10,7 @@ class SpacesTableSeeder extends Seeder
         Space::create([
         	'slug' => str_slug('workstation'),
             'type' => 'workstation',
-        	'nickname' => 'workstation',
+        	'nickname' => 'Workstation',
         	'capacity' => 12,
         	'fee' => 3500,
         	'is_shared' => true
@@ -19,7 +19,7 @@ class SpacesTableSeeder extends Seeder
         Space::create([
         	'slug' => str_slug('tóquio'),
             'type' => 'sala de reunião',
-        	'nickname' => 'tóquio',
+        	'nickname' => 'Tóquio',
         	'capacity' => 4,
         	'fee' => 4900,
         	'is_shared' => false
@@ -28,7 +28,7 @@ class SpacesTableSeeder extends Seeder
         Space::create([
         	'slug' => str_slug('vale do silício'),
             'type' => 'sala de reunião',
-        	'nickname' => 'vale do silício',
+        	'nickname' => 'Vale do Silício',
         	'capacity' => 6,
         	'fee' => 9900,
         	'is_shared' => false

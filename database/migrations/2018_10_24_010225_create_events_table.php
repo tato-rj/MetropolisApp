@@ -15,7 +15,8 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('space_id');
+            $table->unsignedInteger('space_id')->default(1);
+            $table->unsignedInteger('plan_id')->nullable();
             $table->unsignedInteger('creator_id');
             $table->unsignedInteger('fee');
             $table->unsignedInteger('participants')->default(1);

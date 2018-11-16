@@ -35,7 +35,7 @@ function durationToString($number)
 
 function feeToString($number)
 {
-	return 'R$ ' . number_format($number, 2, ',', '.');
+	return 'R$' . number_format($number, 2, ',', '.');
 }
 
 function fromCents($cents)
@@ -60,4 +60,16 @@ function greeting()
 
 	if ($now < 6 || $now >= 18)
 		return 'Boa noite';
+}
+
+function toFormattedDateStringPt(\Carbon\Carbon $date, $withYear = true)
+{
+	$months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+
+	$string = $date->day . ' de ' . $months[$date->month - 1];
+
+	if ($withYear)
+		$string .= ' de ' . $date->year;
+
+	return $string;
 }

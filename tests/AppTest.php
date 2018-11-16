@@ -46,7 +46,7 @@ abstract class AppTest extends TestCase
     	return $this->actingAs($user);
     }
 
-    public function postNewEvent($user = null)
+    public function createNewEvent($user = null)
     {
         $user = $user ?? auth()->user();
 
@@ -58,6 +58,16 @@ abstract class AppTest extends TestCase
             'date' => now(),
             'time' => now()->hour,
             'duration' => 2
+        ]);
+    }
+
+    public function subscribeToNewPlan($plan, $user = null)
+    {
+        $user = $user ?? auth()->user();
+
+        return $this->post(route('client.plan.subscribe'), [
+            'user_id' => $user->id,
+            'plan_id' => $plan->id
         ]);
     }
 }

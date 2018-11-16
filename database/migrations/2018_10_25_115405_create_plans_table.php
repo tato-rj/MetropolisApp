@@ -16,16 +16,14 @@ class CreatePlansTable extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
+            $table->string('type_pt');
             $table->string('name');
+            $table->string('name_pt');
+            $table->string('color')->default('dark');
             $table->unsignedInteger('fee');
-            $table->string('benefits');
-            $table->timestamps();
-        });
-
-        Schema::create('plan_user', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('plan_id');
-            $table->unsignedTinyInteger('user_id');
+            $table->unsignedTinyInteger('bonus_limit');
+            $table->string('bonus_spaces');
+            $table->string('bonus_text');
             $table->timestamps();
         });
     }
@@ -38,6 +36,5 @@ class CreatePlansTable extends Migration
     public function down()
     {
         Schema::dropIfExists('plans');
-        Schema::dropIfExists('plan_user');
     }
 }

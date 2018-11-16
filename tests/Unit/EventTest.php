@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\AppTest;
-use App\{Event, Space, User};
+use App\{Event, Space, User, Bonus};
 
 class EventTest extends AppTest
 {
@@ -18,6 +18,13 @@ class EventTest extends AppTest
 	public function it_belongs_to_a_creator()
 	{
 		$this->assertInstanceOf(User::class, $this->currentEvent->creator); 
+	}
+
+	/** @test */
+	public function it_may_have_a_bonus_applies_to_it()
+	{
+		create(Bonus::class, ['event_id' => $this->currentEvent]);
+		$this->assertInstanceOf(Bonus::class, $this->currentEvent->bonus);
 	}
 
 	/** @test */

@@ -1,3 +1,8 @@
+@subscribed
+<div class="alert alert-{{auth()->user()->membership->plan->color}} border-0 text-center">
+	<strong>{{auth()->user()->membership->plan->displayName}}</strong> se renovará no final do dia {{toFormattedDateStringPt(auth()->user()->membership->next_payment_at)}}
+</div>
+@endsubscribed
 <section class="mb-7 mt-6 container">
   <div class="row">
   	<div class="col-10 mx-auto">

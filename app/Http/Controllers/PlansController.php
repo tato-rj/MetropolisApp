@@ -2,19 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Plan;
+use App\{Plan, User};
 use Illuminate\Http\Request;
+use App\Http\Requests\SubscribeForm;
+use App\Events\MembershipCreated;
 
-class PlanController extends Controller
+class PlansController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function subscribe(Request $request)
+    public function confirm(Request $request)
     {
-        return $request->all();
+        $plan = Plan::find($request->id);
+
+        return view('pages.plans.subscribe.index', compact('plan'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function subscribe(Request $request, SubscribeForm $form)
+    {
+        User::find($request->user_id)->subscribe(Plan::find($request->plan_id));
+
+        event(new MembershipCreated(auth()->user()));
+
+        return redirect()->route('client.events.index')->with('status', 'A sua assinatura foi realizada com sucesso. Aproveite o seu novo espaço de trabalho!');
     }
 
     /**

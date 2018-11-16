@@ -16,8 +16,10 @@ class CreateMembershipsTable extends Migration
         Schema::create('memberships', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('plan_id');
+            $table->unsignedInteger('user_id');
             $table->timestamp('next_payment_at')->nullable();
             $table->timestamp('subscription_ends_at')->nullable();
+            $table->timestamp('renewed_at')->default(now());
             $table->timestamp('canceled_at')->nullable();
             $table->string('pagseguro_id')->nullable();
             $table->string('pagseguro_subscription')->nullable();

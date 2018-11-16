@@ -11,7 +11,7 @@
       				<h3 class="mb-5">Para quando precisa deste espaço?</h3>
       			</div>
       		</div>
-      		@include('components.calendar.finder')
+      		@include('components.calendar.finder', ['z_index' => 1051])
       	</div>
       </div>
     </div>

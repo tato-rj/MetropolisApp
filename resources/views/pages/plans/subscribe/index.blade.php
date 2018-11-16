@@ -15,9 +15,9 @@
 
 @section('content')
 
-@include('pages.plans.sections._lead')
-@include('pages.plans.sections.description')
-@include('pages.plans.sections.plans')
+@include('pages.plans.subscribe.sections._lead')
+@include('pages.plans.subscribe.sections.description')
+@include('pages.plans.show.sections.plans')
 @include('pages.contact.sections.faq')
 
 @include('components.calendar.modal')

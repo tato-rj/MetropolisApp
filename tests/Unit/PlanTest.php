@@ -22,10 +22,16 @@ class PlanTest extends AppTest
 	{
 		$this->signIn();
 		
-		$this->assertEquals($this->workspace->capacity, 12);
+		$this->assertEquals($this->workspace->currentCapacity, 12);
 
 		auth()->user()->subscribe($this->plan);
 
-		$this->assertEquals($this->workspace->capacity, 11);
+		$this->assertEquals($this->workspace->currentCapacity, 11);
+	}
+
+	/** @test */
+	public function it_knows_which_spaces_it_has_for_bonus()
+	{
+		$this->assertCount(1, $this->plan->bonusSpacesArray());
 	}
 }

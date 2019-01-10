@@ -34,7 +34,8 @@
 </head>
 
 <body>
-
+    {{-- TEMPORARY PASSWORD FOR DEVELOPMENT PHASE --}}
+    @if(session()->has('gate'))
     <div id="app">
         @include('layouts.navbar.layout')
         <main>
@@ -42,6 +43,9 @@
         </main>
         @include('layouts.footer.layout')
     </div>
+    @else
+      @include('layouts/dev')
+    @endif
 
 @if(session()->has('status'))
 @include('components.alerts.success', ['message' => session('status')])

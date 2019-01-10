@@ -1,5 +1,8 @@
 <?php
 
+// For development only
+App\Http\Controllers\Auth\GateController::auth();
+
 Auth::routes(['verify' => true]);
 
 Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->group(function() {

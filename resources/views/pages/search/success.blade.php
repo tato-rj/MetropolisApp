@@ -4,7 +4,7 @@
 
 @include('pages.search.sections._lead')
 
-<div class="container ">
+<div class="container">
 	<div class="row">
 		<div class="col-default pb-6 pt-5">
 			@include('pages.search.sections.confirm')
@@ -17,6 +17,7 @@
 @endsection
 
 @push('scripts')
+
 <script type="text/javascript">
 (new CustomDatePicker('#datepicker')).enableSelect('select[name="space"]').create();
 $('button[name="search"]').on('click', function() {

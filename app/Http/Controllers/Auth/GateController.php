@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 class GateController
 {
-	const PASS = 'bostafogo';
+	const PASS = 'quinteto';
 
 	public static function auth()
 	{
@@ -39,7 +39,7 @@ class GateController
 	public function close()
 	{
 		$this->unAuthorize();
-		return redirect()->route('home');		
+		return redirect()->route('client.home');		
 	}
 
 	public function isAdmin()

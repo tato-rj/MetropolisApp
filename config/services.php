@@ -30,10 +30,11 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
-    'stripe' => [
+    'pagseguro' => [
         'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
+        'token' => env('PAGSEGURO_AMBIENTE') == 'sandbox' ? env('PAGSEGURO_SANDBOX') : env('PAGSEGURO_TOKEN'),
+        'email' => env('PAGSEGURO_EMAIL'),
+        'env' => env('PAGSEGURO_AMBIENTE')
     ],
 
 ];

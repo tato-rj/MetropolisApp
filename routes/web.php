@@ -15,6 +15,10 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 		Route::post('/convidar', 'EventsController@invite')->name('invite');
 
+		Route::post('/pagamento', 'PagSeguroController@payment')->name('payment');
+
+		Route::post('/comprar', 'PagSeguroController@purchase')->name('purchase');
+
 		Route::post('/{event}', 'EventsController@update')->name('update');
 	
 		Route::post('/{event}/emails', 'EventsController@updateEmails')->name('update.emails');

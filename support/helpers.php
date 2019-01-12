@@ -5,6 +5,11 @@ function office()
 	return new \App\Space;
 }
 
+function pagseguro($value)
+{
+	return config('services.pagseguro')[$value];
+}
+
 function calculateEndingTime(\Carbon\Carbon $starts_at, $duration)
 {
 	$office_ending_hour = office()->day_ends_at;

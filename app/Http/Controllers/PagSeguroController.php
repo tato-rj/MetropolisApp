@@ -38,6 +38,7 @@ class PagSeguroController extends Controller
             'email' => pagseguro('email'),
             'token' => pagseguro('token'),
             'paymentMode' => 'default',
+            'bankName' => $request->card_brand,
             'paymentMethod' => $request->paymentMethod,
             'receiverEmail' => pagseguro('email'),
             'currency' => 'BRL',

@@ -16,6 +16,10 @@
 	<input type="hidden" name="card_brand">
 	<input type="hidden" name="card_lastfour">
 
+	<div class="form-group d-flex flex-wrap cards">
+		<p class="m-0 text-muted text-center mt-2 mb-0 w-100"><i>Carregando cartões aceitos...</i></p>
+	</div>
+
 	<div class="form-group">
 		<label class="control-label" for="card_holder_name"><small>Nome no cartão</small></label>
 		<input required type="text" class="form-control" name="card_holder_name" id="card_holder_name" placeholder="Nome no cartão">

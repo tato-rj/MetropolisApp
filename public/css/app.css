@@ -21303,6 +21303,10 @@ video {
   z-index: -100;
 }
 
+.nav-tabs .nav-link:not(.active) {
+  opacity: .6;
+}
+
 .price:before {
   content: 'R$';
   font-weight: bold;

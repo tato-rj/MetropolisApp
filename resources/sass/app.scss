@@ -7,6 +7,10 @@
 @import 'components/icons';
 @import 'components/custom';
 
+.nav-tabs .nav-link:not(.active) {
+  opacity: .6;
+}
+
 .btn, .alert, .form-control, .card, .card-header, .modal-content, .modal-header {
 	@extend .rounded-0;
 }

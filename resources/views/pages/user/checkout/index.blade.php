@@ -50,6 +50,17 @@
 @push('scripts')
 <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+  $('input[name="card_holder_cpf"]').inputmask("999.999.999-99");
+  $('input[name="card_number"]').inputmask("9999 9999 9999 9999");
+  $('input[name="cvv"]').inputmask("999[9]");  
+});
+</script>
+<script type="text/javascript">
+jQuery.fn.cleanVal = function() {
+	return this.val().replace(/\D/g,'');
+};
+
 $('#review #date').text(
 	moment(
 		$('#review #date').attr('data-date')
@@ -93,30 +104,45 @@ $(document).ready(function(){
 
 });
 
-$('input[name="card_number"]').on('keyup', function() {
+function getCardFlag(input, cardNumber, form)
+{
+	PagSeguroDirectPayment.getBrand({
+		cardBin: cardNumber,
+		success: function(response) {
+			let icon = response.brand.name;
+			input.css('background-image', 'url(https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/68x30/'+icon+'.png)');
+			form.find('input[name="card_brand"]').val(icon);
+			form.find('#card-invalid').hide();
+		},
+		error: function() {
+			input.css('background-image', 'url(http://metropolis.test/images/icons/credit.png)');
+			form.find('input[name="card_brand"]').val('');
+			form.find('#card-invalid').show();
+		},
+		complete: function(response) {
+			console.log(response);
+		}
+	});
+}
+
+$('input[name="card_number"]').on('blur', function() {
 	let input = $(this);
+	let cardNumber = input.cleanVal();
 	let $form = $($('button#submit').attr('data-target'));
 
-	if (input.val().length == 6) {
-		PagSeguroDirectPayment.getBrand({
-			cardBin: input.val(),
-			success: function(response) {
-				let icon = response.brand.name;
-				input.css('background-image', 'url(https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/68x30/'+icon+'.png)');
-				$form.find('input[name="card_brand"]').val(icon);
-				$form.find('#card-invalid').hide();
-			},
-			error: function() {
-				input.css('background-image', 'url(http://metropolis.test/images/icons/credit.png)');
-				$form.find('input[name="card_brand"]').val('');
-				$form.find('#card-invalid').show();
-			},
-			complete: function(response) {
-				console.log(response);
-			}
-		});
+	if (cardNumber.length >= 6) {
+		getCardFlag(input, cardNumber, $form);
+	}
+});
 
-	} else if (input.val().length < 6) {
+$('input[name="card_number"]').on('keyup', function() {
+	let input = $(this);
+	let cardNumber = input.cleanVal();
+	let $form = $($('button#submit').attr('data-target'));
+
+	if (cardNumber.length == 6) {
+		getCardFlag(input, cardNumber, $form);
+	} else if (cardNumber.length < 6) {
 		input.css('background-image', 'url(http://metropolis.test/images/icons/credit.png)');
 		$form.find('input[name="card_brand"]').val('');
 		$form.find('#card-invalid').hide();
@@ -127,12 +153,13 @@ $('input[name="card_number"]').on('keyup', function() {
 $('button#submit').on('click', function(event) {
 	let $button = $(this);
 	let $form = $($button.attr('data-target'));
+	let buttonOriginalText = $button.text();
 
 	$button.prop('disabled', true);
 	$button.text('PROCESSANDO O SEU PEDIDO...');
 
 	PagSeguroDirectPayment.createCardToken({
-		cardNumber: $form.find('input[name="card_number"]').val(),
+		cardNumber: $form.find('input[name="card_number"]').cleanVal(),
 		brand: $form.find('input[name="card_brand"]').val(),
 		cvv: $form.find('input[name="cvv"]').val(),
 		expirationMonth: $form.find('select[name="expiry_month"] option:selected').val(),
@@ -156,6 +183,8 @@ $('button#submit').on('click', function(event) {
 		error: function (response) {
 			alert(showError(response));
 			console.log(response);
+			$button.prop('disabled', false);
+			$button.text(buttonOriginalText);
 		}
 	});
 

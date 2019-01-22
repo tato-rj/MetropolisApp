@@ -78,3 +78,8 @@ function toFormattedDateStringPt(\Carbon\Carbon $date, $withYear = true)
 
 	return $string;
 }
+
+function clean($string)
+{
+	return preg_replace("/[^0-9]/", "", $string);
+}

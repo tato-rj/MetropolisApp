@@ -2,6 +2,7 @@ require('./bootstrap');
 require('./helpers/cookie');
 require('./datepicker/customize');
 require('fullcalendar/dist/locale/pt-br.js');
+require('inputmask/dist/jquery.inputmask.bundle.js');
 
 $.ajaxSetup({
     headers: {

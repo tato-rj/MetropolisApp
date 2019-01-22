@@ -2,8 +2,7 @@
 	<h5 class="text-green text-center">O espaço que você solicitou está disponível!</h5>
 	@include('components.animations.success-icon')
 </div>
-<form id="confirm-purchase" method="POST" action="{{route('client.events.payment')}}">
-	@csrf
+<form id="confirm-purchase" method="GET" action="{{route('client.events.payment')}}">
 	<input type="hidden" name="creator_id" value="{{auth()->check() ? auth()->user()->id : null}}">
 	<input type="hidden" name="space_id" value="{{$selectedSpace->id}}">
 	<input type="hidden" name="date" value="{{request()->date}}">

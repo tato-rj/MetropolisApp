@@ -80,6 +80,8 @@ $(function() {
     eventRender: function( event, element, view ) {
       if (event.end.isBefore(moment())) {
         $(element).css('background-color', 'lightgrey');
+      } else if (event.statusForUser != 'Confirmado') {
+        $(element).append('<div class="position-absolute text-white" style="top: 0em; right: 0.2em;"><i class="fas fa-exclamation-circle"></i></div>');
       }
 
       if (event.plan_id === null) {

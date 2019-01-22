@@ -4,6 +4,7 @@
 				Você usou <strong>{{$event->bonus->duration}} {{trans_choice('words.horas', $event->bonus->duration)}}</strong> de bônus nessa reserva!
 			</div>
 			@endif
+
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Espaço</strong></span>
 				<span>{{$event->space->name}}</span>
@@ -32,10 +33,16 @@
 
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Status</strong></span>
-				<span class="text-green">Confirmado</span> 
-				<small class="text-muted">({{$event->fee == 0 ? 
-					'reserva sem custos adicionais' : 
-					feeToString(fromCents($event->fee)) . ' pagos no dia' . $event->created_at->format('d/m')}})</small>
+				
+				<span class="text-{{$event->statusColor}}">{{$event->statusForUser}}</span>
+				@if($event->notified_at)
+				<small class="text-muted">({{'atualizado no dia ' . $event->notified_at->format('d/m') . ' às ' . $event->notified_at->format('H:i')}})</small>
+				@endif
+			</li>
+
+			<li class="mb-2">
+				<span class="text-teal mr-1"><strong>Referência</strong></span>
+				<span>#{{$event->reference}}</span>
 			</li>
 
 			<li class="mb-3">

@@ -5,6 +5,8 @@ App\Http\Controllers\Auth\GateController::auth();
 
 Auth::routes(['verify' => true]);
 
+Route::post('/pagseguro/notification', 'PagSeguroController@notification')->name('pagseguro.notification');
+
 Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->group(function() {
 	Route::get('', 'HomeController@index')->name('home');
 
@@ -15,7 +17,7 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 		Route::post('/convidar', 'EventsController@invite')->name('invite');
 
-		Route::post('/pagamento', 'PagSeguroController@payment')->name('payment');
+		Route::get('/pagamento', 'PagSeguroController@payment')->name('payment');
 
 		Route::post('/comprar', 'PagSeguroController@purchase')->name('purchase');
 

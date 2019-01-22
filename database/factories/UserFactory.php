@@ -25,6 +25,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Event::class, function(Faker $faker) {
 	return [
+        'reference' => '1',
         'space_id' => function() {
             return create('App\Space')->id;
         },

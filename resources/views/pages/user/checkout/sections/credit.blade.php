@@ -83,13 +83,13 @@
 		<label class="control-label"><small>Endereço</small></label>
 		<div class="form-row">
 			<div class="col-6 mb-2">
-				<input required type="text" class="form-control" name="address_street" placeholder="Nome da rua" value="Av. Brig. Faria Lima">
+				<input required type="text" class="form-control" name="address_street" placeholder="Nome da rua" value="">
 			</div>
 			<div class="col-3 mb-2">
-				<input required type="text" class="form-control" name="address_number" placeholder="Número" value="1234">				
+				<input required type="text" class="form-control" name="address_number" placeholder="Número" value="">				
 			</div>
 			<div class="col-3 mb-2">
-				<input required type="text" class="form-control" name="address_complement" placeholder="Complemento" value="5o andar">				
+				<input required type="text" class="form-control" name="address_complement" placeholder="Complemento" value="">				
 			</div>
 		</div>
 		<div class="form-row">
@@ -104,10 +104,10 @@
 				</select>
 			</div>
 			<div class="col-6 mb-2">
-				<input required type="text" class="form-control" name="address_district" placeholder="Bairro" value="Centro">				
+				<input required type="text" class="form-control" name="address_district" placeholder="Bairro" value="">				
 			</div>
 			<div class="col-6 mb-2">
-				<input required type="text" class="form-control" name="address_zip" placeholder="CEP" value="01234567">				
+				<input required type="text" class="form-control" name="address_zip" placeholder="CEP" value="">				
 			</div>
 		</div>
 	</div>

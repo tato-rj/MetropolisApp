@@ -2,10 +2,14 @@
 
 namespace App;
 
+use App\Traits\PagSeguro;
+
 class Event extends Metropolis
 {
-	protected $dates = ['starts_at', 'ends_at'];
-    protected $appends = ['title', 'start', 'end', 'duration'];
+    use PagSeguro;
+
+	protected $dates = ['starts_at', 'ends_at', 'notified_at'];
+    protected $appends = ['title', 'start', 'end', 'duration', 'status', 'statusForUser'];
 
 	public function creator()
 	{

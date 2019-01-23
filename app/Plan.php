@@ -4,14 +4,21 @@ namespace App;
 
 class Plan extends Metropolis
 {
+    protected $appends = ['formattedFee'];
+    
     public function memberships()
     {
     	return $this->hasMany(Membership::class);
     }
 
+    public function getFormattedFeeAttribute()
+    {
+        return number_format(($this->fee /100), 2, '.', '');
+    }
+
     public function getDisplayNameAttribute()
     {
-        return 'Plano ' . ucfirst($this->type_pt) . ' ' . ucfirst($this->name_pt);
+        return 'Plano ' . ucfirst($this->type) . ' ' . ucfirst($this->name);
     }
 
     public function bonusSpacesArray()
@@ -33,16 +40,16 @@ class Plan extends Metropolis
     public function cycle($prefix = false)
     {
     	switch ($this->name) {
-    		case 'weekly':
+    		case 'semanal':
     			return $prefix ? 'nessa semana' : 'semana';
     			break;
     		
-    		case 'monthly':
+    		case 'mensal':
     			return $prefix ? 'nesse mês' : 'mês';
     			break;
     		
     		default:
-    			return $prefix ? 'hoje' : 'dia';
+    			return $prefix ? 'nesse semestre' : 'semestre';
     			break;
     	}
     }
@@ -52,16 +59,16 @@ class Plan extends Metropolis
         $starts_at = $date ?? now();
 
         switch ($this->name) {
-            case 'weekly':
+            case 'semanal':
                 return $starts_at->copy()->addWeek()->setTime(office()->day_ends_at,0,0);
                 break;
             
-            case 'monthly':
+            case 'mensal':
                 return $starts_at->copy()->addMonth()->setTime(office()->day_ends_at,0,0);
                 break;
             
             default:
-                return $starts_at->copy()->setTime(office()->day_ends_at,0,0);
+                return $starts_at->copy()->addMonths(6)->setTime(office()->day_ends_at,0,0);
                 break;
         }
     }

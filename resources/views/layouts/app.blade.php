@@ -47,6 +47,8 @@
       @include('layouts/dev')
     @endif
 
+{{-- @include('components.alerts.event', ['status' => 'danger']) --}}
+
 @if(session()->has('status'))
 @include('components.alerts.success', ['message' => session('status')])
 @endif

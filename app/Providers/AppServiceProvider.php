@@ -17,8 +17,8 @@ class AppServiceProvider extends ServiceProvider
         \View::composer('*', function($view) {
             $view->with([
                 'spaces' => \App\Space::all(),
-                'basicPlans' => \App\Plan::where('type', 'basic')->get(),
-                'completePlans' => \App\Plan::where('type', 'complete')->get()
+                'basicPlans' => \App\Plan::where('type', 'básico')->get(),
+                'completePlans' => \App\Plan::where('type', 'completo')->get()
             ]);
         });
     }

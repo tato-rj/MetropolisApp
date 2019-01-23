@@ -10,6 +10,23 @@ function pagseguro($value)
 	return config('services.pagseguro')[$value];
 }
 
+function client($isPlan = false)
+{
+	$headers = ['Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'];
+
+	if ($isPlan)
+		$headers = array_merge($headers, ['Accept' => 'application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1']);
+
+	return new \GuzzleHttp\Client([
+            'headers' => $headers
+        ]);
+}
+
+function notificationUrl($localUrl)
+{
+	return app()->environment() == 'local' ? $localUrl . '/pagseguro/event/notification' : route('pagseguro.event.notification');
+}
+
 function calculateEndingTime(\Carbon\Carbon $starts_at, $duration)
 {
 	$office_ending_hour = office()->day_ends_at;

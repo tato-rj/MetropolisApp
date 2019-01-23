@@ -5,7 +5,7 @@
       <p class="lead m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor.</p>
     </div>
-    @include('components.plans.basic')
+    @include('components.plans.basico')
   </div>
 </section>
 <section class="container-fluid bg-light mb-8 pb-6">
@@ -15,6 +15,6 @@
       <p class="lead m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor.</p>
     </div>
-    @include('components.plans.complete')
+    @include('components.plans.completo')
   </div>
 </section>

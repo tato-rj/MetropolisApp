@@ -41,9 +41,8 @@ $factory->define(App\Event::class, function(Faker $faker) {
 $factory->define(App\Plan::class, function(Faker $faker) {
     return [
         'type' => $faker->word,
-        'type_pt' => $faker->word,
         'name' => $faker->word,
-        'name_pt' => $faker->word,
+        'code' => $faker->word,
         'fee' => $faker->numberBetween(100, 1000),
         'bonus_spaces' => function() {
             return create('App\Space', ['is_shared' => false])->id;

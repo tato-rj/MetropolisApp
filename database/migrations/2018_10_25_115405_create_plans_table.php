@@ -16,9 +16,8 @@ class CreatePlansTable extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
-            $table->string('type_pt');
             $table->string('name');
-            $table->string('name_pt');
+            $table->string('code');
             $table->string('color')->default('dark');
             $table->unsignedInteger('fee');
             $table->unsignedTinyInteger('bonus_limit');

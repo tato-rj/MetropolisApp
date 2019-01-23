@@ -8,72 +8,66 @@ class PlansTableSeeder extends Seeder
     public function run()
     {
         Plan::create([
-        	'type' => 'basic',
-            'type_pt' => 'básico',
-        	'name' => 'daily',
-            'name_pt' => 'diário',
+        	'type' => 'básico',
+        	'name' => 'semanal',
+            'code' => '3F3EA4FA-0B0B-DDEC-C45F-DFB62A2A7A2F',
             'color' => 'indigo',
-        	'fee' => 7900,
+        	'fee' => 34900,
             'bonus_spaces' => '2',
             'bonus_limit' => 1,
         	'bonus_text' => '40 minutos/dia na Sala de Reunião Tóquio com mais 3 pessoas'
         ]);
 
         Plan::create([
-            'type' => 'basic',
-            'type_pt' => 'básico',
-            'name' => 'weekly',
-            'name_pt' => 'semanal',
+            'type' => 'básico',
+            'name' => 'mensal',
+            'code' => '3F3EA4FA-0B0B-DDEC-C45F-DFB62A2A7A2F',
             'color' => 'orange',
-            'fee' => 34900,
+            'fee' => 109900,
             'bonus_spaces' => '2',
             'bonus_limit' => 3,
             'bonus_text' => '3 horas semanais na Sala de Reunião Tóquio com mais 3 pessoas'
         ]);
 
         Plan::create([
-            'type' => 'basic',
-            'type_pt' => 'básico',
-            'name' => 'monthly',
-            'name_pt' => 'mensal',
+            'type' => 'básico',
+            'name' => 'semestral',
+            'code' => '3F3EA4FA-0B0B-DDEC-C45F-DFB62A2A7A2F',
             'color' => 'green',
-            'fee' => 109900,
+            'fee' => 619900,
             'bonus_spaces' => '2',
             'bonus_limit' => 8,
             'bonus_text' => '8 horas mensais de Sala de Reunião Tóquio com mais 3 pessoas'
         ]);
 
         Plan::create([
-            'type' => 'complete',
-            'type_pt' => 'completo',
-            'name' => 'daily',
-            'name_pt' => 'diário',
+            'type' => 'completo',
+            'name' => 'semanal',
+            'code' => '3F3EA4FA-0B0B-DDEC-C45F-DFB62A2A7A2F',
             'color' => 'blue',
-            'fee' => 12900,
+            'fee' => 41900,
             'bonus_spaces' => '2,3',
             'bonus_limit' => 1,
             'bonus_text' => '40 minutos/dia na Sala de Reunião Tóquio com mais 3 pessoas OU na Sala de Reunião Vale do Silício com mais 5 pessoas'
         ]);
 
         Plan::create([
-            'type' => 'complete',
-            'type_pt' => 'completo',
-            'name' => 'weekly',
-            'name_pt' => 'semanal',
+            'type' => 'completo',
+            'name' => 'mensal',
+            'code' => '3F3EA4FA-0B0B-DDEC-C45F-DFB62A2A7A2F',
             'color' => 'purple',
-            'fee' => 41900,
+            'fee' => 114900,
             'bonus_spaces' => '2,3',
             'bonus_limit' => 3,
             'bonus_text' => '3 horas semanais na Sala de Reunião Tóquio com mais 3 pessoas OU na Sala de Reunião Vale do Silício com mais 5 pessoas'
         ]);
 
         Plan::create([
-            'type' => 'complete',
-            'type_pt' => 'completo',
-            'name' => 'monthly',
-            'name_pt' => 'mensal',
+            'type' => 'completo',
+            'name' => 'semestral',
+            'code' => '3F3EA4FA-0B0B-DDEC-C45F-DFB62A2A7A2F',
             'color' => 'red',
-            'fee' => 114900,
+            'fee' => 659900,
             'bonus_spaces' => '2,3',
             'bonus_limit' => 8,
             'bonus_text' => '8 horas semanais na Sala de Reunião Tóquio com mais 3 pessoas OU na Sala de Reunião Vale do Silício com mais 5 pessoas'

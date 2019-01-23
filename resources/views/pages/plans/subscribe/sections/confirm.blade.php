@@ -1,7 +1,5 @@
-<form method="POST" action="{{route('client.plan.subscribe')}}">
-	@csrf
-	<input type="hidden" name="user_id" value="{{auth()->user()->id}}">
-	<input type="hidden" name="plan_id" value="{{request('id')}}">
+<form method="GET" action="{{route('client.plan.payment')}}">
+	<input type="hidden" name="plan_id" value="{{request('plan_id')}}">
 
 	<div class="bg-light border-top border-teal-light border-1x mb-4">
 		<ul class="list-flat p-4" id="review">
@@ -23,3 +21,4 @@
 		</div>
 	</div>
 </form>
+{{-- <a href="http://pag.ae/7UxRbkEQp" class="btn btn-red px-4 d-flex align-items-center justify-content-center" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></a> --}}

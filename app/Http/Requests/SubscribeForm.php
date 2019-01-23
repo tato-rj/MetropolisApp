@@ -24,7 +24,6 @@ class SubscribeForm extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
             'plan_id' => 'required|exists:plans,id',
         ];
     }

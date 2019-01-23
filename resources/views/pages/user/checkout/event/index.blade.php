@@ -10,7 +10,7 @@
 
 @section('content')
 
-@include('pages.user.checkout.sections._lead')
+@include('pages.user.checkout.event.sections._lead')
 
 <div class="container my-5">
 	<div class="row">
@@ -29,18 +29,18 @@
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane mt-3 fade show active" id="credit" role="tabpanel" aria-labelledby="credit-tab">
-					@include('pages.user.checkout.sections.credit')
+					@include('pages.user.checkout.event.sections.credit')
 				</div>
 				<div class="tab-pane mt-3 fade" id="debit" role="tabpanel" aria-labelledby="debit-tab">
-					@include('pages.user.checkout.sections.debit')
+					@include('pages.user.checkout.event.sections.debit')
 				</div>
 			</div>
 			<div class="text-right mt-2">
-				@include('pages.user.checkout.sections.pagseguro')
+				@include('pages.user.checkout.event.sections.pagseguro')
 			</div>
 		</div>
 		<div class="col-default">
-			@include('pages.user.checkout.sections.confirm')
+			@include('pages.user.checkout.event.sections.confirm')
 		</div>
 	</div>
 </div>

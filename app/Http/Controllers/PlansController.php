@@ -6,6 +6,7 @@ use App\{Plan, User};
 use Illuminate\Http\Request;
 use App\Http\Requests\SubscribeForm;
 use App\Events\MembershipCreated;
+use App\Services\PagSeguro;
 
 class PlansController extends Controller
 {
@@ -43,72 +44,58 @@ class PlansController extends Controller
      */
     public function subscribe(Request $request, SubscribeForm $form)
     {
+        $pagseguro = new PagSeguro;
+
         $plan = Plan::find($request->plan_id);
 
-        $payload = [
-            'plan' => $plan->code,
-            'email' => pagseguro('email'),
-            'token' => pagseguro('token'),
-            'sender.name' => auth()->user()->name,
-            // 'sender.email' => 'c38672894586801235492@sandbox.pagseguro.com.br',
-            // 'sender.ip' => '255.255.255.255',
-            'sender.hash' => $request->card_hash,
-            'sender.phone.areaCode' => '21',
-            'sender.phone.number' => '91891234',
-            // 'sender.address.street' => 'Av. Brig. Faria Lima',
-            // 'sender.address.number' => '1384',
-            // 'sender.address.complement' => '5o andar',
-            // 'sender.address.district' => 'Centro',
-            'sender.address.postalCode' => '20040006',
-            // 'sender.address.city' => 'Rio de Janeiro',
-            // 'sender.address.state' => 'RJ',
-            // 'sender.address.country' => 'BRA',
-            // 'sender.documents.type' => 'cpf',
-            // 'sender.documents.value' => '22111944785',
-            // 'paymentMethod.type' => $request->paymentMethod,
-            // 'paymentMethod.creditCard.token' => $request->card_token,
-            // 'paymentMethod.creditCard.holder.name' => $request->card_holder_name,
-            // 'paymentMethod.creditCard.holder.birthDate' => '23/06/1984',
-            // 'paymentMode' => 'default',
-            // 'bankName' => $request->card_brand,
-            // 'receiverEmail' => pagseguro('email'),
-            // 'currency' => 'BRL',
-            // 'notificationURL' => notificationUrl($this->localUrl),
-            // 'reference' => 'testando',
-            // 'shippingType' => '3',
-            // 'shippingCost' => '0.00',
-            // 'installmentQuantity' => '1',
-            // 'installmentValue' => $request->price . '.00',
-            // 'noInterestInstallmentQuantity' => '2',
-            // 'creditCardHolderCPF' => clean($request->card_holder_cpf),
-            // 'creditCardHolderAreaCode' => '11',
-            // 'creditCardHolderPhone' => '56273440',
-            // 'billingAddressStreet' => 'Av. Brig. Faria Lima',
-            // 'billingAddressNumber' => '1384',
-            // 'billingAddressComplement' => '5o andar',
-            // 'billingAddressDistrict' => 'Jardim Paulistano',
-            // 'billingAddressPostalCode' => '01452002',
-            // 'billingAddressCity' => 'Sao Paulo',
-            // 'billingAddressState' => 'SP',
-            // 'billingAddressCountry' => 'BRA'
-        ];
+        $user = auth()->user();
+
+        $preApproval = $pagseguro->subscription();
+        
+        $preApproval->setPlan($plan->code);
+        $preApproval->setReference($user->id);
+        $preApproval->setSender()->setName($user->name);
+        $preApproval->setSender()->setEmail('c38672894586801235492@sandbox.pagseguro.com.br');
+        $preApproval->setSender()->setHash($request->card_hash);
+        $preApproval->setSender()->setDocuments(
+            (new \PagSeguro\Domains\DirectPreApproval\Document)->withParameters('CPF', '09882490735')
+        );
+        $preApproval->setSender()->setAddress()->withParameters(
+            $request->address_street,
+            $request->address_number,
+            $request->address_district,
+            $request->address_zip,
+            $request->address_city,
+            $request->address_state,
+            'BRA'
+        );
+        $preApproval->setSender()->setPhone()->withParameters('21', '91982736');
+        $preApproval->setPaymentMethod()->setCreditCard()->setToken($request->card_token);
+        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setName($request->card_holder_name);
+        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setBirthDate('23/06/1984');
+        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setDocuments(
+            (new \PagSeguro\Domains\DirectPreApproval\Document)->withParameters('CPF', '09882490735')
+        );
+        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setPhone()->withParameters('21', '91982736');
+        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setBillingAddress()->withParameters(
+            $request->address_street,
+            $request->address_number,
+            $request->address_district,
+            $request->address_zip,
+            $request->address_city,
+            $request->address_state,
+            'BRA'
+        );
 
         try {
-            $response = client($isPlan = true)->post('https://ws.sandbox.pagseguro.uol.com.br/pre-approvals', ['form_params' => $payload])->getBody();
+            $response = $preApproval->register($pagseguro->credentials);
         } catch (\Exception $e) {
             dd($e);
-            return redirect()->route('client.events.index')
-                             ->with('error', 'Não conseguimos realizar o seu pedido. Se o problema persistir, por favor entre em contato com o nosso escritório.');
         }
-
-        return $response;
         
-        return $request->all();
+        User::find($user->id)->subscribe($plan);
 
-
-        // User::find($request->user_id)->subscribe(Plan::find($request->plan_id));
-
-        // event(new MembershipCreated(auth()->user()));
+        event(new MembershipCreated(auth()->user()));
 
         return redirect()->route('client.events.index')->with('status', 'A sua assinatura foi realizada com sucesso. Aproveite o seu novo espaço de trabalho!');
     }

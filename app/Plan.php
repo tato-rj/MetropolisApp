@@ -21,6 +21,23 @@ class Plan extends Metropolis
         return 'Plano ' . ucfirst($this->type) . ' ' . ucfirst($this->name);
     }
 
+    public function getTypeEnAttribute()
+    {
+        switch ($this->name) {
+            case 'semanal':
+                return 'WEEKLY';
+                break;
+            
+            case 'mensal':
+                return 'MONTHLY';
+                break;
+            
+            default:
+                return 'SEMIANNUALLY';
+                break;
+        }
+    }
+
     public function bonusSpacesArray()
     {
         return collect(explode(',', $this->bonus_spaces))->flatten();

@@ -6,12 +6,11 @@ use App\{Plan, User};
 use Illuminate\Http\Request;
 use App\Http\Requests\SubscribeForm;
 use App\Events\MembershipCreated;
-use App\Services\PagSeguro;
+use App\Services\PagSeguro\PagSeguro;
+use App\Services\PagSeguro\PagSeguro\Checkout;
 
 class PlansController extends Controller
 {
-    protected $localUrl = 'http://db20ff9d.ngrok.io';
-
     /**
      * Display a listing of the resource.
      *
@@ -50,52 +49,11 @@ class PlansController extends Controller
 
         $user = auth()->user();
 
-        $preApproval = $pagseguro->subscription();
+        $pagseguro->subscription($user, $plan, $request)->purchase();
         
-        $preApproval->setPlan($plan->code);
-        $preApproval->setReference($user->id);
-        $preApproval->setSender()->setName($user->name);
-        $preApproval->setSender()->setEmail('c38672894586801235492@sandbox.pagseguro.com.br');
-        $preApproval->setSender()->setHash($request->card_hash);
-        $preApproval->setSender()->setDocuments(
-            (new \PagSeguro\Domains\DirectPreApproval\Document)->withParameters('CPF', '09882490735')
-        );
-        $preApproval->setSender()->setAddress()->withParameters(
-            $request->address_street,
-            $request->address_number,
-            $request->address_district,
-            $request->address_zip,
-            $request->address_city,
-            $request->address_state,
-            'BRA'
-        );
-        $preApproval->setSender()->setPhone()->withParameters('21', '91982736');
-        $preApproval->setPaymentMethod()->setCreditCard()->setToken($request->card_token);
-        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setName($request->card_holder_name);
-        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setBirthDate('23/06/1984');
-        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setDocuments(
-            (new \PagSeguro\Domains\DirectPreApproval\Document)->withParameters('CPF', '09882490735')
-        );
-        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setPhone()->withParameters('21', '91982736');
-        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setBillingAddress()->withParameters(
-            $request->address_street,
-            $request->address_number,
-            $request->address_district,
-            $request->address_zip,
-            $request->address_city,
-            $request->address_state,
-            'BRA'
-        );
+        $user->subscribe($plan);
 
-        try {
-            $response = $preApproval->register($pagseguro->credentials);
-        } catch (\Exception $e) {
-            dd($e);
-        }
-        
-        User::find($user->id)->subscribe($plan);
-
-        event(new MembershipCreated(auth()->user()));
+        event(new MembershipCreated($user));
 
         return redirect()->route('client.events.index')->with('status', 'A sua assinatura foi realizada com sucesso. Aproveite o seu novo espaço de trabalho!');
     }

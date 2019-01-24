@@ -51,15 +51,36 @@ class EventsController extends Controller
         return view("pages.search.results", compact(['report', 'selectedSpace']));
     }
     
-    public function payment()
+    public function payment(Request $request, CreateEventForm $form)
     {
+        $price = $form->space->priceFor($request->participants, $request->duration, $discount = auth()->user()->bonusesLeft($form->space));
+
+        if ($price == 0) {
+            $event = $form->user->events()->create([
+                'space_id' => $form->space_id,
+                'fee' => $price,
+                'participants' => $form->participants,
+                'emails' => serialize($form->emails),
+                'starts_at' => $form->starts_at,
+                'ends_at' => $form->ends_at,
+                'notified_at' => now(),
+                'status_id' => 3
+            ]);
+
+            $form->user->useBonus($event, $form->duration);
+
+            event(new EventCreated($event));
+
+            return redirect()->route('client.events.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
+        }
+
         $xml = client()->post('https://ws.sandbox.pagseguro.uol.com.br/v2/sessions?email='.pagseguro('email').'&token='.pagseguro('token'))->getBody();
 
         $pagseguroId = json_encode(simplexml_load_string($xml)->id);
         
         $pagseguroId = json_decode($pagseguroId, true)[0];
 
-        $selectedSpace = Space::find(request()->space_id);
+        $selectedSpace = $form->space;
 
         return view('pages.user.checkout.event.index', compact(['pagseguroId', 'selectedSpace']));
     }

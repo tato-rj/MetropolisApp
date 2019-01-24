@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\PagSeguro;
 
 use PagSeguro\Library;
 use PagSeguro\Configuration\Configure;
 use PagSeguro\Services\Session as PagSeguroSession;
-use PagSeguro\Domains\Requests\DirectPreApproval\Accession;
 use PagSeguro\Domains\Requests\DirectPreApproval\Plan as PagSeguroPlan;
+use App\{User, Plan};
+use Illuminate\Http\Request;
 
 class PagSeguro
 {
@@ -35,9 +36,9 @@ class PagSeguro
         }
 	}
 
-	public function subscription()
+	public function subscription(User $user, Plan $plan, Request $request)
 	{
-		return new Accession();
+		return new Checkout($this, $user, $plan, $request);
 	}
 
 	public function createPlan($selectedPlan)

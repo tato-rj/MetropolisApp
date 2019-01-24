@@ -40,11 +40,13 @@
 				@endif
 			</li>
 
+			@if($event->reference)
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Referência</strong></span>
 				<span>#{{$event->reference}}</span>
 			</li>
-
+			@endif
+			
 			<li class="mb-3">
 				<span class="text-teal mr-1"><strong>Número de participantes</strong></span>
 				<span 

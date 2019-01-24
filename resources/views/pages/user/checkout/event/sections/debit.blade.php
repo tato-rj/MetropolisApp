@@ -2,13 +2,13 @@
 	@csrf
 	{{-- EVENT --}}
 	<input type="hidden" name="creator_id" value="{{auth()->check() ? auth()->user()->id : null}}">
-	<input type="hidden" name="space_id" value="{{$selectedSpace->id}}">
-	<input type="hidden" name="description" value="{{$selectedSpace->name}}">
+	<input type="hidden" name="space_id" value="{{$space->id}}">
+	<input type="hidden" name="description" value="{{$space->name}}">
 	<input type="hidden" name="date" value="{{request()->date}}">
 	<input type="hidden" name="time" value="{{request()->time}}">
 	<input type="hidden" name="duration" value="{{request()->duration}}">
 	<input type="hidden" name="participants" value="{{request()->participants}}">
-	<input type="hidden" name="price" value="{{fromCents($selectedSpace->priceFor(request()->participants, request()->duration))}}">
+	<input type="hidden" name="price" value="{{fromCents($space->priceFor(request()->participants, request()->duration))}}">
 
 	<input type="hidden" name="paymentMethod" value="eft">
 	<input type="hidden" name="card_token">

@@ -58,13 +58,19 @@ class Event extends Metropolis
 
     public function getDurationAttribute()
     {
-        if ($this->starts_at->isSameDay($this->ends_at)) {
+        if (! $this->plan()->exists()) {
             $duration = $this->starts_at->diffInHours($this->ends_at);
             return "$duration ". trans_choice('words.horas', $duration);
         }
+
+        if ($this->plan->name == 'semanal')
+            return '1 semana';
+
+        if ($this->plan->name == 'mensal')
+            return '1 mês';
         
-        $duration = $this->starts_at->diffInDays($this->ends_at);
-        return "$duration ". trans_choice('words.dias', $duration);
+        if ($this->plan->name == 'semestral')
+            return '6 meses';
     }
 
     public function getEmailsAttribute($emails)

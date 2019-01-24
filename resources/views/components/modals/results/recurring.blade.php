@@ -6,12 +6,12 @@
 
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Começa</strong></span>
-		<span>dia {{$event->starts_at->day}} às {{$event->starts_at->hour}}:00 horas</span>
+		<span>dia {{$event->starts_at->format('d/m')}} às {{$event->starts_at->hour}}:00 horas</span>
 	</li>
 
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Termina</strong></span>
-		<span>dia {{$event->ends_at->day}} às {{$event->ends_at->hour}}:00 horas</span>
+		<span>dia {{$event->ends_at->format('d/m')}} às {{$event->ends_at->hour}}:00 horas</span>
 	</li>
 
 	<li class="mb-2">
@@ -24,8 +24,13 @@
 		<span class="text-teal mr-1"><strong>Status</strong></span>
 		<span class="text-green">Ativo</span> <small class="text-muted">(se renovará no final do dia {{auth()->user()->membership->next_payment_at->format('d/m')}})</small>
 	</li>
+
 </ul>
-<div class="mt-2">
+<div class="bg-light py-2 px-3 mb-2">
+	<p class="text-muted m-0"><small>Para alterar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></p>
+	<p class="text-muted m-0"><small>O código da reserva é <strong>{{$event->reference}}</strong></small></p>
+</div>
+<div>
 	<p class="m-0 text-muted"><small>Esta reserva faz parte da sua assinatura do</small></p>
 	<div class="d-flex align-items-center justify-content-between">
 		<div>
@@ -33,7 +38,7 @@
 			</p>
 		</div>
 		<div>
-			<a href="/" class="btn btn-xs btn-{{$event->plan->color}}"><strong>MAIS DETALHES</strong></a>
+			<a href="/planos" class="btn btn-xs btn-{{$event->plan->color}}"><strong>MAIS DETALHES</strong></a>
 		</div>
 	</div>
 </div>

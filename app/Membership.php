@@ -16,11 +16,11 @@ class Membership extends Metropolis
     	return $this->belongsTo(User::class);
     }
 
-    public function start()
+    public function start($reference)
     {
         return $this->user->events()->create([
             'plan_id' => $this->plan->id,
-            'reference' => $this->plan->code,
+            'reference' => $reference,
             'fee' => $this->plan->fee,
             'starts_at' => $this->created_at->setTime(office()->day_starts_at,0,0),
             'ends_at' => $this->next_payment_at

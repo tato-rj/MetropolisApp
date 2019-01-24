@@ -3,7 +3,7 @@
 @push('header')
 <script>
     window.pagseguro = <?php echo json_encode([
-        'id' => $pagseguroId
+        'id' => $pagseguro->session->getResult()
     ]); ?>
 </script>
 @endpush

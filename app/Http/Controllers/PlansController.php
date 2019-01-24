@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SubscribeForm;
 use App\Events\MembershipCreated;
 use App\Services\PagSeguro\PagSeguro;
-use App\Services\PagSeguro\PagSeguro\Checkout;
 
 class PlansController extends Controller
 {
@@ -25,15 +24,11 @@ class PlansController extends Controller
 
     public function payment()
     {
-        $xml = client()->post('https://ws.sandbox.pagseguro.uol.com.br/v2/sessions?email='.pagseguro('email').'&token='.pagseguro('token'))->getBody();
+        $pagseguro = new PagSeguro;
 
-        $pagseguroId = json_encode(simplexml_load_string($xml)->id);
-        
-        $pagseguroId = json_decode($pagseguroId, true)[0];
+        $plan = Plan::find(request()->plan_id);
 
-        $selectedPlan = Plan::find(request()->plan_id);
-
-        return view('pages.user.checkout.plan.index', compact(['pagseguroId', 'selectedPlan']));
+        return view('pages.user.checkout.plan.index', compact(['pagseguro', 'plan']));
     }
 
     /**
@@ -49,9 +44,14 @@ class PlansController extends Controller
 
         $user = auth()->user();
 
-        $pagseguro->subscription($user, $plan, $request)->purchase();
+        $reference = $pagseguro->generateReference($user, 'PLANO');
+
+        $status = $pagseguro->plan($user, $plan, $request)->purchase($reference);
+
+        if (! $status)
+            return redirect()->back()->with('error', 'Não foi possível realizar o seu pedido nesse momento, por favor tente mais tarde.');
         
-        $user->subscribe($plan);
+        $user->subscribe($plan, $reference);
 
         event(new MembershipCreated($user));
 

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class PagSeguro
 {
-	protected $credentials;
+	protected $credentials, $session;
 
 	public function __construct()
 	{
@@ -25,21 +25,28 @@ class PagSeguro
         Library::moduleVersion()->setName('Metropolis')->setRelease('1.0');
 
         Configure::setEnvironment('sandbox');
+        Configure::setCharset('UTF-8');
         Configure::setAccountCredentials(pagseguro('email'), pagseguro('token'));
+        Configure::setLog(true, storage_path('logs/pagseguro_'. date('Y-m-d') .'.txt'));
 
         try {
             $this->credentials = \PagSeguro\Configuration\Configure::getAccountCredentials();
 
-            PagSeguroSession::create($this->credentials);
+            $this->session = PagSeguroSession::create($this->credentials);
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
 	}
 
-	public function subscription(User $user, Plan $plan, Request $request)
+	public function plan(User $user, Plan $plan, Request $request)
 	{
-		return new Checkout($this, $user, $plan, $request);
+		return new CheckoutPlan($this, $user, $plan, $request);
 	}
+
+    public function event(User $user, Request $request)
+    {
+        return new CheckoutEvent($this, $user, $request);
+    }
 
 	public function createPlan($selectedPlan)
 	{
@@ -58,6 +65,11 @@ class PagSeguro
             dd($e->getMessage());
         }
 	}
+
+    public function generateReference(User $user, $type)
+    {
+        return $type . '-' . now()->timestamp . $user->id; 
+    }
 
 	public function __get($property) {
 		if (property_exists($this, $property)) {

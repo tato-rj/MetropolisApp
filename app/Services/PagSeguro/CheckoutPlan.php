@@ -6,8 +6,9 @@ use App\{User, Plan};
 use Illuminate\Http\Request;
 use PagSeguro\Domains\Requests\DirectPreApproval\Accession;
 use PagSeguro\Domains\DirectPreApproval\Document;
+use App\Services\PagSeguro\Contracts\Checkout;
 
-class Checkout
+class CheckoutPlan implements Checkout
 {
 	protected $user, $plan, $request, $pagseguro;
 
@@ -19,12 +20,12 @@ class Checkout
 		$this->pagseguro = $pagseguro;
 	}
 
-	public function purchase()
+	public function purchase($reference)
 	{
         $preApproval = new Accession();
         
         $preApproval->setPlan($this->plan->code);
-        $preApproval->setReference($this->user->id);
+        $preApproval->setReference($reference);
         $preApproval->setSender()->setName($this->user->name);
         $preApproval->setSender()->setEmail('c38672894586801235492@sandbox.pagseguro.com.br');
         $preApproval->setSender()->setHash($this->request->card_hash);
@@ -61,6 +62,9 @@ class Checkout
         try {
             return $preApproval->register($this->pagseguro->credentials);
         } catch (\Exception $e) {
+            if ($e->getCode() == 500)
+                return null;
+            
             dd($e);
         }
 	}

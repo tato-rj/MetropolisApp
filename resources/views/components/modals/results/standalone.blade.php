@@ -39,13 +39,6 @@
 				<small class="text-muted">({{'atualizado no dia ' . $event->notified_at->format('d/m') . ' às ' . $event->notified_at->format('H:i')}})</small>
 				@endif
 			</li>
-
-			@if($event->reference)
-			<li class="mb-2">
-				<span class="text-teal mr-1"><strong>Referência</strong></span>
-				<span>#{{$event->reference}}</span>
-			</li>
-			@endif
 			
 			<li class="mb-3">
 				<span class="text-teal mr-1"><strong>Número de participantes</strong></span>
@@ -82,8 +75,9 @@
 						</div>
 					</div>
 			</li>
-			
-			<li>
-				<span class="text-muted"><small>Para cancelar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></span>
-			</li>
+
 		</ul>
+		<div class="bg-light py-2 px-3 mb-2">
+			<p class="text-muted m-0"><small>Para alterar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></p>
+			<p class="text-muted m-0"><small>O código da reserva é <strong>{{$event->reference}}</strong></small></p>
+		</div>

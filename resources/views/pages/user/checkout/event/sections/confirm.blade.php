@@ -3,7 +3,7 @@
 		<ul class="list-flat p-4" id="review">
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Espaço</strong></span>
-				<span>{{$selectedSpace->name}}</span>
+				<span>{{$space->name}}</span>
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Data</strong></span>
@@ -23,9 +23,9 @@
 				<span>{{request()->participants}} {{trans_choice('words.pessoas', request()->participants)}}</span>
 			</li>
 
-			@bonus($selectedSpace)
+			@bonus($space)
 			<li class="mt-2">
-				<span class="text-red mr-1">Você tem <strong>{{auth()->user()->bonusesLeft($selectedSpace)}} {{trans_choice('horas', auth()->user()->bonusesLeft($selectedSpace))}}</strong> de bônus para usar nessa reserva!</span>
+				<span class="text-red mr-1">Você tem <strong>{{auth()->user()->bonusesLeft($space)}} {{trans_choice('horas', auth()->user()->bonusesLeft($space))}}</strong> de bônus para usar nessa reserva!</span>
 			</li>
 			@endbonus
 		</ul>
@@ -33,13 +33,13 @@
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
 			<div class="d-flex xs-w-100">
 				<div class="p-3 bg-teal-dark flex-grow"><strong>
-					@bonus($selectedSpace)
+					@bonus($space)
 					<span class="opacity-6 mr-2" style="text-decoration: line-through;">
-						{{feeToString(fromCents($selectedSpace->priceFor(request()->participants, request()->duration, $discount = 0)))}}
+						{{feeToString(fromCents($space->priceFor(request()->participants, request()->duration, $discount = 0)))}}
 					</span>
-					{{feeToString(fromCents($selectedSpace->priceFor(request()->participants, request()->duration, $discount = auth()->user()->bonusesLeft($selectedSpace))))}}
+					{{feeToString(fromCents($space->priceFor(request()->participants, request()->duration, $discount = auth()->user()->bonusesLeft($space))))}}
 					@else
-					{{feeToString(fromCents($selectedSpace->priceFor(request()->participants, request()->duration)))}}
+					{{feeToString(fromCents($space->priceFor(request()->participants, request()->duration)))}}
 					@endbonus
 				</strong></div>
 			</div>

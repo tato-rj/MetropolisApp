@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Http\Requests\CreateEventForm;
 use App\Traits\HasBonus;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -43,7 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Membership::class);
     }
 
-    public function subscribe(Plan $plan)
+    public function subscribe(Plan $plan, $reference)
     {
         $starts_at = office()->nextBusinessDay();
 
@@ -51,7 +52,24 @@ class User extends Authenticatable implements MustVerifyEmail
             'plan_id' => $plan->id,
             'next_payment_at' => $plan->renewsAt($starts_at),
             'created_at' => $starts_at
-        ])->start();
+        ])->start($reference);
+    }
+
+    public function schedule(CreateEventForm $form, $reference)
+    {
+        $event = $this->events()->create([
+            'reference' => $reference,
+            'space_id' => $form->space_id,
+            'fee' => $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space)),
+            'participants' => $form->participants,
+            'emails' => serialize($form->emails),
+            'starts_at' => $form->starts_at,
+            'ends_at' => $form->ends_at
+        ]);
+
+        $form->user->useBonus($event, $form->duration);
+
+        return $event;
     }
 
     public function getPastEventsAttribute()

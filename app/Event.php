@@ -8,8 +8,8 @@ class Event extends Metropolis
 {
     use PagSeguro;
 
-	protected $dates = ['starts_at', 'ends_at', 'notified_at'];
-    protected $appends = ['title', 'start', 'end', 'duration', 'status', 'statusForUser'];
+	protected $dates = ['starts_at', 'ends_at', 'verified_at'];
+    protected $appends = ['title', 'start', 'end', 'duration', 'status', 'statusForUser', 'statusColor'];
 
 	public function creator()
 	{

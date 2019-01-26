@@ -40,11 +40,13 @@ class Space extends Model
     public function priceFor($participants, $duration, $discount = 0)
     {
         $finalDuration = ($duration - $discount) >= 0 ? $duration - $discount : 0;
+        
+        $fee = $this->fee / 100;
 
         if (! $this->is_shared)
-            return $this->fee * $finalDuration;
+            return $fee * $finalDuration;
 
-        return $this->fee * $participants * $duration;
+        return $fee * $participants * $duration;
     }
 
     public function nextBusinessDay($hour = 8)

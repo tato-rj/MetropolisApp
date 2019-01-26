@@ -5,6 +5,7 @@ namespace App\Traits;
 trait PagSeguro
 {
 	protected $statusArray = [
+        0 => 'Processando o pedido',
 		1 => 'Aguardando pagamento', 
 		2 => 'Em análise',
 		3 => 'Paga',
@@ -17,7 +18,7 @@ trait PagSeguro
 	];
 
 	protected $confirmedStatusArray = [3, 4, 8];
-	protected $waitingStatusArray = [1, 2, 5];
+	protected $waitingStatusArray = [0, 1, 2, 5];
 	protected $cancelledStatusArray = [6, 7, 9];
 
     public function getStatusAttribute()
@@ -52,5 +53,22 @@ trait PagSeguro
             return 'danger';
 
         return 'warning';        
+    }
+
+    public function setStatus($status_id)
+    {
+        $this->update([
+            'status_id' => $status_id,
+            'verified_at' => now()
+        ]);
+
+        return $this;
+    }
+
+    public function setTransactionCode($code)
+    {
+        $this->update(['transaction_code' => $code]);
+
+        return $this;
     }
 }

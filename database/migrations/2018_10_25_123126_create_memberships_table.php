@@ -17,12 +17,11 @@ class CreateMembershipsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('plan_id');
             $table->unsignedInteger('user_id');
+            $table->string('reference')->nullable();
             $table->timestamp('next_payment_at')->nullable();
             $table->timestamp('subscription_ends_at')->nullable();
-            $table->timestamp('renewed_at')->default(now());
-            $table->timestamp('canceled_at')->nullable();
-            $table->string('pagseguro_id')->nullable();
-            $table->string('pagseguro_subscription')->nullable();
+            $table->timestamp('verified_at')->nullable();
+            $table->string('status')->default('Aguardando confirmação');
             $table->string('card_brand')->nullable();
             $table->string('card_last_four')->nullable(); 
             $table->timestamps();

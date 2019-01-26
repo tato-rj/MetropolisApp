@@ -168,7 +168,31 @@ $(document).click(function(e) {
         toggleButtonsFor();
     }
 });
+</script>
+<script type="text/javascript">
+$(document).on('click', '.check-status:not(.checking)', function() {
+  let $button = $(this);
+  let $statusLabel = $button.closest('.modal-body').find('.status-label');
+  let $verifiedAt = $button.closest('.modal-body').find('.verified-at');
+  let $icon = $button.find('i');
+  let url = $button.attr('data-url');
 
-
+  $button.addClass('checking');
+  $icon.addClass('spin');
+  
+  $.post(url, function(data, status){
+    $statusLabel.text(data.statusForUser);
+    $verifiedAt.text('(atualizado no dia ' + moment(data.verified_at).format('DD/MM') + ' às ' + moment(data.verified_at).format('HH:mm') + ')');
+    $icon.toggleClass('fa-sync-alt fa-check');
+    $button.toggleClass('text-red text-success check-status cursor-pointer');
+    $button.find('span').text('Status atualizado com sucesso');
+  }).fail(function(error) {
+    console.log(error);
+    $button.find('span').text('Não foi possível atualizar agora');
+  }).always(function() {
+    $icon.removeClass('spin');
+    $button.removeClass('checking');
+  });
+});
 </script>
 @endpush

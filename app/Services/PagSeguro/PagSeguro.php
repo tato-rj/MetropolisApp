@@ -6,7 +6,7 @@ use PagSeguro\Library;
 use PagSeguro\Configuration\Configure;
 use PagSeguro\Services\Session as PagSeguroSession;
 use PagSeguro\Domains\Requests\DirectPreApproval\Plan as PagSeguroPlan;
-use App\{User, Plan};
+use App\{User, Plan, Event};
 use Illuminate\Http\Request;
 
 class PagSeguro
@@ -38,14 +38,19 @@ class PagSeguro
         }
 	}
 
+    public function status(Event $event)
+    {
+        return new StatusManager($this, $event);
+    }
+
 	public function plan(User $user, Plan $plan, Request $request)
 	{
 		return new CheckoutPlan($this, $user, $plan, $request);
 	}
 
-    public function event(User $user, Request $request)
+    public function event(User $user, Request $request, $price)
     {
-        return new CheckoutEvent($this, $user, $request);
+        return new CheckoutEvent($this, $user, $request, $price);
     }
 
 	public function createPlan($selectedPlan)
@@ -66,9 +71,9 @@ class PagSeguro
         }
 	}
 
-    public function generateReference(User $user, $type)
+    public function generateReference(User $user)
     {
-        return $type . '-' . now()->timestamp . $user->id; 
+        return now()->timestamp . $user->id; 
     }
 
 	public function __get($property) {

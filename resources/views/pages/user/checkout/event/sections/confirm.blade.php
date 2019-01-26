@@ -35,11 +35,11 @@
 				<div class="p-3 bg-teal-dark flex-grow"><strong>
 					@bonus($space)
 					<span class="opacity-6 mr-2" style="text-decoration: line-through;">
-						{{feeToString(fromCents($space->priceFor(request()->participants, request()->duration, $discount = 0)))}}
+						{{feeToString($space->priceFor(request()->participants, request()->duration, $discount = 0))}}
 					</span>
-					{{feeToString(fromCents($space->priceFor(request()->participants, request()->duration, $discount = auth()->user()->bonusesLeft($space))))}}
+					{{feeToString($space->priceFor(request()->participants, request()->duration, $discount = auth()->user()->bonusesLeft($space)))}}
 					@else
-					{{feeToString(fromCents($space->priceFor(request()->participants, request()->duration)))}}
+					{{feeToString($space->priceFor(request()->participants, request()->duration))}}
 					@endbonus
 				</strong></div>
 			</div>

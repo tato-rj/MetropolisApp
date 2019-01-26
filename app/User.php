@@ -36,7 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function bonuses()
     {
-        return $this->hasMany(Bonus::class)->valid($this->membership);
+        return $this->hasMany(Bonus::class);//->valid($this->membership);
     }
 
     public function membership()
@@ -51,20 +51,23 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->membership()->create([
             'plan_id' => $plan->id,
             'next_payment_at' => $plan->renewsAt($starts_at),
-            'created_at' => $starts_at
-        ])->start($reference);
+            'created_at' => $starts_at,
+            'reference' => $reference,
+        ])->start();
     }
 
-    public function schedule(CreateEventForm $form, $reference)
+    public function schedule(CreateEventForm $form, $reference = null)
     {
         $event = $this->events()->create([
-            'reference' => $reference,
+            'reference' => $reference ?? null,
             'space_id' => $form->space_id,
             'fee' => $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space)),
             'participants' => $form->participants,
             'emails' => serialize($form->emails),
             'starts_at' => $form->starts_at,
-            'ends_at' => $form->ends_at
+            'ends_at' => $form->ends_at,
+            'verified_at' => $reference ? null : now(),
+            'status_id' => $reference ? 0 : 3
         ]);
 
         $form->user->useBonus($event, $form->duration);

@@ -22,14 +22,22 @@
 
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Status</strong></span>
-		<span class="text-green">Ativo</span> <small class="text-muted">(se renovará no final do dia {{auth()->user()->membership->next_payment_at->format('d/m')}})</small>
+		<span class="status-label text-{{$event->statusColor}}">{{$event->statusForUser}}</span>
+		
+		<small class="text-muted verified-at">
+			@if($event->verified_at)
+				({{'atualizado no dia ' . $event->verified_at->format('d/m') . ' às ' . $event->verified_at->format('H:i')}})
+			@endif
+		</small>
 	</li>
 
 </ul>
+
 <div class="bg-light py-2 px-3 mb-2">
 	<p class="text-muted m-0"><small>Para alterar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></p>
 	<p class="text-muted m-0"><small>O código da reserva é <strong>{{$event->reference}}</strong></small></p>
 </div>
+
 <div>
 	<p class="m-0 text-muted"><small>Esta reserva faz parte da sua assinatura do</small></p>
 	<div class="d-flex align-items-center justify-content-between">

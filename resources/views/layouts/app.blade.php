@@ -17,6 +17,20 @@
       bottom: .65em;
       right: 1em;
     }
+    .spin {
+      animation-name: spin;
+      animation-duration: 1000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear; 
+    }
+    @keyframes spin {
+      from {
+        transform:rotate(0deg);
+      }
+      to {
+        transform:rotate(360deg);
+      }
+    }
     </style>
     <script>
         window.app = <?php echo json_encode([

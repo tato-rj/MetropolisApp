@@ -5,8 +5,6 @@ App\Http\Controllers\Auth\GateController::auth();
 
 Auth::routes(['verify' => true]);
 
-Route::post('/pagseguro/event/notification', 'EventsController@notification')->name('pagseguro.event.notification');
-
 Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->group(function() {
 
 	Route::get('', 'HomeController@index')->name('home');
@@ -24,6 +22,8 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 		Route::post('/comprar', 'EventsController@purchase')->name('purchase');
 
 		Route::post('/{event}', 'EventsController@update')->name('update');
+
+		Route::post('/{event}/status', 'EventsController@status')->name('status');
 	
 		Route::post('/{event}/emails', 'EventsController@updateEmails')->name('update.emails');
 	
@@ -38,6 +38,8 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 		Route::get('pagamento', 'PlansController@payment')->name('payment');
 
 		Route::post('assinar', 'PlansController@subscribe')->name('subscribe');
+		
+		Route::post('/{event}/status', 'PlansController@status')->name('status');
 
 	});
 });

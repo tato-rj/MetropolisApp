@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Plan, User};
+use App\{Plan, User, Event};
 use Illuminate\Http\Request;
 use App\Http\Requests\SubscribeForm;
 use App\Events\MembershipCreated;
@@ -44,12 +44,12 @@ class PlansController extends Controller
 
         $user = auth()->user();
 
-        $reference = $pagseguro->generateReference($user, 'PLANO');
+        $reference = $pagseguro->generateReference($user);
 
         $status = $pagseguro->plan($user, $plan, $request)->purchase($reference);
 
         if (! $status)
-            return redirect()->back()->with('error', 'Não foi possível realizar o seu pedido nesse momento, por favor tente mais tarde.');
+            return redirect()->back()->with('error', 'O ambiente sandbox não está disponível nesse momento.');
         
         $user->subscribe($plan, $reference);
 
@@ -58,25 +58,25 @@ class PlansController extends Controller
         return redirect()->route('client.events.index')->with('status', 'A sua assinatura foi realizada com sucesso. Aproveite o seu novo espaço de trabalho!');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function status(Event $event, Request $request)
     {
-        //
-    }
+        $pagseguro = new PagSeguro;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $status = $pagseguro->status($event)->checkPlan([
+            'initial_date' => '2019-01-25T03:00',
+            'final_date' => '2019-01-25T04:56',
+            'page' => 1,
+            'max_per_page' => 100,
+        ]);
+
+        if (! $status)
+            abort(404);
+
+        dd($status);
+        
+        $event->setStatus($status->getTransactions()[0]->getStatus());
+
+        return $event;
     }
 
     /**

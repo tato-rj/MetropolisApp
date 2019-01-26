@@ -75,11 +75,11 @@
 				<div class="p-3 bg-teal-dark flex-grow"><strong>
 					@bonus($selectedSpace)
 					<span class="opacity-6 mr-2" style="text-decoration: line-through;">
-						{{feeToString(fromCents($selectedSpace->priceFor(request()->participants, request()->duration, $discount = 0)))}}
+						{{feeToString($selectedSpace->priceFor(request()->participants, request()->duration, $discount = 0))}}
 					</span>
-					{{feeToString(fromCents($selectedSpace->priceFor(request()->participants, request()->duration, $discount = auth()->user()->bonusesLeft($selectedSpace))))}}
+					{{feeToString($selectedSpace->priceFor(request()->participants, request()->duration, $discount = auth()->user()->bonusesLeft($selectedSpace)))}}
 					@else
-					{{feeToString(fromCents($selectedSpace->priceFor(request()->participants, request()->duration)))}}
+					{{feeToString($selectedSpace->priceFor(request()->participants, request()->duration))}}
 					@endbonus
 				</strong></div>
 				<button type="submit" class="btn btn-red h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>

@@ -8,7 +8,7 @@
 	<input type="hidden" name="time" value="{{request()->time}}">
 	<input type="hidden" name="duration" value="{{request()->duration}}">
 	<input type="hidden" name="participants" value="{{request()->participants}}">
-	<input type="hidden" name="price" value="{{fromCents($space->priceFor(request()->participants, request()->duration))}}">
+	<input type="hidden" name="price" value="{{$space->priceFor(request()->participants, request()->duration, auth()->user()->bonusesLeft($space))}}">
 
 	<input type="hidden" name="paymentMethod" value="creditCard">
 	<input type="hidden" name="card_token">

@@ -10,13 +10,14 @@ use App\Services\PagSeguro\Contracts\Checkout;
 
 class CheckoutEvent implements Checkout
 {
-	protected $user, $request, $pagseguro;
+	protected $user, $request, $pagseguro, $price;
 
-	public function __construct(PagSeguro $pagseguro, User $user, Request $request)
+	public function __construct(PagSeguro $pagseguro, User $user, Request $request, $price)
 	{
 		$this->user = $user;
 		$this->request = $request;
 		$this->pagseguro = $pagseguro;
+        $this->price = $price . '.00';
 	}
 
 	public function purchase($reference)
@@ -27,7 +28,7 @@ class CheckoutEvent implements Checkout
         $creditCard->setReference($reference);
         $creditCard->setCurrency("BRL");
         $creditCard->addItems()->withParameters(
-            $reference, $this->request->description, 1, $this->request->price . '.00'
+            $reference, $this->request->description, 1, $this->price
         );
         $creditCard->setSender()->setName($this->user->name);
         $creditCard->setSender()->setEmail('c38672894586801235492@sandbox.pagseguro.com.br');

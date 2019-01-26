@@ -52,21 +52,10 @@ class EventsController extends Controller
     
     public function payment(Space $space, Request $request, CreateEventForm $form)
     {
-        $price = $form->space->priceFor($request->participants, $request->duration, auth()->user()->bonusesLeft($form->space));
+        $price = $form->space->priceFor($request->participants, $request->duration, $form->user->bonusesLeft($form->space));
 
-        if ($price == 0) {
-            $event = $form->user->events()->create([
-                'space_id' => $form->space_id,
-                'fee' => $price,
-                'participants' => $form->participants,
-                'emails' => serialize($form->emails),
-                'starts_at' => $form->starts_at,
-                'ends_at' => $form->ends_at,
-                'notified_at' => now(),
-                'status_id' => 3
-            ]);
-
-            $form->user->useBonus($event, $form->duration);
+        if ($price == 0) {            
+            $event = $form->user->schedule($form);
 
             event(new EventCreated($event));
 
@@ -84,39 +73,39 @@ class EventsController extends Controller
     {
         $pagseguro = new PagSeguro;
 
-        $user = auth()->user();
+        $price = $form->space->priceFor($request->participants, $request->duration, $form->user->bonusesLeft($form->space));
 
-        $reference = $pagseguro->generateReference($user, 'EVENTO');
+        $reference = $pagseguro->generateReference($form->user);
 
-        $status = $pagseguro->event($user, $request)->purchase($reference);
+        $status = $pagseguro->event($form->user, $request, $price)->purchase($reference);
         
         if (! $status)
-            return redirect()->back()->with('error', 'Não foi possível realizar o seu pedido nesse momento, por favor tente mais tarde.');
+            return redirect()->back()->with('error', 'O ambiente sandbox não está disponível nesse momento.');
 
-        $event = $user->schedule($form, $reference);
+        $event = $form->user->schedule($form, $reference);
 
         event(new EventCreated($event));
 
         return redirect()->route('client.events.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
     }
 
-    public function notification(Request $request)
-    {        
-        try {
-            $notification = client()->get(
-                'https://ws.sandbox.pagseguro.uol.com.br/v3/transactions/notifications/'.$request->notificationCode.'?email='.pagseguro('email').'&token='.pagseguro('token')
-            )->getBody();
-        } catch (\Exception $e) {
-            return $e;
-        }
-        
-        $response = simplexml_load_string($notification);
+    public function status(Event $event, Request $request)
+    {
+        $pagseguro = new PagSeguro;
 
-        Event::where('reference', $response->reference)->update([
-            'status_id' => $response->status,
-            'notified_at' => now()]);
+        $status = $pagseguro->status($event)->checkEvent([
+            'initial_date' => null,
+            'final_date' => null,
+            'page' => 1,
+            'max_per_page' => 5,
+        ]);
 
-        return response('Status atualizado', 200);
+        if (! $status)
+            abort(404);
+
+        $event->setStatus($status->getTransactions()[0]->getStatus());
+
+        return $event;
     }
 
     public function invite(Request $request)

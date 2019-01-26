@@ -5,6 +5,11 @@ function office()
 	return new \App\Space;
 }
 
+function carbon($string)
+{
+	return \Carbon\Carbon::parse($string);
+}
+
 function pagseguro($value)
 {
 	return config('services.pagseguro')[$value];

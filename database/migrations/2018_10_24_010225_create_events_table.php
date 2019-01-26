@@ -16,6 +16,7 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('reference')->nullable();
+            $table->string('transaction_code')->nullable();
             $table->unsignedInteger('space_id')->default(1);
             $table->unsignedInteger('plan_id')->nullable();
             $table->unsignedInteger('creator_id');
@@ -24,8 +25,8 @@ class CreateEventsTable extends Migration
             $table->text('emails')->nullable();
             $table->timestamp('starts_at')->nullable();
             $table->timestamp('ends_at')->nullable();
-            $table->timestamp('notified_at')->nullable();
-            $table->tinyInteger('status_id')->default(1);
+            $table->timestamp('verified_at')->nullable();
+            $table->tinyInteger('status_id')->default(0);
             $table->timestamps();
         });
     }

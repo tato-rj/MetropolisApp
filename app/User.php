@@ -85,6 +85,19 @@ class User extends Authenticatable implements MustVerifyEmail
                     ->get();
     }
 
+    public function getCurrentEventCountdownAttribute()
+    {
+        $mostCurrentEvent = $this->currentEvents->first();
+
+        if (! $mostCurrentEvent || now()->isWeekend())
+            return null;
+
+        if ($mostCurrentEvent->ends_at->isSameDay(now()))
+            return ['name' => $mostCurrentEvent->space->name, 'end' => $mostCurrentEvent->ends_at->toDateTimeString()];
+
+        return ['name' => $mostCurrentEvent->space->name, 'end' => now()->setTime(office()->day_ends_at,0,0)->toDateTimeString()];
+    }
+
     public function getUpcomingEventsAttribute()
     {
         return $this->events()->whereDate('starts_at', '>', now()->toDateTimeString())->get();

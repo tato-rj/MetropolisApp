@@ -29,6 +29,11 @@ class Membership extends Metropolis
         ]);
     }
 
+    public function getStatusForUserAttribute()
+    {
+        return $this->status == 'ACTIVE' ? 'Ativo' : 'Cancelado';
+    }
+
     public function setStatus($status)
     {
         $this->update([

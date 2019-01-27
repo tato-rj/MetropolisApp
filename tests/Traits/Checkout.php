@@ -24,6 +24,8 @@ trait Checkout
 		$request = $sandbox->notification($type)->event($event);
 
 		$event = create('App\Event', [
+			'creator_id' => $membership->user_id,
+			'plan_id' => $membership->plan->id,
 			'reference' => $request->key('reference', $reference, $code),
 			'ends_at' => $membership->next_payment_at->subDay()]);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\PagSeguro\Traits;
+namespace Tests\PagSeguro\Notifications;
 
 trait SingleNotifications
 {

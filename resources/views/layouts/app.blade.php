@@ -61,7 +61,7 @@
       @include('layouts/dev')
     @endif
 
-{{-- @include('components.alerts.event', ['status' => 'danger']) --}}
+@include('components.alerts.event')
 
 @if(session()->has('status'))
 @include('components.alerts.success', ['message' => session('status')])
@@ -112,6 +112,52 @@ if ($('#scroll-mark').length > 0) {
   });
 }
 </script>
+
+<script type="text/javascript">
+let end = $('#event-alert').attr('data-end');
+
+$('#countdown').countdown(end, function(event) {
+  $(this).text(event.strftime('%H:%M:%S'));
+});
+
+$("#countdown").countdown(end).on("finish.countdown", function(event) {
+  $('#event-alert').fadeOut('fast', function() {
+    $(this).remove();
+  });
+});
+
+$('#event-alert').on('click', function() {
+  $alert = $(this);
+
+  if ($alert.hasClass('open')) {
+    $alert.removeClass('open');
+    $alert.css({
+      'width': '2.5rem',
+      'height': '2.5rem'
+    });
+    $alert.children().hide();
+
+    setTimeout(function() {
+      $alert.addClass('rounded-circle').removeClass('rounded');
+    }, 200);
+  } else {
+    $alert.addClass('open');
+    $alert.removeClass('rounded-circle').addClass('rounded');
+
+    setTimeout(function() {
+    $alert.css({
+      'width': 'auto',
+      'height': 'auto'
+    });
+
+    $alert.children().fadeIn('fast');
+    }, 220);
+  }
+
+});
+
+</script>
+
 @stack('scripts')
 </body>
 </html>

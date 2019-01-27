@@ -1,6 +1,7 @@
 require('./bootstrap');
 require('./helpers/cookie');
 require('./datepicker/customize');
+require('jquery-countdown');
 require('fullcalendar/dist/locale/pt-br.js');
 require('inputmask/dist/jquery.inputmask.bundle.js');
 

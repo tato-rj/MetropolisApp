@@ -46,11 +46,7 @@
 			</a>
 		</div>
 		<div>
-			@if(auth()->user()->membership->isActive())
-				<div class="bg-success px-2 py-1 text-white"><strong>Ativo</strong></div>
-			@else
-				<div class="bg-danger px-2 py-1 text-white"><strong>Cancelado</strong></div>
-			@endif
+			<div class="bg-danger px-2 py-1 text-white"><strong>{{auth()->user()->membership->statusForUser}}</strong></div>
 		</div>
 	</div>
 </div>

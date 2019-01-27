@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use Tests\AppTest;
-use App\{Space, Plan};
+use App\{Space, Plan, Event, Bonus};
+use Tests\Traits\Checkout;
 
 class BonusTest extends AppTest
 {
+    use Checkout;
+
 	/** @test */
 	public function it_automatically_applies_to_users_with_a_plan()
 	{
@@ -32,4 +35,34 @@ class BonusTest extends AppTest
         	'plan_id' => $plan->id
         ]);
 	}
+
+    /** @test */
+    public function the_memberships_number_of_available_bonuses_reset_when_the_membership_renews()
+    {
+        $request = $this->fakeEvent('recurring', 'paga');
+        
+        $event = Event::byReference('TEST-REFERENCE')->first();
+        
+        $user = $event->creator;
+
+        $this->post(route('pagseguro.event.notification', [
+            'notificationType' => 'transaction',
+            'xml' => $request['notification']]));
+
+        $originalBonusCount = $user->bonusesLeft();
+
+        $bonus = create('App\Bonus', ['duration' => 1]);
+
+        $user->bonuses()->save($bonus);
+
+        $this->assertEquals($originalBonusCount - 1, $user->fresh()->bonusesLeft());
+
+        $firstRenew = $this->fakeNotification('recurring', 'paga');
+
+        $this->post(route('pagseguro.event.notification', [
+            'notificationType' => 'transaction',
+            'xml' => $firstRenew->xml($ref = null, $code = '123456')]));
+
+        $this->assertEquals($originalBonusCount, $user->fresh()->bonusesLeft());
+    }
 }

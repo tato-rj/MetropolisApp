@@ -2,7 +2,7 @@
 
 namespace Tests\PagSeguro;
 
-use Tests\PagSeguro\Traits\{MembershipNotifications, RecurringNotifications, SingleNotifications};
+use Tests\PagSeguro\Notifications\{MembershipNotifications, RecurringNotifications, SingleNotifications};
 
 class Sandbox
 {

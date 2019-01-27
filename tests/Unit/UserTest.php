@@ -49,7 +49,7 @@ class UserTest extends AppTest
 	}
 
 	/** @test */
-	public function it_knows_the_status_of_an_upcoming_event()
+	public function it_knows_if_it_has_an_upcoming_event()
 	{
 		$this->signIn();
 
@@ -67,7 +67,7 @@ class UserTest extends AppTest
 	}
 
 	/** @test */
-	public function it_knows_the_status_of_a_current_event()
+	public function it_knows_if_it_has_a_current_event()
 	{
 		$this->signIn();
 
@@ -85,7 +85,7 @@ class UserTest extends AppTest
 	}
 
 	/** @test */
-	public function it_knows_the_status_of_a_past_event()
+	public function it_knows_if_it_has_a_past_event()
 	{
 		$this->signIn();
 

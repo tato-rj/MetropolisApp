@@ -50,7 +50,7 @@ abstract class AppTest extends TestCase
     {
         $user = $user ?? auth()->user();
 
-        return $this->post(route('client.events.store'), [
+        return $this->post(route('client.events.purchase'), [
             'creator_id' => $user->id,
             'space_id' => $this->space->id,
             'participants' => 1,

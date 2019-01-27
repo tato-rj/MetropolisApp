@@ -16,7 +16,7 @@ class BonusTest extends AppTest
 
 		$this->subscribeToNewPlan($plan);
 
-        $this->post(route('client.events.store'), [
+        $this->post(route('client.events.purchase'), [
             'creator_id' => auth()->user()->id,
             'space_id' => $this->space->id,
             'participants' => 1,

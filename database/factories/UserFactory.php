@@ -34,7 +34,9 @@ $factory->define(App\Event::class, function(Faker $faker) {
         },
         'fee' => 100,
 		'starts_at' => now(),
-		'ends_at' => now()->addHour()
+		'ends_at' => now()->addHour(),
+        'participants' => 1,
+        'status_id' => 0
 	];
 });
 
@@ -75,5 +77,20 @@ $factory->define(App\Space::class, function(Faker $faker) {
         'capacity' => $faker->randomDigitNotNull,
         'fee' => $faker->numberBetween(100,1000),
         'is_shared' => $faker->boolean(50)
+    ];
+});
+
+$factory->define(App\Membership::class, function(Faker $faker) {
+    $plan = create('App\Plan', ['name' => 'semanal']);
+
+    return [
+        'user_id' => function() {
+            return create('App\User')->id;
+        },
+        'plan_id' => function() use ($plan) {
+            return $plan->id;
+        },
+        'reference' => $faker->word,
+        'next_payment_at' => $plan->renewsAt()
     ];
 });

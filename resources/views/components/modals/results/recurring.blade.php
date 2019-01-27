@@ -17,7 +17,6 @@
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Duração</strong></span>
 		<span class="mr-1">{{$event->duration}}</span>
-		<span class="text-muted text-italic"><small>(o escritório fecha às <u>{{durationToString(office()->day_ends_at)}}</u>)</small></span>
 	</li>
 
 	<li class="mb-2">
@@ -38,15 +37,32 @@
 	<p class="text-muted m-0"><small>O código da reserva é <strong>{{$event->reference}}</strong></small></p>
 </div>
 
-<div>
+<div class="mb-3 px-3">
 	<p class="m-0 text-muted"><small>Esta reserva faz parte da sua assinatura do</small></p>
-	<div class="d-flex align-items-center justify-content-between">
+	<div class="d-apart align-items-end">
 		<div>
-			<p class="m-0 text-uppercase"><strong><span class="text-{{$event->plan->color}}">{{$event->plan->displayName}}</span></strong>
-			</p>
+			<a class="text-uppercase" href="/planos">
+				<strong><span class="text-{{$event->plan->color}}">{{$event->plan->displayName}}</span></strong>
+			</a>
 		</div>
 		<div>
-			<a href="/planos" class="btn btn-xs btn-{{$event->plan->color}}"><strong>MAIS DETALHES</strong></a>
+			@if(auth()->user()->membership->isActive())
+				<div class="bg-success px-2 py-1 text-white"><strong>Ativo</strong></div>
+			@else
+				<div class="bg-danger px-2 py-1 text-white"><strong>Cancelado</strong></div>
+			@endif
 		</div>
 	</div>
+</div>
+
+<div class="border-top pt-2 text-center">
+	@if(auth()->user()->membership->isActive())
+		<div class="text-success">
+			<small><i class="far fa-calendar-check mr-2"></i><strong>A sua assinatura se renovará ano dia {{auth()->user()->membership->next_payment_at->format('d/m')}}</strong></small>
+		</div>
+	@else
+		<div class="text-danger">
+			<small><i class="far fa-calendar-times mr-2"></i><strong>A sua assinatura foi cancelada e não se renovará</strong></small>
+		</div>
+	@endif
 </div>

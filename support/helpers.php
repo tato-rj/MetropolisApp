@@ -1,5 +1,38 @@
 <?php 
 
+function encrypt_str($string) {
+    $output = false;
+ 
+    $encrypt_method = "AES-256-CBC";
+    $secret_key = 'metropolis';
+    $secret_iv = '123';
+ 
+    $key = hash('sha256', $secret_key);
+
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+ 
+    $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+    $output = base64_encode($output);
+ 
+    return $output;
+}
+
+function decrypt_str($string) {
+    $output = false;
+ 
+    $encrypt_method = "AES-256-CBC";
+    $secret_key = 'metropolis';
+    $secret_iv = '123';
+ 
+    $key = hash('sha256', $secret_key);
+
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+ 
+	$output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+ 
+    return $output;
+}
+
 function office()
 {
 	return new \App\Space;

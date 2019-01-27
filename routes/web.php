@@ -26,8 +26,6 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 		Route::post('/{event}/status', 'EventsController@status')->name('status');
 	
 		Route::post('/{event}/emails', 'EventsController@updateEmails')->name('update.emails');
-	
-		Route::post('', 'EventsController@store')->name('store');
 
 	});
 

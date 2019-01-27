@@ -363,4 +363,5 @@ function getCities(estado){
 
 getStates();
 </script>
+
 @endpush

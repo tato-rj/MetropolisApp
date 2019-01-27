@@ -46,12 +46,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function subscribe(Plan $plan, $reference)
     {
-        $starts_at = office()->nextBusinessDay();
-
         $this->membership()->create([
             'plan_id' => $plan->id,
-            'next_payment_at' => $plan->renewsAt($starts_at),
-            'created_at' => $starts_at,
+            'next_payment_at' => $plan->renewsAt(),
             'reference' => $reference,
         ])->start();
     }

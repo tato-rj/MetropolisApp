@@ -53,7 +53,7 @@ class EventTest extends AppTest
 
 		$this->signIn();
 
-        $this->post(route('client.events.store'), [
+        $this->post(route('client.events.purchase'), [
             'creator_id' => auth()->user()->id,
             'space_id' => $this->space->id,
             'participants' => 3,
@@ -71,7 +71,7 @@ class EventTest extends AppTest
 	{
 		$this->signIn();
 
-        $this->post(route('client.events.store'), [
+        $this->post(route('client.events.purchase'), [
             'creator_id' => auth()->user()->id,
             'space_id' => $this->space->id,
             'participants' => 3,

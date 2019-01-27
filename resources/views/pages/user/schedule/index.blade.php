@@ -22,7 +22,6 @@ $(function() {
   let ajaxUrl = $('#calendar').attr('data-ajax');
 
   $('#calendar').fullCalendar({
-    weekends: false,
     minTime: '08:00',
     maxTime: '18:00',
     allDaySlot: false,

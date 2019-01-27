@@ -77,4 +77,9 @@ class Event extends Metropolis
     {
         return unserialize($emails);
     }
+
+    public function scopeByReference($query, $reference)
+    {
+        return $query->where('reference', $reference);
+    }
 }

@@ -42,18 +42,9 @@ class UserTest extends AppTest
 	{
 		$this->signIn();
 
-		auth()->user()->subscribe($this->plan);
+		auth()->user()->subscribe($this->plan, 'reference');
 
 		$this->assertTrue(auth()->user()->membership()->exists());
-	}
-
-	/** @test */
-	public function it_has_a_plan()
-	{
-		$this->signIn();
-
-		auth()->user()->subscribe($this->plan);
-
 		$this->assertInstanceOf(Plan::class, auth()->user()->membership->plan);
 	}
 
@@ -112,7 +103,7 @@ class UserTest extends AppTest
 	}
 
 	/** @test */
-	public function it_knows_how_many_bonus_hours_it_has_left()
+	public function it_knows_how_many_bonuses_hours_it_has_left()
 	{
 		$this->signIn();
 
@@ -127,7 +118,7 @@ class UserTest extends AppTest
 		
 		$this->assertEquals(auth()->user()->bonusesLeft($this->space), $plan->bonus_limit);
 
-        $this->post(route('client.events.store'), [
+        $this->post(route('client.events.purchase'), [
             'creator_id' => auth()->user()->id,
             'space_id' => $this->space->id,
             'participants' => 3,

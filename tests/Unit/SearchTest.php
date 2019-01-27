@@ -38,7 +38,7 @@ class SearchTest extends AppTest
 
 		create(Event::class, ['space_id' => $this->workspace->id], 12);
 
-        $this->post(route('client.events.store'), [
+        $this->post(route('client.events.purchase'), [
             'creator_id' => auth()->user()->id,
             'space_id' => $this->workspace->id,
             'participants' => 1,

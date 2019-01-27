@@ -12,7 +12,7 @@ class PlanTest extends AppTest
 	{
 		$this->signIn();
 
-		auth()->user()->subscribe($this->plan);
+		auth()->user()->subscribe($this->plan, 'reference');
 
 		$this->assertInstanceOf(Membership::class, $this->plan->memberships->first());
 	}
@@ -24,7 +24,7 @@ class PlanTest extends AppTest
 		
 		$this->assertEquals($this->workspace->currentCapacity, 12);
 
-		auth()->user()->subscribe($this->plan);
+		auth()->user()->subscribe($this->plan, 'reference');
 
 		$this->assertEquals($this->workspace->currentCapacity, 11);
 	}

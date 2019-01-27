@@ -42,21 +42,27 @@ class PagSeguroController extends Controller
 
     public function transaction(Request $request)
     {
-        $code = $this->cleanCode($request->notificationCode);
+        if (app()->environment() == 'testing') {
+            $response = $request->xml;
+        } else {
+            $code = $this->cleanCode($request->notificationCode);
 
-        $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/notifications/'.$code.'?email='.pagseguro('email').'&token='.pagseguro('token');
+            $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/notifications/'.$code.'?email='.pagseguro('email').'&token='.pagseguro('token');
 
-        $response = client()->get($url)->getBody();
-        
+            $response = client()->get($url)->getBody();
+        }
+
         $xml = simplexml_load_string($response);
-
+        
         try {
 
             if ($xml->type == 1) {
-                return $this->single($xml);
+                $this->single($xml);
             } else {
-                return $this->recurring($xml);
+                $this->recurring($xml);
             }
+
+            return $response;
 
         } catch (\Exception $e) {
             throw new \Exception('Evento não encontrado');
@@ -66,7 +72,7 @@ class PagSeguroController extends Controller
     public function recurring($xml)
     {
         $newEvent = Event::where('reference', $xml->reference)->whereNull('transaction_code');
-
+        
         if ($newEvent->exists()) {
             $newEvent->first()->setStatus($xml->status)->setTransactionCode($xml->code);
         } else {
@@ -75,19 +81,15 @@ class PagSeguroController extends Controller
             if ($event->exists()) {
                 $event->first()->setStatus($xml->status);
             } else {
-                Membership::where('reference', $xml->reference)->first()->renew($xml);
+                if (! in_array($xml->status, [5,6,7]))
+                    Membership::where('reference', $xml->reference)->first()->renew($xml);
             }
-            
         }
-
-        return $xml;        
     }
 
     public function single($xml)
     {
         Event::where('reference', $xml->reference)->first()->setStatus($xml->status)->setTransactionCode($xml->code);
-
-        return $xml;
     }
 
     public function cleanCode($code)

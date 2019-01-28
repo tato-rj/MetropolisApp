@@ -36,13 +36,7 @@ class CheckoutPlan implements Checkout
             $this->document()->withParameters('CPF', '09882490735')
         );
         $preApproval->setSender()->setAddress()->withParameters(
-            $this->request->address_street,
-            $this->request->address_number,
-            $this->request->address_district,
-            $this->request->address_zip,
-            $this->request->address_city,
-            $this->request->address_state,
-            'BRA'
+            'Av. Brig. Faria Lima', '1384', 'Jardim Paulistano', '01452002', 'São Paulo', 'SP', 'BRA', 'apto. 114'
         );
         $preApproval->setSender()->setPhone()->withParameters('21', '91982736');
         $preApproval->setPaymentMethod()->setCreditCard()->setToken($this->request->card_token);
@@ -53,13 +47,7 @@ class CheckoutPlan implements Checkout
         );
         $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setPhone()->withParameters('21', '91982736');
         $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setBillingAddress()->withParameters(
-            $this->request->address_street,
-            $this->request->address_number,
-            $this->request->address_district,
-            $this->request->address_zip,
-            $this->request->address_city,
-            $this->request->address_state,
-            'BRA'
+            'Av. Brig. Faria Lima', '1384', 'Jardim Paulistano', '01452002', 'São Paulo', 'SP', 'BRA', 'apto. 114'
         );
 
         try {

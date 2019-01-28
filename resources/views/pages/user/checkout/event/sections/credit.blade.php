@@ -79,7 +79,7 @@
 		<input required type="text" class="form-control" name="card_holder_cpf" id="card_holder_cpf" placeholder="CPF do titular do cartão">
 	</div>
 
-	<div class="form-group">
+{{-- 	<div class="form-group">
 		<label class="control-label"><small>Endereço</small></label>
 		<div class="form-row">
 			<div class="col-6 mb-2">
@@ -110,7 +110,7 @@
 				<input required type="text" class="form-control" name="address_zip" placeholder="CEP" value="">				
 			</div>
 		</div>
-	</div>
+	</div> --}}
 
 	<div class="custom-control custom-checkbox mt-4">
 		<input type="checkbox" class="custom-control-input" name="remembercard" id="remembercard">

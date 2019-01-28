@@ -91,7 +91,7 @@ function getCardFlag(input, cardNumber, form)
 			form.find('#card-invalid').hide();
 		},
 		error: function() {
-			input.css('background-image', 'url(http://metropolis.test/images/icons/credit.png)');
+			input.css('background-image', 'url(https://metropolisrio.com.br/images/icons/credit.png)');
 			form.find('input[name="card_brand"]').val('');
 			form.find('#card-invalid').show();
 		},
@@ -119,7 +119,7 @@ $('input[name="card_number"]').on('keyup', function() {
 	if (cardNumber.length == 6) {
 		getCardFlag(input, cardNumber, $form);
 	} else if (cardNumber.length < 6) {
-		input.css('background-image', 'url(http://metropolis.test/images/icons/credit.png)');
+		input.css('background-image', 'url(https://metropolisrio.com.br/images/icons/credit.png)');
 		$form.find('input[name="card_brand"]').val('');
 		$form.find('#card-invalid').hide();
 	}
@@ -288,55 +288,55 @@ let errors = {
       '14007': "status da transação não permite reembolso"
 };
 
-function getStates(){
-	$.ajax({
-		type:'GET',
-		url:'http://api.londrinaweb.com.br/PUC/Estados/BR/0/10000',
-		contentType: "application/json; charset=utf-8",
-		dataType: "jsonp",
-		async:false
-	}).done(function(response){
-		estados='';
+// function getStates(){
+// 	$.ajax({
+// 		type:'GET',
+// 		url:'http://api.londrinaweb.com.br/PUC/Estados/BR/0/10000',
+// 		contentType: "application/json; charset=utf-8",
+// 		dataType: "jsonp",
+// 		async:false
+// 	}).done(function(response){
+// 		estados='';
 
-		$.each(response, function(e, estado){
+// 		$.each(response, function(e, estado){
 
-			estados+='<option value="'+estado.UF+'">'+estado.Estado+'</option>';
+// 			estados+='<option value="'+estado.UF+'">'+estado.Estado+'</option>';
 
-		});
+// 		});
 
-		// PREENCHE OS ESTADOS BRASILEIROS
-		$('select[name="address_state"]').append(estados);
+// 		// PREENCHE OS ESTADOS BRASILEIROS
+// 		$('select[name="address_state"]').append(estados);
 
-		// VERIFICA A MUDANÇA NO VALOR DO CAMPO ESTADO E ATUALIZA AS CIDADES
-		$('select[name="address_state"]').change(function(){
-			getCities($(this).val());
-		});
+// 		// VERIFICA A MUDANÇA NO VALOR DO CAMPO ESTADO E ATUALIZA AS CIDADES
+// 		$('select[name="address_state"]').change(function(){
+// 			getCities($(this).val());
+// 		});
 
-	});
-}
+// 	});
+// }
 
-function getCities(estado){
-	$.ajax({
-		type:'GET',
-		url:'http://api.londrinaweb.com.br/PUC/Cidades/'+estado+'/BR/0/10000',
-		contentType: "application/json; charset=utf-8",
-		dataType: "jsonp",
-		async:false
-	}).done(function(response){
-		cidades='<option>Cidade</option>';
+// function getCities(estado){
+// 	$.ajax({
+// 		type:'GET',
+// 		url:'http://api.londrinaweb.com.br/PUC/Cidades/'+estado+'/BR/0/10000',
+// 		contentType: "application/json; charset=utf-8",
+// 		dataType: "jsonp",
+// 		async:false
+// 	}).done(function(response){
+// 		cidades='<option>Cidade</option>';
 
-		$.each(response, function(c, cidade){
+// 		$.each(response, function(c, cidade){
 
-			cidades+='<option value="'+cidade+'">'+cidade+'</option>';
+// 			cidades+='<option value="'+cidade+'">'+cidade+'</option>';
 
-		});
+// 		});
 
-		// PREENCHE AS CIDADES DE ACORDO COM O ESTADO
-		$('select[name="address_city"]').html(cidades);
+// 		// PREENCHE AS CIDADES DE ACORDO COM O ESTADO
+// 		$('select[name="address_city"]').html(cidades);
 
-	});
-}
+// 	});
+// }
 
-getStates();
+// getStates();
 </script>
 @endpush

@@ -1,5 +1,5 @@
-@if ($errors->hasBag($bag) && $errors->$bag->has($field))
+@if ($errors->has($field))
     <span class="invalid-feedback" role="alert">
-        {{ $errors->$bag->first($field) }}
+        <strong>{{ $errors->first($field) }}</strong>
     </span>
 @endif

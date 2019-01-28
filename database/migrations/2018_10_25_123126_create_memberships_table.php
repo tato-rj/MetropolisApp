@@ -22,8 +22,6 @@ class CreateMembershipsTable extends Migration
             $table->timestamp('subscription_ends_at')->nullable();
             $table->timestamp('verified_at')->nullable();
             $table->string('status')->default('Aguardando confirmação');
-            $table->string('card_brand')->nullable();
-            $table->string('card_last_four')->nullable(); 
             $table->timestamps();
         });
     }

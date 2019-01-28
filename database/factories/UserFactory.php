@@ -69,6 +69,22 @@ $factory->define(App\Bonus::Class, function(Faker $faker) {
     ];
 });
 
+$factory->define(App\Payment::class, function(Faker $faker) {
+    return [
+        'user_id' => function() {
+            return create('App\User')->id;
+        },
+        'product_id' => function() {
+            return create('App\Event')->id;
+        },
+        'product_type' => function() {
+            return get_class(create('App\Event'));
+        },
+        'code' => $faker->uuid,
+        'status' => 'PAID'
+    ];
+});
+
 $factory->define(App\Space::class, function(Faker $faker) {
     return [
         'slug' => $faker->word,

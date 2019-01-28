@@ -7,9 +7,12 @@
 				<div class="row">
 					@include('pages.user.home.sections.button', [
 						'title' => 'AGENDA', 'icon' => 'calendar-alt', 'url' => route('client.events.index')])
-					@include('pages.user.home.sections.button', ['title' => 'CADASTRO', 'icon' => 'user'])
-					@include('pages.user.home.sections.button', ['title' => 'PAGAMENTOS', 'icon' => 'credit-card'])
-					@include('pages.user.home.sections.button', ['title' => 'SUPORTE', 'icon' => 'comments'])
+					@include('pages.user.home.sections.button', [
+						'title' => 'CADASTRO', 'icon' => 'user', 'url' => route('client.profile.show')])
+					@include('pages.user.home.sections.button', [
+						'title' => 'PAGAMENTOS', 'icon' => 'credit-card', 'url' => route('client.payments.index')])
+					@include('pages.user.home.sections.button', [
+						'title' => 'SUPORTE', 'icon' => 'comments', 'url' => route('client.support.show')])
 				</div>
 			</div>
 		</div>

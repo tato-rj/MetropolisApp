@@ -11,7 +11,7 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 	Route::prefix('agenda')->name('events.')->group(function() {
 
-		Route::get('', 'EventsController@index')->name('index');
+		Route::get('', 'UsersController@schedule')->name('index');
 	
 		Route::post('/ajax', 'EventsController@ajax')->name('ajax');
 
@@ -38,6 +38,24 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 		Route::post('assinar', 'PlansController@subscribe')->name('subscribe');
 		
 		Route::post('/{event}/status', 'PlansController@status')->name('status');
+
+	});
+
+	Route::prefix('pagamentos')->name('payments.')->group(function() {
+
+		Route::get('', 'PaymentsController@index')->name('index');
+
+	});
+
+	Route::prefix('cadastro')->name('profile.')->group(function() {
+
+		Route::get('', 'UsersController@profile')->name('show');
+
+	});
+
+	Route::prefix('suporte')->name('support.')->group(function() {
+
+		Route::get('', 'UsersController@support')->name('show');
 
 	});
 });

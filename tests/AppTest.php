@@ -4,7 +4,7 @@ namespace Tests;
 
 use Tests\Utilities\ExceptionHandling;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\{Space, Event, Plan};
+use App\{Space, Event, Plan, Payment};
 
 abstract class AppTest extends TestCase
 {
@@ -38,6 +38,8 @@ abstract class AppTest extends TestCase
         ]);
 
         $this->plan = create(Plan::class);
+
+        $this->payment = create(Payment::class);
     }
     
     protected function signIn($user = null)

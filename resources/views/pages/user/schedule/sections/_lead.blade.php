@@ -11,3 +11,5 @@
 		@include('components.calendar.finder')
 	</div>
 @endcomponent
+
+@include('components.alerts.plan')

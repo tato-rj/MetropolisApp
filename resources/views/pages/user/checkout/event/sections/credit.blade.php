@@ -79,9 +79,22 @@
 		<input required type="text" class="form-control" name="card_holder_cpf" id="card_holder_cpf" placeholder="CPF do titular do cartão">
 	</div>
 
-{{-- 	<div class="form-group">
+	<div class="form-group">
 		<label class="control-label"><small>Endereço</small></label>
 		<div class="form-row">
+			<div class="col-6 mb-2">
+				<input required type="text" class="form-control" name="address_zip" placeholder="CEP" value="">				
+			</div>
+			<div class="col-6 mb-2 text-center">
+				<div class="alert-green h-100 zip-alert" id="zip-valid" style="display: none;">
+					<div class="d-inline-block" style="vertical-align: -webkit-baseline-middle;">CEP válido!</div>
+				</div>
+				<div class="alert-red h-100 zip-alert" id="zip-invalid" style="display: none;">
+					<div class="d-inline-block" style="vertical-align: -webkit-baseline-middle;">CEP não encontrado</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row address-fields">
 			<div class="col-6 mb-2">
 				<input required type="text" class="form-control" name="address_street" placeholder="Nome da rua" value="">
 			</div>
@@ -92,25 +105,18 @@
 				<input required type="text" class="form-control" name="address_complement" placeholder="Complemento" value="">				
 			</div>
 		</div>
-		<div class="form-row">
-			<div class="col-6 mb-2">
-				<select class="form-control" name="address_state" required>
-					<option>Estado</option>
-				</select>
-			</div>
-			<div class="col-6">
-				<select class="form-control" name="address_city" required>
-					<option>Cidade</option>
-				</select>
-			</div>
+		<div class="form-row address-fields">
 			<div class="col-6 mb-2">
 				<input required type="text" class="form-control" name="address_district" placeholder="Bairro" value="">				
 			</div>
-			<div class="col-6 mb-2">
-				<input required type="text" class="form-control" name="address_zip" placeholder="CEP" value="">				
+			<div class="col-3 mb-2">
+				<input required type="text" class="form-control" name="address_state" placeholder="Estado" value="">
+			</div>
+			<div class="col-3 mb-2">
+				<input required type="text" class="form-control" name="address_city" placeholder="Cidade" value="">				
 			</div>
 		</div>
-	</div> --}}
+	</div>
 
 	<div class="custom-control custom-checkbox mt-4">
 		<input type="checkbox" class="custom-control-input" name="remembercard" id="remembercard">

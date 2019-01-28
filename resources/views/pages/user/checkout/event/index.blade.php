@@ -54,6 +54,7 @@ $(document).ready(function(){
   $('input[name="card_holder_cpf"]').inputmask("999.999.999-99");
   $('input[name="card_number"]').inputmask("9999 9999 9999 9999");
   $('input[name="cvv"]').inputmask("999[9]");  
+  $('input[name="address_zip"]').inputmask("99999-999");  
 });
 </script>
 <script type="text/javascript">
@@ -312,56 +313,49 @@ let errors = {
       '14007': "status da transação não permite reembolso"
 };
 
-// function getStates(){
-// 	$.ajax({
-// 		type:'GET',
-// 		url:'http://api.londrinaweb.com.br/PUC/Estados/BR/0/10000',
-// 		contentType: "application/json; charset=utf-8",
-// 		dataType: "jsonp",
-// 		async:false
-// 	}).done(function(response){
-// 		estados='';
+$('input[name="address_zip"]').blur(function() {
+    let zip = $(this).val().replace(/\D/g, '');
 
-// 		$.each(response, function(e, estado){
+    if (zip != "") {
 
-// 			estados+='<option value="'+estado.UF+'">'+estado.Estado+'</option>';
+        var validateZip = /^[0-9]{8}$/;
 
-// 		});
+        if(validateZip.test(zip)) {
 
-// 		// PREENCHE OS ESTADOS BRASILEIROS
-// 		$('select[name="address_state"]').append(estados);
+            $('input[name="address_street"]').val("...");
+            // $('input[name="address_number"]').val("...");
+            $('input[name="address_district"]').val("...");
+            $('input[name="address_state"]').val("...");
+            $('input[name="address_city"]').val("...");
 
-// 		// VERIFICA A MUDANÇA NO VALOR DO CAMPO ESTADO E ATUALIZA AS CIDADES
-// 		$('select[name="address_state"]').change(function(){
-// 			getCities($(this).val());
-// 		});
+            //Consulta o webservice viacep.com.br/
+            $.getJSON("https://viacep.com.br/ws/"+ zip +"/json/?callback=?", function(data) {
 
-// 	});
-// }
+                if (!("erro" in data)) {
+                    $('input[name="address_street"]').val(data.logradouro);
+                    // $('input[name="address_number"]').val(data.complemento);
+                    $('input[name="address_district"]').val(data.bairro);
+                    $('input[name="address_state"]').val(data.uf);
+                    $('input[name="address_city"]').val(data.localidade);
 
-// function getCities(estado){
-// 	$.ajax({
-// 		type:'GET',
-// 		url:'http://api.londrinaweb.com.br/PUC/Cidades/'+estado+'/BR/0/10000',
-// 		contentType: "application/json; charset=utf-8",
-// 		dataType: "jsonp",
-// 		async:false
-// 	}).done(function(response){
-// 		cidades='<option>Cidade</option>';
-
-// 		$.each(response, function(c, cidade){
-
-// 			cidades+='<option value="'+cidade+'">'+cidade+'</option>';
-
-// 		});
-
-// 		// PREENCHE AS CIDADES DE ACORDO COM O ESTADO
-// 		$('select[name="address_city"]').html(cidades);
-
-// 	});
-// }
-
-// getStates();
+        			$('.zip-alert').hide();
+            		$('#zip-valid > div').text('CEP válido!').parent().show();
+                } else {
+                    $('.address-fields input').val('');
+        			$('.zip-alert').hide();
+            		$('#zip-invalid > div').text('CEP não encontrado').parent().show();
+                }
+            });
+        } else {
+            $('.address-fields input').val('');
+        	$('.zip-alert').hide();
+            $('#zip-invalid > div').text('Formato de CEP inválido').parent().show();
+        }
+    } else {
+        $('.address-fields input').val('');
+        $('.zip-alert').hide();
+    }
+});
 </script>
 
 @endpush

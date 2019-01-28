@@ -66,23 +66,14 @@ $(function() {
 	    	}
 	    );
     },
-    eventMouseover: function() {
-      if ($(this).css('background-color') != 'rgb(211, 211, 211)') {
-        $(this).css('background-color', '#389d94');
-      }
-    },
-    eventMouseout: function() {
-      if ($(this).css('background-color') != 'rgb(211, 211, 211)') {
-        $(this).css('background-color', '#4dc0b5');
-      }
-    },
+
     eventRender: function( event, element, view ) {
       if (event.end.isBefore(moment())) {
-        $(element).css('background-color', 'lightgrey');
-        $(element).addClass('event-past');
+        $(element).addClass('btn-grey');
       } else if (event.statusForUser != 'Confirmado') {
-        $(element).append('<div class="position-absolute text-white" style="top: 0em; right: 0.2em;"><i class="fas fa-exclamation-circle"></i></div>');
-        $(element).addClass('event-unconfirmed');
+        $(element).addClass('btn-yellow');
+      } else {
+        $(element).addClass('btn-teal');
       }
 
       if (event.plan_id === null) {

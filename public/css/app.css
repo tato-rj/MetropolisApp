@@ -19065,7 +19065,6 @@ html .ui-button.ui-state-disabled:active {
   cursor: pointer;
   border: 0;
   border-radius: 0;
-  background-color: #4dc0b5;
   -webkit-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   -webkit-transition: 0.12s;

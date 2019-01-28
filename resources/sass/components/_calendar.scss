@@ -84,9 +84,7 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
 .fc-event-container, .fc-event { margin: 0 !important; }
 
 .fc-title {
-      white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis;
+  white-space: pre-wrap;
 }
 .fc-state-default { 
   background-color: #e9605c;

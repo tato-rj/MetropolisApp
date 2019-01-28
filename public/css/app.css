@@ -19028,9 +19028,7 @@ html .ui-button.ui-state-disabled:active {
 }
 
 .fc-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: pre-wrap;
 }
 
 .fc-state-default {

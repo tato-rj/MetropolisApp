@@ -71,6 +71,6 @@ class Membership extends Metropolis
 
     public function isActive()
     {
-        return $this->status == 'ACTIVE' || ! $this->status;
+        return $this->status == 'ACTIVE';
     }
 }

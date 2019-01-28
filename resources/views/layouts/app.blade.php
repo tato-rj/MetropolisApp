@@ -132,28 +132,24 @@ $('#event-alert').on('click', function() {
   if ($alert.hasClass('open')) {
     $alert.removeClass('open');
     $alert.css({
-      'width': '2.5rem',
-      'height': '2.5rem'
+      'width': '2.85rem',
+      'height': '2.85rem'
     });
-    $alert.children().hide();
-
-    setTimeout(function() {
-      $alert.addClass('rounded-circle').removeClass('rounded');
-    }, 200);
+    $alert.find('.content').hide();
   } else {
     $alert.addClass('open');
-    $alert.removeClass('rounded-circle').addClass('rounded');
 
-    setTimeout(function() {
     $alert.css({
-      'width': 'auto',
-      'height': 'auto'
+      'width': 'auto'
     });
-
-    $alert.children().fadeIn('fast');
-    }, 220);
+    $alert.find('.content').show();
   }
 
+  $alert.find('button').on('click', function() {
+    $alert.fadeOut(function() {
+      $(this).remove();
+    });
+  })
 });
 
 </script>

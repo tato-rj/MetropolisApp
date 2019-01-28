@@ -16,7 +16,7 @@
 					</div>
 					<div class="col">
 						<input type="password" class="form-control rounded-0" name="phone" placeholder="Telefone (opcional)">
-					</div>					
+					</div>
 				</div>
 
 				<div class="form-group">

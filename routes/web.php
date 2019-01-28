@@ -51,6 +51,8 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 		Route::get('', 'UsersController@profile')->name('show');
 
+		Route::post('/{user}', 'UsersController@update')->name('update');
+
 	});
 
 	Route::prefix('suporte')->name('support.')->group(function() {

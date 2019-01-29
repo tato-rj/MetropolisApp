@@ -1,6 +1,6 @@
 <div class="col-lg-4 col-md-6 col-sm-10 col-12 mb-6">
 	<div class="mb-3 px-5">
-		<img src="http://i.pravatar.cc?img={{$imgId}}" class="rounded-circle w-100">
+		<img src="{{asset('images/team/' . $image . '.jpg')}}" class="rounded-circle w-100">
 	</div>
 	<div class="text-center mb-3">
 		<p class="mb-0"><strong>{{$name}}</strong></p>

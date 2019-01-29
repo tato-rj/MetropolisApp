@@ -9,7 +9,9 @@
 				<label class="control-label" for="card_number"><small>Número do cartão</small></label>
 				<input required type="text" maxlength="19" class="form-control" name="card_number" id="card_number" placeholder="Número do cartão" 
 					style="background: url({{asset('images/icons/credit.png')}}) no-repeat 0rem .3rem; background-size: 3.85rem; padding-left: 3.75rem;">
-				<label class="text-danger m-0" id="card-invalid" style="display: none;"><small>O número do cartão é inválido</small></label>
+				<label class="text-success m-0 card-validation" id="card-valid" style="display: none;"><small><i class="fas fa-check mr-1"></i>Cartão validado com sucesso</small></label>
+				<label class="text-muted m-0 card-validation" id="card-validating" style="display: none;"><small><i>Validando o número do cartão</i></small></label>
+				<label class="text-danger m-0 card-validation" id="card-invalid" style="display: none;"><small>O número do cartão é inválido</small></label>
 			</div>
 		</div>
 		<div class="col-4">

@@ -86,8 +86,6 @@ $(document).ready(function(){
 				$('#form-credit .cards').append('<div class="m-1"><img src="https://stc.pagseguro.uol.com.br/'+obj.images.MEDIUM.path+'"></div>');
 			});
 
-			// $('#deposit').append('<div><img src="https://stc.pagseguro.uol.com.br/'+data.paymentMethods.BOLETO.options.BOLETO.images.SMALL.path+'">'+data.paymentMethods.BOLETO.options.BOLETO.displayName+'</div>');
-
 			$.each(data.paymentMethods.ONLINE_DEBIT.options, function(i, obj) {
 				$('#form-debit .cards').append('<div class="m-1"><img src="https://stc.pagseguro.uol.com.br/'+obj.images.MEDIUM.path+'"></div>');
 			});
@@ -99,31 +97,35 @@ $(document).ready(function(){
 			console.log(data);
 		}
 	});
-
-	// PREPARE STATE NAMES
-
-
 });
 
 function getCardFlag(input, cardNumber, form)
 {
+	showValidationMessage(form, 'validating');
+	
 	PagSeguroDirectPayment.getBrand({
 		cardBin: cardNumber,
 		success: function(response) {
 			let icon = response.brand.name;
 			input.css('background-image', 'url(https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/68x30/'+icon+'.png)');
 			form.find('input[name="card_brand"]').val(icon);
-			form.find('#card-invalid').hide();
+			showValidationMessage(form, 'valid');
 		},
 		error: function() {
 			input.css('background-image', 'url(http://metropolis.test/images/icons/credit.png)');
 			form.find('input[name="card_brand"]').val('');
-			form.find('#card-invalid').show();
+			showValidationMessage(form, 'invalid');
 		},
 		complete: function(response) {
 			console.log(response);
 		}
 	});
+}
+
+function showValidationMessage(form, status)
+{
+	form.find('.card-validation').hide();
+	form.find('#card-' + status).show();
 }
 
 $('input[name="card_number"]').on('blur', function() {

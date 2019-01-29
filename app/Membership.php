@@ -56,7 +56,7 @@ class Membership extends Metropolis
             'plan_id' => $this->plan->id,
             'transaction_code' => $xml->code,
             'reference' => $this->reference,
-            'fee' => $this->plan->fee,
+            'fee' => $this->plan->fee/100,
             'starts_at' => $starts_at,
             'ends_at' => $this->next_payment_at->subDay(),
             'verified_at' => now(),

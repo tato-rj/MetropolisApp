@@ -3,7 +3,7 @@
 	@if(auth()->user()->membership->isActive())
 		<i class="fas fa-check-circle mr-2"></i>
 		<strong>{{auth()->user()->membership->plan->displayName}}</strong> | Próxima cobrança será no dia {{toFormattedDateStringPt(auth()->user()->membership->next_payment_at)}}
-	@elseif(! auth()->user()->membership->status)
+	@elseif(is_null(auth()->user()->membership->status))
 		<i class="fas fa-check-circle mr-2"></i>
 		<strong>{{auth()->user()->membership->plan->displayName}}</strong> | Aguardando confirmação
 	@else

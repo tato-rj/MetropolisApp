@@ -1,6 +1,6 @@
 @subscribed
 <div class="alert alert-{{auth()->user()->membership->plan->color}} border-0 text-center">
-	@if(auth()->user()->membership->isActive())
+	@if(auth()->user()->membership->status == 'ACTIVE')
 		<i class="fas fa-check-circle mr-2"></i>
 		<strong>{{auth()->user()->membership->plan->displayName}}</strong> | Próxima cobrança será no dia {{toFormattedDateStringPt(auth()->user()->membership->next_payment_at)}}
 	@else

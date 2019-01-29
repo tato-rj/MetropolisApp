@@ -1,6 +1,9 @@
 <section class="mb-7 mt-6 container">
   <div class="row">
   	<div class="col-default">
+      @if(auth()->user()->payments->isEmpty())
+      <div class="py-6 text-muted">Você ainda não realizou nenhum pagamento</div>
+      @else
   		<div class="table-responsive-lg">
   			<table class="table table-hover table-bordered">
   				<thead>
@@ -23,6 +26,7 @@
   				</tbody>
   			</table>
   		</div>
+      @endif
   	</div>
   </div>
 </section>

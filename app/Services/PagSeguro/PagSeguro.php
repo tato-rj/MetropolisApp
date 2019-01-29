@@ -76,6 +76,16 @@ class PagSeguro
         return now()->timestamp . $user->id; 
     }
 
+    public function errorMessage(\Exception $error)
+    {
+        $message = '<strong>Mensagem do PagSeguro</strong> | ';
+
+        if ($error->getCode() == 500)
+            return $message . 'O ambiente sandbox está indisponível nesse momento';
+
+        return $message . ucfirst(simplexml_load_string($error->getMessage())->error->message);
+    }
+
 	public function __get($property) {
 		if (property_exists($this, $property)) {
 			return $this->$property;

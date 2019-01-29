@@ -54,11 +54,8 @@ class CheckoutEvent implements Checkout
         
         try {
             return $creditCard->register($this->pagseguro->credentials);
-        } catch (\Exception $e) {
-            if ($e->getCode() == 500)
-                return null;
-            
-            dd($e);
+        } catch (\Exception $error) {
+            return $error;
         }
 	}
 

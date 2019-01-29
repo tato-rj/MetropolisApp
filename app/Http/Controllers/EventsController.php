@@ -79,8 +79,8 @@ class EventsController extends Controller
 
         $status = $pagseguro->event($form->user, $request, $price)->purchase($reference);
         
-        if (! $status)
-            return redirect()->back()->with('error', 'O ambiente sandbox não está disponível nesse momento.');
+        if ($status instanceof \Exception)
+            return redirect()->back()->with('error', $pagseguro->errorMessage($status));
 
         $event = $form->user->schedule($form, $reference);
 

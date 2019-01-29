@@ -2,7 +2,7 @@
   <div class="row">
   	<div class="col-default">
       @if(auth()->user()->payments->isEmpty())
-      <div class="py-6 text-muted">Você ainda não realizou nenhum pagamento</div>
+      <div class="py-4 text-muted text-center lead">Você ainda não realizou nenhum pagamento</div>
       @else
   		<div class="table-responsive-lg">
   			<table class="table table-hover table-bordered">

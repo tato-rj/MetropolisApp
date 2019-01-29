@@ -6,7 +6,7 @@
 	@elseif(! auth()->user()->membership->status)
 		<i class="fas fa-check-circle mr-2"></i>
 		<strong>{{auth()->user()->membership->plan->displayName}}</strong> | Aguardando confirmação
-	@endif
+	@else
 	<i class="fas fa-exclamation-triangle"></i>
 		<strong>{{auth()->user()->membership->plan->displayName}}</strong> | Esse plano foi cancelado e <u>não se renovará</u>
 	@endif

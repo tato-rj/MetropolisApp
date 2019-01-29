@@ -8,10 +8,11 @@
 				{{csrf_field()}}
 				<div class="form-group">
 					<select class="form-control rounded-0">
-						<option>Tópico</option>
+						<option selected disabled>Tópico</option>
 						<option>Agenda</option>
 						<option>Pagamentos</option>
 						<option>Eventos</option>
+						<option>Software</option>
 						<option>Outro</option>
 					</select>
 				</div>

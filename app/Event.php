@@ -76,6 +76,9 @@ class Event extends Metropolis implements Product
 
     public function getNameAttribute()
     {
+        if ($this->plan()->exists())
+            return $this->plan->displayName;
+
         return $this->space->name;
     }
 

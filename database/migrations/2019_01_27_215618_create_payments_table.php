@@ -18,8 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('product_id');
             $table->string('product_type');
-            $table->string('code');
-            $table->string('status');
+            $table->string('transaction_code');
             $table->timestamps();
         });
     }

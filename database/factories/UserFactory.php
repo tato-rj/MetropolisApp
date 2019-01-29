@@ -26,6 +26,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 $factory->define(App\Event::class, function(Faker $faker) {
 	return [
         'reference' => '1',
+        'transaction_code' => $faker->uuid,
         'space_id' => function() {
             return create('App\Space')->id;
         },
@@ -80,8 +81,7 @@ $factory->define(App\Payment::class, function(Faker $faker) {
         'product_type' => function() {
             return get_class(create('App\Event'));
         },
-        'code' => $faker->uuid,
-        'status' => 'PAID'
+        'transaction_code' => $faker->uuid
     ];
 });
 

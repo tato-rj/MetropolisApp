@@ -32,6 +32,20 @@ class RecurringPaymentTest extends AppTest
 	}
 
 	/** @test */
+	public function a_payment_is_recorded_upon_every_first_notification()
+	{
+		$request = $this->fakeEvent('recurring', 'em analise', 'newReference', 'newCode');
+
+		$this->assertEmpty($request['event']->creator->payments);
+
+		$this->post(route('pagseguro.event.notification', [
+			'notificationType' => 'transaction',
+			'xml' => $request['notification']]));
+
+		$this->assertNotEmpty($request['event']->creator->fresh()->payments);
+	}
+
+	/** @test */
 	public function a_renewed_event_is_scheduled_for_the_day_after_its_last_event_ends()
 	{
 		$request = $this->fakeEvent('recurring', 'paga');

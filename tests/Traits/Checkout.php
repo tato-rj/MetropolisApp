@@ -24,6 +24,7 @@ trait Checkout
 		$request = $sandbox->notification($type)->event($event);
 
 		$event = create('App\Event', [
+			'transaction_code' => null,
 			'creator_id' => $membership->user_id,
 			'plan_id' => $membership->plan->id,
 			'reference' => $request->key('reference', $reference, $code),

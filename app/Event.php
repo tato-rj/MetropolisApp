@@ -3,8 +3,9 @@
 namespace App;
 
 use App\Traits\PagSeguro;
+use App\Contracts\Product;
 
-class Event extends Metropolis
+class Event extends Metropolis implements Product
 {
     use PagSeguro;
 
@@ -73,6 +74,11 @@ class Event extends Metropolis
             return '6 meses';
     }
 
+    public function getNameAttribute()
+    {
+        return $this->space->name;
+    }
+
     public function getEmailsAttribute($emails)
     {
         return unserialize($emails);
@@ -81,5 +87,10 @@ class Event extends Metropolis
     public function scopeByReference($query, $reference)
     {
         return $query->where('reference', $reference);
+    }
+
+    public function scopeByCode($query, $code)
+    {
+        return $query->where('transaction_code', $code);
     }
 }

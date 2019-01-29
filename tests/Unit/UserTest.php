@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\AppTest;
-use App\{User, Event, Plan, Membership, Bonus};
+use App\{User, Event, Plan, Membership, Bonus, Payment};
 
 class UserTest extends AppTest
 {
@@ -23,6 +23,16 @@ class UserTest extends AppTest
 		auth()->user()->events()->save($this->currentEvent);
 		
 		$this->assertInstanceOf(Event::class, auth()->user()->events()->first()); 
+	}
+
+	/** @test */
+	public function it_has_many_payments()
+	{
+		$this->signIn();
+
+		auth()->user()->payments()->save($this->payment);
+		
+		$this->assertInstanceOf(Payment::class, auth()->user()->payments()->first());
 	}
 
 	/** @test */

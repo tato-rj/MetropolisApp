@@ -10,7 +10,7 @@ class Event extends Metropolis implements Product
     use PagSeguro;
 
 	protected $dates = ['starts_at', 'ends_at', 'verified_at'];
-    protected $appends = ['title', 'start', 'end', 'duration', 'status', 'statusForUser', 'statusColor'];
+    protected $appends = ['title', 'start', 'end', 'duration', 'status', 'statusForUser', 'statusColor', 'displayName'];
 
 	public function creator()
 	{

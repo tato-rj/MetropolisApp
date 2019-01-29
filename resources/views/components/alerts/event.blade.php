@@ -3,7 +3,7 @@
 	<div class="text-white d-flex align-items-center justify-content-center">
 		<i class="fas fa-stopwatch"></i>
 		<div class="content ml-2" style="display: none;">
-			Sessão ativa na {{auth()->user()->currentEventCountdown['name']}}! Ela se encerrará em <span class="font-weight-bold" id="countdown"></span> h
+			Sessão ativa na {{auth()->user()->currentEventCountdown['name']}}! Ela se encerrará em <span class="font-weight-bold" id="countdown"></span>
 		</div>
 	  <button type="button" class="close ml-2 text-white content" style="display: none;" data-dismiss="alert" aria-label="Close">
 	    <span aria-hidden="true" class="align-text-top">&times;</span>

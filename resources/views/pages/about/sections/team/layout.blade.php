@@ -26,13 +26,13 @@
 		@slot('icons')
 			<a href="" class="p-2 link-inherit"><i class="far fa-envelope"></i></a>
 			<a href="" class="p-2 link-inherit"><i class="fab fa-linkedin-in"></i></a>
-			<a href="" class="p-2 link-inherit"><i class="fab fa-github"></i></a>
+			<a href="" class="p-2 link-inherit"><i class="fab fa-facebook-f"></i></a>
 		@endslot
 		@endcomponent
 
 		@component('pages.about.sections.team.member', [
 			'image' => 'paulo', 'name' => 'Paulo Henrique Paiva', 'position' => 'financeiro',
-			'fields' => ['ACESSO A CAPITAL', 'FINANCIAMENTOS', 'AQUISIÇÕES', 'REGISTRO DE EMPRESAS', 'CONTRATO SOCIAL']])
+			'fields' => ['ACESSO A CAPITAL', 'FINANCIAMENTOS', 'AQUISIÇÕES', 'REGISTRO DE EMPRESAS']])
 		@slot('icons')
 			<a href="" class="p-2 link-inherit"><i class="far fa-envelope"></i></a>
 			<a href="" class="p-2 link-inherit"><i class="fab fa-linkedin-in"></i></a>
@@ -45,6 +45,7 @@
 			'fields' => ['DESENVOLVEDOR FULLSTACK', 'BACKEND', 'IDENTIDADE VISUAL', 'BANCO DE DADOS', 'ASSISTÊNCIA TÉCNICA']])
 		@slot('icons')
 			<a href="" class="p-2 link-inherit"><i class="far fa-envelope"></i></a>
+			<a href="" class="p-2 link-inherit"><i class="fab fa-github"></i></a>
 			<a href="" class="p-2 link-inherit"><i class="fab fa-facebook-f"></i></a>
 		@endslot
 		@endcomponent

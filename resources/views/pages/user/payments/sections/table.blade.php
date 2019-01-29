@@ -16,7 +16,7 @@
   				</thead>
   				<tbody>
   					@foreach(auth()->user()->payments as $payment)
-  					<tr class="cursor-pointer" title="Clique para ver mais detalhes">
+  					<tr class="cursor-pointer" title="Clique para ver mais detalhes" data-toggle="modal" data-target="#payment-modal">
   						<td style="width:16.66%">{{$payment->created_at->format('d/m/Y')}}</td>
   						<td style="width:50%">{{$payment->product->name}}</td>
   						<td style="width:16.66%">{{feeToString($payment->product->fee)}}</td>

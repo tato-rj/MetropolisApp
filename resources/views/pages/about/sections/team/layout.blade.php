@@ -22,7 +22,7 @@
 
 		@component('pages.about.sections.team.member', [
 			'image' => 'marco', 'name' => 'Marco Fernandes', 'position' => 'technologia',
-			'fields' => ['ADMNISTRADOR DE REDE', 'PROGRAMAÇÃO', 'AQUISIÇÕES', 'SUPORTE TÉCNICO']])
+			'fields' => ['PROGRAMAÇÃO', 'ADMINISTRADOR DE REDE', 'AQUISIÇÕES', 'ASSISTÊNCIA TÉCNICA']])
 		@slot('icons')
 			<a href="" class="p-2 link-inherit"><i class="far fa-envelope"></i></a>
 			<a href="" class="p-2 link-inherit"><i class="fab fa-linkedin-in"></i></a>
@@ -42,7 +42,7 @@
 
 		@component('pages.about.sections.team.member', [
 			'image' => 'arthur', 'name' => 'Arthur Villar', 'position' => 'technologia',
-			'fields' => ['DESENVOLVEDOR FULLSTACK', 'BACKEND', 'IDENTIDADE VISUAL', 'BANCO DE DADOS', 'ASSISTÊNCIA TÉCNICA']])
+			'fields' => ['DESENVOLVEDOR FULLSTACK', 'BACKEND', 'IDENTIDADE VISUAL', 'BANCO DE DADOS', 'SUPORTE TÉCNICO']])
 		@slot('icons')
 			<a href="" class="p-2 link-inherit"><i class="far fa-envelope"></i></a>
 			<a href="" class="p-2 link-inherit"><i class="fab fa-github"></i></a>

@@ -2,30 +2,30 @@
 
 namespace App;
 
-use App\Contracts\Product;
+use App\Contracts\Reservation;
 
 class Payment extends Metropolis
 {
-	protected $with = ['product'];
+	protected $with = ['reservation'];
 
     public function user()
     {
     	return $this->belongsTo(User::class);
     }
 
-    public function product()
+    public function reservation()
     {
     	return $this->morphTo();
     }
 
-    public function scopeRecord($query, Product $product = null)
+    public function scopeRecord($query, Reservation $reservation = null)
     {
-        if ($product && ! $this->byCode($product->transaction_code)->exists()) {
+        if ($reservation && ! $this->byCode($reservation->transaction_code)->exists()) {
         	return $this->create([
-        		'user_id' => $product->creator_id,
-        		'product_id' => $product->id,
-        		'product_type' => get_class($product),
-        		'transaction_code' => $product->transaction_code
+        		'user_id' => $reservation->user_id,
+        		'reservation_id' => $reservation->id,
+        		'reservation_type' => get_class($reservation),
+        		'transaction_code' => $reservation->transaction_code
         	]);
         }
     }

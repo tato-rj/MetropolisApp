@@ -29,7 +29,7 @@ class CreateEventForm extends FormRequest
 
     public function setFields()
     {
-        $this->user = User::find($this->creator_id);
+        $this->user = User::find($this->user_id);
         $this->space = Space::find($this->space_id);
 
         $this->starts_at = Carbon::parse($this->date)->setTime($this->time, 0, 0);
@@ -44,7 +44,7 @@ class CreateEventForm extends FormRequest
     public function rules()
     {
         return [
-            'creator_id' => 'required',
+            'user_id' => 'required',
             'space_id' => 'required|exists:spaces,id',
             'participants' => 'required|integer',
             'duration' => 'required|integer',

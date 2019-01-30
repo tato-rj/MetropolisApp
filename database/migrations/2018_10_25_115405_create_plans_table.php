@@ -17,7 +17,6 @@ class CreatePlansTable extends Migration
             $table->increments('id');
             $table->string('type');
             $table->string('name');
-            $table->string('code');
             $table->string('color')->default('dark');
             $table->unsignedInteger('fee');
             $table->unsignedTinyInteger('bonus_limit');

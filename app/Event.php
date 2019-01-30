@@ -3,9 +3,9 @@
 namespace App;
 
 use App\Traits\PagSeguro;
-use App\Contracts\Product;
+use App\Contracts\Reservation;
 
-class Event extends Metropolis implements Product
+class Event extends Metropolis implements Reservation
 {
     use PagSeguro;
 
@@ -14,7 +14,7 @@ class Event extends Metropolis implements Product
 
 	public function creator()
 	{
-		return $this->belongsTo(User::class);
+		return $this->belongsTo(User::class, 'user_id');
 	}
 
     public function space()
@@ -85,15 +85,5 @@ class Event extends Metropolis implements Product
     public function getEmailsAttribute($emails)
     {
         return unserialize($emails);
-    }
-
-    public function scopeByReference($query, $reference)
-    {
-        return $query->where('reference', $reference);
-    }
-
-    public function scopeByCode($query, $code)
-    {
-        return $query->where('transaction_code', $code);
     }
 }

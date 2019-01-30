@@ -15,7 +15,7 @@ class EventTest extends AppTest
 	}
 
 	/** @test */
-	public function it_belongs_to_a_creator()
+	public function it_belongs_to_a_user()
 	{
 		$this->assertInstanceOf(User::class, $this->currentEvent->creator); 
 	}

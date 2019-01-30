@@ -4,7 +4,7 @@ namespace Tests;
 
 use Tests\Utilities\ExceptionHandling;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\{Space, Event, Plan, Payment};
+use App\{Space, Event, Plan, Payment, Workshop};
 
 abstract class AppTest extends TestCase
 {
@@ -37,6 +37,8 @@ abstract class AppTest extends TestCase
             'ends_at' => now()->copy()->addHours(8),
         ]);
 
+        $this->workshop = create(Workshop::class);
+
         $this->plan = create(Plan::class);
 
         $this->payment = create(Payment::class);
@@ -53,7 +55,7 @@ abstract class AppTest extends TestCase
         $user = $user ?? auth()->user();
 
         return $this->post(route('client.events.purchase'), [
-            'creator_id' => $user->id,
+            'user_id' => $user->id,
             'space_id' => $this->space->id,
             'participants' => 1,
             'guests' => null,

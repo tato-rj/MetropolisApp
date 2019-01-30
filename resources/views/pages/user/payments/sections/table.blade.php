@@ -18,9 +18,9 @@
   					@foreach(auth()->user()->payments as $payment)
   					<tr class="cursor-pointer" title="Clique para ver mais detalhes" data-toggle="modal" data-target="#payment-modal">
   						<td style="width:16.66%">{{$payment->created_at->format('d/m/Y')}}</td>
-  						<td style="width:50%">{{$payment->product->name}}</td>
-  						<td style="width:16.66%">{{feeToString($payment->product->fee)}}</td>
-  						<td style="width:16.66%" class="text-{{$payment->product->statusColor}}">{{$payment->product->status}}</td>
+  						<td style="width:50%">{{$payment->reservation->name}}</td>
+  						<td style="width:16.66%">{{feeToString($payment->reservation->fee)}}</td>
+  						<td style="width:16.66%" class="text-{{$payment->reservation->statusColor}}">{{$payment->reservation->status}}</td>
   					</tr>
   					@endforeach
   				</tbody>

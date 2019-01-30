@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\AppTest;
-use App\Contracts\Product;
+use App\Contracts\Reservation;
 use App\{User, Payment, Event};
 
 class PaymentTest extends AppTest
@@ -15,9 +15,9 @@ class PaymentTest extends AppTest
 	}
 
 	/** @test */
-	public function it_has_a_product()
+	public function it_has_a_reservation()
 	{
-		$this->assertInstanceOf(Product::class, $this->payment->product);
+		$this->assertInstanceOf(Reservation::class, $this->payment->reservation);
 	}
 
 	/** @test */
@@ -28,8 +28,8 @@ class PaymentTest extends AppTest
 		Payment::record($event);
 
 		$this->assertDatabaseHas('payments', [
-			'product_id' => $event->id,
-			'product_type' => get_class($event)
+			'reservation_id' => $event->id,
+			'reservation_type' => get_class($event)
 		]);
 	}
 }

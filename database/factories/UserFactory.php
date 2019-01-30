@@ -30,7 +30,7 @@ $factory->define(App\Event::class, function(Faker $faker) {
         'space_id' => function() {
             return create('App\Space')->id;
         },
-        'creator_id' => function() {
+        'user_id' => function() {
             return create('App\User')->id;
         },
         'fee' => 100,
@@ -45,7 +45,6 @@ $factory->define(App\Plan::class, function(Faker $faker) {
     return [
         'type' => $faker->word,
         'name' => $faker->word,
-        'code' => $faker->word,
         'fee' => $faker->numberBetween(100, 1000),
         'bonus_spaces' => function() {
             return create('App\Space', ['is_shared' => false])->id;
@@ -75,10 +74,10 @@ $factory->define(App\Payment::class, function(Faker $faker) {
         'user_id' => function() {
             return create('App\User')->id;
         },
-        'product_id' => function() {
+        'reservation_id' => function() {
             return create('App\Event')->id;
         },
-        'product_type' => function() {
+        'reservation_type' => function() {
             return get_class(create('App\Event'));
         },
         'transaction_code' => $faker->uuid
@@ -93,6 +92,37 @@ $factory->define(App\Space::class, function(Faker $faker) {
         'capacity' => $faker->randomDigitNotNull,
         'fee' => $faker->numberBetween(100,1000),
         'is_shared' => $faker->boolean(50)
+    ];
+});
+
+$factory->define(App\Membership::class, function(Faker $faker) {
+    $plan = create('App\Plan', ['name' => 'semanal']);
+
+    return [
+        'user_id' => function() {
+            return create('App\User')->id;
+        },
+        'plan_id' => function() use ($plan) {
+            return $plan->id;
+        },
+        'reference' => $faker->word,
+        'next_payment_at' => $plan->renewsAt()
+    ];
+});
+
+$factory->define(App\Workshop::class, function(Faker $faker) {
+    $date = carbon($faker->dateTimeBetween('-2 weeks', 'now')->format('c'));
+
+    return [
+        'slug' => str_slug($faker->sentence),
+        'name' => $faker->sentence,
+        'description' => $faker->paragraph,
+        'reference' => $faker->uuid,
+        'fee' => $faker->numberBetween(20,100),
+        'cover_image' => $faker->imageUrl(),
+        'capacity' => $faker->numberBetween(12,30),
+        'starts_at' => $date,
+        'ends_at' => $date->addHour()
     ];
 });
 

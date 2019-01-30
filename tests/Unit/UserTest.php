@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\AppTest;
-use App\{User, Event, Plan, Membership, Bonus, Payment};
+use App\{User, Event, Plan, Membership, Bonus, Payment, Workshop};
 
 class UserTest extends AppTest
 {
@@ -23,6 +23,38 @@ class UserTest extends AppTest
 		auth()->user()->events()->save($this->currentEvent);
 		
 		$this->assertInstanceOf(Event::class, auth()->user()->events()->first()); 
+	}
+
+	/** @test */
+	public function it_has_many_workshops()
+	{
+		$this->signIn();
+
+		auth()->user()->workshops()->save($this->workshop);
+
+		$this->assertInstanceOf(Workshop::class, auth()->user()->workshops()->first());		 
+	}
+
+	/** @test */
+	public function it_knows_how_to_sign_up_to_workshops()
+	{
+		$this->signIn();
+
+		auth()->user()->signup($this->workshop);
+
+		$this->assertInstanceOf(Workshop::class, auth()->user()->workshops()->first());
+	}
+
+	/** @test */
+	public function it_cannot_signup_twice_to_the_same_workshop()
+	{
+		$this->signIn();
+
+		auth()->user()->signup($this->workshop);
+
+		$this->expectException('Illuminate\Database\QueryException');
+
+		auth()->user()->signup($this->workshop);
 	}
 
 	/** @test */
@@ -129,7 +161,7 @@ class UserTest extends AppTest
 		$this->assertEquals(auth()->user()->bonusesLeft($this->space), $plan->bonus_limit);
 
         $this->post(route('client.events.purchase'), [
-            'creator_id' => auth()->user()->id,
+            'user_id' => auth()->user()->id,
             'space_id' => $this->space->id,
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],

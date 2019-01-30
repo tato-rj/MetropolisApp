@@ -21,6 +21,16 @@ trait PagSeguro
 	protected $waitingStatusArray = [0, 1, 2, 5];
 	protected $cancelledStatusArray = [6, 7, 9];
 
+    public function scopeByReference($query, $reference)
+    {
+        return $query->where('reference', $reference);
+    }
+
+    public function scopeByCode($query, $code)
+    {
+        return $query->where('transaction_code', $code);
+    }
+
     public function getStatusAttribute()
     {
         if (array_key_exists($this->status_id, $this->statusArray))

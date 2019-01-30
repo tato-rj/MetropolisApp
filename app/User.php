@@ -31,7 +31,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function events()
     {
-        return $this->hasMany(Event::class, 'creator_id');
+        return $this->hasMany(Event::class);
+    }
+
+    public function workshops()
+    {
+        return $this->belongsToMany(Workshop::class);
     }
 
     public function payments()
@@ -41,7 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function bonuses()
     {
-        return $this->hasMany(Bonus::class);//->valid($this->membership);
+        return $this->hasMany(Bonus::class);
     }
 
     public function membership()
@@ -75,6 +80,14 @@ class User extends Authenticatable implements MustVerifyEmail
         $form->user->useBonus($event, $form->duration);
 
         return $event;
+    }
+
+    public function signup(Workshop $workshop)
+    {
+        return $this->workshops()->attach([
+            'workshop_id' => $workshop->id,
+            'reference' => $workshop->reference
+        ]);
     }
 
     public function getPastEventsAttribute()

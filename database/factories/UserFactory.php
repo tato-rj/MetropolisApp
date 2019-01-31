@@ -111,11 +111,12 @@ $factory->define(App\Membership::class, function(Faker $faker) {
 });
 
 $factory->define(App\Workshop::class, function(Faker $faker) {
-    $date = carbon($faker->dateTimeBetween('-2 weeks', 'now')->format('c'));
+    $date = carbon($faker->dateTimeBetween('+1 dia', '+2 weeks')->format('c'));
 
     return [
         'slug' => str_slug($faker->sentence),
         'name' => $faker->sentence,
+        'headline' => $faker->sentence,
         'description' => $faker->paragraph,
         'reference' => $faker->uuid,
         'fee' => $faker->numberBetween(20,100),

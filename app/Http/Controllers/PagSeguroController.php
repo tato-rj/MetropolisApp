@@ -71,6 +71,17 @@ class PagSeguroController extends Controller
         }
     }
 
+    public function single($xml)
+    {
+        $model = (new PagSeguro)->referenceToModel($xml->reference);
+
+        $event = $model::where('reference', $xml->reference)->first();
+
+        $event->setStatus($xml->status)->setTransactionCode($xml->code);
+
+        return $event;
+    }
+
     public function recurring($xml)
     {
         $newEvent = Event::byReference($xml->reference)->whereNull('transaction_code');
@@ -89,15 +100,6 @@ class PagSeguroController extends Controller
         }
 
         return Event::byCode($xml->code)->first();
-    }
-
-    public function single($xml)
-    {
-        $event = Event::where('reference', $xml->reference)->first();
-
-        $event->setStatus($xml->status)->setTransactionCode($xml->code);
-
-        return $event;
     }
 
     public function cleanCode($code)

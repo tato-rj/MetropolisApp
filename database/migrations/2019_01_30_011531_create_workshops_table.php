@@ -17,17 +17,18 @@ class CreateWorkshopsTable extends Migration
             $table->increments('id');
             $table->string('slug');
             $table->string('name');
+            $table->string('headline');
             $table->text('description');
             $table->string('fee');
             $table->string('reference');
             $table->string('cover_image')->nullable();
             $table->unsignedInteger('capacity')->nullable();
-            $table->timestamp('starts_at');
-            $table->timestamp('ends_at');
+            $table->timestamp('starts_at')->nullable();
+            $table->timestamp('ends_at')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('user_workshop', function (Blueprint $table) {
+        Schema::create('user_workshops', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('workshop_id');

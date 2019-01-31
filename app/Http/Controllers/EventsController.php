@@ -75,7 +75,7 @@ class EventsController extends Controller
 
         $price = $form->space->priceFor($request->participants, $request->duration, $form->user->bonusesLeft($form->space));
 
-        $reference = $pagseguro->generateReference($form->user);
+        $reference = $pagseguro->generateReference($prefix = 'E', $form->user);
 
         $status = $pagseguro->event($form->user, $request, $price)->purchase($reference);
         

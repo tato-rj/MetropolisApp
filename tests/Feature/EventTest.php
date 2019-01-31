@@ -35,7 +35,7 @@ class EventTest extends AppTest
 	}
 
 	/** @test */
-	public function the_creator_of_an_always_receives_a_confirmation_email()
+	public function the_creator_of_an_event_always_receives_a_confirmation_email()
 	{
 		Mail::fake();
 

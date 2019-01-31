@@ -26,16 +26,6 @@ class UserTest extends AppTest
 	}
 
 	/** @test */
-	public function it_has_many_workshops()
-	{
-		$this->signIn();
-
-		auth()->user()->workshops()->save($this->workshop);
-
-		$this->assertInstanceOf(Workshop::class, auth()->user()->workshops()->first());		 
-	}
-
-	/** @test */
 	public function it_knows_how_to_sign_up_to_workshops()
 	{
 		$this->signIn();
@@ -182,10 +172,8 @@ class UserTest extends AppTest
 
 		$this->subscribeToNewPlan($plan);
 
-		$this->createNewEvent();
+		auth()->user()->useBonus($this->futureEvent, $duration = 1);
 
-		auth()->user()->useBonus(auth()->user()->events->last(), $duration = 1);
-
-		$this->assertCount(1, auth()->user()->bonuses);
+		$this->assertCount(1, auth()->user()->fresh()->bonuses);
 	}
 }

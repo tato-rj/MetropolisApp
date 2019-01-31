@@ -39,9 +39,9 @@ class BonusTest extends AppTest
     /** @test */
     public function the_memberships_number_of_available_bonuses_reset_when_the_membership_renews()
     {
-        $request = $this->fakeEvent('recurring', 'paga');
+        $request = $this->fakeEvent('recurring', Event::class, 'paga');
         
-        $event = Event::byReference('TEST-REFERENCE')->first();
+        $event = Event::byReference('E-REFERENCE')->first();
         
         $user = $event->creator;
 

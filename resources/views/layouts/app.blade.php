@@ -51,7 +51,7 @@
     {{-- TEMPORARY PASSWORD FOR DEVELOPMENT PHASE --}}
     @if(session()->has('gate'))
     <div id="app">
-        @include('layouts.navbar.layout')
+        @include('layouts.navbar.bar')
         <main>
             @yield('content')
         </main>

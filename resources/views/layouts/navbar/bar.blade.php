@@ -10,7 +10,7 @@
         @include('layouts.navbar.link', ['title' => 'Quem Somos', 'url' => '/quem-somos'])
         @include('layouts.navbar.link', ['title' => 'Planos', 'url' => '/planos'])
         @include('layouts.navbar.link', ['title' => 'Consultoria', 'url' => '/'])
-        @include('layouts.navbar.link', ['title' => 'Workshops', 'url' => '/'])
+        @include('layouts.navbar.link', ['title' => 'Workshops', 'url' => route('workshops.index')])
         @include('layouts.navbar.link', ['title' => 'Contato', 'url' => '/contato'])
 
     </ul>

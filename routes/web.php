@@ -78,6 +78,16 @@ Route::get('/planos', function () {
     return view('pages.plans.show.index');
 });
 
+Route::prefix('workshop')->name('workshops.')->group(function() {
+
+	Route::get('', 'WorkshopsController@index')->name('index');
+
+	Route::get('/{workshop}', 'WorkshopsController@show')->name('show');
+
+	Route::post('/{workshop}', 'WorkshopsController@signup')->middleware(['auth', 'verified'])->name('signup');
+
+});
+
 Route::prefix('eventos')->name('events.')->group(function() {
 	Route::get('/buscar', 'EventsController@search')->name('search');
 });

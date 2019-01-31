@@ -1,7 +1,6 @@
 <form id="form-credit" method="POST" action="{{route('client.events.purchase')}}">
 	@csrf
 	{{-- EVENT --}}
-	<input type="hidden" name="creator_id" value="{{auth()->check() ? auth()->user()->id : null}}">
 	<input type="hidden" name="space_id" value="{{$space->id}}">
 	<input type="hidden" name="description" value="{{$space->name}}">
 	<input type="hidden" name="date" value="{{request()->date}}">

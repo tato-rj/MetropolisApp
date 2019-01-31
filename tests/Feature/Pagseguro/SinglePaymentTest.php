@@ -5,7 +5,7 @@ namespace Tests\Feature\PagSeguro;
 use Tests\AppTest;
 use Tests\PagSeguro\Sandbox;
 use Tests\Traits\Checkout;
-use App\Event;
+use App\{Event, Workshop, UserWorkshop};
 
 class SimplePaymentTest extends AppTest
 {
@@ -14,30 +14,30 @@ class SimplePaymentTest extends AppTest
 	/** @test */
 	public function an_event_updates_its_status_via_notifications()
 	{
-		$request = $this->fakeEvent('single', 'em analise', 'newReference', 'newCode');
+		$request = $this->fakeEvent('single', Event::class, 'em analise', 'E-REFERENCE', 'newCode');
 
-		$this->assertNull($request['event']->transaction_code);
+		$this->assertNull(Event::byReference('E-REFERENCE')->first()->transaction_code);
 
 		$this->post(route('pagseguro.event.notification', [
 			'notificationType' => 'transaction',
 			'xml' => $request['notification']]));
 
-		$this->assertNotNull($request['event']->fresh()->transaction_code);
-		$this->assertEquals('Em análise', $request['event']->fresh()->status);
+		$this->assertNotNull(Event::byReference('E-REFERENCE')->first()->transaction_code);
+		$this->assertEquals('Em análise', Event::byReference('E-REFERENCE')->first()->status);
 
 		$notification = $this->fakeNotification('single', 'paga');
 
 		$this->post(route('pagseguro.event.notification', [
 			'notificationType' => 'transaction',
-			'xml' => $notification->xml('newReference', 'newCode')]));
+			'xml' => $notification->xml('E-REFERENCE', 'newCode')]));
 
-		$this->assertEquals('Paga', $request['event']->fresh()->status);
+		$this->assertEquals('Paga', Event::byReference('E-REFERENCE')->first()->status);
 	}
 
 	/** @test */
-	public function a_payment_is_recorded_upon_every_first_notification()
+	public function an_event_payment_is_recorded_upon_every_first_notification()
 	{
-		$request = $this->fakeEvent('single', 'em analise', 'newReference', 'newCode');
+		$request = $this->fakeEvent('single', Event::class, 'em analise', 'E-REFERENCE', 'newCode');
 
 		$this->assertEmpty($request['event']->creator->payments);
 
@@ -49,9 +49,9 @@ class SimplePaymentTest extends AppTest
 	}
 
 	/** @test */
-	public function a_payment_record_is_updated_with_a_notification()
+	public function an_event_payment_record_is_updated_with_a_notification()
 	{
-		$request = $this->fakeEvent('single', 'em analise', 'newReference', 'newCode');
+		$request = $this->fakeEvent('single', Event::class, 'em analise', 'E-REFERENCE', 'newCode');
 
 		$this->post(route('pagseguro.event.notification', [
 			'notificationType' => 'transaction',
@@ -63,7 +63,7 @@ class SimplePaymentTest extends AppTest
 
 		$this->post(route('pagseguro.event.notification', [
 			'notificationType' => 'transaction',
-			'xml' => $notification->xml('newReference', 'newCode')]));
+			'xml' => $notification->xml('E-REFERENCE', 'newCode')]));
 
 		$this->assertCount(1, $request['event']->creator->fresh()->payments);
 	}
@@ -71,9 +71,9 @@ class SimplePaymentTest extends AppTest
 	/** @test */
 	public function a_user_can_see_any_event_unless_it_has_been_cancelled()
 	{
-		$request = $this->fakeEvent('single', 'em analise', 'newReference', 'newCode');
+		$request = $this->fakeEvent('single', Event::class, 'em analise', 'E-REFERENCE', 'newCode');
 
-		$event = Event::byReference('newReference')->first();
+		$event = Event::byReference('E-REFERENCE')->first();
 
 		$this->assertCount(1, $event->creator->eventsArray);
 
@@ -81,7 +81,7 @@ class SimplePaymentTest extends AppTest
 
 		$this->post(route('pagseguro.event.notification', [
 			'notificationType' => 'transaction',
-			'xml' => $notification->xml('newReference', 'newCode')]));
+			'xml' => $notification->xml('E-REFERENCE', 'newCode')]));
 
 		$this->assertCount(0, $event->creator->eventsArray);
 	}

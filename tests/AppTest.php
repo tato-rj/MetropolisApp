@@ -5,10 +5,11 @@ namespace Tests;
 use Tests\Utilities\ExceptionHandling;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\{Space, Event, Plan, Payment, Workshop};
+use Tests\Traits\FakeEvents;
 
 abstract class AppTest extends TestCase
 {
-	use DatabaseMigrations, ExceptionHandling;
+	use DatabaseMigrations, ExceptionHandling, FakeEvents;
 
     public function setUp()
     {
@@ -42,36 +43,5 @@ abstract class AppTest extends TestCase
         $this->plan = create(Plan::class);
 
         $this->payment = create(Payment::class);
-    }
-    
-    protected function signIn($user = null)
-    {
-    	$user = ($user) ?: create('App\User');
-    	return $this->actingAs($user);
-    }
-
-    public function createNewEvent($user = null)
-    {
-        $user = $user ?? auth()->user();
-
-        return $this->post(route('client.events.purchase'), [
-            'user_id' => $user->id,
-            'space_id' => $this->space->id,
-            'participants' => 1,
-            'guests' => null,
-            'date' => now(),
-            'time' => now()->hour,
-            'duration' => 2
-        ]);
-    }
-
-    public function subscribeToNewPlan($plan, $user = null)
-    {
-        $user = $user ?? auth()->user();
-
-        return $this->post(route('client.plan.subscribe'), [
-            'user_id' => $user->id,
-            'plan_id' => $plan->id
-        ]);
     }
 }

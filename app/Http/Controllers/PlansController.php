@@ -44,7 +44,7 @@ class PlansController extends Controller
 
         $user = auth()->user();
 
-        $reference = $pagseguro->generateReference($user);
+        $reference = $pagseguro->generateReference($prefix = 'P', $user);
 
         $status = $pagseguro->plan($user, $plan, $request)->purchase($reference);
 

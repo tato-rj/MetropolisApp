@@ -14,7 +14,7 @@ class RecurringPaymentTest extends AppTest
 	/** @test */
 	public function a_recurring_event_knows_if_it_should_just_update_or_renew_its_membership_plan_by_automatically_creating_a_new_event()
 	{
-		$request = $this->fakeEvent('recurring', 'paga');
+		$request = $this->fakeEvent('recurring', Event::class, 'paga');
 
 		$this->post(route('pagseguro.event.notification', [
 			'notificationType' => 'transaction',
@@ -34,7 +34,7 @@ class RecurringPaymentTest extends AppTest
 	/** @test */
 	public function a_payment_is_recorded_upon_every_first_notification()
 	{
-		$request = $this->fakeEvent('recurring', 'em analise', 'newReference', 'newCode');
+		$request = $this->fakeEvent('recurring', Event::class, 'em analise', 'newReference', 'newCode');
 
 		$this->assertEmpty($request['event']->creator->payments);
 
@@ -48,7 +48,7 @@ class RecurringPaymentTest extends AppTest
 	/** @test */
 	public function a_renewed_event_is_scheduled_for_the_day_after_its_last_event_ends()
 	{
-		$request = $this->fakeEvent('recurring', 'paga');
+		$request = $this->fakeEvent('recurring', Event::class, 'paga');
 
 		$this->post(route('pagseguro.event.notification', [
 			'notificationType' => 'transaction',
@@ -66,7 +66,7 @@ class RecurringPaymentTest extends AppTest
 			'notificationType' => 'transaction',
 			'xml' => $secondRenew->xml($ref = null, $code = '098766')]));
 
-		$events = Event::byReference('TEST-REFERENCE')->get();
+		$events = Event::byReference('E-REFERENCE')->get();
 
 		$this->assertTrue($events[0]->ends_at->addDay()->isSameDay($events[1]->starts_at));
 		$this->assertTrue($events[1]->ends_at->addDay()->isSameDay($events[2]->starts_at));
@@ -76,7 +76,7 @@ class RecurringPaymentTest extends AppTest
 	/** @test */
 	public function a_users_membership_is_not_renewed_if_a_recurring_payment_is_cancelled()
 	{
-		$request = $this->fakeEvent('recurring', 'paga', 'membershipPlan', '12345');
+		$request = $this->fakeEvent('recurring', Event::class, 'paga', 'membershipPlan', '12345');
 
 		$this->post(route('pagseguro.event.notification', [
 			'notificationType' => 'transaction',

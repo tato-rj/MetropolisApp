@@ -53,6 +53,11 @@ class PagSeguro
         return new CheckoutEvent($this, $user, $request, $price);
     }
 
+    public function referenceToModel($reference)
+    {
+        return substr($reference, 0, 1) == 'W' ? 'App\UserWorkshop' : 'App\Event';
+    }
+
 	public function createPlan($selectedPlan)
 	{
         $plan = new PagSeguroPlan();
@@ -71,9 +76,9 @@ class PagSeguro
         }
 	}
 
-    public function generateReference(User $user)
+    public function generateReference($prefix, User $user)
     {
-        return now()->timestamp . $user->id; 
+        return $prefix . '-' . now()->timestamp . $user->id; 
     }
 
     public function errorMessage(\Exception $error)

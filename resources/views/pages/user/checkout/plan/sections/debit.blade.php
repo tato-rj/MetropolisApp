@@ -1,7 +1,6 @@
 <form id="form-debit" method="POST" action="{{route('client.events.purchase')}}">
 	@csrf
 	{{-- EVENT --}}
-	<input type="hidden" name="creator_id" value="{{auth()->check() ? auth()->user()->id : null}}">
 	<input type="hidden" name="space_id" value="{{$plan->id}}">
 	<input type="hidden" name="description" value="{{$plan->name}}">
 	<input type="hidden" name="date" value="{{request()->date}}">

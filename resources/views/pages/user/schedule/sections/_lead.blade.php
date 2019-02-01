@@ -1,4 +1,4 @@
-@component('layouts.header.partial', ['background' => 'workstation'])
+@component('layouts.header.partial', ['background' => 'images/workstation.jpg'])
 	<div class="container text-white z-10 mb-5">
 		<div class="row">
 			<div class="col-default">

@@ -36,6 +36,20 @@ class UserTest extends AppTest
 	}
 
 	/** @test */
+	public function it_knows_its_upcoming_workshops()
+	{
+		$this->signIn();
+
+		$pastWorkshop = create(Workshop::class, ['ends_at' => now()->subDay()]);
+
+		auth()->user()->signup($this->workshop);
+		auth()->user()->signup($pastWorkshop);
+
+		$this->assertCount(1, auth()->user()->upcomingWorkshops);
+		 
+	}
+
+	/** @test */
 	public function it_cannot_signup_twice_to_the_same_workshop()
 	{
 		$this->signIn();

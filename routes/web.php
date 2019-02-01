@@ -84,7 +84,15 @@ Route::prefix('workshop')->name('workshops.')->group(function() {
 
 	Route::get('/{workshop}', 'WorkshopsController@show')->name('show');
 
-	Route::post('/{workshop}', 'WorkshopsController@signup')->middleware(['auth', 'verified'])->name('signup');
+	Route::prefix('/{workshop}')->middleware(['auth', 'verified'])->group(function() {
+
+		Route::get('/ajax', 'WorkshopsController@ajax')->name('ajax');
+		
+		Route::get('/pagamento', 'WorkshopsController@payment')->name('payment');
+
+		Route::post('', 'WorkshopsController@purchase')->name('purchase');
+
+	});
 
 });
 

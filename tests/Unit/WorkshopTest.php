@@ -26,6 +26,42 @@ class WorkshopTest extends AppTest
 	}
 
 	/** @test */
+	public function it_knows_all_events_this_week()
+	{
+		Workshop::truncate();
+
+		create(Workshop::class, ['ends_at' => now()->copy()->endOfWeek()->subDays(mt_rand(1,2))->setTime(20,0,0)]);
+		create(Workshop::class, ['ends_at' => now()->copy()->addMonth()->subDays(mt_rand(1,2))->setTime(20,0,0)]);
+
+		$this->assertCount(2, Workshop::all());
+		$this->assertCount(1, Workshop::currentWeek()->get());
+	}
+
+	/** @test */
+	public function it_knows_all_events_this_month()
+	{
+		Workshop::truncate();
+
+		create(Workshop::class, ['ends_at' => now()->copy()->endOfMonth()->subDays(mt_rand(1,2))->setTime(20,0,0)]);
+		create(Workshop::class, ['ends_at' => now()->copy()->addMonths(2)->subDays(mt_rand(1,2))->setTime(20,0,0)]);
+
+		$this->assertCount(2, Workshop::all());
+		$this->assertCount(1, Workshop::currentMonth()->get());
+	}
+
+	/** @test */
+	public function it_knows_all_free_events()
+	{
+		Workshop::truncate();
+
+		create(Workshop::class, ['fee' => null]);
+		create(Workshop::class);
+
+		$this->assertCount(2, Workshop::all());
+		$this->assertCount(1, Workshop::free()->get());
+	}
+
+	/** @test */
 	public function it_knows_if_its_capacity_has_reached_its_limit()
 	{
 		$workshop = create(Workshop::class, ['capacity' => 1]);

@@ -1,0 +1,20 @@
+.pagination, .page-link {
+	border-radius: 0!important;
+}
+
+.page-link {
+	color: $teal;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: $teal;
+    border-color: $teal;
+}
+
+.page-item:not(.active):hover {
+	.page-link {
+		color: $teal-dark;
+	}
+}

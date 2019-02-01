@@ -62,7 +62,7 @@ trait PagSeguro
         if ($this->statusForUser == 'Cancelado')
             return 'danger';
 
-        return 'warning';        
+        return 'warning';
     }
 
     public function setStatus($status_id)

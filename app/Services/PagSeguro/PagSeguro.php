@@ -88,7 +88,7 @@ class PagSeguro
         if ($error->getCode() == 500)
             return $message . 'O ambiente sandbox está indisponível nesse momento';
 
-        return $message . ucfirst(simplexml_load_string($error->getMessage())->error->message);
+        return $message . ucfirst($error->getMessage());
     }
 
 	public function __get($property) {

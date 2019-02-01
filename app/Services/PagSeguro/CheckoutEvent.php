@@ -45,13 +45,13 @@ class CheckoutEvent implements Checkout
             'Avenida Rio Branco', '151', 'Centro', '20040006', 'Rio de Janeiro', 'RJ', 'BRA', 'Grupo 401'
         );
         $creditCard->setToken($this->request->card_token);
-        $creditCard->setInstallment()->withParameters(1, $this->request->price . '.00');
+        $creditCard->setInstallment()->withParameters(1, $this->price);
         $creditCard->setHolder()->setBirthdate('01/10/1979');
         $creditCard->setHolder()->setName($this->request->card_holder_name);
         $creditCard->setHolder()->setPhone()->withParameters(11, 56273440);
         $creditCard->setHolder()->setDocument()->withParameters('CPF', '09882490735');
         $creditCard->setMode('DEFAULT');
-        
+
         try {
             return $creditCard->register($this->pagseguro->credentials);
         } catch (\Exception $error) {

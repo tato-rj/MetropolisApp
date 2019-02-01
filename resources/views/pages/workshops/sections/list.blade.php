@@ -1,9 +1,19 @@
 <section class="container mb-6">
-	<div class="row mt-6">
-		<div class="col-default">
-			@foreach($workshops as $workshop)
+	<div class="row">
+		<div class="col-default mb-5 pr-0 border-bottom">
+			@include('pages.workshops.sections.filters')
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-default mb-4">
+			@forelse($workshops as $workshop)
 			@include('pages.workshops.sections.event')
-			@endforeach
+			@empty
+			<div class="text-center text-muted py-6"><i>Não encontramos nenhum workshop no período escolhido</i></div>
+			@endforelse
+		</div>
+		<div class="col-default d-flex justify-content-center">
+			{{ $workshops->links() }}
 		</div>
 	</div>
 </section>

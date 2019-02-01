@@ -9,8 +9,6 @@ class PaymentsController extends Controller
 {
     public function index()
     {
-    	// return auth()->user()->payments;
-
         return view('pages.user.payments.index');
     }
 }

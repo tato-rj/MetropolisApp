@@ -36,5 +36,14 @@ trait Office
 
 		return $date->isWeekDay() && ! in_array($date->format('m/d'), $this->holidays);
 	}
+
+	public function isOpen()
+	{
+		if (app()->environment() == 'testing') return true;
+
+		$now = now();
+
+		return $this->isWOrkingDay($now) && $now->hour >= $this->day_starts_at && $now->hour <= $this->day_ends_at;
+	}
 }
 

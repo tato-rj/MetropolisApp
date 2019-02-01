@@ -44,13 +44,13 @@ class WorkshopPaymentTest extends AppTest
 
 		$request = $this->fakeEvent('single', Workshop::class, 'em analise', 'W-REFERENCE', 'newCode');
 
-		$this->assertEmpty(Workshop::where('reference', 'W-REFERENCE')->first()->attendees()->find(auth()->user()->id)->payments);
+		$this->assertEmpty(UserWorkshop::byReference('W-REFERENCE')->first()->workshop->attendees()->find(auth()->user()->id)->payments);
 
 		$this->post(route('pagseguro.event.notification', [
 			'notificationType' => 'transaction',
 			'xml' => $request['notification']]));
 
-		$this->assertNotEmpty(Workshop::where('reference', 'W-REFERENCE')->first()->attendees()->find(auth()->user()->id)->fresh()->payments);
+		$this->assertNotEmpty(UserWorkshop::byReference('W-REFERENCE')->first()->workshop->attendees()->find(auth()->user()->id)->fresh()->payments);
 	}
 
 	/** @test */
@@ -64,7 +64,7 @@ class WorkshopPaymentTest extends AppTest
 			'notificationType' => 'transaction',
 			'xml' => $request['notification']]));
 
-		$this->assertCount(1, Workshop::where('reference', 'W-REFERENCE')->first()->attendees()->find(auth()->user()->id)->payments);
+		$this->assertCount(1, UserWorkshop::byReference('W-REFERENCE')->first()->workshop->attendees()->find(auth()->user()->id)->payments);
 
 		$notification = $this->fakeNotification('single', 'paga');
 
@@ -72,6 +72,6 @@ class WorkshopPaymentTest extends AppTest
 			'notificationType' => 'transaction',
 			'xml' => $notification->xml('W-REFERENCE', 'newCode')]));
 
-		$this->assertCount(1, Workshop::where('reference', 'W-REFERENCE')->first()->attendees()->find(auth()->user()->id)->fresh()->payments);
+		$this->assertCount(1, UserWorkshop::byReference('W-REFERENCE')->first()->workshop->attendees()->find(auth()->user()->id)->fresh()->payments);
 	}
 }

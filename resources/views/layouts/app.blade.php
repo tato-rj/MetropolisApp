@@ -82,7 +82,7 @@ $('#event-modal').on('hidden.bs.modal', function (e) {
   $(this).find('.modal-body > div:first-child').html('');
   $(this).find('#loading').show();
   $(this).find('.modal-footer').hide();
-})
+});
 
 if ($('#scroll-mark').length > 0) {
   let $navbar = $('.navbar');
@@ -166,7 +166,6 @@ $('input[name="address_zip"]').blur(function() {
         if(validateZip.test(zip)) {
 
             $('input[name="address_street"]').val("...");
-            // $('input[name="address_number"]').val("...");
             $('input[name="address_district"]').val("...");
             $('input[name="address_state"]').val("...");
             $('input[name="address_city"]').val("...");

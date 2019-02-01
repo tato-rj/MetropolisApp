@@ -46,6 +46,7 @@ $factory->define(App\Plan::class, function(Faker $faker) {
         'type' => $faker->word,
         'name' => $faker->word,
         'fee' => $faker->numberBetween(100, 1000),
+        'code' => $faker->word,
         'bonus_spaces' => function() {
             return create('App\Space', ['is_shared' => false])->id;
         },
@@ -118,7 +119,6 @@ $factory->define(App\Workshop::class, function(Faker $faker) {
         'name' => $faker->sentence,
         'headline' => $faker->sentence,
         'description' => $faker->paragraph,
-        'reference' => $faker->uuid,
         'fee' => $faker->numberBetween(20,100),
         'cover_image' => $faker->imageUrl(),
         'capacity' => $faker->numberBetween(12,30),

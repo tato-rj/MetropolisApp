@@ -12,7 +12,7 @@
 
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Data</strong></span>
-		<span id="date" data-date="{{$event->starts_at->format('Y-m-d')}}"></span>
+		<span class="date" data-date="{{$event->starts_at->format('Y-m-d')}}"></span>
 	</li>
 
 	<li class="mb-2">

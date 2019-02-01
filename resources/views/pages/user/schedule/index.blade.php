@@ -53,9 +53,9 @@ $(function() {
           
           $modal.find('.modal-footer input[name="event_id"]').val(event.id);
           
-          $modal.find('#date').text(
+          $modal.find('.date').text(
             moment(
-              $(this).attr('data-date')
+              $modal.find('.date').attr('data-date')
             ).locale('pt').format("D [de] MMMM [de] YYYY")
           );
           
@@ -63,8 +63,10 @@ $(function() {
 
           if ($modal.find('#participants').attr('data-participants') > 1)
   	    		$modal.find('.modal-footer').show();
-	    	}
-	    );
+	    	}).fail(function() {
+          $modal.find('.modal-body > div:first-child').html('<p class="text-center my-4 text-red">Não foi possível processar o seu pedido nesse momento</p>');
+          $modal.find('#loading').hide();
+        });
     },
 
     eventRender: function( event, element, view ) {
@@ -186,5 +188,29 @@ $(document).on('click', '.check-status:not(.checking)', function() {
     $button.removeClass('checking');
   });
 });
+</script>
+
+<script type="text/javascript">
+$('.workshop-details').on('click', function() {
+  let $modal = $('#event-modal');
+  let ajaxUrl = $(this).attr('data-ajax');
+
+  $modal.modal('show');
+
+  $.get(ajaxUrl, function(data, status){
+      $modal.find('.modal-body > div:first-child').html(data);
+
+      $modal.find('.date').text(
+        moment(
+          $modal.find('.date').attr('data-date')
+          ).locale('pt').format("D [de] MMMM [de] YYYY")
+        );
+
+      $modal.find('#loading').hide();
+    }).fail(function() {
+      $modal.find('.modal-body > div:first-child').html('<p class="text-center my-4 text-red">Não foi possível processar o seu pedido nesse momento</p>');
+      $modal.find('#loading').hide();
+    });
+})
 </script>
 @endpush

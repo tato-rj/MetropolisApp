@@ -49,8 +49,8 @@ trait Checkout
 
 	public function newWorkshopSignup($request, $reference, $code)
 	{
-		$workshop = create('App\Workshop', ['reference' => $reference]);
+		$workshop = create('App\Workshop');
 
-		return auth()->user()->signup($workshop);
+		return auth()->user()->signup($workshop, $reference);
 	}
 }

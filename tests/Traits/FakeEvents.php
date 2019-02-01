@@ -29,7 +29,7 @@ trait FakeEvents
     {
         $user = $user ?? auth()->user();
 
-        return $this->post(route('workshops.signup', $workshop->slug));
+        return $this->post(route('workshops.purchase', $workshop->slug));
     }
 
     public function subscribeToNewPlan($plan, $user = null)

@@ -1,4 +1,4 @@
-@if(auth()->check() && auth()->user()->currentEventCountdown)
+@if(auth()->check() && auth()->user()->currentEventCountdown && office()->isOpen())
 <div id="event-alert" data-end="{{auth()->user()->currentEventCountdown['end']}}" class="position-fixed d-flex align-items-center justify-content-center text-center cursor-pointer bg-green shadow py-2 px-3" style="width: 2.85rem; height: 2.85rem; bottom: 1.2rem; left: 1.2rem; z-index: 5; border-radius: 2.85rem">
 	<div class="text-white d-flex align-items-center justify-content-center">
 		<i class="fas fa-stopwatch"></i>

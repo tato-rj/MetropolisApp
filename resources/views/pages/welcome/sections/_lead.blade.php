@@ -1,4 +1,4 @@
-@component('layouts.header.full', ['background' => 'workstation'])
+@component('layouts.header.full', ['background' => 'images/workstation'])
 	<div class="container text-white z-10 mb-4">
 		<div class="row">
 			<div class="col-10 mx-auto">

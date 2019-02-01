@@ -36,7 +36,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function workshops()
     {
-        return $this->belongsToMany(Workshop::class, 'user_workshops')->withPivot('reference', 'transaction_code', 'verified_at', 'status_id');
+        return $this->belongsToMany(Workshop::class, 'user_workshops')->withPivot('reference', 'transaction_code', 'verified_at', 'status_id')->withTimestamps();
+    }
+
+    public function upcomingWorkshops()
+    {
+        return $this->belongsToMany(Workshop::class, 'user_workshops')->upcoming()->withPivot('reference', 'transaction_code', 'verified_at', 'status_id');        
     }
 
     public function payments()
@@ -82,10 +87,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $event;
     }
 
-    public function signup(Workshop $workshop)
+    public function signup(Workshop $workshop, $reference = null)
     {
+        $status = $reference ? 0 : 3;
+        
         $this->workshops()->attach($workshop->id, 
-            ['reference' => $workshop->reference]);
+            [
+                'reference' => $reference,
+                'status_id' => $status
+            ]);
 
         return $this->workshops()->latest()->first()->reservation;
     }

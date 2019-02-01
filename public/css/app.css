@@ -21073,6 +21073,26 @@ html .ui-button.ui-state-disabled:active {
   font-style: normal;
 }
 
+.pagination,
+.page-link {
+  border-radius: 0 !important;
+}
+
+.page-link {
+  color: #4DC0B5;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #4DC0B5;
+  border-color: #4DC0B5;
+}
+
+.page-item:not(.active):hover .page-link {
+  color: #389d94;
+}
+
 .modal-content {
   border: 0;
 }

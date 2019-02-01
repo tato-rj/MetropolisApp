@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Workshop;
+use App\{Workshop, UserWorkshop};
 use Illuminate\Http\Request;
 use App\Events\WorkshopSignup;
+use App\Services\PagSeguro\PagSeguro;
 
 class WorkshopsController extends Controller
 {
@@ -15,9 +16,44 @@ class WorkshopsController extends Controller
      */
     public function index()
     {
-        $workshops = Workshop::upcoming()->get();
-        
+        $workshops = Workshop::upcoming()->filtered()->ordered()->paginate(4);
+
         return view('pages.workshops.index', compact('workshops'));
+    }
+    
+    public function payment(Workshop $workshop)
+    {
+        if ($workshop->isFree) {
+            auth()->user()->signup($workshop);
+
+            event(new WorkshopSignup($workshop));
+
+            return redirect()->route('client.events.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
+        }
+
+        $pagseguro = new PagSeguro;
+
+        return view('pages.user.checkout.workshop.index', compact(['workshop', 'pagseguro']));
+    }
+
+    public function purchase(Workshop $workshop, Request $request)
+    {
+        $pagseguro = new PagSeguro;
+
+        $user = auth()->user();
+
+        $reference = $pagseguro->generateReference($prefix = 'W', $user);
+
+        $status = $pagseguro->event($user, $request, $workshop->fee)->purchase($reference);
+        
+        if ($status instanceof \Exception)
+            return redirect()->back()->with('error', $pagseguro->errorMessage($status));
+
+        $user->signup($workshop, $reference);
+
+        event(new WorkshopSignup($workshop));
+
+        return redirect()->route('client.events.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
     }
 
     /**
@@ -41,15 +77,6 @@ class WorkshopsController extends Controller
         //
     }
 
-    public function signup(Request $request, Workshop $workshop)
-    {
-        auth()->user()->signup($workshop);
-
-        event(new WorkshopSignup($workshop));
-
-        return redirect()->route('workshops.show', $workshop->slug)->with('status', 'A sua reserva foi confirmada com sucesso.');
-    }
-
     /**
      * Display the specified resource.
      *
@@ -58,7 +85,14 @@ class WorkshopsController extends Controller
      */
     public function show(Workshop $workshop)
     {
-        //
+        return view('pages.workshops.show.index', compact('workshop'));
+    }
+
+    public function ajax(Workshop $workshop)
+    {
+        $reservation = auth()->user()->workshops()->find($workshop->id)->reservation;
+
+        return view('components.modals.workshop', compact('reservation'))->render();
     }
 
     /**

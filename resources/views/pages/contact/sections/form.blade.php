@@ -1,8 +1,7 @@
 <section class="container mt-5 mb-7">
 	<div class="row">
 		<div class="col-default">
-			<div class="mb-5">
-				<p class="lead">Estamos aqui para atender a qualquer dúvida, pergunta ou sugestão. Deixe abaixo a sua mensagem e retornaremos em breve.</p>
+			<div>
 				<p>Se preferir, pode enviar o seu contato por email para <a href="" class="link-blue">contato@metropolis.com.br</a>.</p>
 			</div>
 			<form method="POST" action="">

@@ -90512,6 +90512,7 @@ module.exports = function(module) {
 
 __webpack_require__("./resources/js/bootstrap.js");
 __webpack_require__("./resources/js/helpers/cookie.js");
+__webpack_require__("./resources/js/helpers/string.js");
 __webpack_require__("./resources/js/datepicker/customize.js");
 __webpack_require__("./node_modules/jquery-countdown/dist/jquery.countdown.js");
 __webpack_require__("./node_modules/fullcalendar/dist/locale/pt-br.js");
@@ -90719,6 +90720,19 @@ setCookie = function setCookie(cname, cvalue, exdays) {
     }
 
     document.cookie = cname + "=" + cvalue + ";" + expires;
+};
+
+/***/ }),
+
+/***/ "./resources/js/helpers/string.js":
+/***/ (function(module, exports) {
+
+fullDatePT = function fullDatePT($element) {
+	$element.text(moment($element.attr('data-date')).locale('pt').format("D [de] MMMM [de] YYYY"));
+};
+
+jQuery.fn.cleanVal = function () {
+	return this.val().replace(/\D/g, '');
 };
 
 /***/ }),

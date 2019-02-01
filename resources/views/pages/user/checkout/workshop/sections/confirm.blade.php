@@ -7,7 +7,7 @@
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Data</strong></span>
-				<span id="date" data-date="{{$workshop->starts_at}}"></span>
+				<span class="date-pt" data-date="{{$workshop->starts_at}}"></span>
 			</li>
 			<li>
 				<span class="text-teal mr-1"><strong>Horário</strong></span>

@@ -49,7 +49,7 @@ class PlansController extends Controller
         $status = $pagseguro->plan($user, $plan, $request)->purchase($reference);
 
         if ($status instanceof \Exception)
-            return redirect()->back()->with('error', $pagseguro->errorMessage($status));
+            return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
         
         $user->subscribe($plan, $reference);
 

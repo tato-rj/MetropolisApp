@@ -20,6 +20,10 @@ class BladeServiceProvider extends ServiceProvider
         \Blade::if('bonus', function(\App\Space $space) {
             return auth()->check() && auth()->user()->bonusesLeft($space);
         });
+
+        \Blade::if('old', function ($filter, $value) {
+            return (old($filter) == $value);
+        });
     }
 
     /**

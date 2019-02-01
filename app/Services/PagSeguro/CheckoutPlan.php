@@ -33,21 +33,28 @@ class CheckoutPlan implements Checkout
         $preApproval->setSender()->setEmail('c38672894586801235492@sandbox.pagseguro.com.br');
         $preApproval->setSender()->setHash($this->request->card_hash);
         $preApproval->setSender()->setDocuments(
-            $this->document()->withParameters('CPF', '09882490735')
+            $this->document()->withParameters('CNPJ', '00000000000000')
         );
         $preApproval->setSender()->setAddress()->withParameters(
             'Avenida Rio Branco', '151', 'Centro', '20040006', 'Rio de Janeiro', 'RJ', 'BRA', 'Grupo 401'
         );
-        $preApproval->setSender()->setPhone()->withParameters('21', '91982736');
+        $preApproval->setSender()->setPhone()->withParameters(21, 31991377);
         $preApproval->setPaymentMethod()->setCreditCard()->setToken($this->request->card_token);
         $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setName($this->request->card_holder_name);
-        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setBirthDate('23/06/1984');
+        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setBirthDate('01/10/1979');
         $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setDocuments(
-            $this->document()->withParameters('CPF', '09882490735')
+            $this->document()->withParameters($this->request->card_holder_document_type, clean($this->request->card_holder_document_value))
         );
-        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setPhone()->withParameters('21', '91982736');
+        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setPhone()->withParameters(21, 31991377);
         $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setBillingAddress()->withParameters(
-            'Avenida Rio Branco', '151', 'Centro', '20040006', 'Rio de Janeiro', 'RJ', 'BRA', 'Grupo 401'
+            $this->request->address_street, 
+            $this->request->address_number, 
+            $this->request->address_district, 
+            $this->request->address_zip, 
+            $this->request->address_city, 
+            $this->request->address_state, 
+            'BRA', 
+            $this->request->address_complement
         );
 
         try {

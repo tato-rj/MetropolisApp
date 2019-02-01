@@ -7,7 +7,7 @@
 				</div>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Data de início</strong></span>
-				<span>{{toFormattedDateStringPt(now())}}</span>
+				<span class="date-pt" data-date="{{now()}}"></span>
 			</li>
 			<li>
 				<span class="text-teal mr-1"><strong>Renovação automática a cada</strong></span>

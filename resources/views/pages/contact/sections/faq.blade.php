@@ -1,8 +1,7 @@
 <section class="container mb-8">
   <div class="text-center mb-4">
     <h3 class="text-center mb-4">Perguntas mais frequentes</h3>
-    <p class="lead m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor.</p>
+    <p class="lead m-0">Veja abaixo os assuntos mais comuns que recebemos dos nossos usuários</p>
   </div>
   <div class="row">
     <div class="col-lg-4 col-md-3 col-12 p-3">

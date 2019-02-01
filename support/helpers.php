@@ -122,19 +122,16 @@ function greeting()
 		return 'Boa noite';
 }
 
-function toFormattedDateStringPt(\Carbon\Carbon $date, $withYear = true)
-{
-	$months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
-
-	$string = $date->day . ' de ' . $months[$date->month - 1];
-
-	if ($withYear)
-		$string .= ' de ' . $date->year;
-
-	return $string;
-}
-
 function clean($string)
 {
 	return preg_replace("/[^0-9]/", "", $string);
+}
+
+function toFormattedDateStringPt(\Carbon\Carbon $date, $withYear = true)
+{
+	$months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+	$string = $date->day . ' de ' . $months[$date->month - 1];
+	if ($withYear)
+		$string .= ' de ' . $date->year;
+	return $string;
 }

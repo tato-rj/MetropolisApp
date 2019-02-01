@@ -1,5 +1,5 @@
 <ul class="list-flat px-3 py-2">
-	<li class="mb-2">
+	<li class="mb-2 text-truncate">
 		<span class="text-teal mr-1"><strong>Workshop</strong></span>
 		<span>{{$reservation->workshop->name}}</span>
 	</li>
@@ -27,7 +27,7 @@
 </ul>
 
 <div class="text-center mb-3">
-	<a href="{{route('workshops.show', $reservation->workshop->slug)}}" class="btn btn-sm btn-teal"><strong>Página do workshop</strong></a>
+	<a href="{{route('workshops.show', $reservation->workshop->slug)}}" class="btn btn-sm btn-teal"><strong>Visitar a página do workshop</strong></a>
 </div>
 
 <div class="bg-light py-2 px-3">

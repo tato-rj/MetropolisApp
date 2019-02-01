@@ -20,15 +20,10 @@
 
 <script type="text/javascript">
 (new CustomDatePicker('#datepicker')).enableSelect('select[name="space"]').create();
+
 $('button[name="search"]').on('click', function() {
 	$('form#search').submit();
 });
-
-$('#review #date').text(
-	moment(
-		$('#review #date').attr('data-date')
-	).locale('pt').format("D [de] MMMM [de] YYYY")
-);
 </script>
 <script type="text/javascript">
 $('input[name="send_emails"]').on('click', function() {

@@ -1,6 +1,12 @@
 <section class="mb-7 mt-4 container">
   <div class="row">
-    @include('pages.user.schedule.sections.workshops')
+
+	<div class="col-10 mx-auto">
+		@foreach(auth()->user()->upcomingWorkshops as $workshop)
+		@include('components.alerts.workshop')
+		@endforeach
+	</div>
+
   	<div class="col-10 mx-auto">
   		<div id="calendar-loading" class="text-muted d-flex align-items-start justify-content-center pt-8" style="min-height: 740px">
   			<span>Estamos carregando a sua agenda...</span>

@@ -47,7 +47,7 @@ class WorkshopsController extends Controller
         $status = $pagseguro->event($user, $request, $workshop->fee)->purchase($reference);
         
         if ($status instanceof \Exception)
-            return redirect()->back()->with('error', $pagseguro->errorMessage($status));
+            return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
 
         $user->signup($workshop, $reference);
 

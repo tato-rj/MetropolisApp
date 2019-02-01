@@ -35,21 +35,35 @@ class CheckoutEvent implements Checkout
         );
         $creditCard->setSender()->setName($this->user->name);
         $creditCard->setSender()->setEmail('c38672894586801235492@sandbox.pagseguro.com.br');
-        $creditCard->setSender()->setPhone()->withParameters(21, 91891234);
-        $creditCard->setSender()->setDocument()->withParameters('CPF', '09882490735');
+        $creditCard->setSender()->setPhone()->withParameters(21, 31991377);
+        $creditCard->setSender()->setDocument()->withParameters('CNPJ', '00000000000000');
         $creditCard->setSender()->setHash($this->request->card_hash);
         $creditCard->setShipping()->setAddress()->withParameters(
-            'Avenida Rio Branco', '151', 'Centro', '20040006', 'Rio de Janeiro', 'RJ', 'BRA', 'Grupo 401'
+            $this->request->address_street, 
+            $this->request->address_number, 
+            $this->request->address_district, 
+            $this->request->address_zip, 
+            $this->request->address_city, 
+            $this->request->address_state, 
+            'BRA', 
+            $this->request->address_complement
         );
         $creditCard->setBilling()->setAddress()->withParameters(
-            'Avenida Rio Branco', '151', 'Centro', '20040006', 'Rio de Janeiro', 'RJ', 'BRA', 'Grupo 401'
+            $this->request->address_street, 
+            $this->request->address_number, 
+            $this->request->address_district, 
+            $this->request->address_zip, 
+            $this->request->address_city, 
+            $this->request->address_state, 
+            'BRA', 
+            $this->request->address_complement
         );
         $creditCard->setToken($this->request->card_token);
         $creditCard->setInstallment()->withParameters(1, $this->price);
         $creditCard->setHolder()->setBirthdate('01/10/1979');
         $creditCard->setHolder()->setName($this->request->card_holder_name);
-        $creditCard->setHolder()->setPhone()->withParameters(11, 56273440);
-        $creditCard->setHolder()->setDocument()->withParameters('CPF', '09882490735');
+        $creditCard->setHolder()->setPhone()->withParameters(21, 31991377);
+        $creditCard->setHolder()->setDocument()->withParameters($this->request->card_holder_document_type, clean($this->request->card_holder_document_value));
         $creditCard->setMode('DEFAULT');
 
         try {
@@ -59,8 +73,8 @@ class CheckoutEvent implements Checkout
         }
 	}
 
-	public function document()
+	public function document($type, $value)
 	{
-		return new Document;
+		return new \PagSeguro\Domains\Document($type, $value);
 	}
 }

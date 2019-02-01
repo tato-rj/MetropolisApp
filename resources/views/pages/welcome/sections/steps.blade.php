@@ -18,7 +18,7 @@
 
           <div class="step-content">
             <p><strong>Marque o dia e o horário</strong></p>
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+            <p class="text-muted">Use o nosso calendário dinâmico para encontrar a data e horário que deseja.</p>
           </div>
         </li>
 
@@ -29,7 +29,7 @@
 
           <div class="step-content">
             <p><strong>Escolha o espaço</strong></p>
-            <p class="text-muted">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+            <p class="text-muted">Além do espaço de co-working, também oferecemos 2 salas de reunião modernas e totalmente equipadas.</p>
           </div>
         </li>
 
@@ -40,7 +40,7 @@
 
           <div class="step-content">
             <p><strong>Comece a trabalhar!</strong></p>
-            <p class="text-muted">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris commodo consequat.</p>
+            <p class="text-muted">Na área do cliente você poderá monitorar o status das suas reservas e acompanhar a sua agenda.</p>
           </div>
         </li>
       </ol>

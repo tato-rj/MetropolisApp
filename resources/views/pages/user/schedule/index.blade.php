@@ -53,11 +53,7 @@ $(function() {
           
           $modal.find('.modal-footer input[name="event_id"]').val(event.id);
           
-          $modal.find('.date').text(
-            moment(
-              $modal.find('.date').attr('data-date')
-            ).locale('pt').format("D [de] MMMM [de] YYYY")
-          );
+          fullDatePT($modal.find('.date'));
           
           $modal.find('#loading').hide();
 
@@ -200,11 +196,7 @@ $('.workshop-details').on('click', function() {
   $.get(ajaxUrl, function(data, status){
       $modal.find('.modal-body > div:first-child').html(data);
 
-      $modal.find('.date').text(
-        moment(
-          $modal.find('.date').attr('data-date')
-          ).locale('pt').format("D [de] MMMM [de] YYYY")
-        );
+      fullDatePT($modal.find('.date'));
 
       $modal.find('#loading').hide();
     }).fail(function() {

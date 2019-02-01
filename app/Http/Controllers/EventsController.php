@@ -80,7 +80,7 @@ class EventsController extends Controller
         $status = $pagseguro->event($form->user, $request, $price)->purchase($reference);
         
         if ($status instanceof \Exception)
-            return redirect()->back()->with('error', $pagseguro->errorMessage($status));
+            return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
 
         $event = $form->user->schedule($form, $reference);
 

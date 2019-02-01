@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-default">
 				<h1 class="display-4">Meu cadastro</h1>
-				<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+				<p class="lead">Aqui você pode modificar os seus dados pessoais e informações de pagamento</p>
 			</div>
 		</div>
 	</div>

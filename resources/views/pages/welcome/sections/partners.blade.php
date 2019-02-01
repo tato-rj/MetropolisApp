@@ -1,8 +1,7 @@
 <section class="container mb-8">
   <div class="text-center mb-4">
     <h3 class="text-center mb-4">Nossos parceiros</h3>
-    <p class="lead m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor.</p>
+    <p class="lead m-0">Temos orgulho de trabalhar com grandes marcas. <a href="/contato" class="link-red">Clique aqui</a> para nos contactar sobre novas parcerias.</p>
   </div>
   <div class="row align-items-end justify-content-center">
 

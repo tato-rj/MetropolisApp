@@ -7,7 +7,7 @@
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Data</strong></span>
-				<span id="date" data-date="{{request()->date}}"></span>
+				<span class="date-pt" data-date="{{request()->date}}"></span>
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Hora de chegada</strong></span>

@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-10 mx-auto">
 				<h1 class="display-4">Colaboração. Produtividade.</h1>
-				<p class="lead d-none d-sm-block">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+				<p class="lead d-none d-sm-block">Oferecemos um espaço moderno de co-working, salas de reunião e workshops para você se aperfeiçoar ainda mais na sua área de trabalho</p>
 			</div>
 		</div>
 	</div>

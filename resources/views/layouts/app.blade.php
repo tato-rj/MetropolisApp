@@ -75,7 +75,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-  // May need this
+  fullDatePT($('.date-pt'));
 });
 
 $('#event-modal').on('hidden.bs.modal', function (e) {

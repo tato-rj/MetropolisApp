@@ -6,7 +6,7 @@
 		<div class="col-lg-8 col-12 px-3">
 			<div class="mb-4">
 				<h3 class="mb-2">Workstation</h3>
-				<p class="lead m-0">Veja os nossos planos para as estações de trabalho compartilhadas:</p>
+				<p class="lead m-0">Veja o que oferecemos na estação de trabalho compartilhada:</p>
 			</div>
 			<div>
 				<div class="d-flex flex-wrap">
@@ -33,8 +33,8 @@
 		</div>
 		<div class="col-lg-8 col-12 px-3">
 			<div class="mb-4">
-				<h3 class="mb-2">Salas de reunião "Tóquio"</h3>
-				<p class="lead m-0">Veja os nossos planos para esta sala de reunião:</p>
+				<h3 class="mb-2">Sala de Reunião "Tóquio"</h3>
+				<p class="lead m-0">Veja o que oferecemos nesta sala de reunião:</p>
 			</div>
 			<div>
 				<div class="d-flex flex-wrap">
@@ -62,8 +62,8 @@
 		</div>
 		<div class="col-lg-8 col-12 px-3">
 			<div class="mb-4">
-				<h3 class="mb-2">Salas de reunião "Vale do Silício"</h3>
-				<p class="lead m-0">Veja os nossos planos para esta sala de reunião:</p>
+				<h3 class="mb-2">Sala de Reunião "Vale do Silício"</h3>
+				<p class="lead m-0">Veja o que oferecemos nesta sala de reunião:</p>
 			</div>
 			<div>
 				<div class="d-flex flex-wrap">

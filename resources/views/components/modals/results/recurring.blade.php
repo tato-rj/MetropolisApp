@@ -46,7 +46,13 @@
 			</a>
 		</div>
 		<div>
-			<div class="bg-danger px-2 py-1 text-white"><strong>{{auth()->user()->membership->statusForUser}}</strong></div>
+			@if(auth()->user()->membership->isActive())
+			<div class="alert-green px-2 py-1"><strong>Ativo</strong></div>
+			@elseif(auth()->user()->membership->status == 'Aguardando confirmação')
+			<div class="alert-warning px-2 py-1 "><strong>Pendente</strong></div>
+			@else
+			<div class="alert-danger px-2 py-1"><strong>Cancelado</strong></div>
+			@endif
 		</div>
 	</div>
 </div>
@@ -55,6 +61,10 @@
 	@if(auth()->user()->membership->isActive())
 		<div class="text-success">
 			<small><i class="far fa-calendar-check mr-2"></i><strong>A sua assinatura se renovará ano dia {{auth()->user()->membership->next_payment_at->format('d/m')}}</strong></small>
+		</div>
+	@elseif(auth()->user()->membership->status == 'Aguardando confirmação')
+		<div class="text-warning">
+			<small><i class="fas fa-exclamation-circle mr-2"></i><strong>Estamos aguardando a confirmação do seu pedido</strong></small>
 		</div>
 	@else
 		<div class="text-danger">

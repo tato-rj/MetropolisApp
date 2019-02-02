@@ -47,7 +47,7 @@
 		</div>
 		<div>
 			@if(auth()->user()->membership->isActive())
-			<div class="alert-green px-2 py-1"><strong>Ativo</strong></div>
+			<div class="alert-success px-2 py-1"><strong>Ativo</strong></div>
 			@elseif(auth()->user()->membership->status == 'Aguardando confirmação')
 			<div class="alert-warning px-2 py-1 "><strong>Pendente</strong></div>
 			@else

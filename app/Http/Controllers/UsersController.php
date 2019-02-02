@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Rules\FullName;
 
 class UsersController extends Controller
 {
@@ -87,9 +88,18 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'min:4', 'max:255', 'string', new FullName],
+            'email' => 'required|email',
+        ]);
+
+        auth()->user()->update([
+            'name' => ucwords($request->name),
+            'email' => $request->email]);
+
+        return redirect()->back()->with('status', 'O seu cadastro foi atualizado com sucesso.');
     }
 
     /**

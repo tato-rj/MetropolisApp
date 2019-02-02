@@ -36,7 +36,7 @@ trait FakeEvents
     {
         $user = $user ?? auth()->user();
 
-        return $this->post(route('client.plan.subscribe'), [
+        return $this->post(route('plan.subscribe'), [
             'plan_id' => $plan->id
         ]);
     }

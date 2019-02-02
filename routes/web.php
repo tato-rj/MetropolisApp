@@ -29,18 +29,6 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 	});
 
-	Route::prefix('plano')->name('plan.')->group(function() {
-
-		Route::get('confirmar', 'PlansController@confirm')->name('confirm');
-
-		Route::get('pagamento', 'PlansController@payment')->name('payment');
-
-		Route::post('assinar', 'PlansController@subscribe')->name('subscribe');
-		
-		Route::post('/{event}/status', 'PlansController@status')->name('status');
-
-	});
-
 	Route::prefix('pagamentos')->name('payments.')->group(function() {
 
 		Route::get('', 'PaymentsController@index')->name('index');
@@ -51,7 +39,7 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 		Route::get('', 'UsersController@profile')->name('show');
 
-		Route::post('/{user}', 'UsersController@update')->name('update');
+		Route::post('', 'UsersController@update')->name('update');
 
 	});
 
@@ -74,8 +62,22 @@ Route::get('/contato', function () {
     return view('pages.contact.index');
 });
 
-Route::get('/planos', function () {
-    return view('pages.plans.show.index');
+Route::prefix('planos')->name('plan.')->group(function() {
+
+	Route::get('', 'PlansController@index')->name('index');
+
+	Route::middleware(['auth', 'verified'])->group(function() {
+
+		Route::get('confirmar', 'PlansController@confirm')->name('confirm');
+
+		Route::get('pagamento', 'PlansController@payment')->name('payment');
+
+		Route::post('assinar', 'PlansController@subscribe')->name('subscribe');
+		
+		Route::post('/{event}/status', 'PlansController@status')->name('status');
+	
+	});
+
 });
 
 Route::prefix('workshop')->name('workshops.')->group(function() {
@@ -97,7 +99,9 @@ Route::prefix('workshop')->name('workshops.')->group(function() {
 });
 
 Route::prefix('eventos')->name('events.')->group(function() {
+
 	Route::get('/buscar', 'EventsController@search')->name('search');
+
 });
 
 Route::get('/mail/confirm', function() {

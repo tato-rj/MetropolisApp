@@ -1,4 +1,4 @@
-<form method="GET" action="{{route('client.plan.payment')}}">
+<form method="GET" action="{{route('plan.payment')}}">
 	<input type="hidden" name="plan_id" value="{{request('plan_id')}}">
 
 	<div class="bg-light border-top border-teal-light border-1x mb-4">

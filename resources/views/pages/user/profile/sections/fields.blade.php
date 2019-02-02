@@ -27,11 +27,13 @@
         <div class="profile-fields">
           @include('pages.user.profile.sections.show-field', [
             'label' => 'Nome completo',
-            'value' => auth()->user()->name])
+            'value' => auth()->user()->name,
+            'field' => 'name'])
 
           @include('pages.user.profile.sections.show-field', [
             'label' => 'Email',
-            'value' => auth()->user()->email])
+            'value' => auth()->user()->email,
+            'field' => 'email'])
         </div>
 
       </div>

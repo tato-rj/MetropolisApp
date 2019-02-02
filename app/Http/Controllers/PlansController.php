@@ -10,6 +10,10 @@ use App\Services\PagSeguro\PagSeguro;
 
 class PlansController extends Controller
 {
+    public function index()
+    {
+        return view('pages.plans.show.index');
+    }
     /**
      * Display a listing of the resource.
      *

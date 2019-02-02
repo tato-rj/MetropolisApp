@@ -1,4 +1,4 @@
-<form id="form-credit" method="POST" action="{{route('client.plan.subscribe')}}">
+<form id="form-credit" method="POST" action="{{route('plan.subscribe')}}">
 	@csrf
 	{{-- PLAN --}}
 	<input type="hidden" name="plan_id" value="{{$plan->id}}">

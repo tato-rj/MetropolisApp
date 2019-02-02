@@ -1,4 +1,4 @@
-<form id="form-debit" method="POST" action="{{route('client.events.purchase')}}">
+<form id="form-debit" method="POST" action="{{route('plan.subscribe')}}">
 	@csrf
 	{{-- EVENT --}}
 	<input type="hidden" name="space_id" value="{{$plan->id}}">

@@ -11,4 +11,9 @@ class PaymentsController extends Controller
     {
         return view('pages.user.payments.index');
     }
+
+    public function loadFields()
+    {
+    	return view('components.form.payment.fields.' . request('fields'))->render();
+    }
 }

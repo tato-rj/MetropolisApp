@@ -18,7 +18,7 @@ class PagSeguro
         try {
             Library::initialize();
         } catch (\Exception $e) {
-            dd($e);
+            abort(400, $e);
         }
 
         Library::cmsVersion()->setName('Metropolis')->setRelease('1.0');
@@ -34,7 +34,7 @@ class PagSeguro
 
             $this->session = PagSeguroSession::create($this->credentials);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            abort(400, $e);
         }
 	}
 

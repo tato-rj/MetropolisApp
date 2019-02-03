@@ -181,7 +181,7 @@ var errors = {
   '14007': "status da transação não permite reembolso"
 };
 
-function getCardFlag(input, cardNumber, form) {
+getCardFlag = function getCardFlag(input, cardNumber, form) {
   showValidationMessage(form, 'validating');
 
   PagSeguroDirectPayment.getBrand({
@@ -201,7 +201,7 @@ function getCardFlag(input, cardNumber, form) {
       console.log(response);
     }
   });
-}
+};
 
 function showValidationMessage(form, status) {
   form.find('.card-validation').hide();
@@ -216,12 +216,16 @@ function ucfirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-$(document).ready(function () {
+createMasks = function createMasks() {
   $('input.cpf-field').inputmask("999.999.999-99");
   $('input.cnpj-field').inputmask("99.999.999/9999-99");
   $('input[name="card_number"]').inputmask("9999 9999 9999 9999");
   $('input[name="cvv"]').inputmask("999[9]");
-  $('input[name="address_zip"]').inputmask("99999-999");
+  $('input[name="address_zip"]').inputmask("99.999-999");
+};
+
+$(document).ready(function () {
+  createMasks();
 
   PagSeguroDirectPayment.setSessionId(pagseguro.id);
 
@@ -249,7 +253,7 @@ $(document).ready(function () {
   });
 });
 
-$('input[name="card_number"]').on('blur', function () {
+$(document).on('blur', 'input[name="card_number"]', function () {
   var input = $(this);
   var cardNumber = input.cleanVal();
   var $form = $($('button#submit').attr('data-target'));
@@ -259,7 +263,7 @@ $('input[name="card_number"]').on('blur', function () {
   }
 });
 
-$('input[name="card_number"]').on('keyup', function () {
+$(document).on('keyup', 'input[name="card_number"]', function () {
   var input = $(this);
   var cardNumber = input.cleanVal();
   var $form = $($('button#submit').attr('data-target'));
@@ -273,7 +277,7 @@ $('input[name="card_number"]').on('keyup', function () {
   }
 });
 
-$('button#submit').on('click', function (event) {
+$(document).on('click', 'button#submit', function (event) {
   var $button = $(this);
   var $form = $($button.attr('data-target'));
   var buttonOriginalText = $button.text();
@@ -312,8 +316,76 @@ $('button#submit').on('click', function (event) {
   });
 });
 
-$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+$(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
   $('button#submit').attr('data-target', $(e.target).attr('data-form'));
+});
+
+$(document).on('blur', 'input[name="address_zip"]', function () {
+  var zip = $(this).val().replace(/\D/g, '');
+
+  if (zip != "") {
+
+    var validateZip = /^[0-9]{8}$/;
+
+    if (validateZip.test(zip)) {
+
+      $('input[name="address_street"]').val("...");
+      $('input[name="address_district"]').val("...");
+      $('input[name="address_state"]').val("...");
+      $('input[name="address_city"]').val("...");
+
+      //Consulta o webservice viacep.com.br/
+      $.getJSON("https://viacep.com.br/ws/" + zip + "/json/?callback=?", function (data) {
+
+        if (!("erro" in data)) {
+          $('input[name="address_street"]').val(data.logradouro);
+          $('input[name="address_district"]').val(data.bairro);
+          $('input[name="address_state"]').val(data.uf);
+          $('input[name="address_city"]').val(data.localidade);
+
+          $('.zip-alert').hide();
+          $('#zip-valid > div').text('CEP válido!').parent().show();
+        } else {
+          $('.address-fields input').val('');
+          $('.zip-alert').hide();
+          $('#zip-invalid > div').text('CEP não encontrado').parent().show();
+        }
+      });
+    } else {
+      $('.address-fields input').val('');
+      $('.zip-alert').hide();
+      $('#zip-invalid > div').text('Formato de CEP inválido').parent().show();
+    }
+  } else {
+    $('.address-fields input').val('');
+    $('.zip-alert').hide();
+  }
+});
+
+$('input[name="select-card"]').on('change', function () {
+  var $input = $(this);
+  var url = $input.attr('data-url');
+  var target = $input.parent().attr('data-target');
+
+  $('.loading-icons').children().hide();
+  $input.parent().siblings('.loading-icons').children('.text-grey').show();
+
+  $.get(url, function (data) {
+    $('#card-preference .collapse').html('');
+    $(target).html(data);
+
+    if ($input.attr('id') == 'existing-card-radio') {
+      var $cardNumberInput = $('input[name="card_number"]');
+      var $form = $($('button#submit').attr('data-target'));
+
+      getCardFlag($cardNumberInput, $cardNumberInput.cleanVal(), $form);
+    } else if ($input.attr('id') == 'new-card-radio') {
+      createMasks();
+    }
+
+    $input.parent().siblings('.loading-icons').children('.text-grey').hide();
+    $input.parent().siblings('.loading-icons').children('.text-green').show();
+  });
 });
 
 /***/ }),

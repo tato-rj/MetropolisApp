@@ -154,50 +154,6 @@ $('#event-alert').on('click', function() {
 
 </script>
 
-<script type="text/javascript">
-
-$('input[name="address_zip"]').blur(function() {
-    let zip = $(this).val().replace(/\D/g, '');
-
-    if (zip != "") {
-
-        var validateZip = /^[0-9]{8}$/;
-
-        if(validateZip.test(zip)) {
-
-            $('input[name="address_street"]').val("...");
-            $('input[name="address_district"]').val("...");
-            $('input[name="address_state"]').val("...");
-            $('input[name="address_city"]').val("...");
-
-            //Consulta o webservice viacep.com.br/
-            $.getJSON("https://viacep.com.br/ws/"+ zip +"/json/?callback=?", function(data) {
-
-                if (!("erro" in data)) {
-                    $('input[name="address_street"]').val(data.logradouro);
-                    $('input[name="address_district"]').val(data.bairro);
-                    $('input[name="address_state"]').val(data.uf);
-                    $('input[name="address_city"]').val(data.localidade);
-
-              $('.zip-alert').hide();
-                $('#zip-valid > div').text('CEP válido!').parent().show();
-                } else {
-                    $('.address-fields input').val('');
-              $('.zip-alert').hide();
-                $('#zip-invalid > div').text('CEP não encontrado').parent().show();
-                }
-            });
-        } else {
-            $('.address-fields input').val('');
-          $('.zip-alert').hide();
-            $('#zip-invalid > div').text('Formato de CEP inválido').parent().show();
-        }
-    } else {
-        $('.address-fields input').val('');
-        $('.zip-alert').hide();
-    }
-});
-</script>
 @stack('scripts')
 </body>
 </html>

@@ -50,19 +50,4 @@
 @push('scripts')
 <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
 <script type="text/javascript" src="{{mix('js/pagseguro.js')}}"></script>
-<script type="text/javascript">
-$('input[name="tipo_de_pessoa"]').on('click', function() {
-	let $input = $(this);
-	let target = $input.attr('data-target');
-	let name = $input.attr('data-name');
-	let value = $input.attr('data-value');
-
-	$('input[name="card_holder_document_type"]').val(value);
-	$('input.cpf-field, input.cnpj-field').removeAttr('name').hide();
-	$(target).attr('name', name).show();
-});
-$('.different-billing').on('click', function() {
-	$('#new-address').collapse('show');
-});
-</script>
 @endpush

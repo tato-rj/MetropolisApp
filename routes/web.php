@@ -33,6 +33,8 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 		Route::get('', 'PaymentsController@index')->name('index');
 
+		Route::get('load-fields', 'PaymentsController@loadFields')->name('load-fields');
+
 	});
 
 	Route::prefix('cadastro')->name('profile.')->group(function() {

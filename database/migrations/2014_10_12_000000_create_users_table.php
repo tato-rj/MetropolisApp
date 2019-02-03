@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->text('card_holder_name')->nullable(); 
             $table->text('card_number')->nullable(); 
             $table->text('card_brand')->nullable();
-            $table->text('card_last_four')->nullable(); 
+            $table->text('card_lastfour')->nullable(); 
             $table->text('cvv')->nullable(); 
             $table->text('expiry_month')->nullable(); 
             $table->text('expiry_year')->nullable(); 

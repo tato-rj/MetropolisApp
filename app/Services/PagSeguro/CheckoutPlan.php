@@ -50,7 +50,7 @@ class CheckoutPlan implements Checkout
             $this->request->address_street, 
             $this->request->address_number, 
             $this->request->address_district, 
-            $this->request->address_zip, 
+            clean($this->request->address_zip), 
             $this->request->address_city, 
             $this->request->address_state, 
             'BRA', 

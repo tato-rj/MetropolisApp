@@ -30,6 +30,8 @@ trait HasCreditCard
 
 	public function updateCard(CreditCardForm $form)
 	{
+		$this->card_lastfour = substr($form->card_number, -4);
+
 		foreach ($this->cardFields as $field) {
 			$this->$field = $form->$field ? encrypt($form->$field) : null;
 		}

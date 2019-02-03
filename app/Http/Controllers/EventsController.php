@@ -6,7 +6,7 @@ use App\Events\EventCreated;
 use App\{Event, Space, User};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Requests\{SpaceSearchForm, CreateEventForm};
+use App\Http\Requests\{SpaceSearchForm, CreateEventForm, CreditCardForm};
 use Illuminate\Support\Facades\Mail;
 use App\Mail\InviteToEvent;
 use App\Services\PagSeguro\PagSeguro;
@@ -69,7 +69,7 @@ class EventsController extends Controller
         return view('pages.user.checkout.event.index', compact(['space', 'pagseguro']));
     }
 
-    public function purchase(Request $request, CreateEventForm $form)
+    public function purchase(Request $request, CreateEventForm $form, CreditCardForm $cardForm)
     {
         $pagseguro = new PagSeguro;
 
@@ -81,6 +81,9 @@ class EventsController extends Controller
         
         if ($status instanceof \Exception)
             return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
+
+        if ($request->save_card)
+            auth()->user()->updateCard($cardForm);
 
         $event = $form->user->schedule($form, $reference);
 

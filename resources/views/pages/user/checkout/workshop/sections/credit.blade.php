@@ -15,7 +15,7 @@
 	@include('components.form.payment.credit-card')
 
 	<div class="custom-control custom-checkbox mt-4">
-		<input type="checkbox" class="custom-control-input" name="remembercard" id="remembercard">
-		<label class="custom-control-label" for="remembercard">Lembrar os meus dados para reservas mais rápidas</label>
+		<input type="checkbox" class="custom-control-input" name="save_card" id="save_card">
+		<label class="custom-control-label" for="save_card">Lembrar os meus dados para reservas mais rápidas</label>
 	</div>
 </form>

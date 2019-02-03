@@ -7,27 +7,20 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Http\Requests\CreateEventForm;
 use App\Notifications\MailResetPasswordNotification;
-use App\Traits\HasBonus;
+use App\Traits\{HasBonus, HasCreditCard};
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, HasBonus;
+    use Notifiable, HasBonus, HasCreditCard;
 
     protected $guarded = [];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
-public function sendPasswordResetNotification($token)
-{
-    $this->notify(new MailResetPasswordNotification($token));
-}
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new MailResetPasswordNotification($token));
+    }
 
     public function getFirstNameAttribute()
     {

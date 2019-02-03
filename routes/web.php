@@ -41,6 +41,10 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 		Route::post('', 'UsersController@update')->name('update');
 
+		Route::post('/password', 'UsersController@password')->name('update.password');
+
+		Route::post('/creditCard', 'UsersController@creditCard')->name('update.creditCard');
+
 	});
 
 	Route::prefix('suporte')->name('support.')->group(function() {

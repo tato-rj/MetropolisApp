@@ -45,7 +45,7 @@ class UserTest extends AppTest
 		auth()->user()->signup($this->workshop);
 		auth()->user()->signup($pastWorkshop);
 
-		$this->assertCount(1, auth()->user()->upcomingWorkshops);
+		$this->assertCount(1, auth()->user()->fresh()->upcomingWorkshops);
 		 
 	}
 
@@ -149,7 +149,7 @@ class UserTest extends AppTest
 	}
 
 	/** @test */
-	public function it_knows_how_many_bonuses_hours_it_has_left()
+	public function it_knows_how_many_bonus_hours_it_has_left()
 	{
 		$this->signIn();
 
@@ -164,7 +164,7 @@ class UserTest extends AppTest
 		
 		$this->assertEquals(auth()->user()->bonusesLeft($this->space), $plan->bonus_limit);
 
-        $this->post(route('client.events.purchase'), [
+		$data = array_merge([
             'user_id' => auth()->user()->id,
             'space_id' => $this->space->id,
             'participants' => 3,
@@ -172,7 +172,9 @@ class UserTest extends AppTest
             'date' => now(),
             'time' => now()->hour,
             'duration' => 2
-        ]);
+        ], $this->cardFields);
+
+        $this->post(route('client.events.purchase'), $data);
         
         $this->assertEquals(auth()->user()->fresh()->bonusesLeft($this->space), 1);
 	}
@@ -189,5 +191,31 @@ class UserTest extends AppTest
 		auth()->user()->useBonus($this->futureEvent, $duration = 1);
 
 		$this->assertCount(1, auth()->user()->fresh()->bonuses);
+	}
+
+	/** @test */
+	public function it_knows_if_it_has_a_card_saved()
+	{
+		$this->signIn();
+
+		$this->assertFalse(auth()->user()->hasCard);
+
+		$this->postCreditCard()->assertSessionHas('status');
+
+		$this->assertTrue(auth()->user()->fresh()->hasCard);
+	}
+
+	/** @test */
+	public function it_knows_hows_to_decrypt_its_card_information()
+	{
+		$this->signIn();
+
+		$this->postCreditCard()->assertSessionHas('status');
+
+		$this->assertNull(auth()->user()->card(null));
+
+		$this->assertNull(auth()->user()->card('invalid'));
+		
+		$this->assertEquals(auth()->user()->card('card_number'), '4111111111111111');
 	}
 }

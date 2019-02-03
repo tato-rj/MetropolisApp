@@ -35,7 +35,36 @@
             'value' => auth()->user()->email,
             'field' => 'email'])
         </div>
+      </div>
 
+      <div class="view-form mb-5">
+        <div class="mb-2 pb-2 border-bottom align-items-center d-apart">
+          <label class="m-0"><strong>PASSWORD</strong></label>
+          <span class="cursor-pointer text-red edit-field" data-target=".password-fields">editar</span>
+        </div>
+
+        <div class="password-fields" style="display: none;">
+          <form method="POST" action="{{route('client.profile.update.password', auth()->user()->id)}}">
+              @csrf
+              <div class="form-group">
+                <label class="mb-1"><small>Novo password</small></label>
+                <input type="password" name="password" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label class="mb-1"><small>Confirme o password</small></label>
+                <input type="password" name="password_confirmation" class="form-control" required>
+              </div>
+
+              <button type="submit" class="btn btn-red mt-1">Atualizar</button>
+          </form>
+        </div>
+
+        <div class="password-fields">
+          @include('pages.user.profile.sections.show-field', [
+            'label' => 'Password',
+            'value' => '&bull;&bull;&bull;&bull;&bull;&bull;',
+            'field' => 'password'])
+        </div>
       </div>
 
       <div class="view-form">

@@ -19,7 +19,7 @@ class BonusTest extends AppTest
 
 		$this->subscribeToNewPlan($plan);
 
-        $this->post(route('client.events.purchase'), [
+        $data = array_merge([
             'user_id' => auth()->user()->id,
             'space_id' => $this->space->id,
             'participants' => 1,
@@ -27,7 +27,9 @@ class BonusTest extends AppTest
             'date' => now(),
             'time' => now()->hour,
             'duration' => 1
-        ]);
+        ], $this->cardFields);
+
+        $this->post(route('client.events.purchase'), $data);
         
         $this->assertDatabaseHas('bonuses', [
         	'user_id' => auth()->user()->id,

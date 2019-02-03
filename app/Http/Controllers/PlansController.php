@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\{Plan, User, Event};
 use Illuminate\Http\Request;
-use App\Http\Requests\SubscribeForm;
+use App\Http\Requests\{SubscribeForm, CreditCardForm};
 use App\Events\MembershipCreated;
 use App\Services\PagSeguro\PagSeguro;
 
@@ -40,7 +40,7 @@ class PlansController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function subscribe(Request $request, SubscribeForm $form)
+    public function subscribe(Request $request, SubscribeForm $form, CreditCardForm $cardForm)
     {
         $pagseguro = new PagSeguro;
 
@@ -54,7 +54,10 @@ class PlansController extends Controller
 
         if ($status instanceof \Exception)
             return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
-        
+
+        if ($request->save_card)
+            auth()->user()->updateCard($cardForm);
+
         $user->subscribe($plan, $reference);
 
         event(new MembershipCreated($user));

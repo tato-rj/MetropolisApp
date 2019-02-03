@@ -6,6 +6,7 @@ use App\{Workshop, UserWorkshop};
 use Illuminate\Http\Request;
 use App\Events\WorkshopSignup;
 use App\Services\PagSeguro\PagSeguro;
+use App\Http\Requests\CreditCardForm;
 
 class WorkshopsController extends Controller
 {
@@ -36,7 +37,7 @@ class WorkshopsController extends Controller
         return view('pages.user.checkout.workshop.index', compact(['workshop', 'pagseguro']));
     }
 
-    public function purchase(Workshop $workshop, Request $request)
+    public function purchase(Workshop $workshop, Request $request, CreditCardForm $form)
     {
         $pagseguro = new PagSeguro;
 
@@ -48,6 +49,9 @@ class WorkshopsController extends Controller
         
         if ($status instanceof \Exception)
             return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
+
+        if ($request->save_card)
+            auth()->user()->updateCard($form);
 
         $user->signup($workshop, $reference);
 

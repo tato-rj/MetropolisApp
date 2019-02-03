@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Rules\FullName;
+use App\Http\Requests\CreditCardForm;
 
 class UsersController extends Controller
 {
@@ -100,6 +101,22 @@ class UsersController extends Controller
             'email' => $request->email]);
 
         return redirect()->back()->with('status', 'O seu cadastro foi atualizado com sucesso.');
+    }
+
+    public function password(Request $request)
+    {
+        $request->validate(['password' => 'required|string|min:6|confirmed']);
+
+        auth()->user()->update(['password' => bcrypt($request->password)]);
+
+        return redirect()->back()->with('status', 'O seu password foi atualizado com sucesso.');
+    }
+
+    public function creditCard(Request $request, CreditCardForm $form)
+    {
+        auth()->user()->updateCard($form);
+
+        return redirect()->back()->with('status', 'O seu cartão de crédito foi atualizado com sucesso.');
     }
 
     /**

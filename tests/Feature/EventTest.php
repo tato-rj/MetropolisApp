@@ -25,6 +25,28 @@ class EventTest extends AppTest
 	}
 
 	/** @test */
+	public function a_user_can_save_its_payment_information_when_making_a_purchase()
+	{
+		$this->signIn();
+
+		$this->assertFalse(auth()->user()->fresh()->hasCard);
+
+		$this->createNewEvent($user = null, $saveCard = true)->assertSessionHas('status');
+
+		$this->assertTrue(auth()->user()->fresh()->hasCard);
+	}
+
+	/** @test */
+	public function a_users_payment_information_is_not_saved_if_the_checkbox_has_not_been_checked()
+	{
+		$this->signIn();
+
+		$this->createNewEvent($user = null, $saveCard = false)->assertSessionHas('status');
+
+		$this->assertFalse(auth()->user()->fresh()->hasCard);
+	}
+
+	/** @test */
 	public function unauthenticated_users_cannot_create_an_event()
 	{
 		$this->expectException('Illuminate\Auth\AuthenticationException');
@@ -53,7 +75,7 @@ class EventTest extends AppTest
 
 		$this->signIn();
 
-        $this->post(route('client.events.purchase'), [
+		$data = array_merge([
             'user_id' => auth()->user()->id,
             'space_id' => $this->space->id,
             'participants' => 3,
@@ -61,7 +83,9 @@ class EventTest extends AppTest
             'date' => now(),
             'time' => now()->hour,
             'duration' => 2
-        ]);
+        ], $this->cardFields);
+
+        $this->post(route('client.events.purchase'), $data);
 
 		Mail::assertQueued(InviteToEvent::class, 2);		 
 	}
@@ -71,7 +95,7 @@ class EventTest extends AppTest
 	{
 		$this->signIn();
 
-        $this->post(route('client.events.purchase'), [
+		$data = array_merge([
             'user_id' => auth()->user()->id,
             'space_id' => $this->space->id,
             'participants' => 3,
@@ -79,7 +103,9 @@ class EventTest extends AppTest
             'date' => now(),
             'time' => now()->hour,
             'duration' => 2
-        ]);
+        ], $this->cardFields);
+
+        $this->post(route('client.events.purchase'), $data);
 
 		Mail::fake();
 

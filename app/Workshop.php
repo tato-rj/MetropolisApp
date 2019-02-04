@@ -93,4 +93,9 @@ class Workshop extends Metropolis
         
         return $query->orderBy($names[$array[0]], $orders[$array[1]]);
     }
+
+    public function scopePopular($query)
+    {
+        return $query->orderBy('attendees_count', 'desc');
+    }
 }

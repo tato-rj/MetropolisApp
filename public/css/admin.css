@@ -47,7 +47,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Roboto", sans-serif;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -87,7 +87,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -5770,7 +5770,7 @@ button.close {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -5895,7 +5895,7 @@ button.close {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Roboto", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -10790,38 +10790,6 @@ a.breadcrumb-item:hover {
   font-weight: 500;
 }
 
-@font-face {
-  font-family: Roboto;
-  src: url(/fonts/Roboto-Light-webfont.eot?a990f611f2305dc12965f186c2ef2690);
-  src: url(/fonts/Roboto-Light-webfont.eot?a990f611f2305dc12965f186c2ef2690?#iefix) format("embedded-opentype"), url(/fonts/Roboto-Light-webfont.woff?816d43bc217485bc52e309cd1b356880) format("woff"), url(/fonts/Roboto-Light-webfont.ttf?d8472f7b6012706fc028021e5a654843) format("truetype"), url(/fonts/Roboto-Light-webfont.svg?3581138bd3477ae13eca1ac9e584220a#icon) format("svg");
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Roboto;
-  src: url(/fonts/Roboto-Regular-webfont.eot?30799efa5bf74129468ad4e257551dc3);
-  src: url(/fonts/Roboto-Regular-webfont.eot?30799efa5bf74129468ad4e257551dc3?#iefix) format("embedded-opentype"), url(/fonts/Roboto-Regular-webfont.woff?3e5675c89f974f7811eeaf07e2dd5ba3) format("woff"), url(/fonts/Roboto-Regular-webfont.ttf?7f1320f7ec4f6716054d88c33235d17b) format("truetype"), url(/fonts/Roboto-Regular-webfont.svg?da61d7ef302b8bf871dd0ae796a52f33#icon) format("svg");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Roboto;
-  src: url(/fonts/Roboto-Medium-webfont.eot?4d9f3f9e5195e7b074bb63ba4ce42208);
-  src: url(/fonts/Roboto-Medium-webfont.eot?4d9f3f9e5195e7b074bb63ba4ce42208?#iefix) format("embedded-opentype"), url(/fonts/Roboto-Medium-webfont.woff?b9d01ac1742192a7c9d30f3fe346a9f4) format("woff"), url(/fonts/Roboto-Medium-webfont.ttf?1d2af757de4340d6b644360e517a2a47) format("truetype"), url(/fonts/Roboto-Medium-webfont.svg?88e897b6e48f9b57cbed1ad9256f18ee#icon) format("svg");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Roboto;
-  src: url(/fonts/Roboto-Bold-webfont.eot?ecdd509cadbf1ea78b8d2e31ec52328c);
-  src: url(/fonts/Roboto-Bold-webfont.eot?ecdd509cadbf1ea78b8d2e31ec52328c?#iefix) format("embedded-opentype"), url(/fonts/Roboto-Bold-webfont.woff?8b18d65d6824460ad37616723e493bcd) format("woff"), url(/fonts/Roboto-Bold-webfont.ttf?3dcc0e0f2287e2e955cd8ce8cb08dae0) format("truetype"), url(/fonts/Roboto-Bold-webfont.svg?375c4f3bd35840adee24a1535bbb2018#icon) format("svg");
-  font-weight: 700;
-  font-style: normal;
-}
-
 .bg-blue {
   background-color: #2196F3 !important;
 }
@@ -13901,7 +13869,7 @@ b {
 }
 
 .widget-pie {
-  background-color: #e3342f;
+  background-color: #4dc0b5;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -15499,7 +15467,7 @@ span.flatpickr-weekday {
 .swal2-modal {
   border-radius: 2px;
   padding: 2.5rem !important;
-  font-family: "Roboto", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   -webkit-box-shadow: 0 4px 18px rgba(0, 0, 0, 0.11);
           box-shadow: 0 4px 18px rgba(0, 0, 0, 0.11);
 }

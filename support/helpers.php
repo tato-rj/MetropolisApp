@@ -1,5 +1,48 @@
 <?php 
 
+function percentage($value, $total)
+{
+    if ($total == 0)
+        return 0;
+    
+    return $value * 100 / $total;
+}
+
+function fullDatePt()
+{
+    $data = date('D');
+    $mes = date('M');
+    $dia = date('d');
+    $ano = date('Y');
+    
+    $semana = array(
+        'Sun' => 'Domingo', 
+        'Mon' => 'Segunda-Feira',
+        'Tue' => 'Terca-Feira',
+        'Wed' => 'Quarta-Feira',
+        'Thu' => 'Quinta-Feira',
+        'Fri' => 'Sexta-Feira',
+        'Sat' => 'Sábado'
+    );
+    
+    $mes_extenso = array(
+        'Jan' => 'Janeiro',
+        'Feb' => 'Fevereiro',
+        'Mar' => 'Março',
+        'Apr' => 'Abril',
+        'May' => 'Maio',
+        'Jun' => 'Junho',
+        'Jul' => 'Julho',
+        'Aug' => 'Agosto',
+        'Nov' => 'Novembro',
+        'Sep' => 'Setembro',
+        'Oct' => 'Outubro',
+        'Dec' => 'Dezembro'
+    );
+    
+    return $semana["$data"] . ", {$dia} de " . $mes_extenso["$mes"] . " de {$ano}";
+}
+
 function formatPhoneLink($type, $number)
 {
 	if ($type == 'whatsapp')

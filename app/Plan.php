@@ -5,6 +5,7 @@ namespace App;
 class Plan extends Metropolis
 {
     protected $appends = ['formattedFee'];
+    protected $withCount = ['memberships'];
     
     public function memberships()
     {

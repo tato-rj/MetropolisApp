@@ -6,7 +6,7 @@ $(document).ready(function(){
     // Main
     var curvedLineChartData = [
         {
-            label: '2016',
+            label: '2011',
             color: '#ededed',
             lines: {
                 show: true,
@@ -21,13 +21,13 @@ $(document).ready(function(){
         },
         {
             label: '2017',
-            color: '#00BCD4',
+            color: '#e3342f',
             lines: {
                 show: true,
                 lineWidth: 0.1,
                 fill: 1,
                 fillColor: {
-                    colors: ['rgba(0,188,212,0.001)', '#00BCD4']
+                    colors: ['rgba(227,52,47,0.001)', '#e3342f']
                 }
             },
             data: [[10, 80], [20, 30], [30, 70], [40, 10], [50, 80], [60, 10], [70, 50]]

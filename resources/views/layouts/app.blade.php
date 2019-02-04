@@ -9,8 +9,11 @@
     <title>{{ config('app.name') }} | O seu espaço de co-working no RJ</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
-    <link href="{{ asset('css/primer.css') }}" rel="stylesheet">
+    
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    
+    <link href="{{ asset('css/primer.css') }}" rel="stylesheet">
+
     <style type="text/css">
     .fixed-bottom-right {
       position: fixed;

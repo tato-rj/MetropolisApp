@@ -6,12 +6,12 @@
 					O nosso escritório está aberto de Seg. à Sex. das 8 às 18 horas. Se entrar em contato conosco fora do horário de atendimento, a nossa equipe irá retornar o mais rápido possível.
 				</div>
 				<div class="col-6">
-					<h3 class="mb-3">
+					<h5 class="mb-3">
 						<a href="{{formatPhoneLink('whatsapp', '(21) 999-498-498')}}" class="mb-1 link-none"><i class="fab fa-whatsapp text-teal fa-lg mr-2"></i>(21) 999-498-498</a>
-					</h3>
-					<h3>
+					</h5>
+					<h5>
 						<a href="{{formatPhoneLink('phone', '(21) 3199-1377')}}" class="m-0 link-none"><i class="fas fa-phone text-teal mr-2"></i>(21) 3199-1377</a>
-					</h3>
+					</h5>
 				</div>
 			</div>
 			<div>

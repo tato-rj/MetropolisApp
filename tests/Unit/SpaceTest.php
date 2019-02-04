@@ -96,7 +96,7 @@ class SpaceTest extends AppTest
 	}
 
 	/** @test */
-	public function if_ignores_memberships_when_checking_if_the_workstation_is_full()
+	public function it_ignores_memberships_when_checking_if_the_workstation_is_full()
 	{
 		create(Event::class, [
 			'space_id' => $this->workspace->id,

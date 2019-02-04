@@ -8,7 +8,7 @@
   		  <input type="radio" id="existing-card-radio" name="select-card" data-url="{{route('client.payments.load-fields', ['fields' => 'existing'])}}" class="custom-control-input">
   		  <label class="custom-control-label" for="existing-card-radio">
   		  	Vou usar o cartão 
-  		  	<strong>{{strtoupper(auth()->user()->card('card_brand'))}}</strong> <small><strong>**** **** **** {{auth()->user()->card_lastfour}}</strong></small>
+  		  	@include('components.form.payment.card-preview')
   		  </label>
   		</div>
       <div class="loading-icons">

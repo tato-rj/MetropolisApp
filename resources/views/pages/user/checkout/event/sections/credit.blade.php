@@ -2,6 +2,11 @@
 	@csrf
 	{{-- EVENT --}}
 	<input type="hidden" name="space_id" value="{{$space->id}}">
+	@if(request('emails'))
+	@foreach(request()->emails as $email)
+	<input type="hidden" name="emails[]" value="{{$email}}">
+	@endforeach
+	@endif
 	<input type="hidden" name="description" value="{{$space->name}}">
 	<input type="hidden" name="date" value="{{request()->date}}">
 	<input type="hidden" name="time" value="{{request()->time}}">

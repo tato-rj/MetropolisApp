@@ -70,23 +70,23 @@
       <div class="view-form">
         <div class="mb-2 pb-2 border-bottom align-items-center d-apart">
           <label class="m-0"><strong>DADOS DE PAGAMENTO</strong></label>
-          <span class="cursor-pointer text-red edit-field" data-target=".payment-fields">editar</span>
         </div>
 
-        <div class="payment-fields" style="display: none;">
-          <form method="POST" action="{{route('client.profile.update', auth()->user()->id)}}">
+        @if(auth()->user()->hasCard)
+        <div class="alert alert-grey d-apart align-items-center">
+          <div>
+            @include('components.form.payment.card-preview')
+          </div>
+          <form method="POST" action="{{route('client.profile.remove.creditCard', auth()->user()->id)}}">
               @csrf
-
-              @include('components.form.payment.credit-card')
-
-              <button type="submit" class="btn btn-red mt-1">Atualizar</button>
+              <button type="submit" class="btn btn-red">Remover</button>
           </form>
         </div>
-
+        @else
         <div class="payment-fields">
-          <div class="text-center text-muted p-3"><i>O seu cartão não está salvo</i></div>
+          <div class="text-center text-muted p-3"><i>Não existe nenhum cartão salvo nesse momento</i></div>
         </div>
-
+        @endif
       </div>
   	</div>
   </div>

@@ -1,4 +1,3 @@
-
 <div class="form-group">
 	<label class="control-label" for="card_holder_name"><small>Nome no cartão</small></label>
 	<input required type="text" class="form-control" name="card_holder_name" id="card_holder_name" placeholder="Nome no cartão" value="{{old('card_holder_name')}}">
@@ -85,10 +84,10 @@
 			<input required type="text" class="form-control" name="address_street" placeholder="Nome da rua" value="{{old('address_street')}}">
 		</div>
 		<div class="col-3 mb-2">
-			<input required type="text" class="form-control" name="address_number" placeholder="Número" value="{{old('address_number')}}">				
+			<input type="text" class="form-control" name="address_number" placeholder="Número" value="{{old('address_number')}}">				
 		</div>
 		<div class="col-3 mb-2">
-			<input required type="text" class="form-control" name="address_complement" placeholder="Complemento" value="{{old('address_complement')}}">				
+			<input type="text" class="form-control" name="address_complement" placeholder="Complemento" value="{{old('address_complement')}}">				
 		</div>
 	</div>
 	<div class="form-row address-fields">

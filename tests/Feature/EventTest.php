@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\AppTest;
-use App\{Event, User};
+use App\{Event, User, Newsletter};
 use App\Mail\{ConfirmEvent, InviteToEvent};
 use Illuminate\Support\Facades\Mail;
 use App\Events\EventCreated;
@@ -25,7 +25,7 @@ class EventTest extends AppTest
 	}
 
 	/** @test */
-	public function a_user_can_save_its_payment_information_when_making_a_purchase()
+	public function a_user_can_save_its_card_information_when_making_a_purchase()
 	{
 		$this->signIn();
 
@@ -112,5 +112,45 @@ class EventTest extends AppTest
 		$this->post(route('client.events.invite'), ['event_id' => auth()->user()->events->first()->id]);
 
 		Mail::assertQueued(InviteToEvent::class, 2);		 
+	}
+
+	/** @test */
+	public function all_guests_emails_given_are_saved_on_the_newsletter_table()
+	{
+		$this->signIn();
+
+		$data = array_merge([
+            'user_id' => auth()->user()->id,
+            'space_id' => $this->space->id,
+            'participants' => 3,
+            'emails' => ['guest1@email.com', 'guest2@email.com'],
+            'date' => now(),
+            'time' => now()->hour,
+            'duration' => 2
+        ], $this->cardFields);
+
+		$this->post(route('client.events.purchase'), $data);
+
+		$this->assertDatabaseHas('newsletters', ['email' => 'guest1@email.com']);
+	}
+
+	/** @test */
+	public function no_email_is_added_twice_in_the_newsletter_table()
+	{
+		$this->signIn();
+
+		$data = array_merge([
+            'user_id' => auth()->user()->id,
+            'space_id' => $this->space->id,
+            'participants' => 3,
+            'emails' => ['guest1@email.com', 'guest1@email.com'],
+            'date' => now(),
+            'time' => now()->hour,
+            'duration' => 2
+        ], $this->cardFields);
+
+		$this->post(route('client.events.purchase'), $data);
+
+		$this->assertCount(1, Newsletter::all());
 	}
 }

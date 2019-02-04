@@ -1,5 +1,15 @@
 <?php 
 
+function formatPhoneLink($type, $number)
+{
+	if ($type == 'whatsapp')
+		return 'https://wa.me/55' . preg_replace("/[^0-9]/", "", $number);
+
+	$format = preg_replace("/[^0-9]/", "-", $number);
+	$number = implode('-',array_unique(explode('-', $format)));
+	return 'tel:55' . $number;
+}
+
 function encrypt_str($string) {
     $output = false;
  

@@ -39,6 +39,17 @@ trait HasCreditCard
 		return $this->save();
 	}
 
+	public function removeCard()
+	{
+		$this->card_lastfour = null;
+		
+		foreach ($this->cardFields as $field) {
+			$this->$field = null;
+		}
+
+		return $this->save();
+	}
+
 	public function card($field)
 	{
 		if (! in_array($field, $this->cardFields))

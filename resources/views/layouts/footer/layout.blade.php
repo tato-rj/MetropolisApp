@@ -11,12 +11,18 @@
           <div class="mb-5 text-light">
             <div class="mb-3">
               <p class="mb-1"><strong>Endereço</strong></p>
-              <p class="mb-1">Av. Rio Branco, nº 185 Sala 1025</p>
-              <p class="m-0">Centro, Rio de Janeiro/RJ</p>
+              <p class="mb-1">Av. Rio Branco, nº 151 Grupo 401</p>
+              <p class="mb-1">Centro, Rio de Janeiro/RJ</p>
+              <p class="m-0">CEP: 20.040-006</p>
             </div>
             <div class="mb-3">
               <p class="mb-1"><strong>Telefone</strong></p>
-              <p class="m-0">+55 21 3199-1377 | +55 21 3429-1377</p>
+              <div class="mb-1">
+                <a href="{{formatPhoneLink('whatsapp', '(21) 999-498-498')}}" class="mb-1 link-none"><i class="fab fa-whatsapp fa-lg mr-2"></i>(21) 999-498-498</a>
+              </div>
+              <div>
+                <a href="{{formatPhoneLink('phone', '(21) 3199-1377')}}" class="m-0 link-none"><i class="fas fa-phone mr-2"></i>(21) 3199-1377</a>
+              </div>
             </div>
             <div class="mb-3">
               <p class="mb-1"><strong>Email</strong></p>
@@ -34,9 +40,8 @@
     </div>
 
 
-    <div class="col-md-6">
-      <div class="bg-align-center h-100 w-100" style="background-image: url({{asset('images/map.jpg')}})"></div>
-      {{-- <div id="map" class="w-100 h-100"></div> --}}
+    <div class="col-md-6 bg-light">
+      @include('layouts.footer.map')
     </div>
 
   </div>

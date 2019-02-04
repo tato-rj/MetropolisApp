@@ -9,6 +9,7 @@
 @endsection
 
 @push('scripts')
+
 <script type="text/javascript">
 $('.edit-field').on('click', function() {
 	let $button = $(this);

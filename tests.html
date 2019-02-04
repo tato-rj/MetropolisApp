@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Test Documentation</title>
+        <style>
+            body {
+                text-rendering: optimizeLegibility;
+                font-variant-ligatures: common-ligatures;
+                font-kerning: normal;
+                margin-left: 2em;
+                font-size: .5em;
+            }
+
+            body > ul > li {
+                font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial;
+                font-size: 2em;
+            }
+
+            h2 {
+                font-family: Tahoma, Helvetica, Arial;
+                font-size: 3em;
+            }
+
+            ul {
+                list-style: none;
+                margin-bottom: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <h2 id="Tests\Unit\BonusTest">Unit\Bonus</h2>
+        <ul>
+            <li style="color: #555753;">✓ It belongs to a user</li>
+            <li style="color: #555753;">✓ It belongs to an event</li>
+            <li style="color: #555753;">✓ It belongs to a plan</li>
+            <li style="color: #555753;">✓ It knows its limit</li>
+        </ul>
+        <h2 id="Tests\Unit\EventTest">Unit\Event</h2>
+        <ul>
+            <li style="color: #555753;">✓ It belongs to a space</li>
+            <li style="color: #555753;">✓ It belongs to a user</li>
+            <li style="color: #555753;">✓ It may have a bonus applies to it</li>
+            <li style="color: #555753;">✓ It knows if it is a future event</li>
+            <li style="color: #555753;">✓ It knows if it is a current event</li>
+            <li style="color: #555753;">✓ It knows if it is a past event</li>
+        </ul>
+        <h2 id="Tests\Unit\PaymentTest">Unit\Payment</h2>
+        <ul>
+            <li style="color: #555753;">✓ It belongs to a user</li>
+            <li style="color: #555753;">✓ It has a reservation</li>
+            <li style="color: #555753;">✓ It knows how to record an event</li>
+        </ul>
+        <h2 id="Tests\Unit\PlanTest">Unit\Plan</h2>
+        <ul>
+            <li style="color: #555753;">✓ It has many memberships</li>
+            <li style="color: #555753;">✓ It decreases the capacity for the workstation</li>
+            <li style="color: #555753;">✓ It knows which spaces it has for bonus</li>
+        </ul>
+        <h2 id="Tests\Unit\SearchTest">Unit\Search</h2>
+        <ul>
+            <li style="color: #555753;">✓ It knows how many users are in the workstation at a given time</li>
+            <li style="color: #555753;">✓ It ignores plans when counting the number of participants</li>
+            <li style="color: #555753;">✓ An event cannot be booked if the room is full</li>
+        </ul>
+        <h2 id="Tests\Unit\SpaceTest">Unit\Space</h2>
+        <ul>
+            <li style="color: #555753;">✓ It has many events</li>
+            <li style="color: #555753;">✓ It knows its day length</li>
+            <li style="color: #555753;">✓ It knows its starting and ending hours</li>
+            <li style="color: #555753;">✓ It can calcultate the cost of a reservation</li>
+            <li style="color: #555753;">✓ It knows if it is available on any given time</li>
+            <li style="color: #555753;">✓ It keeps track of its total capacity</li>
+            <li style="color: #555753;">✓ If it reaches its limit it knows how many participants it can still accept</li>
+            <li style="color: #555753;">✓ If ignores memberships when checking if the workstation is full</li>
+            <li style="color: #555753;">✓ It knows when is the next business day</li>
+        </ul>
+        <h2 id="Tests\Unit\UserTest">Unit\User</h2>
+        <ul>
+            <li style="color: #555753;">✓ It knows its first name</li>
+            <li style="color: #555753;">✓ It has many events</li>
+            <li style="color: #555753;">✓ It knows how to sign up to workshops</li>
+            <li style="color: #555753;">✓ It knows its upcoming workshops</li>
+            <li style="color: #555753;">✓ It cannot signup twice to the same workshop</li>
+            <li style="color: #555753;">✓ It has many payments</li>
+            <li style="color: #555753;">✓ It may have many bonuses</li>
+            <li style="color: #555753;">✓ It knows how to subscribe to a plan</li>
+            <li style="color: #555753;">✓ It knows if it has an upcoming event</li>
+            <li style="color: #555753;">✓ It knows if it has a current event</li>
+            <li style="color: #555753;">✓ It knows if it has a past event</li>
+            <li style="color: #555753;">✓ It knows how many bonus hours it has left</li>
+            <li style="color: #555753;">✓ It knows how to use a bonus</li>
+            <li style="color: #555753;">✓ It knows if it has a card saved</li>
+            <li style="color: #555753;">✓ It knows hows to decrypt its card information</li>
+        </ul>
+        <h2 id="Tests\Unit\WorkshopTest">Unit\Workshop</h2>
+        <ul>
+            <li style="color: #555753;">✓ It has many attendees</li>
+            <li style="color: #555753;">✓ It knows the upcoming events</li>
+            <li style="color: #555753;">✓ It knows all events this week</li>
+            <li style="color: #555753;">✓ It knows all events this month</li>
+            <li style="color: #555753;">✓ It knows all free events</li>
+            <li style="color: #555753;">✓ It knows if its capacity has reached its limit</li>
+        </ul>
+        <h2 id="Tests\Feature\BonusTest">Feature\Bonus</h2>
+        <ul>
+            <li style="color: #555753;">✓ It automatically applies to users with a plan</li>
+            <li style="color: #555753;">✓ The memberships number of available bonuses reset when the membership renews</li>
+        </ul>
+        <h2 id="Tests\Feature\EventTest">Feature\Event</h2>
+        <ul>
+            <li style="color: #555753;">✓ Authenticated users can create an event</li>
+            <li style="color: #555753;">✓ A user can save its payment information when making a purchase</li>
+            <li style="color: #555753;">✓ A users payment information is not saved if the checkbox has not been checked</li>
+            <li style="color: #555753;">✓ Unauthenticated users cannot create an event</li>
+            <li style="color: #555753;">✓ The creator of an event always receives a confirmation email</li>
+            <li style="color: #555753;">✓ Each participant can receive an invitation by email</li>
+            <li style="color: #555753;">✓ The creator can resend all invitation emails</li>
+            <li style="color: #555753;">✓ All guests emails given are saved on the subscription table</li>
+            <li style="color: #555753;">✓ No email is added twice in the newsletter table</li>
+        </ul>
+        <h2 id="Tests\Feature\PagSeguro\RecurringPaymentTest">Feature\PagSeguro\RecurringPayment</h2>
+        <ul>
+            <li style="color: #555753;">✓ A recurring event knows if it should just update or renew its membership plan by automatically creating a new event</li>
+            <li style="color: #555753;">✓ A payment is recorded upon every first notification</li>
+            <li style="color: #555753;">✓ A renewed event is scheduled for the day after its last event ends</li>
+            <li style="color: #555753;">✓ A users membership is not renewed if a recurring payment is cancelled</li>
+        </ul>
+        <h2 id="Tests\Feature\PagSeguro\SimplePaymentTest">Feature\PagSeguro\SimplePayment</h2>
+        <ul>
+            <li style="color: #555753;">✓ An event updates its status via notifications</li>
+            <li style="color: #555753;">✓ An event payment is recorded upon every first notification</li>
+            <li style="color: #555753;">✓ An event payment record is updated with a notification</li>
+            <li style="color: #555753;">✓ A user can see any event unless it has been cancelled</li>
+        </ul>
+        <h2 id="Tests\Feature\PagSeguro\WorkshopPaymentTest">Feature\PagSeguro\WorkshopPayment</h2>
+        <ul>
+            <li style="color: #555753;">✓ A workshop signup updates its status via notifications</li>
+            <li style="color: #555753;">✓ A workshop payment is recorded upon every first notification</li>
+            <li style="color: #555753;">✓ A workshop payment record is updated with a notification</li>
+        </ul>
+        <h2 id="Tests\Feature\PlanTest">Feature\Plan</h2>
+        <ul>
+            <li style="color: #555753;">✓ Authenticated users can subscribe to a plan</li>
+            <li style="color: #555753;">✓ Unauthenticated users cannot subscribe</li>
+            <li style="color: #555753;">✓ A user receives an email when subscribing to a plan</li>
+            <li style="color: #555753;">✓ A user cannot have two subscriptions</li>
+            <li style="color: #555753;">✓ An event is automatically created upon subscription</li>
+        </ul>
+        <h2 id="Tests\Feature\UserTest">Feature\User</h2>
+        <ul>
+            <li style="color: #555753;">✓ Authenticated users can update their profile information</li>
+            <li style="color: #555753;">✓ Authenticated users can update their password</li>
+            <li style="color: #555753;">✓ Authenticated users can save their credit card information</li>
+            <li style="color: #555753;">✓ The users card information is stored encrypted</li>
+            <li style="color: #555753;">✓ Users cannot update their names with a single word</li>
+            <li style="color: #555753;">✓ Users cannot update their emails with invalid data</li>
+        </ul>
+        <h2 id="Tests\Feature\WorkshopTest">Feature\Workshop</h2>
+        <ul>
+            <li style="color: #555753;">✓ Authenticated users can signup for a workshop</li>
+            <li style="color: #555753;">✓ Unauthenticated users cannot signup for a workshop</li>
+        </ul>
+    </body>
+</html>

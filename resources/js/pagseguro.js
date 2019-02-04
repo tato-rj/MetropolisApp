@@ -216,6 +216,11 @@ $(document).on('click', 'button#submit', function(event) {
 	let $form = $($button.attr('data-target'));
 	let buttonOriginalText = $button.text();
 
+  if (! $form.find('input[name="card_number"]').val()) {
+    alert('Por favor preencha o número do cartão corretamente');
+    return;
+  }
+
 	$button.prop('disabled', true);
 	$button.text('PROCESSANDO O SEU PEDIDO...');
 

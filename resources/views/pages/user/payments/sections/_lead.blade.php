@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-default">
 				<h1 class="display-4">Meus pagamentos</h1>
-				<p class="lead">Encontre aqui todos os pagamentos online que você realizou conosco</p>
+				<p class="lead">Encontre aqui todos os pagamentos online que você realizou conosco.</p>
 			</div>
 		</div>
 	</div>

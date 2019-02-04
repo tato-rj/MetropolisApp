@@ -119,6 +119,13 @@ class UsersController extends Controller
         return redirect()->back()->with('status', 'O seu cartão de crédito foi atualizado com sucesso.');
     }
 
+    public function removeCard(Request $request)
+    {
+        auth()->user()->removeCard();
+
+        return redirect()->back()->with('status', 'O seu cartão de crédito foi removido com sucesso.');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

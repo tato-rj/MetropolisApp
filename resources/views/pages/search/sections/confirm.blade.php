@@ -50,11 +50,11 @@
 					<div class="icon-input position-relative mb-2">
 					<input type="text" placeholder="O seu email será enviado automaticamente" disabled 
 						class="form-control border-grey bg-transparent" style="border: none; border-bottom: 1px solid">
-						<i class="text-grey opacity-8 fas fa-envelope"></i>
+						<i class="text-green fas fa-check"></i>
 					</div>
 					@for($i=2; $i<=request()->participants; $i++)
 					<div class="icon-input position-relative mb-2">
-					<input type="email" name="emails[]" placeholder="Participante {{$i}}" 
+					<input type="email" name="emails[]" placeholder="Email do participante {{$i}}" 
 						class="form-control border-grey bg-transparent" style="border: none; border-bottom: 1px solid">
 						<i class="text-grey opacity-8 fas fa-envelope"></i>
 					</div>

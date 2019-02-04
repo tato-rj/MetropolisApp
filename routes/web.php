@@ -47,6 +47,8 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 		Route::post('/creditCard', 'UsersController@creditCard')->name('update.creditCard');
 
+		Route::post('/creditCard/remove', 'UsersController@removeCard')->name('remove.creditCard');
+
 	});
 
 	Route::prefix('suporte')->name('support.')->group(function() {
@@ -62,6 +64,10 @@ Route::get('/', function () {
 
 Route::get('/quem-somos', function () {
     return view('pages.about.index');
+});
+
+Route::get('/consultoria', function () {
+    return view('pages.consulting.index');
 });
 
 Route::get('/contato', function () {

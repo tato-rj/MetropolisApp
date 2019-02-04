@@ -43,7 +43,21 @@ class UserTest extends AppTest
 	{
 		$this->signIn();
 
-		$this->postCreditCard()->assertSessionHas('status')->assertSessionHas('status');
+		$this->postCreditCard()->assertSessionHas('status');
+	}
+
+	/** @test */
+	public function authenticated_users_can_remove_their_credit_card_information()
+	{
+		$this->signIn();
+
+		$this->postCreditCard()->assertSessionHas('status');
+
+		$this->assertTrue(auth()->user()->hasCard);
+
+		$this->post(route('client.profile.remove.creditCard', auth()->user()->id));
+
+		$this->assertFalse(auth()->user()->fresh()->hasCard);
 	}
 
 	/** @test */

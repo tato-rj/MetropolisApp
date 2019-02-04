@@ -11680,11 +11680,6 @@ textarea {
   line-height: 100%;
 }
 
-.top-nav > li > a.active,
-.top-nav > li > a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 .top-nav > li .dropdown-menu--block {
   padding: 0;
 }

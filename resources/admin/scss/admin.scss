@@ -123,3 +123,22 @@
 @import "inc/vendor-overrides/lightgallery";
 @import "inc/vendor-overrides/jquery.scrollbar";
 @import "inc/vendor-overrides/Waves";
+
+.app-shortcuts__item > i {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.2em;
+    line-height: 39px;
+    -webkit-transition: background-color 250ms;
+    transition: background-color 250ms;
+}
+
+.app-shortcuts__item > small {
+    display: block;
+    margin-top: 0.85rem;
+    font-size: 80%;
+    color: #9c9c9c;
+    -webkit-transition: color 250ms;
+    transition: color 250ms;
+}

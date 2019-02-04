@@ -8,10 +8,6 @@
   }
 }
 
-html {
-  font-size: $font-size-root;
-}
-
 a {
   cursor: pointer;
 }
@@ -31,5 +27,5 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: $font-family-sans-serif;
+  // font-family: $font-family-sans-serif;
 }

@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+        <title>{{ config('app.name') }} | Admin</title>
         <!-- Vendor styles -->
         <link rel="stylesheet" href="{{asset('admin-page/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css')}}">
         <link rel="stylesheet" href="{{asset('admin-page/vendors/bower_components/animate.css/animate.min.css')}}">
@@ -13,7 +14,8 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
         
         <!-- App styles -->
-        <link rel="stylesheet" href="{{asset('css/admin.css')}}">
+        <link href="{{ asset('css/primer.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{mix('css/admin.css')}}">
     </head>
 
     <body data-ma-theme="teal">
@@ -65,6 +67,6 @@
         <script src="{{asset('admin-page/demo/js/jqvmap.js')}}"></script>
 
         <!-- App functions and actions -->
-        <script src="{{asset('js/admin.js')}}"></script>
+        <script src="{{mix('js/admin.js')}}"></script>
     </body>
 </html>

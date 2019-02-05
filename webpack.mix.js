@@ -13,6 +13,5 @@ mix.js('resources/js/app.js', 'public/js')
    	], 'public/js/app.js')
    	.copy('resources/sass/vendor/primer.css', 'public/css/primer.css')
    	.copyDirectory('resources/images/', 'public/images')
-   	.copyDirectory('resources/admin/img/', 'public/images/admin')
-   	.copyDirectory('resources/admin/vendors/', 'public/admin-page/vendors')
+   	.copyDirectory('resources/admin/js/vendors/', 'public/admin-page/vendors')
    	.version();

@@ -10,7 +10,7 @@ class Event extends Metropolis implements Reservation
     use PagSeguro;
 
 	protected $dates = ['starts_at', 'ends_at', 'verified_at'];
-    protected $appends = ['title', 'start', 'end', 'duration', 'status', 'statusForUser', 'statusColor', 'displayName'];
+    protected $appends = ['title', 'start', 'end', 'duration', 'status', 'statusForUser', 'statusColor'];
 
 	public function creator()
 	{
@@ -85,5 +85,13 @@ class Event extends Metropolis implements Reservation
     public function getEmailsAttribute($emails)
     {
         return unserialize($emails);
+    }
+
+    public function scopeNow($query)
+    {
+        if (! office()->isOpen())
+            return collect();
+
+        return $query->whereDate('starts_at', '<=', now())->whereDate('ends_at', '>', now())->get();
     }
 }

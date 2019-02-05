@@ -1,7 +1,7 @@
 <ul class="list-flat px-3 py-2">
 	@if($event->bonus()->exists())
 	<div class="alert alert-green border-0 text-center p-2" role="alert">
-		Você usou <strong>{{$event->bonus->duration}} {{trans_choice('words.horas', $event->bonus->duration)}}</strong> de bônus nessa reserva!
+		Nós aplicamos <strong>{{$event->bonus->duration}} {{trans_choice('words.horas', $event->bonus->duration)}}</strong> de bônus nessa reserva!
 	</div>
 	@endif
 
@@ -83,5 +83,11 @@
 
 <div class="bg-light py-2 px-3">
 	<p class="text-muted m-0"><small>Para alterar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></p>
+	@if($event->reference)
 	<p class="text-muted m-0"><small>O código da reserva é <strong>{{$event->reference}}</strong></small></p>
+	@endif
+</div>
+
+<div class="text-right mt-3">
+	<button class="btn btn-red btn-sm">Cancelar esta reserva</button>
 </div>

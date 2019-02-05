@@ -44,7 +44,9 @@ class Event extends Metropolis implements Reservation
 
     public function getTitleAttribute()
     {
-        return ucfirst($this->space->name);
+        $plan = $this->plan()->exists() ? ' (' . $this->plan->displayName . ')' : null;
+
+        return ucfirst($this->space->name) . $plan;
     }
 
     public function getStartAttribute()
@@ -82,6 +84,11 @@ class Event extends Metropolis implements Reservation
         return $this->space->name;
     }
 
+    public function getEditableAttribute()
+    {
+        return ! $this->plan()->exists();
+    }
+
     public function getEmailsAttribute($emails)
     {
         return unserialize($emails);
@@ -93,5 +100,12 @@ class Event extends Metropolis implements Reservation
             return collect();
 
         return $query->whereDate('starts_at', '<=', now())->whereDate('ends_at', '>', now())->get();
+    }
+
+    public function scopeCalendar($query)
+    {
+        return $query->get()->map(function ($item, $key) {
+            return $item->only(['id', 'title', 'start', 'end', 'plan_id', 'notified_at', 'statusForUser', 'editable']);
+        });
     }
 }

@@ -20,7 +20,9 @@ class AdminController extends Controller
 
     public function schedule()
     {
-    	return view('admin.pages.schedule.index');
+        $eventsArray = Event::calendar();
+
+    	return view('admin.pages.schedule.index', compact('eventsArray'));
     }
 
     public function users()

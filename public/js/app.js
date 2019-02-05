@@ -90507,13 +90507,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/admin/scss/admin.scss":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ "./resources/js/app.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -90530,14 +90523,6 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': app.csrfToken
     }
 });
-
-// window.Vue = require('vue');
-
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-// const app = new Vue({
-//     el: '#app'
-// });
 
 /***/ }),
 
@@ -90755,8 +90740,7 @@ jQuery.fn.cleanVal = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__("./resources/js/app.js");
-__webpack_require__("./resources/sass/app.scss");
-module.exports = __webpack_require__("./resources/admin/scss/admin.scss");
+module.exports = __webpack_require__("./resources/sass/app.scss");
 
 
 /***/ })

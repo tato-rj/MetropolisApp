@@ -9,13 +9,32 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-    	$eventsNow = Event::now();
     	$ranking = Workshop::popular()->take(5)->get();
     	$upcoming = Workshop::upcoming()->orderBy('starts_at', 'asc')->first();
     	$latestUsers = User::latest()->take(20)->get();
     	$membershipsCount = Membership::count();
     	$plans = Plan::all();
 
-    	return view('admin.pages.dashboard.index', compact(['ranking', 'upcoming', 'latestUsers', 'membershipsCount', 'plans', 'eventsNow']));
+    	return view('admin.pages.dashboard.index', compact(['ranking', 'upcoming', 'latestUsers', 'membershipsCount', 'plans']));
+    }
+
+    public function schedule()
+    {
+    	return view('admin.pages.schedule.index');
+    }
+
+    public function users()
+    {
+    	return view('admin.pages.users.index');
+    }
+
+    public function workshops()
+    {
+    	return view('admin.pages.workshops.index');
+    }
+
+    public function payments()
+    {
+    	return view('admin.pages.payments.index');
     }
 }

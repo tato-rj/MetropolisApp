@@ -1,5 +1,13 @@
 <?php 
 
+function checkActive($routes, $class = 'navigation__active')
+{
+    foreach ($routes as $route) {
+        if (\Request::route()->getName() == $route)
+            return $class;
+    }
+}
+
 function percentage($value, $total)
 {
     if ($total == 0)

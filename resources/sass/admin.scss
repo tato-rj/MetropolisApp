@@ -97,3 +97,9 @@
     left:100%
   }
 }
+
+.text-percentage:after {
+  content: '%';
+  margin-left: 2px;
+  font-size: .6em;
+}

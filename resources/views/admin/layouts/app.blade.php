@@ -34,10 +34,10 @@
     <div id="app">
         @include('admin.layouts.header')
         @include('admin.layouts.menu')
-        <main class="container-fluid py-4 bg-light">
-            @yield('content')
+        <main class="container-fluid py-4 px-4 bg-light">
+          @yield('content')
+          @include('admin.layouts.footer')
         </main>
-        {{-- @include('layouts.footer.layout') --}}
     </div>
 
 @if(session()->has('status'))
@@ -51,6 +51,9 @@
 <script src="{{ mix('js/admin.js') }}"></script>
 
 <script type="text/javascript">
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 $(document).ready(function() {
   fullDatePT($('.date-pt'));
 });

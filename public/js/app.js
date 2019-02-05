@@ -90729,6 +90729,13 @@ jQuery.fn.cleanVal = function () {
 
 /***/ }),
 
+/***/ "./resources/sass/admin.scss":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /***/ (function(module, exports) {
 
@@ -90740,7 +90747,8 @@ jQuery.fn.cleanVal = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__("./resources/js/app.js");
-module.exports = __webpack_require__("./resources/sass/app.scss");
+__webpack_require__("./resources/sass/app.scss");
+module.exports = __webpack_require__("./resources/sass/admin.scss");
 
 
 /***/ })

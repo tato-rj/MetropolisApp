@@ -10,7 +10,7 @@
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
     
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/admin.css') }}" rel="stylesheet">
     
     <link href="{{ asset('css/primer.css') }}" rel="stylesheet">
 
@@ -32,6 +32,7 @@
 <body>
 
     <div id="app">
+        @include('admin.layouts.header')
         {{-- @include('layouts.navbar.bar') --}}
         <main>
             @yield('content')
@@ -47,7 +48,7 @@
 @include('components.alerts.error', ['message' => session('error')])
 @endif
 
-<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ mix('js/admin.js') }}"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {

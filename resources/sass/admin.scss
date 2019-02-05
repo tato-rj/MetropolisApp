@@ -1,0 +1,48 @@
+@import 'bootstrap';
+@import 'node_modules/fullcalendar/dist/fullcalendar.min';
+@import 'variables';
+@import 'responsive';
+@import 'components/calendar';
+@import 'components/steps';
+@import 'components/icons';
+@import 'components/pagination';
+@import 'components/loaders';
+@import 'components/custom';
+
+.nav-tabs .nav-link:not(.active) {
+  opacity: .6;
+}
+
+.btn, .alert, .form-control, .card, .card-header, .modal-content, .modal-header {
+	@extend .rounded-0;
+}
+
+.col-default {
+	@extend .col-lg-8, .col-md-10, .col-12, .mx-auto;
+}
+
+.plans {
+	.cover {
+		@extend .col-lg-4, .col-12;
+	}
+
+	.description {
+		@extend .mx-5;
+	}
+}
+
+.price {
+  &:before {
+    content: 'R$';
+    font-weight: bold;
+    opacity: 0.6;
+    font-size: .215em;
+    vertical-align: top;
+  }
+
+  &:after {
+    content: attr(data-label);
+    font-size: .25em;
+    vertical-align: initial;    
+  }
+}

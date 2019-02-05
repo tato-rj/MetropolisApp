@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="bg-light" style="min-height: 100vh">
 
 <head>
     <meta charset="utf-8">
@@ -33,8 +33,8 @@
 
     <div id="app">
         @include('admin.layouts.header')
-        {{-- @include('layouts.navbar.bar') --}}
-        <main>
+        @include('admin.layouts.menu')
+        <main class="container-fluid py-4 bg-light">
             @yield('content')
         </main>
         {{-- @include('layouts.footer.layout') --}}

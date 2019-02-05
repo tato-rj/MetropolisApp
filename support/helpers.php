@@ -1,6 +1,6 @@
 <?php 
 
-function checkActive($routes, $class = 'navigation__active')
+function checkActive($routes, $class = 'active')
 {
     foreach ($routes as $route) {
         if (\Request::route()->getName() == $route)

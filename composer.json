@@ -10,7 +10,8 @@
         "guzzlehttp/guzzle": "~6.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
-        "pagseguro/pagseguro-php-sdk": "^6.0"
+        "pagseguro/pagseguro-php-sdk": "^6.0",
+        "yajra/laravel-datatables": "^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

@@ -10,8 +10,8 @@
   </thead>
   <tbody>
     @foreach($users as $user)
-    <tr class="cursor-pointer" data-url="#">
-      <td scope="row">{{$user->name}}</td>
+    <tr class="cursor-pointer" data-url="{{route('admin.users.edit', $user->id)}}" title="Clique para editar">
+      <td>{{$user->name}}</td>
       <td>{{$user->email}}</td>
       <td>{{$user->membership()->exists() ? $user->membership->plan->displayName : '-'}}</td>
       <td>{{$user->events()->count()}}</td>

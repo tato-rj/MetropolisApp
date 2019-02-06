@@ -12,8 +12,8 @@
             <li class="nav-item {{checkActive(['admin.schedule'], 'text-teal')}} mb-2">
                 <a href="{{route('admin.schedule')}}" class="nav-link link-inherit"><i class="fas fa-calendar-alt" style="width: 1.7rem; margin-left: .14rem"></i>Agenda</a>
             </li>
-            <li class="nav-item {{checkActive(['admin.users'], 'text-teal')}} mb-2">
-                <a href="{{route('admin.users')}}" class="nav-link link-inherit"><i class="fas fa-users" style="width: 1.8rem"></i>Usuários</a>
+            <li class="nav-item {{checkActive(['admin.users.index'], 'text-teal')}} mb-2">
+                <a href="{{route('admin.users.index')}}" class="nav-link link-inherit"><i class="fas fa-users" style="width: 1.8rem"></i>Usuários</a>
             </li>
             <li class="nav-item {{checkActive(['admin.workshops'], 'text-teal')}} mb-2">
                 <a href="{{route('admin.workshops')}}" class="nav-link link-inherit"><i class="fas fa-chalkboard-teacher" style="width: 1.8rem"></i>Workshops</a>

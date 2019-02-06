@@ -10,12 +10,12 @@ class AdminController extends Controller
     public function dashboard()
     {
     	$ranking = Workshop::popular()->take(5)->get();
-    	$upcoming = Workshop::upcoming()->orderBy('starts_at', 'asc')->first();
+    	$upcomingWorkshop = Workshop::upcoming()->orderBy('starts_at', 'asc')->first();
     	$latestUsers = User::latest()->take(20)->get();
     	$membershipsCount = Membership::count();
     	$plans = Plan::all();
 
-    	return view('admin.pages.dashboard.index', compact(['ranking', 'upcoming', 'latestUsers', 'membershipsCount', 'plans']));
+    	return view('admin.pages.dashboard.index', compact(['ranking', 'upcomingWorkshop', 'latestUsers', 'membershipsCount', 'plans']));
     }
 
     public function schedule()
@@ -34,7 +34,9 @@ class AdminController extends Controller
 
     public function workshops()
     {
-    	return view('admin.pages.workshops.index');
+        $workshops = Workshop::all();
+
+    	return view('admin.pages.workshops.index', compact('workshops'));
     }
 
     public function payments()

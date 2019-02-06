@@ -51,9 +51,9 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 	});
 
-	Route::prefix('suporte')->name('support.')->group(function() {
+	Route::prefix('workshops')->name('workshops.')->group(function() {
 
-		Route::get('', 'UsersController@support')->name('show');
+		Route::get('', 'UsersController@workshops')->name('index');
 
 	});
 });

@@ -44,9 +44,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function support()
+    public function workshops()
     {
-        return view('pages.user.support.index');
+        return view('pages.user.workshops.index');
     }
 
     /**

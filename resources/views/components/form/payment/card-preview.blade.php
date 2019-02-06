@@ -1,1 +1,1 @@
-<strong>{{strtoupper(auth()->user()->card('card_brand'))}}</strong> <small><strong>**** **** **** {{auth()->user()->card_lastfour}}</strong></small>
+<strong>{{strtoupper($user->card('card_brand'))}}</strong> <small><strong>**** **** **** {{$user->card_lastfour}}</strong></small>

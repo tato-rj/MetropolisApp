@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{Workshop, User, Plan, Membership, Event};
+use App\{Workshop, User, Plan, Membership, Event, Payment};
 
 class AdminController extends Controller
 {
@@ -41,6 +41,8 @@ class AdminController extends Controller
 
     public function payments()
     {
-    	return view('admin.pages.payments.index');
+        $payments = Payment::all();
+
+    	return view('admin.pages.payments.index', compact('payments'));
     }
 }

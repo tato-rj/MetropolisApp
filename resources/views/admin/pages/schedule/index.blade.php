@@ -1,10 +1,19 @@
 @extends('admin.layouts.app')
 
+@push('header')
+<style type="text/css">
+.fc-newEvent-button {
+    background-color: #e3342f;
+}
+</style>
+@endpush
+
 @section('content')
 	@include('admin.pages.schedule.sections.calendar')
 
   @include('components.modals.event')
   @include('components.modals.plan')
+  @include('admin.components.modals.new-event')
 @endsection
 
 @push('scripts')
@@ -22,10 +31,18 @@ console.log(JSON.parse(schedule));
       start: app.office.day_starts_at+':00',
       end: app.office.day_ends_at+':00',
     },
+    customButtons: {
+      newEvent: {
+        text: 'Criar reserva',
+        click: function() {
+          $('#new-event-modal').modal('show');
+        }
+      }
+    },
     header: {
     	left: 'prev,next today',
     	center: 'title',
-    	right:  'month,agendaWeek,agendaDay'
+    	right:  'newEvent month,agendaWeek,agendaDay'
     },
     selectConstraint: "businessHours",
     views: {
@@ -52,8 +69,10 @@ console.log(JSON.parse(schedule));
 
           if ($modal.find('#participants').attr('data-participants') > 1)
   	    		$modal.find('.modal-footer').show();
+
 	    	}).fail(function() {
           $modal.find('.modal-body > div:first-child').html('<p class="text-center my-4 text-red">Não foi possível processar o seu pedido nesse momento</p>');
+
           $modal.find('#loading').hide();
         });
     },

@@ -79,7 +79,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.pages.users.show.index', compact('user'));
     }
 
     /**

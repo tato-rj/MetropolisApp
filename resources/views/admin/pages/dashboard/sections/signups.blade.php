@@ -7,8 +7,8 @@
 
             <div class="d-flex flex-wrap justify-content-center align-items-center">
                 @foreach($latestUsers as $user)
-                <a data-toggle="tooltip" data-placement="top" title="{{$user->name}}" href="#" class="link-none">
-                    <div class="bg-grey-dark text-white rounded-circle d-flex flex-center" style="width: 3rem; height: 3rem; font-size: 1.2em; padding-bottom: 1px">{{$user->name[0]}}</div>
+                <a data-toggle="tooltip" data-placement="top" title="{{$user->name}}" href="{{route('admin.users.edit', $user->id)}}" class="link-none">
+                    <div class="bg-grey-dark text-white rounded-circle d-flex flex-center m-1" style="width: 3rem; height: 3rem; font-size: 1.2em; padding-bottom: 1px">{{$user->name[0]}}</div>
                 </a>
                 @endforeach
             </div>

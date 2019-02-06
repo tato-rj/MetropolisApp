@@ -14,7 +14,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable, HasBonus, HasCreditCard;
 
     protected $guarded = [];
-
+    protected $dates = ['email_verified_at'];
     protected $hidden = ['password', 'remember_token'];
 
     public function sendPasswordResetNotification($token)
@@ -56,6 +56,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function membership()
     {
         return $this->hasOne(Membership::class);
+    }
+
+    public function getHasPlanAttribute()
+    {
+        return $this->membership()->exists();
     }
 
     public function subscribe(Plan $plan, $reference)

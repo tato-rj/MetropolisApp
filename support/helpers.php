@@ -16,6 +16,62 @@ function percentage($value, $total)
     return $value * 100 / $total;
 }
 
+function monthPt($index, $type)
+{
+    $months = array(
+        [
+            'short' => 'Jan',
+            'full' => 'Janeiro'
+        ],
+        [
+            'short' => 'Fev',
+            'full' => 'Fevereiro'
+        ],
+        [
+            'short' => 'Mar',
+            'full' => 'Março'
+        ],
+        [
+            'short' => 'Abr',
+            'full' => 'Abril'
+        ],
+        [
+            'short' => 'Mai',
+            'full' => 'Maio'
+        ],
+        [
+            'short' => 'Jun',
+            'full' => 'Junho'
+        ],
+        [
+            'short' => 'Jul',
+            'full' => 'Julho'
+        ],
+        [
+            'short' => 'Ago',
+            'full' => 'Agosto'
+        ],
+        [
+            'short' => 'Set',
+            'full' => 'Setembro'
+        ],
+        [
+            'short' => 'Out',
+            'full' => 'Outubro'
+        ],
+        [
+            'short' => 'Nov',
+            'full' => 'Novembro'
+        ],
+        [
+            'short' => 'Dez',
+            'full' => 'Dezembro'
+        ]
+    );
+
+    return $months[$index-1][$type]; 
+}
+
 function fullDatePt()
 {
     $data = date('D');
@@ -42,9 +98,9 @@ function fullDatePt()
         'Jun' => 'Junho',
         'Jul' => 'Julho',
         'Aug' => 'Agosto',
-        'Nov' => 'Novembro',
         'Sep' => 'Setembro',
         'Oct' => 'Outubro',
+        'Nov' => 'Novembro',
         'Dec' => 'Dezembro'
     );
     

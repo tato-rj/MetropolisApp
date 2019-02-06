@@ -19,7 +19,11 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before
 @endpush
 
 @section('content')
-	@include('admin.pages.payments.sections.table')
+	<h5 class="alert-grey border mb-3 p-2 text-center">Dados pessoais</h5>
+	@include('admin.pages.users.show.sections.info')	
+
+	<h5 class="alert-grey border mb-3 p-2 text-center">Histórico de pagamentos</h5>
+	@include('admin.pages.users.show.sections.payments', ['payments' => $user->payments])
 
 	@include('components.modals.payment')
 @endsection
@@ -54,7 +58,6 @@ $(document).ready( function () {
 		    }
     	}
     });
-
-} );
+});
 </script>
 @endpush

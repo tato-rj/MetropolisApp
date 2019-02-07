@@ -7,13 +7,13 @@
 	<div>
 		<form method="GET" action="{{\URL::current()}}">
 			<div class="d-flex">
-				<select class="form-control" name="filtro" onchange="this.form.submit()" style="border-top: 0; border-bottom: 0; border-right: 0; width: auto">
+				<select class="form-control {{!empty($bg) ? 'bg-' . $bg : null}}" name="filtro" onchange="this.form.submit()" style="border-top: 0; border-bottom: 0; border-right: 0; width: auto">
 					<option value="todos" {{request('filtro') == 'todos' ? 'selected' : null}}>Mostrar todos</option>
 					<option value="semana" {{request('filtro') == 'semana' ? 'selected' : null}}>Nessa semana</option>
 					<option value="mes" {{request('filtro') == 'mes' ? 'selected' : null}}>Nesse mês</option>
 					<option value="gratuitos" {{request('filtro') == 'gratuitos' ? 'selected' : null}}>Gratuitos</option>
 				</select>
-				<select class="form-control" name="ordem" onchange="this.form.submit()" style="border-top: 0; border-bottom: 0; width: auto">
+				<select class="form-control {{!empty($bg) ? 'bg-' . $bg : null}}" name="ordem" onchange="this.form.submit()" style="border-top: 0; border-bottom: 0; width: auto">
 					<option value="data_cresc" {{request('ordem') == 'data_cresc' ? 'selected' : null}}>Data: cresc.</option>
 					<option value="data_decresc" {{request('ordem') == 'data_decresc' ? 'selected' : null}}>Data: decresc.</option>
 					<option value="nome_cresc" {{request('ordem') == 'nome_cresc' ? 'selected' : null}}>Nome: A - Z</option>

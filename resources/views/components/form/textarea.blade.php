@@ -7,7 +7,7 @@
 		@if(! empty($limit))
 		maxlength="{{$limit}}"
 		@endif
-		placeholder="{{$label ?? snake_str($name)}}">{{old($name)}}</textarea>
+		placeholder="{{$label ?? snake_str($name)}} {{! empty($limit) ? '(limite de ' . $limit . ' caracteres)' : null}}">{{old($name)}}</textarea>
 
 	@include('components/form/error', ['bag' => $bag, 'field' => $name])
 </div>

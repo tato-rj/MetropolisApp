@@ -1,5 +1,7 @@
 @import 'bootstrap';
 @import 'node_modules/fullcalendar/dist/fullcalendar.min';
+@import 'node_modules/trix/dist/trix';
+@import 'node_modules/cropperjs/dist/cropper.min';
 @import 'variables';
 @import 'responsive';
 @import 'components/calendar';
@@ -7,6 +9,7 @@
 @import 'components/icons';
 @import 'components/pagination';
 @import 'components/loaders';
+@import 'components/trix';
 @import 'components/custom';
 
 .nav-tabs .nav-link:not(.active) {

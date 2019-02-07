@@ -24,6 +24,14 @@ class BladeServiceProvider extends ServiceProvider
         \Blade::if('old', function ($filter, $value) {
             return (old($filter) == $value);
         });
+
+        \Blade::include('components.form.input');
+
+        \Blade::include('components.form.textarea');
+
+        \Blade::include('components.form.trix');
+
+        \Blade::include('components.form.upload.image');
     }
 
     /**

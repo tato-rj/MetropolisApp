@@ -3,6 +3,8 @@ window.Popper = require('popper.js').default;
 window.jQueryUI = require('jquery-ui-bundle');
 window.moment = require('moment');
 window.Calendar = require('fullcalendar');
+window.Trix = require('trix');
+window.Cropper = require('cropperjs');
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

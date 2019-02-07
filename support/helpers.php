@@ -1,5 +1,15 @@
 <?php 
 
+function snake_str($snake)
+{
+    return ucfirst(str_replace('_', ' ', $snake));
+}
+
+function validate($errors, $input)
+{
+    return $errors->has($input) ? 'is-invalid' : null;
+}
+
 function checkActive($routes, $class = 'active')
 {
     foreach ($routes as $route) {

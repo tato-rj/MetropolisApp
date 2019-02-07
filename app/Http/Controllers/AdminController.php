@@ -34,7 +34,7 @@ class AdminController extends Controller
 
     public function workshops()
     {
-        $workshops = Workshop::all();
+        $workshops = Workshop::paginate(6);
 
     	return view('admin.pages.workshops.index', compact('workshops'));
     }

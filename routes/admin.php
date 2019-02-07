@@ -20,6 +20,8 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 
 		Route::get('', 'AdminController@workshops')->name('index');
 
+		Route::get('novo', 'WorkshopsController@create')->name('create');
+
 		Route::post('novo', 'WorkshopsController@store')->name('store');
 
 		Route::get('{workshop}', 'AdminController@workshops')->name('show');

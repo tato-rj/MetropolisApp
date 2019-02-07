@@ -28,8 +28,8 @@ class CreateWorkshopForm extends FormRequest
             'headline' => 'required|max:255',
             'description' => 'required',
             'cover_image' => 'required',
-            'starts_at' => 'required|date',
-            'ends_at' => 'required|date'
+            'starts_at' => 'required',
+            'ends_at' => 'required'
         ];
     }
 }

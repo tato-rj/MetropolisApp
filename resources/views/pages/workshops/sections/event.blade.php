@@ -11,7 +11,7 @@
 			<h5 class="mb-2"><strong>{{$workshop->name}}</strong></h5>
 			<div>{{$workshop->headline}}</div>
 		</div>
-		<div class="d-flex align-items-center justify-content-end">
+		<div class="w-100 text-right">
 			<a href="{{route('workshops.show', $workshop->slug)}}" class="btn btn-teal"><strong><i class="fas fa-info-circle mr-2"></i>Mais informações</strong></a>
 		</div>
 	</div>

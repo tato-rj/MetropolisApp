@@ -244,6 +244,11 @@ function clean($string)
 	return preg_replace("/[^0-9]/", "", $string);
 }
 
+function cleanFileName($filename)
+{
+    return preg_replace('/\\.[^.\\s]{3,4}$/', '', $filename);
+}
+
 function toFormattedDateStringPt(\Carbon\Carbon $date, $withYear = true)
 {
 	$months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];

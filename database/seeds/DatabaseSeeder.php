@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         	SpacesTableSeeder::class,
         	PlansTableSeeder::class,
             UsersTableSeeder::class,
+            AdminsTableSeeder::class,
             WorkshopsTableSeeder::class
         ]);
     }

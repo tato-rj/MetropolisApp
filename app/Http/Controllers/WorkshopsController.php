@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Events\WorkshopSignup;
 use App\Services\PagSeguro\PagSeguro;
 use App\Http\Requests\CreditCardForm;
+use App\Http\Requests\CreateWorkshopForm;
 
 class WorkshopsController extends Controller
 {
@@ -76,9 +77,21 @@ class WorkshopsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, CreateWorkshopForm $form)
     {
-        //
+        $workshop = Workshop::create([
+            'slug' => str_slug($request->name),
+            'name' => $request->name,
+            'headline' => $request->headline,
+            'description' => $request->description,
+            'fee' => $request->fee,
+            'cover_image' => $request->file('cover_image')->store('/workshops/cover_images'),
+            'capacity' => $request->capacity,
+            'starts_at' => $request->starts_at,
+            'ends_at' => $request->ends_at
+        ]);
+
+        return redirect()->route('admin.workshops.show', $workshop->slug)->with('status', 'O workshop foi criado com sucesso.');
     }
 
     /**

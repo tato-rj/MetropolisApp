@@ -21,12 +21,6 @@ trait FakeEvents
         'address_city' => 'Rio de Janeiro',
         'address_state' => 'RJ'];
 
-    protected function signIn($user = null)
-    {
-    	$user = ($user) ?: create('App\User');
-    	return $this->actingAs($user);
-    }
-
     public function createNewEvent($user = null, $saveCard = null)
     {
         $user = $user ?? auth()->user();

@@ -23,6 +23,16 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(App\Admin::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'role' => 'manager',
+        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+        'remember_token' => str_random(10),
+    ];
+});
+
 $factory->define(App\Event::class, function(Faker $faker) {
 	return [
         'reference' => '1',
@@ -124,6 +134,16 @@ $factory->define(App\Workshop::class, function(Faker $faker) {
         'capacity' => $faker->numberBetween(12,30),
         'starts_at' => $date,
         'ends_at' => $date->addHour()
+    ];
+});
+
+$factory->define(App\WorkshopFile::class, function(Faker $faker) {
+    return [
+        'workshop_id' => function() {
+            return factory('App\Workshop')->create()->id;
+        },
+        'path' => $faker->imageUrl(),
+        'name' => $faker->word
     ];
 });
 

@@ -1,6 +1,6 @@
 <?php
 
-Route::prefix('admin')->name('admin.')->group(function() {
+Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function() {
 
 	Route::get('', 'AdminController@dashboard')->name('dashboard');
 
@@ -16,8 +16,52 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
 	});
 
-	Route::get('/workshops', 'AdminController@workshops')->name('workshops');
+	Route::prefix('workshops')->name('workshops.')->group(function() {
+
+		Route::get('', 'AdminController@workshops')->name('index');
+
+		Route::post('novo', 'WorkshopsController@store')->name('store');
+
+		Route::get('{workshop}', 'AdminController@workshops')->name('show');
+
+		Route::prefix('{workshop}/arquivo')->name('file.')->group(function() {
+
+			Route::post('', 'WorkshopsFilesController@store')->name('store');
+
+			Route::delete('{file}/deletar', 'WorkshopsFilesController@destroy')->name('destroy');
+
+		});
+
+	});
 
 	Route::get('/pagamentos', 'AdminController@payments')->name('payments');
 	
+});
+
+Route::prefix('admin')->middleware('guest:admin')->namespace('Auth\Admin')->name('admin.')->group(function() {
+
+	Route::prefix('login')->name('login.')->group(function() {
+
+		Route::get('', 'LoginController@showLoginForm')->name('show');
+
+		Route::post('', 'LoginController@login')->middleware('admin.new')->name('submit');
+	
+	});
+
+	Route::prefix('password')->name('password.')->group(function() {
+
+		Route::post('email', 'ForgotPasswordController@sendResetLinkEmail')->name('email');
+
+		Route::get('mudar', 'ForgotPasswordController@showLinkRequestForm')->name('request');
+
+		Route::post('mudar', 'ResetPasswordController@reset');
+	
+		Route::get('mudar/novo-admin', 'ResetPasswordController@showRequiredResetForm')->name('required-reset');
+
+		Route::post('mudar/novo-admin', 'ResetPasswordController@saveNewPassword')->name('required-save');
+
+		Route::get('mudar/{token}', 'ResetPasswordController@showResetForm')->name('reset');
+
+	});
+
 });

@@ -16,6 +16,11 @@ class Workshop extends Metropolis
     	return $this->belongsToMany(User::class, 'user_workshops', 'workshop_id', 'user_id')->withTimestamps();
     }
 
+    public function files()
+    {
+        return $this->hasMany(WorkshopFile::class);
+    }
+
     public function isFull()
     {
     	return $this->attendees_count >= $this->capacity;

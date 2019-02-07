@@ -16,7 +16,7 @@
                 <a href="{{route('admin.users.index')}}" class="nav-link link-inherit"><i class="fas fa-users" style="width: 1.8rem"></i>Usuários</a>
             </li>
             <li class="nav-item {{checkActive(['admin.workshops'], 'text-teal')}} mb-2">
-                <a href="{{route('admin.workshops')}}" class="nav-link link-inherit"><i class="fas fa-chalkboard-teacher" style="width: 1.8rem"></i>Workshops</a>
+                <a href="{{route('admin.workshops.index')}}" class="nav-link link-inherit"><i class="fas fa-chalkboard-teacher" style="width: 1.8rem"></i>Workshops</a>
             </li>
             <li class="nav-item {{checkActive(['admin.payments'], 'text-teal')}} mb-2">
                 <a href="{{route('admin.payments')}}" class="nav-link link-inherit"><i class="fas fa-credit-card" style="width: 1.8rem"></i>Pagamentos</a>

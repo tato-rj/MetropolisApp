@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\AppTest;
-use App\{User, Workshop};
+use App\{User, Workshop, WorkshopFile};
 
 class WorkshopTest extends AppTest
 {
@@ -15,6 +15,14 @@ class WorkshopTest extends AppTest
 		$this->workshop->attendees()->save(auth()->user());
 
 		$this->assertInstanceOf(User::class, $this->workshop->attendees()->find(auth()->user()->id));
+	}
+
+	/** @test */
+	public function it_has_many_files()
+	{
+		$file = create(WorkshopFile::class, ['workshop_id' => $this->workshop->id]);
+
+		$this->assertInstanceOf(WorkshopFile::class, $this->workshop->files->first());
 	}
 
 	/** @test */

@@ -44,4 +44,10 @@ abstract class AppTest extends TestCase
 
         $this->payment = create(Payment::class);
     }
+
+    protected function signIn($user = null, $guard = null)
+    {
+        $user = ($user) ?: create('App\User');
+        return $this->actingAs($user, $guard);
+    }
 }

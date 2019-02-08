@@ -94342,7 +94342,8 @@ module.exports = function(module) {
 __webpack_require__("./resources/js/bootstrap.js");
 __webpack_require__("./resources/js/helpers/cookie.js");
 __webpack_require__("./resources/js/helpers/string.js");
-__webpack_require__("./resources/js/datepicker/customize.js");
+__webpack_require__("./resources/js/helpers/extensions.js");
+__webpack_require__("./resources/js/datepicker/CustomDatePicker.js");
 __webpack_require__("./node_modules/jquery-countdown/dist/jquery.countdown.js");
 __webpack_require__("./node_modules/fullcalendar/dist/locale/pt-br.js");
 __webpack_require__("./node_modules/inputmask/dist/jquery.inputmask.bundle.js");
@@ -94421,7 +94422,7 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/datepicker/customize.js":
+/***/ "./resources/js/datepicker/CustomDatePicker.js":
 /***/ (function(module, exports) {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -94547,15 +94548,36 @@ setCookie = function setCookie(cname, cvalue, exdays) {
 
 /***/ }),
 
+/***/ "./resources/js/helpers/extensions.js":
+/***/ (function(module, exports) {
+
+jQuery.fn.toggleAttr = function (attr) {
+	return this.each(function () {
+		var $this = $(this);
+		$this.attr(attr) ? $this.removeAttr(attr) : $this.attr(attr, attr);
+	});
+};
+
+/***/ }),
+
 /***/ "./resources/js/helpers/string.js":
 /***/ (function(module, exports) {
 
 fullDatePT = function fullDatePT($element) {
-	$element.text(moment($element.attr('data-date')).locale('pt').format("D [de] MMMM [de] YYYY"));
+  $element.text(moment($element.attr('data-date')).locale('pt').format("D [de] MMMM [de] YYYY"));
+};
+
+formatBytes = function formatBytes(bytes, decimals) {
+  if (bytes == 0) return '0 Bytes';
+  var k = 1024,
+      dm = decimals || 2,
+      sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+      i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 };
 
 jQuery.fn.cleanVal = function () {
-	return this.val().replace(/\D/g, '');
+  return this.val().replace(/\D/g, '');
 };
 
 /***/ }),

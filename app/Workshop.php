@@ -61,6 +61,11 @@ class Workshop extends Metropolis
         return is_null($this->fee);
     }
 
+    public function getDescriptionAttribute($description)
+    {
+        return \Purify::clean($description);
+    }
+
     public function scopeFiltered($query)
     {
         $filtro = request('filtro');

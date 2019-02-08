@@ -1,7 +1,5 @@
 <div class="mb-4 pb-2 bg-light p-4">
 	<form id="search" method="GET" action="{{route('events.search')}}">
-		<input type="hidden" name="date" value="{{request()->date ?? now()->format('Y-m-d')}}">
-
 		<div class="form-group">
 			<label><small><strong>Qual tipo de espaço está procurando?</strong></small></label>
 			<select class=" form-control px-1" name="type">

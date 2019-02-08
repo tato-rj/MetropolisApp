@@ -9,6 +9,7 @@ use App\Services\PagSeguro\PagSeguro;
 use App\Http\Requests\CreditCardForm;
 use App\Http\Requests\CreateWorkshopForm;
 use App\Tools\Cropper;
+use Carbon\Carbon;
 
 class WorkshopsController extends Controller
 {
@@ -80,18 +81,16 @@ class WorkshopsController extends Controller
      */
     public function store(Request $request, CreateWorkshopForm $form)
     {
-        $image = (new Cropper($request))->make('cover_image')->saveTo('workshops/cover_images/');
-
         $workshop = Workshop::create([
             'slug' => str_slug($request->name),
             'name' => $request->name,
             'headline' => $request->headline,
             'description' => $request->description,
             'fee' => $request->fee,
-            'cover_image' => $image->getPath(),
+            'cover_image' => (new Cropper($request))->make('cover_image')->saveTo('workshops/cover_images/')->getPath(),
             'capacity' => $request->capacity,
-            'starts_at' => carbon($request->starts_at),
-            'ends_at' => carbon($request->ends_at)
+            'starts_at' => Carbon::parse($request->date)->setTime($request->start_time,0,0),
+            'ends_at' => Carbon::parse($request->date)->setTime($request->end_time,0,0)
         ]);
 
         return redirect()->route('admin.workshops.show', $workshop->slug)->with('status', 'O workshop foi criado com sucesso.');

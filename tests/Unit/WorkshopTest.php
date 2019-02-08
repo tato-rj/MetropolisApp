@@ -82,4 +82,12 @@ class WorkshopTest extends AppTest
 
 		$this->assertTrue($workshop->fresh()->isFull());
 	}
+
+	/** @test */
+	public function its_description_is_automatically_sanitized()
+	{
+		$badRecord = make(Workshop::class, ['description' => '<script>alert("bad")</script><p>This is ok</p>']);
+
+		$this->assertEquals($badRecord->description, '<p>This is ok</p>');
+	}
 }

@@ -13,7 +13,6 @@
 		<div class="px-4 py-3 bg-light">
 			<form method="GET" action="{{route('events.search')}}">
 				<input type="hidden" name="type" value="{{$spaces->first()->slug}}">
-				<input type="hidden" name="date" value="{{now()->format('Y-m-d')}}">
 				<div class="row w-100 mx-auto">
 					
 					<div class="col-lg-4 col-12 p-0">

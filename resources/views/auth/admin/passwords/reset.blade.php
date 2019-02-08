@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-12 mb-2 text-center">
                         <img src="{{asset('images/brand/logo.svg')}}" width="100" class="mb-3">
-                        <p class="lead-lg">{{! empty($required_reset) ? 'NOVO PASSWORD' : 'MUDAR O PASSWORD'}}</p>
+                        <p class="lead-lg m-0">{{! empty($required_reset) ? 'NOVO PASSWORD' : 'MUDAR O PASSWORD'}}</p>
                     </div>
                     @if(! empty($required_reset))
                         @include('auth.admin.passwords.required-reset-form')

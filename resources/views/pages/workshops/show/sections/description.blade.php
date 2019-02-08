@@ -13,14 +13,18 @@
 		<div class="col-default mb-5">
 			@include('pages.workshops.show.sections.intro')
 		</div>
-		<div class="col-default mb-5">
+		<div class="col-default mb-4">
 			<p><strong>Sobre o workshop</strong></p>
 			{!! $workshop->description !!}
 		</div>
-		<div class="col-default">
-			@if($workshop->attendees->find(auth()->user()))
-				<div class="alert alert-teal text-center m-0"><strong><i class="fas fa-check-circle mr-2"></i>A sua presença está confirmada, nos vemos lá!</strong></div>
-			@else
+		@if($workshop->hasFiles())
+		<div class="col-default mb-4">
+			<p><strong>Material disponível para esse workshop</strong></p>
+			@include('components.workshops.files', ['removable' => false])
+		</div>
+		@endif
+		<div class="col-default mt-4">
+			@if(! $workshop->attendees->find(auth()->user()))
 				@include('pages.workshops.show.sections.confirm')
 			@endif
 		</div>

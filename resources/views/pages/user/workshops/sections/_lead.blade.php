@@ -2,8 +2,8 @@
 	<div class="container text-white">
 		<div class="row">
 			<div class="col-default">
-				<h1 class="display-4">Suporte ao cliente</h1>
-				<p class="lead">Estamos aqui para atender a qualquer dúvida, pergunta ou sugestão. Deixe abaixo a sua mensagem e retornaremos o mais rápido possível.</p>
+				<h1 class="display-4">Meus workshops</h1>
+				<p class="lead">Abaixo está a lista dos workshops que você se cadastrou. Nas páginas desses eventos você pode fazer o download dos materiais disponíveis.</p>
 			</div>
 		</div>
 	</div>

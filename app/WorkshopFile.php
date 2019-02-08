@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Support\Facades\Storage;
-
 class WorkshopFile extends Metropolis
 {
     protected static function boot()
@@ -11,12 +9,17 @@ class WorkshopFile extends Metropolis
         parent::boot();
 
         self::deleting(function($file) {
-        	Storage::delete($file->path);
+        	\Storage::disk('public')->delete($file->path);
         });
     }
 
-    public function getFullNameAttribute()
+    public function getIconAttribute()
     {
-    	return $this->name.' ('.strtoupper(pathinfo($this->path)['extension']).')';
+        return 'images/file_icons/' . $this->extension . '.svg';
+    }
+
+    public function getDownloadPathAttribute()
+    {
+        return 'storage/' . $this->path;
     }
 }

@@ -17,6 +17,7 @@ class CreateWorkshopFilesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('workshop_id');
             $table->string('name');
+            $table->string('extension');
             $table->string('path');
             $table->timestamps();
         });

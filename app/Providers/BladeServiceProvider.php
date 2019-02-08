@@ -24,7 +24,11 @@ class BladeServiceProvider extends ServiceProvider
         \Blade::if('old', function ($filter, $value) {
             return (old($filter) == $value);
         });
-
+        
+        \Blade::if('match', function ($record, $value) {
+            return ($record == $value);
+        });
+        
         \Blade::include('components.form.input');
 
         \Blade::include('components.form.textarea');

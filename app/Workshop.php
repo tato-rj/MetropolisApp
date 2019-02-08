@@ -9,7 +9,20 @@ class Workshop extends Metropolis
 	use FindBySlug;
 	
     protected $dates = ['starts_at', 'ends_at'];
-	protected $withCount = ['attendees'];
+	protected $withCount = ['attendees', 'files'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function($workshop) {
+            \Storage::disk('public')->delete($workshop->cover_image);
+
+            $workshop->files->each(function($file) {
+                $file->delete();
+            });
+        });
+    }
 
     public function attendees()
     {
@@ -19,6 +32,11 @@ class Workshop extends Metropolis
     public function files()
     {
         return $this->hasMany(WorkshopFile::class);
+    }
+
+    public function hasFiles()
+    {
+        return $this->files_count > 0;
     }
 
     public function isFull()
@@ -59,6 +77,11 @@ class Workshop extends Metropolis
     public function getIsFreeAttribute()
     {
         return is_null($this->fee);
+    }
+
+    public function getCoverImagePathAttribute()
+    {
+        return 'storage/' . $this->cover_image;
     }
 
     public function getDescriptionAttribute($description)

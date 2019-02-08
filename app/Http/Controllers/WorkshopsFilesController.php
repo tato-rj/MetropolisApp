@@ -15,13 +15,19 @@ class WorkshopsFilesController extends Controller
      */
     public function store(Request $request, Workshop $workshop)
     {
-        $name = cleanFileName($request->file('file')->getClientOriginalName());
+        $filename = $request->file('file')->getClientOriginalName();
+        $extension = $request->file('file')->getClientOriginalExtension();
+        $name = basename($filename, '.' . $extension);
 
         try {
             WorkshopFile::create([
                 'workshop_id' => $workshop->id,
-                'path' => $request->file('file')->store("/workshops/{$workshop->slug}/arquivos"),
-                'name' => $name
+                'path' => \Storage::disk('public')->putFileAs(
+                    "/workshops/files/{$workshop->slug}", 
+                    $request->file('file'),
+                    $filename),
+                'name' => $name,
+                'extension' => $extension
             ]);            
         } catch (\Exception $e) {
             return response()->json('Não foi possível fazer o upload nesse momento...', 404);

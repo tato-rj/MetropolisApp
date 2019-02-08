@@ -7018,7 +7018,8 @@ button.bg-dark:focus {
   background-color: transparent !important;
 }
 
-.border {
+.border,
+.image-container canvas {
   border: 1px solid #dee2e6 !important;
 }
 
@@ -22318,5 +22319,9 @@ video {
   content: '%';
   margin-left: 2px;
   font-size: .6em;
+}
+
+.image-container canvas {
+  width: 100% !important;
 }
 

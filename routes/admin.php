@@ -24,7 +24,11 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 
 		Route::post('novo', 'WorkshopsController@store')->name('store');
 
-		Route::get('{workshop}', 'AdminController@workshops')->name('show');
+		Route::get('{workshop}', 'WorkshopsController@edit')->name('edit');
+
+		Route::post('{workshop}', 'WorkshopsController@update')->name('update');
+
+		Route::delete('{workshop}', 'WorkshopsController@destroy')->name('destroy');
 
 		Route::prefix('{workshop}/arquivo')->name('file.')->group(function() {
 

@@ -18,34 +18,25 @@ class Cropper
 		$this->file = $this->request->file($name);
 
         $this->image = \Image::make($this->file)->crop(
-            intval($this->request->cropped_width), 
+            intval($this->request->cropped_width),
             intval($this->request->cropped_height), 
             intval($this->request->cropped_x), 
             intval($this->request->cropped_y)
         );
 
-        $this->generateFilename();
-
         return $this;
-	}
-
-	public function generateFilename()
-	{
-		$this->filename = str_slug($this->request->name) . '.' . $this->file->getClientOriginalExtension();
 	}
 
 	public function getPath()
 	{
-		return 'storage/' . $this->path . $this->filename;
+		return $this->path;
 	}
 
-	public function saveTo($path)
+	public function saveTo($folder)
 	{
-		$this->path = $path;
+		$this->path = $folder . $this->file->getClientOriginalName();
 
-		$location = storage_path('app/public/' . $this->path . $this->filename);
-
-		$this->image->save($location);
+		\Storage::disk('public')->put($this->path, (string) $this->image->encode());
 
 		return $this;
 	}

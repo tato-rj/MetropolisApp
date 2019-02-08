@@ -45,8 +45,20 @@ class UserTest extends AppTest
 		auth()->user()->signup($this->workshop);
 		auth()->user()->signup($pastWorkshop);
 
-		$this->assertCount(1, auth()->user()->fresh()->upcomingWorkshops);
-		 
+		$this->assertCount(1, auth()->user()->fresh()->upcomingWorkshops);		 
+	}
+
+	/** @test */
+	public function it_knows_if_it_has_signed_up_for_a_specific_workshop()
+	{
+		$this->signIn();
+
+		$anotherWorkshop = create(Workshop::class);
+
+		auth()->user()->signup($this->workshop);
+
+		$this->assertTrue(auth()->user()->workshops->contains($this->workshop));
+		$this->assertFalse(auth()->user()->workshops->contains($anotherWorkshop));
 	}
 
 	/** @test */

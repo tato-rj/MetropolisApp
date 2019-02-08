@@ -28,7 +28,7 @@ class WorkshopTest extends AppTest
 	/** @test */
 	public function it_knows_the_upcoming_events()
 	{
-		$pastWorkshop = create('App\Workshop', ['ends_at' => now()->copy()->subHours(4)]);
+		$pastWorkshop = create('App\Workshop', ['ends_at' => now()->copy()->subWeek()]);
 
 		$this->assertCount(1, Workshop::upcoming()->get());
 	}

@@ -1,4 +1,4 @@
-@component('layouts.header.partial', ['background' => $workshop->cover_image, 'size' => 16])
+@component('layouts.header.partial', ['background' => $workshop->cover_image_path, 'size' => 16])
 	<div class="container text-white">
 		<div class="row">
 			<div class="col-default">

@@ -13,8 +13,8 @@
 	@csrf
 	<div class="row">
 		<div class="col-6">
-			@input(['bag' => 'default', 'name' => 'name', 'label' => 'Nome'])
-			@textarea(['bag' => 'default', 'name' => 'headline', 'label' => 'Resumo','limit' => 255])
+			@input(['bag' => 'default', 'name' => 'name', 'placeholder' => 'Nome'])
+			@textarea(['bag' => 'default', 'name' => 'headline', 'placeholder' => 'Resumo','limit' => 255])
 
 			<div class="form-row form-group">
 				<div class="col">
@@ -22,7 +22,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text rounded-0">R$</span>
 						</div>
-						<input type="text" name="fee" class="form-control" placeholder="Preço">
+						<input type="text" name="fee" class="form-control" placeholder="Preço" value="{{old('fee')}}">
 						<div class="input-group-append">
 							<span class="input-group-text rounded-0">,00</span>
 						</div>
@@ -31,7 +31,7 @@
 				</div>
 				<div class="col">
 					<div class="input-group">
-						<input type="text" name="capacity" class="form-control" placeholder="Capacidade">
+						<input type="text" name="capacity" class="form-control" placeholder="Capacidade" value="{{old('capacity')}}">
 						<div class="input-group-append">
 							<span class="input-group-text rounded-0">pessoas</span>
 						</div>
@@ -49,7 +49,7 @@
 					<select name="start_time" class="form-control">
 						<option disabled selected>Começa às</option>
 						@for($i = office()->day_starts_at; $i <= office()->day_ends_at + 4; $i++)
-						<option value="{{$i}}">{{$i}}:00h</option>
+						<option value="{{$i}}" @old('start_time', $i) selected @endold>{{$i}}:00h</option>
 						@endfor
 					</select>
 					@include('components/form/error', ['bag' => 'default', 'field' => 'start_time'])
@@ -58,17 +58,17 @@
 					<select name="end_time" class="form-control">
 						<option disabled selected>Termina às</option>
 						@for($i = office()->day_starts_at; $i <= office()->day_ends_at + 4; $i++)
-						<option value="{{$i}}">{{$i}}:00h</option>
+						<option value="{{$i}}" @old('end_time', $i) selected @endold>{{$i}}:00h</option>
 						@endfor
 					</select>
 					@include('components/form/error', ['bag' => 'default', 'field' => 'end_time'])
 				</div>
 			</div>
 
-			@trix(['bag' => 'default', 'name' => 'description', 'label' => 'Descrição'])
+			@trix(['bag' => 'default', 'name' => 'description', 'placeholder' => 'Descrição'])
 		</div>
 		<div class="col-6">
-			@image(['name' => 'cover_image', 'image' => asset('images/covers/placeholder-image.png')])
+			@image(['name' => 'cover_image', 'image' => asset('images/covers/placeholder-image.png'), 'empty' => true])
 		</div>
 	</div>
 	<div class="mt-4 pt-4 border-top text-right">

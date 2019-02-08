@@ -13,6 +13,7 @@ mix.js('resources/js/app.js', 'public/js')
 	   	'public/js/admin.js',
 	   	'resources/js/datepicker/localize.js'
    	], 'public/js/admin.js')
-   	.copy('resources/sass/vendor/primer.css', 'public/css/primer.css')
+   	.copyDirectory('resources/sass/vendor', 'public/css')
+   	.copyDirectory('resources/js/vendor', 'public/js/vendor')
    	.copyDirectory('resources/images/', 'public/images')
    	.version();

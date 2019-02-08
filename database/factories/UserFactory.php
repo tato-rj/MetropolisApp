@@ -122,7 +122,7 @@ $factory->define(App\Membership::class, function(Faker $faker) {
 });
 
 $factory->define(App\Workshop::class, function(Faker $faker) {
-    $date = carbon($faker->dateTimeBetween('+1 dia', '+2 weeks')->format('c'));
+    $date = now()->copy()->addDays(mt_rand(1,5));
 
     return [
         'slug' => str_slug($faker->sentence),
@@ -133,7 +133,7 @@ $factory->define(App\Workshop::class, function(Faker $faker) {
         'cover_image' => $faker->imageUrl(),
         'capacity' => $faker->numberBetween(12,30),
         'starts_at' => $date,
-        'ends_at' => $date->addHour()
+        'ends_at' => $date->addHours(2)
     ];
 });
 
@@ -143,7 +143,8 @@ $factory->define(App\WorkshopFile::class, function(Faker $faker) {
             return factory('App\Workshop')->create()->id;
         },
         'path' => $faker->imageUrl(),
-        'name' => $faker->word
+        'name' => $faker->word,
+        'extension' => $faker->word
     ];
 });
 

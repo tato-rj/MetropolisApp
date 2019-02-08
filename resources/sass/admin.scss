@@ -106,3 +106,10 @@
   margin-left: 2px;
   font-size: .6em;
 }
+
+.image-container { 
+  canvas { 
+    @extend .border;
+    width: 100% !important;
+  }
+}

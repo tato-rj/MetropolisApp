@@ -93,7 +93,7 @@ class WorkshopsController extends Controller
             'ends_at' => Carbon::parse($request->date)->setTime($request->end_time,0,0)
         ]);
 
-        return redirect()->route('admin.workshops.show', $workshop->slug)->with('status', 'O workshop foi criado com sucesso.');
+        return redirect()->route('admin.workshops.edit', $workshop->slug)->with('status', 'O workshop foi criado com sucesso.');
     }
 
     /**
@@ -122,7 +122,7 @@ class WorkshopsController extends Controller
      */
     public function edit(Workshop $workshop)
     {
-        //
+        return view('admin.pages.workshops.edit.index', compact('workshop'));
     }
 
     /**
@@ -134,7 +134,17 @@ class WorkshopsController extends Controller
      */
     public function update(Request $request, Workshop $workshop)
     {
-        //
+        if ($request->has('cover_image')) {
+            \Storage::disk('public')->delete($workshop->cover_image);
+
+            $workshop->update([
+                'cover_image' => (new Cropper($request))->make('cover_image')->saveTo('workshops/cover_images/')->getPath()
+            ]);
+        } else {
+            $workshop->fill($request->toArray())->save();
+        }
+
+        return redirect()->back()->with('status', 'O workshop foi editado com sucesso.');
     }
 
     /**
@@ -145,6 +155,8 @@ class WorkshopsController extends Controller
      */
     public function destroy(Workshop $workshop)
     {
-        //
+        $workshop->delete();
+
+        return redirect()->route('admin.workshops.index')->with('status', 'O workshop foi editado com sucesso.');
     }
 }

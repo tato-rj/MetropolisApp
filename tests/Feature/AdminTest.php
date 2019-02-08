@@ -57,20 +57,53 @@ class AdminTest extends AppTest
     /** @test */
     public function an_admin_can_create_a_new_workshop()
     {
-        Storage::fake();
-
         $this->signIn($this->admin, 'admin');
         
         $workshop = $this->newWorkshop();
 
-        Storage::assertExists($workshop->cover_image);
+        Storage::disk('public')->assertExists($workshop->cover_image);
+    }
+
+    /** @test */
+    public function an_admin_can_update_a_workshop()
+    {
+        $this->signIn($this->admin, 'admin');
+
+        $workshop = $this->newWorkshop();
+        
+        $this->post(route('admin.workshops.update', $workshop->slug), [
+            'name' => 'New name'
+        ]);
+
+        $this->assertEquals($workshop->fresh()->name, 'New name');
+    }
+
+    /** @test */
+    public function an_existing_image_is_removed_when_the_admin_updates_the_workshop_cover_image()
+    {
+        $this->signIn($this->admin, 'admin');
+        
+        $workshop = $this->newWorkshop();
+
+        $originalImage = $workshop->cover_image;
+
+        Storage::disk('public')->assertExists($originalImage);
+
+        $this->post(route('admin.workshops.update', $workshop->slug), [
+            'cropped_width' => 200,
+            'cropped_height' => 200,
+            'cropped_x' => 0,
+            'cropped_y' => 0,
+            'cover_image' => UploadedFile::fake()->image('new_image.jpg')
+        ]);
+
+        Storage::disk('public')->assertMissing($originalImage);
+        Storage::disk('public')->assertExists($workshop->fresh()->cover_image);
     }
 
     /** @test */
     public function an_admin_can_upload_many_files_to_a_worshop()
     {
-        Storage::fake();
-
         $this->signIn($this->admin, 'admin');
 
         $workshop = $this->newWorkshop();
@@ -85,7 +118,7 @@ class AdminTest extends AppTest
 
         $this->assertCount(1, $workshop->files);
 
-        Storage::assertExists($workshop->files->first()->path);
+        Storage::disk('public')->assertExists($workshop->files->first()->path);
 
         $file2 = UploadedFile::fake()->create('file2.pdf');
 
@@ -93,14 +126,12 @@ class AdminTest extends AppTest
             'file' => $file2
         ])->assertSuccessful();
 
-        $this->assertCount(2, $workshop->fresh()->files);
+        Storage::disk('public')->assertExists($workshop->fresh()->files[1]->path);
     }
 
     /** @test */
     public function an_admin_can_delete_files_from_a_workshop()
     {
-        Storage::fake();
-
         $this->signIn($this->admin, 'admin');
 
         $workshop = $this->newWorkshop();
@@ -120,5 +151,44 @@ class AdminTest extends AppTest
         $this->assertCount(0, $workshop->fresh()->files);
 
         Storage::assertMissing($file->path);
+    }
+
+    /** @test */
+    public function an_admin_can_delete_a_workshop()
+    {
+        $this->signIn($this->admin, 'admin');
+
+        $workshop = $this->newWorkshop();
+
+        $workshopName = $workshop->name;
+
+        $this->assertDatabaseHas('workshops', ['name' => $workshopName]);
+
+        $this->delete(route('admin.workshops.destroy', $workshop->slug));
+
+        $this->assertDatabaseMissing('workshops', ['name' => $workshopName]);
+    }
+
+    /** @test */
+    public function the_workshops_files_are_removed_when_it_is_deleted()
+    {
+        $this->signIn($this->admin, 'admin');
+
+        $workshop = $this->newWorkshop();
+
+        $this->json('POST', route('admin.workshops.file.store', $workshop->slug), [
+            'file' => UploadedFile::fake()->create('file.pdf')
+        ]);
+
+        $cover_image = $workshop->cover_image;
+        $file = $workshop->files->first();
+
+        Storage::disk('public')->assertExists($cover_image);
+        Storage::disk('public')->assertExists($file->path);
+
+        $this->delete(route('admin.workshops.destroy', $workshop->slug));
+
+        Storage::disk('public')->assertMissing($cover_image);
+        Storage::disk('public')->assertMissing($file->path);
     }
 }

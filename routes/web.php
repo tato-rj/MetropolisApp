@@ -12,8 +12,6 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 	Route::prefix('agenda')->name('events.')->group(function() {
 
 		Route::get('', 'UsersController@schedule')->name('index');
-	
-		Route::post('/ajax', 'EventsController@ajax')->name('ajax');
 
 		Route::post('/convidar', 'EventsController@invite')->name('invite');
 
@@ -57,6 +55,8 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 	});
 });
+
+Route::post('/status/ajax', 'EventsController@ajax')->name('status.ajax');
 
 Route::get('/', function () {
     return view('pages.welcome.index');

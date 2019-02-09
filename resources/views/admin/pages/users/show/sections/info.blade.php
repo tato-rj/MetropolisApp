@@ -2,26 +2,28 @@
 	<div class="flex-grow">
 		<div class="d-flex">
 			<div class="p-2">
-				<h5 class="text-teal mb-3">Nome</h5>
-				<h5 class="text-teal mb-3">Email</h5>
-				<h5 class="text-teal mb-3">Cartão</h5>
-				<h5 class="text-teal mb-3">Plano</h5>
+				<p class="text-teal mb-3">Nome</p>
+				<p class="text-teal mb-3">Email</p>
+				<p class="text-teal mb-3">Cartão</p>
+				<p class="text-teal mb-3">Plano</p>
 			</div>
 			<div class="p-2">
-				<h5 class="mb-3">{{$user->name}}</h5>
+				<p class="mb-3">{{$user->name}}</p>
 
-				<h5 class="mb-3">{{$user->email}} <small class="text-green">(verificado no dia {{$user->email_verified_at->format('d/m/Y')}})</small></h5>
+				<p class="mb-3">{{$user->email}} <small class="text-green">(verificado no dia {{$user->email_verified_at->format('d/m/Y')}})</small></p>
 
 				@if($user->hasCard)
-				@include('components.form.payment.card-preview', ['user' => auth()->user()])
+				<div class="mb-3">
+					@include('components.form.payment.card-preview', ['user' => $user])
+				</div>
 				@else
-				<h5 class="text-muted mb-3"><small><i>Nenhum cartão salvo</i></small></h5>
+				<p class="text-muted mb-3"><i>Nenhum cartão salvo</i></p>
 				@endif
 
 				@if($user->hasPlan)
-				<h5 class="text-{{$user->membership->plan->color}} mb-3">{{$user->membership->plan->displayName}} <small class="text-green">(próxima cobrança será no dia {{toFormattedDateStringPt($user->membership->next_payment_at)}})</small></h5>
+				<p class="text-{{$user->membership->plan->color}} mb-3">{{$user->membership->plan->displayName}} <small class="text-green">(próxima cobrança será no dia {{toFormattedDateStringPt($user->membership->next_payment_at)}})</small></p>
 				@else
-				<h5 class="text-muted mb-3"><i>Nenhum plano assinado</i></h5>
+				<p class="text-muted mb-3"><i>Nenhum plano assinado</i></p>
 				@endif
 			</div>
 		</div>

@@ -12,7 +12,7 @@
       <img class="w-100 border" id="image" src="{{$image}}">
       
       <div class="controls d-apart mt-3">
-        <button type="button" id="upload-button" class="btn btn-red">
+        <button type="button" id="upload-button" class="btn btn-teal">
           <i class="fas fa-folder-open mr-2"></i>{{$empty ? 'Escolher foto' : 'Mudar a foto'}}
         </button>
 

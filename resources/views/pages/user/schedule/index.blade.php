@@ -25,6 +25,7 @@ $(function() {
     minTime: '08:00',
     maxTime: '18:00',
     allDaySlot: false,
+    eventLimit: 3,
     businessHours: {
       start: app.office.day_starts_at+':00',
       end: app.office.day_ends_at+':00',

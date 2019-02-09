@@ -11,7 +11,7 @@
   		<div id="calendar-loading" class="text-muted d-flex align-items-start justify-content-center pt-8" style="min-height: 740px">
   			<span>Estamos carregando a sua agenda...</span>
   		</div>
-  		<div id='calendar' data-events="{{auth()->user()->eventsArray}}" data-ajax="{{route('client.events.ajax')}}"></div>
+  		<div id='calendar' data-events="{{auth()->user()->eventsArray($editable = false)}}" data-ajax="{{route('status.ajax')}}"></div>
   	</div>
   </div>
 </section>

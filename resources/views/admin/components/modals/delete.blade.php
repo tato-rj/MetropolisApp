@@ -18,7 +18,7 @@
           <form action="{{$url}}" method="POST">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-sm btn-red">Sim, pode confirmar</button>
+            <button type="submit" class="btn btn-red">Sim, pode confirmar</button>
           </form>
         </div>
       </div>

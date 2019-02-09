@@ -65,10 +65,10 @@ class PlanTest extends AppTest
 	{
 		$this->signIn();
 
-		$this->assertEmpty(auth()->user()->eventsArray);
+		$this->assertEmpty(auth()->user()->eventsArray());
 
 		$this->subscribeToNewPlan($this->plan);
 
-		$this->assertCount(1, auth()->user()->fresh()->eventsArray);
+		$this->assertCount(1, auth()->user()->fresh()->eventsArray());
 	}
 }

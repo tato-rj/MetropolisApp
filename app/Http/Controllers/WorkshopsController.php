@@ -141,10 +141,10 @@ class WorkshopsController extends Controller
                 'cover_image' => (new Cropper($request))->make('cover_image')->saveTo('workshops/cover_images/')->getPath()
             ]);
         } else {
-            $workshop->fill($request->toArray())->save();
+            $workshop->updateOrIgnore($request);
         }
 
-        return redirect()->back()->with('status', 'O workshop foi editado com sucesso.');
+        return redirect()->route('admin.workshops.edit', $workshop->slug)->with('status', 'O workshop foi editado com sucesso.');
     }
 
     /**

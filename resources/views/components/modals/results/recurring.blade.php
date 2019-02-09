@@ -46,9 +46,9 @@
 			</a>
 		</div>
 		<div>
-			@if(auth()->user()->membership->isActive())
+			@if($event->creator->membership->isActive())
 			<div class="alert-success px-2 py-1"><strong>Ativo</strong></div>
-			@elseif(auth()->user()->membership->status == 'Aguardando confirmação')
+			@elseif($event->creator->membership->status == 'Aguardando confirmação')
 			<div class="alert-warning px-2 py-1 "><strong>Pendente</strong></div>
 			@else
 			<div class="alert-danger px-2 py-1"><strong>Cancelado</strong></div>
@@ -58,11 +58,11 @@
 </div>
 
 <div class="border-top pt-2 text-center">
-	@if(auth()->user()->membership->isActive())
+	@if($event->creator->membership->isActive())
 		<div class="text-success">
-			<small><i class="far fa-calendar-check mr-2"></i><strong>A sua assinatura se renovará ano dia {{auth()->user()->membership->next_payment_at->format('d/m')}}</strong></small>
+			<small><i class="far fa-calendar-check mr-2"></i><strong>A sua assinatura se renovará ano dia {{$event->creator->membership->next_payment_at->format('d/m')}}</strong></small>
 		</div>
-	@elseif(auth()->user()->membership->status == 'Aguardando confirmação')
+	@elseif($event->creator->membership->status == 'Aguardando confirmação')
 		<div class="text-warning">
 			<small><i class="fas fa-exclamation-circle mr-2"></i><strong>Estamos aguardando a confirmação do seu pedido</strong></small>
 		</div>

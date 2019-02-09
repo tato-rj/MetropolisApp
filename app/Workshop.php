@@ -2,11 +2,11 @@
 
 namespace App;
 
-use App\Traits\FindBySlug;
+use App\Traits\{FindBySlug, SmartUpdate};
 
 class Workshop extends Metropolis
 {
-	use FindBySlug;
+	use FindBySlug, SmartUpdate;
 	
     protected $dates = ['starts_at', 'ends_at'];
 	protected $withCount = ['attendees', 'files'];

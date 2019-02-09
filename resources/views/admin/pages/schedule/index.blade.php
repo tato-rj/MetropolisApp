@@ -21,7 +21,7 @@
 $(function() {
   let schedule = $('#calendar').attr('data-events');
   let ajaxUrl = $('#calendar').attr('data-ajax');
-console.log(JSON.parse(schedule));
+
   $('#calendar').fullCalendar({
     minTime: '08:00',
     maxTime: '18:00',

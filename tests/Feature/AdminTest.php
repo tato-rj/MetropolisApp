@@ -70,12 +70,12 @@ class AdminTest extends AppTest
         $this->signIn($this->admin, 'admin');
 
         $workshop = $this->newWorkshop();
-        
-        $this->post(route('admin.workshops.update', $workshop->slug), [
-            'name' => 'New name'
-        ]);
 
-        $this->assertEquals($workshop->fresh()->name, 'New name');
+        $changes = collect(make(Workshop::class)->toArray())->forget('cover_image');
+
+        $this->post(route('admin.workshops.update', $workshop->slug), $changes->toArray());
+
+        $this->assertEquals($workshop->fresh()->name, $changes['name']);
     }
 
     /** @test */

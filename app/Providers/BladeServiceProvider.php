@@ -28,7 +28,13 @@ class BladeServiceProvider extends ServiceProvider
         \Blade::if('match', function ($record, $value) {
             return ($record == $value);
         });
-        
+
+        \Blade::if('adminpage', function ($record, $value) {
+            $middlewares = \Route::current()->action['middleware'];
+
+            return in_array('auth:admin', $middlewares);
+        });
+
         \Blade::include('components.form.input');
 
         \Blade::include('components.form.textarea');

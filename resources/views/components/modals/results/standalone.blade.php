@@ -56,7 +56,7 @@
 		<div class="collapse mt-2" id="emails">
 			<div class="bg-light px-4 py-3">
 				<ul class="list-flat">
-					<li><span class="text-muted"><small><i class="fas fa-user mr-2"></i>{{auth()->user()->email}}</small></span></li>
+					<li><span class="text-muted"><small><i class="fas fa-user mr-2"></i>{{$event->creator->email}}</small></span></li>
 					@if($event->emails)
 						<div class="mt-3 pt-2 border-top"> 
 							@foreach($event->emails as $email)

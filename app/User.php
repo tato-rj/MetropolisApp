@@ -135,10 +135,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->events()->whereDate('starts_at', '>', now()->toDateTimeString())->get();
     }
 
-    public function getEventsArrayAttribute()
+    public function eventsArray($editable = true)
     {
-        return $this->events()->whereNotIn('status_id', [6,7])->get()->map(function ($item, $key) {
-            return $item->only(['id', 'title', 'start', 'end', 'plan_id', 'notified_at', 'statusForUser']);
+        $fields = ['id', 'title', 'start', 'end', 'plan_id', 'notified_at', 'statusForUser'];
+
+        if ($editable)
+            array_push($fields, 'editable');
+
+        return $this->events()->whereNotIn('status_id', [6,7])->get()->map(function ($item, $key) use ($fields) {
+            return $item->only($fields);
         });
     }
 }

@@ -75,7 +75,7 @@ class SimplePaymentTest extends AppTest
 
 		$event = Event::byReference('E-REFERENCE')->first();
 
-		$this->assertCount(1, $event->creator->eventsArray);
+		$this->assertCount(1, $event->creator->eventsArray());
 
 		$notification = $this->fakeNotification('single', 'cancelada');
 
@@ -83,6 +83,6 @@ class SimplePaymentTest extends AppTest
 			'notificationType' => 'transaction',
 			'xml' => $notification->xml('E-REFERENCE', 'newCode')]));
 
-		$this->assertCount(0, $event->creator->eventsArray);
+		$this->assertCount(0, $event->creator->eventsArray());
 	}
 }

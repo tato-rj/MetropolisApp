@@ -38,6 +38,20 @@ trait FakeEvents
         return $this->post(route('client.events.purchase'), $data);
     }
 
+    public function adminCreateNewEvent()
+    {
+        $data = [
+            'space_id' => $this->space->id,
+            'participants' => 1,
+            'guests' => null,
+            'date' => now(),
+            'time' => now()->hour,
+            'duration' => 2
+        ];
+
+        return $this->post(route('admin.schedule.store'), $data);
+    }
+
     public function signUpToNewWorkshop($workshop, $user = null, $saveCard = null)
     {
         $user = $user ?? auth()->user();

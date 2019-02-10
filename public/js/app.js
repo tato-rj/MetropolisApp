@@ -94456,15 +94456,23 @@ var CustomDatePicker = function () {
 
             var object = this;
 
-            $(finders).on('click', function () {
-                var $this = $(this);
+            if ($(finders).is('select')) {
+                $(finders).on('change', function () {
+                    var $this = $(this).find('option:selected');
 
-                if (toggleBg) object._updateBackground($this.attr('data-background'));
+                    object._updateSelect($this.attr('data-target'));
+                });
+            } else {
+                $(finders).on('click', function () {
+                    var $this = $(this);
 
-                object._updateSelect($this.attr('data-target'));
-                object._updateSpace($this.attr('data-target'));
-                object._updateButtons($this);
-            });
+                    if (toggleBg) object._updateBackground($this.attr('data-background'));
+
+                    object._updateSelect($this.attr('data-target'));
+                    object._updateSpace($this.attr('data-target'));
+                    object._updateButtons($this);
+                });
+            }
 
             return this;
         }

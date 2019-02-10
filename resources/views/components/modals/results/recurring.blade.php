@@ -32,10 +32,31 @@
 
 </ul>
 
+@user($user_type)
 <div class="bg-light py-2 px-3 mb-2">
 	<p class="text-muted m-0"><small>Para alterar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></p>
 	<p class="text-muted m-0"><small>O código da reserva é <strong>{{$event->reference}}</strong></small></p>
 </div>
+@enduser
+
+@admin($user_type)
+<div class="bg-light py-3 px-4 mb-2">
+	<ul class="list-flat">
+		<li class="mb-2">
+			<span class="text-muted mr-1"><strong>Criado por</strong></span>
+			<span>{{$event->creator->name}}</span>
+		</li>
+		<li class="mb-2">
+			<span class="text-muted mr-1"><strong>Email</strong></span>
+			<a href="mailto:{{$event->creator->email}}" class="link-inherit"><span>{{$event->creator->email}}</span></a>
+		</li>
+		<li>
+			<span class="text-muted mr-1"><strong>Reserva</strong></span>
+			<span>{{$event->reference}}</span>
+		</li>
+	</ul>
+</div>
+@endadmin
 
 <div class="mb-3 px-3">
 	<p class="m-0 text-muted"><small>Esta reserva faz parte da sua assinatura do</small></p>
@@ -60,15 +81,15 @@
 <div class="border-top pt-2 text-center">
 	@if($event->creator->membership->isActive())
 		<div class="text-success">
-			<small><i class="far fa-calendar-check mr-2"></i><strong>A sua assinatura se renovará ano dia {{$event->creator->membership->next_payment_at->format('d/m')}}</strong></small>
+			<small><i class="far fa-calendar-check mr-2"></i><strong>Essa assinatura se renovará ano dia {{$event->creator->membership->next_payment_at->format('d/m')}}</strong></small>
 		</div>
 	@elseif($event->creator->membership->status == 'Aguardando confirmação')
 		<div class="text-warning">
-			<small><i class="fas fa-exclamation-circle mr-2"></i><strong>Estamos aguardando a confirmação do seu pedido</strong></small>
+			<small><i class="fas fa-exclamation-circle mr-2"></i><strong>Estamos aguardando a confirmação do pedido</strong></small>
 		</div>
 	@else
 		<div class="text-danger">
-			<small><i class="far fa-calendar-times mr-2"></i><strong>A sua assinatura foi cancelada e não se renovará</strong></small>
+			<small><i class="far fa-calendar-times mr-2"></i><strong>Essa assinatura foi cancelada e não se renovará</strong></small>
 		</div>
 	@endif
 </div>

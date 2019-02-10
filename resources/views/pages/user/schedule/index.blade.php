@@ -20,7 +20,7 @@
 $(function() {
   let schedule = $('#calendar').attr('data-events');
   let ajaxUrl = $('#calendar').attr('data-ajax');
-
+console.log(app.user.type);
   $('#calendar').fullCalendar({
     minTime: '08:00',
     maxTime: '18:00',
@@ -48,7 +48,7 @@ $(function() {
 
     	$modal.modal('show');
     	
-      $.post(ajaxUrl, {event_id: event.id},
+      $.post(ajaxUrl, {event_id: event.id, user_type: app.user.type},
 	    	function(data, status){
 	    		$modal.find('.modal-body > div:first-child').html(data);
           

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{Workshop, User, Plan, Membership, Event, Payment};
+use App\{Workshop, User, Plan, Membership, Event, Payment, Space};
 
 class AdminController extends Controller
 {

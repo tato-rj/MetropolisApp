@@ -25,4 +25,9 @@ class UserWorkshop extends Metropolis implements Reservation
     {
     	return $this->workshop->fee;
     }
+
+    public function getOwnerIdAttribute()
+    {
+        return $this->user_id;
+    }
 }

@@ -6,7 +6,7 @@ use App\Events\EventCreated;
 use App\{Event, Space, User};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Requests\{SpaceSearchForm, CreateEventForm, CreditCardForm};
+use App\Http\Requests\{SpaceSearchForm, CreateEventForm, CreditCardForm, AdminCreateEventForm};
 use Illuminate\Support\Facades\Mail;
 use App\Mail\InviteToEvent;
 use App\Services\PagSeguro\PagSeguro;
@@ -30,7 +30,9 @@ class EventsController extends Controller
      */
     public function create()
     {
-        //
+        $spaces = Space::all();
+     
+        return view('admin.pages.schedule.create.index', compact('space'));
     }
 
     /**
@@ -49,7 +51,13 @@ class EventsController extends Controller
 
         return view("pages.search.results", compact(['report', 'selectedSpace']));
     }
-    
+
+    /**
+     * Shows the payment form.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function payment(Space $space, Request $request, CreateEventForm $form)
     {
         $price = $form->space->priceFor($request->participants, $request->duration, $form->user->bonusesLeft($form->space));
@@ -69,6 +77,12 @@ class EventsController extends Controller
         return view('pages.user.checkout.event.index', compact(['space', 'pagseguro']));
     }
 
+    /**
+     * Charges the user for the reservation.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function purchase(Request $request, CreateEventForm $form, CreditCardForm $cardForm)
     {
         $pagseguro = new PagSeguro;
@@ -92,6 +106,12 @@ class EventsController extends Controller
         return redirect()->route('client.events.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
     }
 
+    /**
+     * Checks the status of a current reservation.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function status(Event $event, Request $request)
     {
         $pagseguro = new PagSeguro;
@@ -111,6 +131,12 @@ class EventsController extends Controller
         return $event;
     }
 
+    /**
+     * Invites the participants.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function invite(Request $request)
     {
         $event = Event::find($request->event_id);
@@ -133,14 +159,44 @@ class EventsController extends Controller
         //
     }
 
+    /**
+     * Returns the view with details about an event.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function ajax(Request $request)
     {
+        $user_type = $request->user_type;
         $event = Event::find($request->event_id);
 
         if ($event->plan()->exists())
-            return view('components.modals.results.recurring', compact('event'))->render();
+            return view('components.modals.results.recurring', compact(['event', 'user_type']))->render();
     
-        return view('components.modals.results.standalone', compact('event'))->render();
+        return view('components.modals.results.standalone', compact(['event', 'user_type']))->render();
+    }
+
+    /**
+     * Saves a new event.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request, CreateEventForm $form)
+    {
+        $event = auth()->guard('admin')->user()->events()->create([
+            'space_id' => $form->space_id,
+            'participants' => $form->participants,
+            'starts_at' => $form->starts_at,
+            'emails' => serialize($form->emails),
+            'ends_at' => $form->ends_at,
+            'verified_at' => now(),
+            'status_id' => 3
+        ]);
+
+        event(new EventCreated($event));
+
+        return redirect()->back()->with('status', 'O evento foi criado com sucesso.');
     }
 
     /**
@@ -168,6 +224,12 @@ class EventsController extends Controller
         return view('components.alerts.success', ['message' => 'O evento foi atualizado com sucesso.'])->render();
    }
 
+    /**
+     * Update the emails of participants.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function updateEmails(Request $request, Event $event)
     {
         $event->update([$request->field => serialize(json_decode($request->emails))]);

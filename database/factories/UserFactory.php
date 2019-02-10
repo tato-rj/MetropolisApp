@@ -34,14 +34,19 @@ $factory->define(App\Admin::class, function (Faker $faker) {
 });
 
 $factory->define(App\Event::class, function(Faker $faker) {
+    $user = create('App\User');
+
 	return [
         'reference' => '1',
         'transaction_code' => $faker->uuid,
         'space_id' => function() {
             return create('App\Space')->id;
         },
-        'user_id' => function() {
-            return create('App\User')->id;
+        'creator_id' => function() use ($user) {
+            return $user->id;
+        },
+        'creator_type' => function() use ($user) {
+            return get_class($user);
         },
         'fee' => 100,
 		'starts_at' => now(),
@@ -81,15 +86,17 @@ $factory->define(App\Bonus::Class, function(Faker $faker) {
 });
 
 $factory->define(App\Payment::class, function(Faker $faker) {
+    $event = create('App\Event');
+
     return [
         'user_id' => function() {
             return create('App\User')->id;
         },
-        'reservation_id' => function() {
-            return create('App\Event')->id;
+        'reservation_id' => function() use ($event) {
+            return $event->id;
         },
-        'reservation_type' => function() {
-            return get_class(create('App\Event'));
+        'reservation_type' => function() use ($event) {
+            return get_class($event);
         },
         'transaction_code' => $faker->uuid
     ];

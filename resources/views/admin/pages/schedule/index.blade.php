@@ -13,7 +13,6 @@
 
   @include('components.modals.event')
   @include('components.modals.plan')
-  @include('admin.components.modals.new-event')
 @endsection
 
 @push('scripts')
@@ -35,7 +34,7 @@ $(function() {
       newEvent: {
         text: 'Criar reserva',
         click: function() {
-          $('#new-event-modal').modal('show');
+          window.location.href = {!! json_encode(route('admin.schedule.create'), JSON_HEX_TAG) !!};
         }
       }
     },
@@ -57,7 +56,7 @@ $(function() {
 
     	$modal.modal('show');
     	
-      $.post(ajaxUrl, {event_id: event.id},
+      $.post(ajaxUrl, {event_id: event.id, user_type: app.user.type},
 	    	function(data, status){
 	    		$modal.find('.modal-body > div:first-child').html(data);
           

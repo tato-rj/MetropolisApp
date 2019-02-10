@@ -5,6 +5,28 @@
 	</div>
 	@endif
 
+@admin($user_type)
+	<div class="alert alert-yellow border-0 text-center p-2" role="alert">
+		Essa reserva foi feita por um administrador
+	</div>
+
+	<li class="mb-2">
+		<span class="text-teal mr-1"><strong>Criado por</strong></span>
+		<span>{{$event->creator->name}}</span>
+	</li>
+	<li class="mb-2">
+		<span class="text-teal mr-1"><strong>Email</strong></span>
+		<span>{{$event->creator->email}}</span>
+	</li>
+
+	@user($event->creator_type)
+	<li class="mb-2">
+		<span class="text-teal mr-1"><strong>Reserva #</strong></span>
+		<span>{{$event->reference}}</span>
+	</li>
+	@enduser
+@endadmin
+
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Espaço</strong></span>
 		<span>{{$event->space->name}}</span>
@@ -81,13 +103,15 @@
 	</li>
 </ul>
 
+@user($user_type)
 <div class="bg-light py-2 px-3">
 	<p class="text-muted m-0"><small>Para alterar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></p>
 	@if($event->reference)
 	<p class="text-muted m-0"><small>O código da reserva é <strong>{{$event->reference}}</strong></small></p>
 	@endif
 </div>
+@enduser
 
-<div class="text-right mt-3">
+{{-- <div class="text-right mt-3">
 	<button class="btn btn-red btn-sm">Cancelar esta reserva</button>
-</div>
+</div> --}}

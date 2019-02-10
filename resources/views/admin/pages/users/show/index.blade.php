@@ -97,7 +97,7 @@ $(function() {
 
     	$modal.modal('show');
     	
-      $.post(ajaxUrl, {event_id: event.id},
+      $.post(ajaxUrl, {event_id: event.id, user_type: app.user.type},
 	    	function(data, status){
 	    		$modal.find('.modal-body > div:first-child').html(data);
           

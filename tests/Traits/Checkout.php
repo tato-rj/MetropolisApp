@@ -41,7 +41,8 @@ trait Checkout
 
 		return create('App\Event', [
 			'transaction_code' => null,
-			'user_id' => $membership->user_id,
+			'creator_id' => $membership->user_id,
+			'creator_type' => get_class($membership->user),
 			'plan_id' => $membership->plan->id,
 			'reference' => $request->key('reference', $reference, $code),
 			'ends_at' => $membership->next_payment_at->subDay()]);

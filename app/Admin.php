@@ -14,6 +14,11 @@ class Admin extends Authenticatable
     protected $guarded = [];
     protected $hidden = ['password', 'remember_token'];
 
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'creator');
+    }
+    
     public function isManager()
     {
     	return $this->role == 'manager';

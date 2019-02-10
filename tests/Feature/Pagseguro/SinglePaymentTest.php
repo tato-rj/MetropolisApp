@@ -7,7 +7,7 @@ use Tests\PagSeguro\Sandbox;
 use Tests\Traits\Checkout;
 use App\{Event, Workshop, UserWorkshop};
 
-class SimplePaymentTest extends AppTest
+class SinglePaymentTest extends AppTest
 {
 	use Checkout;
 

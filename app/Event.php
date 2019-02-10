@@ -14,7 +14,7 @@ class Event extends Metropolis implements Reservation
 
 	public function creator()
 	{
-		return $this->belongsTo(User::class, 'user_id');
+		return $this->morphTo();
 	}
 
     public function space()
@@ -30,6 +30,11 @@ class Event extends Metropolis implements Reservation
     public function bonus()
     {
         return $this->hasOne(Bonus::class);
+    }
+
+    public function getOwnerIdAttribute()
+    {
+        return $this->creator_id;
     }
 
     public function getHasPassedAttribute()

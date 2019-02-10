@@ -22,7 +22,7 @@ class Payment extends Metropolis
     {
         if ($reservation && ! $this->byCode($reservation->transaction_code)->exists()) {
         	return $this->create([
-        		'user_id' => $reservation->user_id,
+        		'user_id' => $reservation->owner_id,
         		'reservation_id' => $reservation->id,
         		'reservation_type' => get_class($reservation),
         		'transaction_code' => $reservation->transaction_code

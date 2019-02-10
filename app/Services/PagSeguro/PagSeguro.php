@@ -34,7 +34,7 @@ class PagSeguro
 
             $this->session = PagSeguroSession::create($this->credentials);
         } catch (\Exception $e) {
-            abort(400, $e);
+            return redirect()->back()->with('error', 'Não foi possível conectar com o PagSeguro.');
         }
 	}
 

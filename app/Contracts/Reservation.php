@@ -11,4 +11,5 @@ interface Reservation
     public function getStatusColorAttribute();
     public function setStatus($status_id);
     public function setTransactionCode($code);
+    public function getOwnerIdAttribute();
 }

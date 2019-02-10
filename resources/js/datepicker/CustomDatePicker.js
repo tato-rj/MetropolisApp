@@ -19,16 +19,24 @@ class CustomDatePicker
     enableTogglers(finders, toggleBg = true) {
     	let object = this;
 
-		$(finders).on('click', function() {
-		    let $this = $(this);
+        if ($(finders).is('select')) {
+            $(finders).on('change', function() {
+                let $this = $(this).find('option:selected');
 
-            if (toggleBg)
-		      object._updateBackground($this.attr('data-background'));
-			
-            object._updateSelect($this.attr('data-target'));
-            object._updateSpace($this.attr('data-target'));
-			object._updateButtons($this);
-		});
+                object._updateSelect($this.attr('data-target'));
+            });
+        } else {
+    		$(finders).on('click', function() {
+    		    let $this = $(this);
+
+                if (toggleBg)
+    		      object._updateBackground($this.attr('data-background'));
+    			
+                object._updateSelect($this.attr('data-target'));
+                object._updateSpace($this.attr('data-target'));
+    			object._updateButtons($this);
+    		});
+        }
 
 		return this;
     }

@@ -19,8 +19,9 @@ class CreateEventsTable extends Migration
             $table->string('transaction_code')->nullable();
             $table->unsignedInteger('space_id')->default(1);
             $table->unsignedInteger('plan_id')->nullable();
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('fee');
+            $table->unsignedInteger('creator_id');
+            $table->string('creator_type');
+            $table->unsignedInteger('fee')->nullable();
             $table->unsignedInteger('participants')->default(1);
             $table->text('emails')->nullable();
             $table->timestamp('starts_at')->nullable();

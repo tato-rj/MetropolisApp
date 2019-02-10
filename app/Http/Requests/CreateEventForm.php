@@ -19,6 +19,9 @@ class CreateEventForm extends FormRequest
     {
         $this->setFields();
 
+        if (auth()->guard('admin')->check())
+            return true;
+
         return auth()->check() && $this->getReport()->status;
     }
 

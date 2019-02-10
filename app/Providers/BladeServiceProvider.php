@@ -29,10 +29,12 @@ class BladeServiceProvider extends ServiceProvider
             return ($record == $value);
         });
 
-        \Blade::if('adminpage', function ($record, $value) {
-            $middlewares = \Route::current()->action['middleware'];
+        \Blade::if('user', function ($user_type) {
+            return $user_type == 'App\User';
+        });
 
-            return in_array('auth:admin', $middlewares);
+        \Blade::if('admin', function ($user_type) {
+            return $user_type == 'App\Admin';
         });
 
         \Blade::include('components.form.input');

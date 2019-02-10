@@ -38,6 +38,10 @@
     <script>
         window.app = <?php echo json_encode([
             'csrfToken' => csrf_token(),
+            'user' => [
+              'id' => auth()->check() ? auth()->user()->id : null,
+              'type' => auth()->check() ? get_class(auth()->user()) : null,
+            ],
             'office' => [
               'day_length' => office()->day_length,
               'day_starts_at' => office()->day_starts_at,

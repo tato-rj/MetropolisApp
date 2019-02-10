@@ -9,8 +9,8 @@
             <li class="nav-item {{checkActive(['admin.dashboard'], 'text-teal')}} mb-2">
                 <a href="{{route('admin.dashboard')}}" class="nav-link link-inherit"><i class="fas fa-home" style="width: 1.8rem"></i>Painel de Controle</a>
             </li>
-            <li class="nav-item {{checkActive(['admin.schedule'], 'text-teal')}} mb-2">
-                <a href="{{route('admin.schedule')}}" class="nav-link link-inherit"><i class="fas fa-calendar-alt" style="width: 1.7rem; margin-left: .14rem"></i>Agenda</a>
+            <li class="nav-item {{checkActive(['admin.schedule.index'], 'text-teal')}} mb-2">
+                <a href="{{route('admin.schedule.index')}}" class="nav-link link-inherit"><i class="fas fa-calendar-alt" style="width: 1.7rem; margin-left: .14rem"></i>Agenda</a>
             </li>
             <li class="nav-item {{checkActive(['admin.users.index'], 'text-teal')}} mb-2">
                 <a href="{{route('admin.users.index')}}" class="nav-link link-inherit"><i class="fas fa-users" style="width: 1.8rem"></i>Usuários</a>

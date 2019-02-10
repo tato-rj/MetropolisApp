@@ -4,7 +4,17 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 
 	Route::get('', 'AdminController@dashboard')->name('dashboard');
 
-	Route::get('/agenda', 'AdminController@schedule')->name('schedule');
+	Route::prefix('agenda')->name('schedule.')->group(function() {
+		
+		Route::get('', 'AdminController@schedule')->name('index');
+
+		Route::get('/novo-evento', 'EventsController@create')->name('create');
+
+		Route::post('', 'EventsController@store')->name('store');
+
+		Route::get('/checar', 'SpacesController@check')->name('check');
+	
+	});
 	
 	Route::prefix('usuarios')->name('users.')->group(function() {
 	

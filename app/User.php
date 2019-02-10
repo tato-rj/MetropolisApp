@@ -30,7 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function events()
     {
-        return $this->hasMany(Event::class);
+        return $this->morphMany(Event::class, 'creator');
     }
 
     public function workshops()

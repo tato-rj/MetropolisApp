@@ -28,11 +28,11 @@ trait FakeEvents
         $user = $user ?? auth()->user();
 
         $data = array_merge([
-            'space_id' => $this->space->id,
+            'type' => $this->space->slug,
             'participants' => 1,
             'guests' => null,
             'date' => now(),
-            'time' => now()->hour . '.0',
+            'time' => now()->hour . ':0',
             'duration' => 2,
             'save_card' => $saveCard
         ], $this->cardFields);
@@ -46,8 +46,8 @@ trait FakeEvents
             'space_id' => $space ? $space->id : $this->space->id,
             'participants' => 1,
             'guests' => null,
-            'date' => now(),
-            'time' => now()->hour . '.0',
+            'starts_at' => now(),
+            'ends_at' => now()->addHour(),
             'duration' => 2
         ];
 

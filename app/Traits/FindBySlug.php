@@ -8,4 +8,9 @@ trait FindBySlug
     {
         return 'slug';
     }
+
+    public function scopeBySlug($query, $slug)
+    {
+    	return $query->where('slug', $slug)->first();
+    }
 }

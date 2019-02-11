@@ -177,12 +177,11 @@ class UserTest extends AppTest
 		$this->assertEquals(auth()->user()->bonusesLeft($this->space), $plan->bonus_limit);
 
 		$data = array_merge([
-            'user_id' => auth()->user()->id,
-            'space_id' => $this->space->id,
+            'type' => $this->space->slug,
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],
             'date' => now(),
-            'time' => now()->hour . '.0',
+            'time' => now()->hour . ':0',
             'duration' => 2
         ], $this->cardFields);
 

@@ -7,3 +7,9 @@
 @include('pages.contact.sections.faq')
 
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+$('input.phone-field').inputmask("(99) 9999-9999");
+</script>
+@endpush

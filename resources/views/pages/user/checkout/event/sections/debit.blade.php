@@ -1,13 +1,13 @@
 <form id="form-debit" method="POST" action="{{route('client.events.purchase')}}">
 	@csrf
 	{{-- EVENT --}}
-	<input type="hidden" name="space_id" value="{{$space->id}}">
-	<input type="hidden" name="description" value="{{$space->name}}">
-	<input type="hidden" name="date" value="{{request()->date}}">
-	<input type="hidden" name="time" value="{{request()->time}}">
-	<input type="hidden" name="duration" value="{{request()->duration}}">
-	<input type="hidden" name="participants" value="{{request()->participants}}">
-	<input type="hidden" name="price" value="{{fromCents($space->priceFor(request()->participants, request()->duration))}}">
+	<input type="hidden" name="space_id" value="{{$form->space->id}}">
+	<input type="hidden" name="description" value="{{$form->space->name}}">
+	<input type="hidden" name="date" value="{{$form->date}}">
+	<input type="hidden" name="time" value="{{$form->time}}">
+	<input type="hidden" name="duration" value="{{$form->duration}}">
+	<input type="hidden" name="participants" value="{{$form->participants}}">
+	<input type="hidden" name="price" value="{{fromCents($form->space->priceFor($form->participants, $form->duration))}}">
 
 	<input type="hidden" name="paymentMethod" value="eft">
 	<input type="hidden" name="card_token">

@@ -41,9 +41,9 @@
       <select name="time" class="col-lg-2 col-6 form-control border-left-0">
         <option selected disabled value="">Horário</option>
           @for($i = office()->day_starts_at; $i < office()->day_ends_at; $i++)
-          <option value="{{$i}}.0">{{$i}}:00h</option>
+          <option value="{{$i}}:0">{{$i}}:00h</option>
           @unless($i == office()->day_ends_at -1)
-          <option value="{{$i}}.30">{{$i}}:30h</option>
+          <option value="{{$i}}:30">{{$i}}:30h</option>
           @endunless
           @endfor
       </select>

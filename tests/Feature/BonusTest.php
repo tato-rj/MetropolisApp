@@ -20,12 +20,11 @@ class BonusTest extends AppTest
 		$this->subscribeToNewPlan($plan);
 
         $data = array_merge([
-            'user_id' => auth()->user()->id,
-            'space_id' => $this->space->id,
+            'type' => $this->space->slug,
             'participants' => 1,
             'guests' => null,
             'date' => now(),
-            'time' => now()->hour  . '.0',
+            'time' => now()->hour  . ':0',
             'duration' => 1
         ], $this->cardFields);
 

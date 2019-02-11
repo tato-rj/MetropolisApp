@@ -43,12 +43,12 @@
 
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Hora de chegada</strong></span>
-		<span>{{$event->starts_at->hour}}:00 horas</span>
+		<span>{{$event->starts_at->format('H:i')}}</span>
 	</li>
 
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Hora da saída</strong></span>
-		<span>{{$event->ends_at->hour}}:00 horas</span>
+		<span>{{$event->ends_at->format('H:i')}}</span>
 	</li>
 
 	<li class="mb-2">

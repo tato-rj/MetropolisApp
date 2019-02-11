@@ -96,8 +96,16 @@ class SpaceTest extends AppTest
 	}
 
 	/** @test */
-	public function it_ignores_memberships_when_checking_if_the_workstation_is_full()
+	public function it_knows_how_to_ignore_memberships_when_checking_if_the_workstation_is_full()
 	{
+		create(Event::class, [
+			'space_id' => $this->workspace->id,
+			'plan_id' => $this->plan->id,
+			'participants' => 1,
+			'starts_at' => now()->copy()->subHour(),
+			'ends_at' => now()->copy()->addHour()
+		]);
+
 		create(Event::class, [
 			'space_id' => $this->workspace->id,
 			'participants' => 8,
@@ -105,10 +113,14 @@ class SpaceTest extends AppTest
 			'ends_at' => now()->copy()->addHour()
 		]);
 
-		$report = $this->workspace->checkAvailability(now(), $duration = 1, $participants = 8);
+		$reportForAdmin = $this->workspace->checkAvailability(now(), $duration = 1, $participants = 8, $includePlan = true);
+		$reportForUser = $this->workspace->checkAvailability(now(), $duration = 1, $participants = 8, $includePlan = false);
 
-		$this->assertFalse($report->status);
-		$this->assertEquals($report->participantsLeft, 4);
+		$this->assertFalse($reportForAdmin->status);
+		$this->assertEquals($reportForAdmin->participantsLeft, 3);
+
+		$this->assertFalse($reportForUser->status);
+		$this->assertEquals($reportForUser->participantsLeft, 4);
 	}
 
 	/** @test */

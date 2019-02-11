@@ -1,18 +1,18 @@
 <form id="form-credit" method="POST" action="{{route('client.events.purchase')}}">
 	@csrf
 	{{-- EVENT --}}
-	<input type="hidden" name="space_id" value="{{$space->id}}">
-	@if(request('emails'))
-	@foreach(request()->emails as $email)
+	<input type="hidden" name="type" value="{{$form->type}}">
+	@if($form->emails)
+	@foreach($form->emails as $email)
 	<input type="hidden" name="emails[]" value="{{$email}}">
 	@endforeach
 	@endif
-	<input type="hidden" name="description" value="{{$space->name}}">
-	<input type="hidden" name="date" value="{{request()->date}}">
-	<input type="hidden" name="time" value="{{request()->time}}">
-	<input type="hidden" name="duration" value="{{request()->duration}}">
-	<input type="hidden" name="participants" value="{{request()->participants}}">
-	<input type="hidden" name="price" value="{{$space->priceFor(request()->participants, request()->duration, auth()->user()->bonusesLeft($space))}}">
+	<input type="hidden" name="description" value="{{$form->space->name}}">
+	<input type="hidden" name="date" value="{{$form->date}}">
+	<input type="hidden" name="time" value="{{$form->time}}">
+	<input type="hidden" name="duration" value="{{$form->duration}}">
+	<input type="hidden" name="participants" value="{{$form->participants}}">
+	{{-- <input type="hidden" name="price" value="{{$form->space->priceFor($form->participants, $form->duration, auth()->user()->bonusesLeft($form->space))}}"> --}}
 
 	<input type="hidden" name="paymentMethod" value="creditCard">
 	<input type="hidden" name="card_token">

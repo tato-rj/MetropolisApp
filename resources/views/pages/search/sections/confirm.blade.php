@@ -3,37 +3,37 @@
 	@include('components.animations.success-icon')
 </div>
 <form id="confirm-purchase" method="GET" action="{{route('client.events.payment')}}">
-	<input type="hidden" name="space_id" value="{{$selectedSpace->id}}">
-	<input type="hidden" name="date" value="{{request()->date}}">
-	<input type="hidden" name="time" value="{{request()->time}}">
-	<input type="hidden" name="duration" value="{{request()->duration}}">
-	<input type="hidden" name="participants" value="{{request()->participants}}">
+	<input type="hidden" name="type" value="{{$form->type}}">
+	<input type="hidden" name="date" value="{{$form->date}}">
+	<input type="hidden" name="time" value="{{$form->time}}">
+	<input type="hidden" name="duration" value="{{$form->duration}}">
+	<input type="hidden" name="participants" value="{{$form->participants}}">
 	<input type="hidden" name="emails">
 
 	<div class="bg-light border-top border-teal-light border-1x mb-4">
 		<ul class="list-flat p-4" id="review">
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Espaço</strong></span>
-				<span>{{$selectedSpace->name}}</span>
+				<span>{{$form->space->name}}</span>
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Data</strong></span>
-				<span class="date-pt" data-date="{{request()->date}}"></span>
+				<span class="date-pt" data-date="{{$form->date}}"></span>
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Hora de chegada</strong></span>
-				<span>{{request()->time}}:00 horas</span>
+				<span>{{$form->time}}</span>
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Duração</strong></span>
-				<span class="mr-1">{{request()->duration == office()->day_length ? 'Dia inteiro' : request()->duration.'h'}}</span>
+				<span class="mr-1">{{$form->duration == office()->day_length ? 'Dia inteiro' : $form->duration.'h'}}</span>
 				<span class="text-muted text-italic"><small>(o escritório fecha às <u>{{durationToString(office()->day_ends_at)}}</u>)</small></span>
 			</li>
 			<li>
 				<span class="text-teal mr-1"><strong>Número de participantes</strong></span>
-				<span>{{request()->participants}} {{trans_choice('words.pessoas', request()->participants)}}</span>
+				<span>{{$form->participants}} {{trans_choice('words.pessoas', $form->participants)}}</span>
 			</li>
-			@if(request()->participants > 1)
+			@if($form->participants > 1)
 			<div class="mt-3 border-top pt-3">
 				<p class="mb-2">Quer que enviemos um email de confirmação para os participantes do seu evento?</p>
 				<div class="custom-control custom-radio">
@@ -52,7 +52,7 @@
 						class="form-control border-grey bg-transparent" style="border: none; border-bottom: 1px solid">
 						<i class="text-green fas fa-check"></i>
 					</div>
-					@for($i=2; $i<=request()->participants; $i++)
+					@for($i=2; $i<=$form->participants; $i++)
 					<div class="icon-input position-relative mb-2">
 					<input type="email" name="emails[]" placeholder="Email do participante {{$i}}" 
 						class="form-control border-grey bg-transparent" style="border: none; border-bottom: 1px solid">
@@ -62,9 +62,9 @@
 				</div>
 			</li>
 			@endif
-			@bonus($selectedSpace)
+			@bonus($form->space)
 			<li class="mt-2">
-				<span class="text-red mr-1">Você tem <strong>{{auth()->user()->bonusesLeft($selectedSpace)}} {{trans_choice('horas', auth()->user()->bonusesLeft($selectedSpace))}}</strong> de bônus para usar nessa reserva!</span>
+				<span class="text-red mr-1">Você tem <strong>{{auth()->user()->bonusesLeft($form->space)}} {{trans_choice('horas', auth()->user()->bonusesLeft($form->space))}}</strong> de bônus para usar nessa reserva!</span>
 			</li>
 			@endbonus
 		</ul>
@@ -72,13 +72,13 @@
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
 			<div class="d-flex xs-w-100">
 				<div class="p-3 bg-teal-dark flex-grow"><strong>
-					@bonus($selectedSpace)
+					@bonus($form->space)
 					<span class="opacity-6 mr-2" style="text-decoration: line-through;">
-						{{feeToString($selectedSpace->priceFor(request()->participants, request()->duration, $discount = 0))}}
+						{{feeToString($form->space->priceFor($form->participants, $form->duration, $discount = 0))}}
 					</span>
-					{{feeToString($selectedSpace->priceFor(request()->participants, request()->duration, $discount = auth()->user()->bonusesLeft($selectedSpace)))}}
+					{{feeToString($form->space->priceFor($form->participants, $form->duration, $discount = auth()->user()->bonusesLeft($form->space)))}}
 					@else
-					{{feeToString($selectedSpace->priceFor(request()->participants, request()->duration))}}
+					{{feeToString($form->space->priceFor($form->participants, $form->duration))}}
 					@endbonus
 				</strong></div>
 				<button type="submit" class="btn btn-red h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>

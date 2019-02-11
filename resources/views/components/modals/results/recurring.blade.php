@@ -43,12 +43,12 @@
 
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Começa</strong></span>
-		<span>dia {{$event->starts_at->format('d/m')}} às {{$event->starts_at->hour}}:00 horas</span>
+		<span>dia {{$event->starts_at->format('d/m')}} às {{$event->starts_at->format('H:i')}}</span>
 	</li>
 
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Termina</strong></span>
-		<span>dia {{$event->ends_at->format('d/m')}} às {{$event->ends_at->hour}}:00 horas</span>
+		<span>dia {{$event->ends_at->format('d/m')}} às {{$event->ends_at->format('H:i')}}</span>
 	</li>
 
 	<li class="mb-2">

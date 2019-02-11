@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Http\Requests\CreateEventForm;
+use App\Http\Requests\SpaceSearchForm;
 use App\Notifications\MailResetPasswordNotification;
 use App\Traits\{HasBonus, HasCreditCard};
 
@@ -72,11 +72,11 @@ class User extends Authenticatable implements MustVerifyEmail
         ])->start();
     }
 
-    public function schedule(CreateEventForm $form, $reference = null)
+    public function schedule(SpaceSearchForm $form, $reference = null)
     {
         $event = $this->events()->create([
             'reference' => $reference ?? null,
-            'space_id' => $form->space_id,
+            'space_id' => $form->space->id,
             'fee' => $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space)),
             'participants' => $form->participants,
             'emails' => serialize($form->emails),

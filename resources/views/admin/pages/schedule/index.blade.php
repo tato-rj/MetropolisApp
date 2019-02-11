@@ -23,6 +23,7 @@ $(function() {
 
   $('#calendar').fullCalendar({
     minTime: '08:00',
+    navLinks: true,
     maxTime: '18:00',
     allDaySlot: false,
     eventLimit: 3,
@@ -93,6 +94,7 @@ $(function() {
     },
     eventAfterAllRender: function (view) {
         $('#calendar-loading').remove();
+        $('.fc-day-number').attr('title', 'Ver agenda nesse dia');
     },
     eventDrop: function(event, delta, revertFunc) {
       if (!confirm("Tem certeza de que deseja atualizar esse evento?")) {

@@ -9,6 +9,15 @@
 		</div>
 		@else
 		<div class="mb-4">
+			@if($results->participantsExceeded)
+			<div class="alert alert-red">
+				<i class="fas fa-exclamation-triangle mr-2"></i><strong>Atenção!</strong> Este horário já ultrapassou o limite de reservas. 
+			</div>
+			<div class="pl-4">
+				<p class="text-red">Número de reservas excendendo o limite: <strong>{{$results->participantsExceeded}}</strong></p>
+				<p>Nós recomendamos resolver os conflitos antes de prosseguir com essa reserva.</p>
+			</div>
+			@else
 			<div class="alert alert-yellow">
 				<i class="fas fa-exclamation-triangle mr-2"></i><strong>Atenção!</strong> Esta reserva vai criar um conflito no calendário desse dia. 
 			</div>
@@ -16,6 +25,7 @@
 				<p class="text-red">Número de reservas disponíveis nesse horário: <strong>{{$results->participantsLeft}}</strong></p>
 				<p>Após criar o evento, lembre-se de verificar a agenda do dia para resolver os conflitos.</p>
 			</div>
+			@endif
 		</div>
 		@endif
 	</div>
@@ -28,23 +38,23 @@
 				<ul class="list-flat p-4" id="review">
 					<li class="mb-2">
 						<span class="text-teal mr-1"><strong>Espaço</strong></span>
-						<span>{{$space->name}}</span>
+						<span>{{$form->space->name}}</span>
 					</li>
 					<li class="mb-2">
 						<span class="text-teal mr-1"><strong>Data</strong></span>
-						<span class="date-pt" data-date="{{$request->date}}"></span>
+						<span class="date-pt" data-date="{{$form->date}}"></span>
 					</li>
 					<li class="mb-2">
 						<span class="text-teal mr-1"><strong>Hora de chegada</strong></span>
-						<span>{{$request->time}}:00 horas</span>
+						<span>{{$form->time}}</span>
 					</li>
 					<li class="mb-2">
 						<span class="text-teal mr-1"><strong>Duração</strong></span>
-						<span class="mr-1">{{$request->duration == office()->day_length ? 'Dia inteiro' : $request->duration.'h'}}</span>
+						<span class="mr-1">{{$form->duration == office()->day_length ? 'Dia inteiro' : $form->duration.'h'}}</span>
 					</li>
 					<li>
 						<span class="text-teal mr-1"><strong>Número de participantes</strong></span>
-						<span>{{$request->participants}} {{trans_choice('words.pessoas', $request->participants)}}</span>
+						<span>{{$form->participants}} {{trans_choice('words.pessoas', $form->participants)}}</span>
 					</li>
 					<div class="mt-3 border-top pt-3">
 						<p class="mb-2">Quer que enviemos um email de confirmação para os participantes desse evento?</p>
@@ -59,7 +69,7 @@
 					</div>
 					<li class="mt-3" id="emails" style="display: none;">
 						<div>
-							@for($i=1; $i<=$request->participants; $i++)
+							@for($i=1; $i<=$form->participants; $i++)
 							<div class="icon-input position-relative mb-2">
 							<input type="email" name="emails[]" placeholder="Email do participante {{$i}}" 
 								class="form-control border-grey bg-transparent" style="border: none; border-bottom: 1px solid">
@@ -72,11 +82,10 @@
 				<div class="bg-teal text-white d-flex flex-wrap">
 					<div class="p-3 flex-grow"><strong>CONFIRMAR RESERVA</strong></div>
 					<div>
-						<input type="hidden" name="space_id" value="{{$request->space_id}}">
-						<input type="hidden" name="date" value="{{$request->date}}">
-						<input type="hidden" name="duration" value="{{$request->duration}}">
-						<input type="hidden" name="participants" value="{{$request->participants}}">
-						<input type="hidden" name="time" value="{{$request->time}}">
+						<input type="hidden" name="space_id" value="{{$form->space_id}}">
+						<input type="hidden" name="participants" value="{{$form->participants}}">
+						<input type="hidden" name="starts_at" value="{{$form->starts_at}}">
+						<input type="hidden" name="ends_at" value="{{$form->ends_at}}">
 						<button type="submit" class="btn btn-red h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>
 					</div>
 				</div>

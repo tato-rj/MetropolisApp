@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Space;
 
 class SpaceSearchForm extends FormRequest
 {
@@ -13,6 +14,26 @@ class SpaceSearchForm extends FormRequest
      */
     public function authorize()
     {
+        return $this->setTime();
+    }
+
+    public function setTime()
+    {
+        try {
+
+            $hour = explode(':', $this->time)[0];
+            $min = explode(':', $this->time)[1];
+
+            $this->user = auth()->user() ?? null;
+            $this->starts_at = carbon($this->date)->setTime($hour,$min,0);
+            $this->ends_at = calculateEndingTime($this->starts_at, $this->duration);
+            $this->time = $this->starts_at->format('H:i');
+            $this->space = Space::bySlug($this->type);
+
+        } catch (\Exception $e) {
+            abort(404, 'Os dados fornecidos não estão corretos');
+        }
+
         return true;
     }
 
@@ -26,7 +47,7 @@ class SpaceSearchForm extends FormRequest
         return [
             'type' => 'required|exists:spaces,slug',
             'date' => 'required|date',
-            'time' => 'required|integer',
+            'time' => 'required',
             'duration' => 'required|integer',
             'participants' => 'required|integer'
         ];

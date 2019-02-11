@@ -14,6 +14,7 @@ class Report extends Office
 		$this->date = $date;
 		$this->status = $status;
 		$this->participantsLeft = $participantsLeft;
+		$this->participantsExceeded = $participantsLeft < 0 ? $participantsLeft * -1 : null;
 	}
 
 	public function getMessage()
@@ -21,7 +22,7 @@ class Report extends Office
 		if (! office()->isWorkingDay($this->date))
 			return 'O escritório está fechado no dia '.$this->date->format('d/m').'.';
 
-		if ($this->participantsLeft)
+		if ($this->participantsLeft > 0)
 			return 'Temos apenas <strong>'.$this->participantsLeft.'</strong> lugares disponíveis entre os horários que você procurou.';
 
 		return 'Infelizmente a <strong>'.$this->space->name.'</strong> não está disponível nesse horário.';

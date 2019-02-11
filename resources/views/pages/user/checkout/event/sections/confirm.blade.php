@@ -3,29 +3,29 @@
 		<ul class="list-flat p-4" id="review">
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Espaço</strong></span>
-				<span>{{$space->name}}</span>
+				<span>{{$form->space->name}}</span>
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Data</strong></span>
-				<span class="date-pt" data-date="{{request()->date}}"></span>
+				<span class="date-pt" data-date="{{$form->date}}"></span>
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Hora de chegada</strong></span>
-				<span>{{request()->time}}:00 horas</span>
+				<span>{{$form->time}}</span>
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Duração</strong></span>
-				<span class="mr-1">{{request()->duration == office()->day_length ? 'Dia inteiro' : request()->duration.'h'}}</span>
+				<span class="mr-1">{{$form->duration == office()->day_length ? 'Dia inteiro' : $form->duration.'h'}}</span>
 				<span class="text-muted text-italic"><small>(o escritório fecha às <u>{{durationToString(office()->day_ends_at)}}</u>)</small></span>
 			</li>
 			<li>
 				<span class="text-teal mr-1"><strong>Número de participantes</strong></span>
-				<span>{{request()->participants}} {{trans_choice('words.pessoas', request()->participants)}}</span>
+				<span>{{$form->participants}} {{trans_choice('words.pessoas', $form->participants)}}</span>
 			</li>
 
-			@bonus($space)
+			@bonus($form->space)
 			<li class="mt-2">
-				<span class="text-red mr-1">Você tem <strong>{{auth()->user()->bonusesLeft($space)}} {{trans_choice('horas', auth()->user()->bonusesLeft($space))}}</strong> de bônus para usar nessa reserva!</span>
+				<span class="text-red mr-1">Você tem <strong>{{auth()->user()->bonusesLeft($form->space)}} {{trans_choice('horas', auth()->user()->bonusesLeft($form->space))}}</strong> de bônus para usar nessa reserva!</span>
 			</li>
 			@endbonus
 		</ul>
@@ -33,13 +33,13 @@
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
 			<div class="d-flex xs-w-100">
 				<div class="p-3 bg-teal-dark flex-grow"><strong>
-					@bonus($space)
+					@bonus($form->space)
 					<span class="opacity-6 mr-2" style="text-decoration: line-through;">
-						{{feeToString($space->priceFor(request()->participants, request()->duration, $discount = 0))}}
+						{{feeToString($form->space->priceFor($form->participants, $form->duration, $discount = 0))}}
 					</span>
-					{{feeToString($space->priceFor(request()->participants, request()->duration, $discount = auth()->user()->bonusesLeft($space)))}}
+					{{feeToString($form->space->priceFor($form->participants, $form->duration, $discount = auth()->user()->bonusesLeft($form->space)))}}
 					@else
-					{{feeToString($space->priceFor(request()->participants, request()->duration))}}
+					{{feeToString($form->space->priceFor($form->participants, $form->duration))}}
 					@endbonus
 				</strong></div>
 			</div>

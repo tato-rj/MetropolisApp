@@ -6,7 +6,7 @@ use App\Events\EventCreated;
 use App\{Event, Space, User};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Requests\{SpaceSearchForm, CreateEventForm, CreditCardForm, AdminCreateEventForm};
+use App\Http\Requests\{SpaceSearchForm, CreateEventForm, CreditCardForm};
 use Illuminate\Support\Facades\Mail;
 use App\Mail\InviteToEvent;
 use App\Services\PagSeguro\PagSeguro;
@@ -43,13 +43,9 @@ class EventsController extends Controller
      */
     public function search(Request $request, SpaceSearchForm $form)
     {
-        $selectedSpace = Space::where('slug', $request->type)->first();
+        $report = $form->space->checkAvailability($form->starts_at, $request->duration, $request->participants);
 
-        $date = Carbon::parse($request->date)->setTime($request->time,0,0);
-
-        $report = $selectedSpace->checkAvailability($date, $request->duration, $request->participants);
-
-        return view("pages.search.results", compact(['report', 'selectedSpace']));
+        return view('pages.search.results', compact(['form', 'report']));
     }
 
     /**
@@ -58,9 +54,16 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function payment(Space $space, Request $request, CreateEventForm $form)
+    public function payment(Space $space, Request $request, SpaceSearchForm $form)
     {
-        $price = $form->space->priceFor($request->participants, $request->duration, $form->user->bonusesLeft($form->space));
+        $authorization = $form->space->authorize($form);
+
+        if (! $authorization->status)
+            return redirect()->back()->with([
+                'error' => $authorization->getMessage(),
+                'form' => $form]);
+        
+        $price = $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space));
 
         if ($price == 0) {            
             $event = $form->user->schedule($form);
@@ -72,9 +75,7 @@ class EventsController extends Controller
 
         $pagseguro = new PagSeguro;
 
-        $space = $form->space;
-
-        return view('pages.user.checkout.event.index', compact(['space', 'pagseguro']));
+        return view('pages.user.checkout.event.index', compact(['form', 'pagseguro']));
     }
 
     /**
@@ -83,16 +84,21 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function purchase(Request $request, CreateEventForm $form, CreditCardForm $cardForm)
+    public function purchase(Request $request, SpaceSearchForm $form, CreditCardForm $cardForm)
     {
+        $authorization = $form->space->authorize($form);
+        
+        if (! $authorization->status)
+            return redirect()->back()->with('error', $authorization->getMessage());
+        
         $pagseguro = new PagSeguro;
 
-        $price = $form->space->priceFor($request->participants, $request->duration, $form->user->bonusesLeft($form->space));
+        $price = $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space));
 
         $reference = $pagseguro->generateReference($prefix = 'E', $form->user);
 
         $status = $pagseguro->event($form->user, $request, $price)->purchase($reference);
-        
+      
         if ($status instanceof \Exception)
             return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
 

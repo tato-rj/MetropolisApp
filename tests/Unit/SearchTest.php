@@ -32,20 +32,16 @@ class SearchTest extends AppTest
 	/** @test */
 	public function an_event_cannot_be_booked_if_the_room_is_full()
 	{
-		$this->expectException('Illuminate\Auth\Access\AuthorizationException');
-
 		$this->signIn();
 
-		create(Event::class, ['space_id' => $this->workspace->id], 12);
+		$this->space = $this->workspace;
 
-        $this->post(route('client.events.purchase'), [
-            'user_id' => auth()->user()->id,
-            'space_id' => $this->workspace->id,
-            'participants' => 1,
-            'guests' => null,
-            'date' => now(),
-            'time' => now()->hour . '.0',
-            'duration' => 2
-        ]);
+		create(Event::class, ['space_id' => $this->space->id], 12);
+
+		$eventsCount = $this->space->events->count();
+
+        $this->createNewEvent();
+
+        $this->assertEquals($eventsCount, $this->space->fresh()->events->count());
 	}
 }

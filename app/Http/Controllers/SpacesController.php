@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CheckEventsForm;
 use App\{Space, Event};
-use Carbon\Carbon;
 
 class SpacesController extends Controller
 {
@@ -27,15 +26,13 @@ class SpacesController extends Controller
      */
     public function check(Request $request, CheckEventsForm $form)
     {
-        $date = Carbon::parse($request->date)->setTime($request->time,0,0);
+        $date = carbon($form->starts_at);
 
-    	$space = Space::find($request->space_id);
-
-    	$results = $space->checkAvailability($date, $request->duration, $request->participants);
+    	$results = $form->space->checkAvailability($date, $form->duration, $form->participants, $includePlan = true);
     	
         if ($date->isWeekend())
             return view('admin.pages.schedule.create.results.invalid', compact('results'))->render();
 
-    	return view('admin.pages.schedule.create.results.valid', compact(['results', 'request', 'space']))->render();
+    	return view('admin.pages.schedule.create.results.valid', compact(['results', 'form']))->render();
     }
 }

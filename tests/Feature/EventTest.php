@@ -81,7 +81,7 @@ class EventTest extends AppTest
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],
             'date' => now(),
-            'time' => now()->hour,
+            'time' => now()->hour . '.0',
             'duration' => 2
         ], $this->cardFields);
 
@@ -101,7 +101,7 @@ class EventTest extends AppTest
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],
             'date' => now(),
-            'time' => now()->hour,
+            'time' => now()->hour . '.0',
             'duration' => 2
         ], $this->cardFields);
 
@@ -125,7 +125,7 @@ class EventTest extends AppTest
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],
             'date' => now(),
-            'time' => now()->hour,
+            'time' => now()->hour . '.0',
             'duration' => 2
         ], $this->cardFields);
 
@@ -145,7 +145,7 @@ class EventTest extends AppTest
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest1@email.com'],
             'date' => now(),
-            'time' => now()->hour,
+            'time' => now()->hour . '.0',
             'duration' => 2
         ], $this->cardFields);
 

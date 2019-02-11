@@ -2,6 +2,8 @@
 
 namespace Tests\Traits;
 
+use App\Space;
+
 trait FakeEvents
 {
     protected $cardFields =  [
@@ -30,7 +32,7 @@ trait FakeEvents
             'participants' => 1,
             'guests' => null,
             'date' => now(),
-            'time' => now()->hour,
+            'time' => now()->hour . '.0',
             'duration' => 2,
             'save_card' => $saveCard
         ], $this->cardFields);
@@ -38,14 +40,14 @@ trait FakeEvents
         return $this->post(route('client.events.purchase'), $data);
     }
 
-    public function adminCreateNewEvent()
+    public function adminCreateNewEvent(Space $space = null)
     {
         $data = [
-            'space_id' => $this->space->id,
+            'space_id' => $space ? $space->id : $this->space->id,
             'participants' => 1,
             'guests' => null,
             'date' => now(),
-            'time' => now()->hour,
+            'time' => now()->hour . '.0',
             'duration' => 2
         ];
 

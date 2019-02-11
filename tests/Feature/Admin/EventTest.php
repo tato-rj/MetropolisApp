@@ -3,7 +3,7 @@
 namespace Tests\Feature\Admin;
 
 use Tests\AppTest;
-use App\{Admin, Event};
+use App\{Admin, Event, Space};
 use Tests\Traits\FakeEvents;
 
 class EventTest extends AppTest
@@ -18,12 +18,32 @@ class EventTest extends AppTest
     }
 
 	/** @test */
-	public function it_can_create_an_event()
+	public function an_admin_can_create_an_event()
 	{
     	$this->signIn($this->admin, 'admin');
 
 		$this->adminCreateNewEvent()->assertSessionHas('status');
 
 		$this->assertCount(1, $this->admin->events);
+	}
+
+	/** @test */
+	public function an_admin_can_update_the_events_start_and_end_date()
+	{
+    	$this->signIn($this->admin, 'admin');
+
+    	$space = create(Space::class);
+		
+		$this->adminCreateNewEvent($space);
+
+		$event = $space->events->first();
+
+		$this->post(route('admin.schedule.update.datetime'), [
+			'event_id' => $event->id,
+			'starts_at' => '2019-03-05T08:00:00',
+			'ends_at' => '2019-03-05T09:00:00'
+		]);
+
+		$this->assertEquals(carbon('2019-03-05T08:00:00'), $event->fresh()->starts_at);
 	}
 }

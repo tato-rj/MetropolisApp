@@ -25,7 +25,7 @@ class BonusTest extends AppTest
             'participants' => 1,
             'guests' => null,
             'date' => now(),
-            'time' => now()->hour,
+            'time' => now()->hour  . '.0',
             'duration' => 1
         ], $this->cardFields);
 

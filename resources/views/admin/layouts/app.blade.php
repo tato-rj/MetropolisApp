@@ -52,6 +52,8 @@
 @include('components.alerts.error', ['message' => session('error')])
 @endif
 
+@include('components.overlays.loading')
+
 <script src="{{ mix('js/admin.js') }}"></script>
 
 <script type="text/javascript">
@@ -63,7 +65,7 @@ $(document).ready(function() {
   fullDatePT($('.date-pt'));
 });
 
-$('#event-modal').on('hidden.bs.modal', function (e) {
+$('#event-modal, #plan-modal').on('hidden.bs.modal', function (e) {
   $(this).find('.modal-body > div:first-child').html('');
   $(this).find('#loading').show();
   $(this).find('.modal-footer').hide();

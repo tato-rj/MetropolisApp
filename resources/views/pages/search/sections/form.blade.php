@@ -18,8 +18,11 @@
 		<div class="form-group">
 			<label><small><strong>Qual horário deseja marcar?</strong></small></label>
 			<select class=" form-control px-1" name="time">
-				@for($i = office()->day_starts_at; $i <= office()->day_ends_at; $i++)
-				<option value="{{$i}}" {{request()->time == $i ? 'selected' : null}}>{{$i}}:00h</option>
+				@for($i = office()->day_starts_at; $i < office()->day_ends_at; $i++)
+				<option value="{{$i}}.0" {{request()->time == $i . '.0' ? 'selected' : null}}>{{$i}}:00h</option>
+				@unless($i == office()->day_ends_at -1)
+				<option value="{{$i}}.30" {{request()->time == $i . '.30' ? 'selected' : null}}>{{$i}}:30h</option>
+				@endunless
 				@endfor
 			</select>
 		</div>

@@ -1,4 +1,41 @@
 <ul class="list-flat px-3 py-2">
+
+	<div class="mb-3">
+		<p class="m-0 text-muted"><small>Esta reserva faz parte da sua assinatura do</small></p>
+		<div class="d-apart align-items-end">
+			<div>
+				<a class="text-uppercase" href="/planos">
+					<strong><span class="text-{{$event->plan->color}}">{{$event->plan->displayName}}</span></strong>
+				</a>
+			</div>
+			<div>
+				@if($event->creator->membership->isActive())
+				<div class="alert-success px-2 py-1"><strong>Ativo</strong></div>
+				@elseif($event->creator->membership->status == 'Aguardando confirmação')
+				<div class="alert-warning px-2 py-1 "><strong>Pendente</strong></div>
+				@else
+				<div class="alert-danger px-2 py-1"><strong>Cancelado</strong></div>
+				@endif
+			</div>
+		</div>
+	</div>
+
+	@admin($user_type)
+	<li class="mb-2">
+		<span class="text-teal mr-1"><strong>Assinante</strong></span>
+		<span>{{$event->creator->name}}</span>
+	</li>
+	<li class="mb-2">
+		<span class="text-teal mr-1"><strong>Email</strong></span>
+		<span>{{$event->creator->email}}</span>
+	</li>
+	@endadmin
+
+	<li class="mb-2">
+		<span class="text-teal mr-1"><strong>Reserva #</strong></span>
+		<span>{{$event->reference}}</span>
+	</li>
+
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Espaço</strong></span>
 		<span>{{$event->space->name}}</span>
@@ -35,50 +72,10 @@
 @user($user_type)
 <div class="bg-light py-2 px-3 mb-2">
 	<p class="text-muted m-0"><small>Para alterar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></p>
-	<p class="text-muted m-0"><small>O código da reserva é <strong>{{$event->reference}}</strong></small></p>
 </div>
 @enduser
 
-@admin($user_type)
-<div class="bg-light py-3 px-4 mb-2">
-	<ul class="list-flat">
-		<li class="mb-2">
-			<span class="text-muted mr-1"><strong>Criado por</strong></span>
-			<span>{{$event->creator->name}}</span>
-		</li>
-		<li class="mb-2">
-			<span class="text-muted mr-1"><strong>Email</strong></span>
-			<a href="mailto:{{$event->creator->email}}" class="link-inherit"><span>{{$event->creator->email}}</span></a>
-		</li>
-		<li>
-			<span class="text-muted mr-1"><strong>Reserva</strong></span>
-			<span>{{$event->reference}}</span>
-		</li>
-	</ul>
-</div>
-@endadmin
-
-<div class="mb-3 px-3">
-	<p class="m-0 text-muted"><small>Esta reserva faz parte da sua assinatura do</small></p>
-	<div class="d-apart align-items-end">
-		<div>
-			<a class="text-uppercase" href="/planos">
-				<strong><span class="text-{{$event->plan->color}}">{{$event->plan->displayName}}</span></strong>
-			</a>
-		</div>
-		<div>
-			@if($event->creator->membership->isActive())
-			<div class="alert-success px-2 py-1"><strong>Ativo</strong></div>
-			@elseif($event->creator->membership->status == 'Aguardando confirmação')
-			<div class="alert-warning px-2 py-1 "><strong>Pendente</strong></div>
-			@else
-			<div class="alert-danger px-2 py-1"><strong>Cancelado</strong></div>
-			@endif
-		</div>
-	</div>
-</div>
-
-<div class="border-top pt-2 text-center">
+<div class="mt-2 text-center">
 	@if($event->creator->membership->isActive())
 		<div class="text-success">
 			<small><i class="far fa-calendar-check mr-2"></i><strong>Essa assinatura se renovará ano dia {{$event->creator->membership->next_payment_at->format('d/m')}}</strong></small>

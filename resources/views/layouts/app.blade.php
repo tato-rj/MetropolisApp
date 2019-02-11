@@ -85,7 +85,7 @@ $(document).ready(function() {
   fullDatePT($('.date-pt'));
 });
 
-$('#event-modal').on('hidden.bs.modal', function (e) {
+$('#event-modal, #plan-modal').on('hidden.bs.modal', function (e) {
   $(this).find('.modal-body > div:first-child').html('');
   $(this).find('#loading').show();
   $(this).find('.modal-footer').hide();

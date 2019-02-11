@@ -196,7 +196,7 @@ class EventsController extends Controller
 
         event(new EventCreated($event));
 
-        return redirect()->back()->with('status', 'O evento foi criado com sucesso.');
+        return redirect()->route('admin.schedule.index')->with('status', 'A reserva na ' . $event->space->name . ' foi criada com sucesso.');
     }
 
     /**
@@ -217,9 +217,21 @@ class EventsController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function updateDatetime(Request $request)
     {
-        $event->update([$request->field => $request->emails]);
+        $event = Event::findOrFail($request->event_id);
+
+        try {
+
+            $event->update([
+                'starts_at' => carbon($request->starts_at),
+                'ends_at' => carbon($request->ends_at)]);       
+
+        } catch (\Exception $e) {
+
+            return view('components.alerts.error', ['message' => 'Não foi possível atualizar o evento nesse momento.'])->render();
+        
+        }
 
         return view('components.alerts.success', ['message' => 'O evento foi atualizado com sucesso.'])->render();
    }

@@ -12,6 +12,12 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 
 		Route::post('', 'EventsController@store')->name('store');
 
+		Route::prefix('modificar')->name('update.')->group(function() {
+
+			Route::post('data', 'EventsController@updateDatetime')->name('datetime');
+	
+		});
+
 		Route::get('/checar', 'SpacesController@check')->name('check');
 	
 	});

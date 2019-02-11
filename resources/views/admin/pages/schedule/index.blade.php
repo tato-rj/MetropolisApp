@@ -93,8 +93,34 @@ $(function() {
     },
     eventAfterAllRender: function (view) {
         $('#calendar-loading').remove();
+    },
+    eventDrop: function(event, delta, revertFunc) {
+      if (!confirm("Tem certeza de que deseja atualizar esse evento?")) {
+        revertFunc();
+      } else {
+        updateDatetime(event.id, event.start.format(), event.end.format())
+      }
+    },
+    eventResize: function(event, delta, revertFunc) {
+      if (!confirm("Tem certeza de que deseja atualizar esse evento?")) {
+        revertFunc();
+      } else {
+        updateDatetime(event.id, event.start.format(), event.end.format())
+      }
     }
   })
 });
+
+function updateDatetime(event_id, starts_at, ends_at) {
+  $overlay = $('#loading-overlay');
+
+  $overlay.fadeIn('fast');
+
+  $.post({!! json_encode(route('admin.schedule.update.datetime'), JSON_HEX_TAG) !!}, {event_id: event_id, starts_at: starts_at, ends_at: ends_at},
+    function(data, status){
+      $overlay.fadeOut('fast');
+      $('body').append(data);
+    });
+}
 </script>
 @endpush

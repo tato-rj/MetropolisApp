@@ -34,8 +34,10 @@ class CreateEventForm extends FormRequest
     {
         $this->user = auth()->user();
         $this->space = Space::find($this->space_id);
+        $hour = explode('.', $this->time)[0];
+        $min = explode('.', $this->time)[1];
 
-        $this->starts_at = Carbon::parse($this->date)->setTime($this->time, 0, 0);
+        $this->starts_at = Carbon::parse($this->date)->setTime($hour, $min, 0);
         $this->ends_at = calculateEndingTime($this->starts_at, $this->duration); 
     }
 

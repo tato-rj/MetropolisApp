@@ -5,19 +5,22 @@
 	</div>
 	@endif
 
-@admin($user_type)
+	@admin($event->creator_type)
 	<div class="alert alert-yellow border-0 text-center p-2" role="alert">
 		Essa reserva foi feita por um administrador
 	</div>
+	@endadmin
 
+	@admin($user_type)
 	<li class="mb-2">
-		<span class="text-teal mr-1"><strong>Criado por</strong></span>
+		<span class="text-teal mr-1"><strong>{{$event->creator_type == 'App\Admin' ? 'Administrador' : 'Cliente'}}</strong></span>
 		<span>{{$event->creator->name}}</span>
 	</li>
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Email</strong></span>
 		<span>{{$event->creator->email}}</span>
 	</li>
+	@endadmin
 
 	@user($event->creator_type)
 	<li class="mb-2">
@@ -25,7 +28,8 @@
 		<span>{{$event->reference}}</span>
 	</li>
 	@enduser
-@endadmin
+	
+	<hr class="my-3">
 
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Espaço</strong></span>
@@ -53,6 +57,8 @@
 		<span class="text-muted text-italic"><small>(o escritório fecha às <u>{{durationToString(office()->day_ends_at)}}</u>)</small></span>
 	</li>
 
+	<hr class="my-3">
+
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Status</strong></span>
 		
@@ -78,9 +84,11 @@
 		<div class="collapse mt-2" id="emails">
 			<div class="bg-light px-4 py-3">
 				<ul class="list-flat">
+					@user($user_type)
 					<li><span class="text-muted"><small><i class="fas fa-user mr-2"></i>{{$event->creator->email}}</small></span></li>
+					@enduser
 					@if($event->emails)
-						<div class="mt-3 pt-2 border-top"> 
+						<div class=""> 
 							@foreach($event->emails as $email)
 							<li class="d-flex justify-content-between align-items-baseline">
 								<span class="text-muted mr-3"><small>{{$loop->iteration}}</small></span>
@@ -106,9 +114,6 @@
 @user($user_type)
 <div class="bg-light py-2 px-3">
 	<p class="text-muted m-0"><small>Para alterar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></p>
-	@if($event->reference)
-	<p class="text-muted m-0"><small>O código da reserva é <strong>{{$event->reference}}</strong></small></p>
-	@endif
 </div>
 @enduser
 

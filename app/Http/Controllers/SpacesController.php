@@ -29,9 +29,9 @@ class SpacesController extends Controller
         $date = carbon($form->starts_at);
 
     	$results = $form->space->checkAvailability($date, $form->duration, $form->participants, $includePlan = true);
-    	
+
         if ($date->isWeekend())
-            return view('admin.pages.schedule.create.results.invalid', compact('results'))->render();
+            return view('admin.pages.schedule.create.results.invalid', compact(['results', 'form']))->render();
 
     	return view('admin.pages.schedule.create.results.valid', compact(['results', 'form']))->render();
     }

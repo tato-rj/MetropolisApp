@@ -59,7 +59,7 @@ class SpaceTest extends AppTest
 		create(Event::class, [
 			'space_id' => $this->workspace->id,
 			'participants' => 4,
-			'starts_at' => now()->copy()->subHour(),
+			'starts_at' => now()->copy()->subMinutes(30),
 			'ends_at' => now()->copy()->addHour()
 		]);
 
@@ -71,7 +71,7 @@ class SpaceTest extends AppTest
 			'space_id' => $this->workspace->id,
 			'participants' => 3,
 			'starts_at' => now()->copy()->subHour(),
-			'ends_at' => now()->copy()->addHour()
+			'ends_at' => now()->copy()->addMinutes(30)
 		]);
 
 		$this->assertEquals($this->workspace->participantsLeftOn(now(), $duration = 1), 5);

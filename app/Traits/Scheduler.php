@@ -30,8 +30,8 @@ trait Scheduler
 
         $query = [
             ['space_id', $this->id],
-            ['starts_at', '<=', $date],
-            ['ends_at', '>', $date]
+            ['starts_at', '<=', $endDate],
+            ['ends_at', '>', $startDate]
         ];
 
         if ($includePlan) {
@@ -43,8 +43,8 @@ trait Scheduler
         for ($i = 1; $i < $endDate->diffInHours($startDate); $i++) {
             $events->orWhere([
                 ['space_id', $this->id],
-                ['starts_at', '<=', $date->copy()->addHours($i)],
-                ['ends_at', '>', $date->copy()->addHours($i)]
+                ['starts_at', '<=', $endDate->copy()->addHours($i)],
+                ['ends_at', '>', $startDate->copy()->addHours($i)]
             ]);
         }
 

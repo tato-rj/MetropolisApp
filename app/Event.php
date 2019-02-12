@@ -109,8 +109,29 @@ class Event extends Metropolis implements Reservation
 
     public function scopeCalendar($query)
     {
-        return $query->get()->map(function ($item, $key) {
-            return $item->only(['id', 'title', 'start', 'end', 'plan_id', 'notified_at', 'statusForUser', 'editable']);
+        $eventsTypes = $query->orderBy('starts_at')->get()->groupBy('title');
+
+        // $eventsCount = $events->count();
+
+        $doesOverlap = false;
+
+        $results = collect();
+
+        $eventsTypes->each(function($events) use ($results) {
+            
+            $eventsCount = $events->count();
+
+            for ($i = 0; $i < $events->count(); $i++) {
+                if ($i+1 < $eventsCount && empty($events[$i]->doesOverlap))
+                    $events[$i]->doesOverlap = $events[$i+1]->doesOverlap = $events[$i]->ends_at->gt($events[$i+1]->starts_at);
+
+                $events[$i] = $events[$i]->only(['id', 'title', 'start', 'end', 'plan_id', 'notified_at', 'statusForUser', 'editable', 'doesOverlap']);
+
+                $results->push($events[$i]);
+            }
+            
         });
+
+        return $results;
     }
 }

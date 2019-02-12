@@ -9,22 +9,32 @@
 		</div>
 		@else
 		<div class="mb-4">
-			@if($results->participantsExceeded)
-			<div class="alert alert-red">
-				<i class="fas fa-exclamation-triangle mr-2"></i><strong>Atenção!</strong> Este horário já ultrapassou o limite de reservas. 
-			</div>
-			<div class="pl-4">
-				<p class="text-red">Número de reservas excendendo o limite: <strong>{{$results->participantsExceeded}}</strong></p>
-				<p>Nós recomendamos resolver os conflitos antes de prosseguir com essa reserva.</p>
-			</div>
+			@if($form->space->is_shared)
+				@if($results->participantsExceeded)
+				<div class="alert alert-red">
+					<i class="fas fa-exclamation-triangle mr-2"></i><strong>Atenção!</strong> Este horário já ultrapassou o limite de reservas. 
+				</div>
+				<div class="pl-4">
+					<p class="text-red">Número de reservas excendendo o limite: <strong>{{$results->participantsExceeded}}</strong></p>
+					<p>Nós recomendamos resolver os conflitos antes de prosseguir com essa reserva.</p>
+				</div>
+				@else
+				<div class="alert alert-yellow">
+					<i class="fas fa-exclamation-triangle mr-2"></i><strong>Atenção!</strong> Esta reserva vai criar um conflito no calendário desse dia. 
+				</div>
+				<div class="pl-4">
+					<p class="text-red">Número de reservas disponíveis nesse horário: <strong>{{$results->participantsLeft}}</strong></p>
+					<p>Após criar o evento, lembre-se de verificar a agenda do dia para resolver os conflitos.</p>
+				</div>
+				@endif
 			@else
-			<div class="alert alert-yellow">
-				<i class="fas fa-exclamation-triangle mr-2"></i><strong>Atenção!</strong> Esta reserva vai criar um conflito no calendário desse dia. 
-			</div>
-			<div class="pl-4">
-				<p class="text-red">Número de reservas disponíveis nesse horário: <strong>{{$results->participantsLeft}}</strong></p>
-				<p>Após criar o evento, lembre-se de verificar a agenda do dia para resolver os conflitos.</p>
-			</div>
+				<div class="alert alert-yellow">
+					<i class="fas fa-exclamation-triangle mr-2"></i><strong>Atenção!</strong> A {{$form->space->name}} está sendo usada nesse momento. 
+				</div>
+				<div class="pl-4">
+					<p class="text-red">Você pode confirmar essa reserva mas será responsável por solucionar o problema.</p>
+					<p>Após criar o evento, lembre-se de verificar a agenda do dia para resolver os conflitos.</p>
+				</div>	
 			@endif
 		</div>
 		@endif

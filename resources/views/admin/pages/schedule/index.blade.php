@@ -46,9 +46,15 @@ $(function() {
     },
     selectConstraint: "businessHours",
     views: {
-    	agenda: {
-    		titleFormat: 'MMMM YYYY'
-    	}
+      month: {
+        titleFormat: 'MMMM YYYY'
+      },
+      week: {
+        titleFormat: 'D MMMM YYYY',
+      },
+      day: {
+        titleFormat: '[Dia] D[,] MMMM YYYY',
+      }
     },
     events: JSON.parse(schedule),
     eventClick: function(event, jsEvent, view) {
@@ -78,7 +84,9 @@ $(function() {
     },
 
     eventRender: function( event, element, view ) {
-      if (event.end.isBefore(moment())) {
+      if (event.doesOverlap) {
+        $(element).addClass('btn-red');
+      } else if (event.end.isBefore(moment())) {
         $(element).addClass('btn-grey');
       } else if (event.statusForUser != 'Confirmado') {
         $(element).addClass('btn-yellow');
@@ -102,6 +110,7 @@ $(function() {
       } else {
         updateDatetime(event.id, event.start.format(), event.end.format())
       }
+      $('#calendar').rerenderResources();
     },
     eventResize: function(event, delta, revertFunc) {
       if (!confirm("Tem certeza de que deseja atualizar esse evento?")) {

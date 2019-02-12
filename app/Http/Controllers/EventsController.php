@@ -31,7 +31,7 @@ class EventsController extends Controller
     public function create()
     {
         $spaces = Space::all();
-     
+
         return view('admin.pages.schedule.create.index', compact('space'));
     }
 

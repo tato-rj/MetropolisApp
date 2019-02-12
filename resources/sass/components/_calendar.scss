@@ -91,7 +91,9 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
   background-image: none;
 }
 .fc-state-active, .fc-next-button, .fc-prev-button, .fc-today-button { background-color: #e3342f; }
+
 .fc-state-disabled { background-color: #f4afad; }
+
 .fc-button {
   color: white;
   text-shadow: none;
@@ -99,10 +101,12 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
   border: 0;
   box-shadow: none;
 }
+
 .fc-content { 
     color: white;
     padding: 0 .25em;
 }
+
 .fc-event {
   cursor: pointer;
   border: 0;

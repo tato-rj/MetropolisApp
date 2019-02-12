@@ -14,7 +14,7 @@
 		</div>
 		<div class="w-100 d-flex align-items-center justify-content-end">
 			<a href="{{route('workshops.show', $workshop->slug)}}" class="btn btn-teal"><strong><i class="fas fa-info-circle mr-2"></i>Mais informações</strong></a>
-			@if(!empty(auth()->user()->workshops->contains($workshop)))
+			@if(auth()->guard('web')->check() && auth()->guard('web')->user()->workshops->contains($workshop))
 			<button class="btn btn-red ml-2">Cancelar</button>
 			@endif
 		</div>

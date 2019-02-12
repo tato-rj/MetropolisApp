@@ -21,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
                 'completePlans' => \App\Plan::where('type', 'completo')->get()
             ]);
         });
+
+        \Validator::extend('safePassUpdate', 'App\Rules\SafePassUpdate@passes');
     }
 
     /**

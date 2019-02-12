@@ -19853,6 +19853,10 @@ html .ui-button.ui-state-disabled:active {
   background-color: #e0f4f2;
 }
 
+.fc-newEvent-button {
+  background-color: #e3342f;
+}
+
 .step {
   list-style: none;
   margin: 0;

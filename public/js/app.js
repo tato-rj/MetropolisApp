@@ -94344,6 +94344,7 @@ __webpack_require__("./resources/js/helpers/cookie.js");
 __webpack_require__("./resources/js/helpers/string.js");
 __webpack_require__("./resources/js/helpers/extensions.js");
 __webpack_require__("./resources/js/datepicker/CustomDatePicker.js");
+__webpack_require__("./resources/js/calendar/CustomCalendar.js");
 __webpack_require__("./node_modules/jquery-countdown/dist/jquery.countdown.js");
 __webpack_require__("./node_modules/fullcalendar/dist/locale/pt-br.js");
 __webpack_require__("./node_modules/inputmask/dist/jquery.inputmask.bundle.js");
@@ -94419,6 +94420,175 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/calendar/CustomCalendar.js":
+/***/ (function(module, exports) {
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var CustomCalendar = function () {
+	function CustomCalendar(element) {
+		_classCallCheck(this, CustomCalendar);
+
+		this.element = $(element);
+		this.isEditable = false;
+		this.createButton = null;
+	}
+
+	_createClass(CustomCalendar, [{
+		key: 'create',
+		value: function create() {
+			var object = this;
+			var createButton = object.createButton;
+			var schedule = this.element.attr('data-events');
+			var ajaxUrl = this.element.attr('data-ajax');
+
+			this.element.fullCalendar({
+				minTime: '08:00',
+				navLinks: true,
+				maxTime: '18:00',
+				allDaySlot: false,
+				eventLimit: 3,
+				businessHours: {
+					start: app.office.day_starts_at + ':00',
+					end: app.office.day_ends_at + ':00'
+				},
+				customButtons: createButton,
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'newEvent month,agendaWeek,agendaDay'
+				},
+				selectConstraint: "businessHours",
+				views: {
+					month: {
+						titleFormat: 'MMMM YYYY'
+					},
+					week: {
+						titleFormat: 'D MMMM YYYY'
+					},
+					day: {
+						titleFormat: '[Dia] D[,] MMMM YYYY'
+					}
+				},
+				events: JSON.parse(schedule),
+				eventClick: function eventClick(event, jsEvent, view) {
+					var modalId = $(this).attr('data-modal');
+					var $modal = $(modalId);
+
+					$modal.modal('show');
+
+					$.post(ajaxUrl, { event_id: event.id, user_type: app.user.type }, function (data, status) {
+						$modal.find('.modal-body > div:first-child').html(data);
+
+						$modal.find('.modal-footer input[name="event_id"]').val(event.id);
+
+						fullDatePT($modal.find('.date'));
+
+						$modal.find('#loading').hide();
+
+						if ($modal.find('#participants').attr('data-participants') > 1) $modal.find('.modal-footer').show();
+					}).fail(function () {
+						$modal.find('.modal-body > div:first-child').html('<p class="text-center my-4 text-red">Não foi possível processar o seu pedido nesse momento</p>');
+
+						$modal.find('#loading').hide();
+					});
+				},
+
+				eventRender: function eventRender(event, element, view) {
+					if (event.doesOverlap) {
+						$(element).addClass('btn-red');
+					} else if (event.end.isBefore(moment())) {
+						$(element).addClass('btn-grey');
+					} else if (event.statusForUser != 'Confirmado') {
+						$(element).addClass('btn-yellow');
+					} else {
+						$(element).addClass('btn-teal');
+					}
+
+					if (event.plan_id === null) {
+						$(element).attr('data-modal', '#event-modal');
+					} else {
+						$(element).attr('data-modal', '#plan-modal');
+					}
+				},
+				eventAfterAllRender: function eventAfterAllRender(view) {
+					$('#calendar-loading').remove();
+					$('.fc-day-number').attr('title', 'Ver agenda nesse dia');
+				},
+				eventDrop: function eventDrop(event, delta, revertFunc) {
+					if (!object.isEditable) {
+						alert('Você não tem autorização para editar os eventos.');
+						revertFunc();
+					} else if (!confirm("Tem certeza de que deseja atualizar esse evento?")) {
+						revertFunc();
+					} else {
+						object._updateDatetime(event.id, event.start.format(), event.end.format());
+					}
+				},
+				eventResize: function eventResize(event, delta, revertFunc) {
+					if (!object.isEditable) {
+						alert('Você não tem autorização para editar os eventos.');
+						revertFunc();
+					} else if (!confirm("Tem certeza de que deseja atualizar esse evento?")) {
+						revertFunc();
+					} else {
+						object._updateDatetime(event.id, event.start.format(), event.end.format());
+					}
+				}
+			});
+		}
+	}, {
+		key: 'creatable',
+		value: function creatable() {
+			var object = this;
+
+			this.createButton = {
+				newEvent: {
+					text: 'Criar reserva',
+					click: function click() {
+						window.location.href = object.createEventUrl;
+					}
+				}
+			};
+
+			return this;
+		}
+	}, {
+		key: 'editable',
+		value: function editable() {
+			this.isEditable = true;
+			this.updateDatetimeUrl = this.element.attr('data-update-datetime');
+			this.createEventUrl = this.element.attr('data-create-event');
+
+			return this;
+		}
+	}, {
+		key: '_updateDatetime',
+		value: function _updateDatetime(event_id, starts_at, ends_at) {
+			var object = this;
+			var $overlay = $('#loading-overlay');
+
+			$overlay.fadeIn('fast');
+
+			$.post(object.updateDatetimeUrl, { event_id: event_id, starts_at: starts_at, ends_at: ends_at }, function (data, status) {
+				$overlay.fadeOut('fast');
+				$('body').append(data);
+			}).fail(function () {
+				alert('Não foi possível realizar esse pedido agora.');
+				$overlay.fadeOut('fast');
+			});
+		}
+	}]);
+
+	return CustomCalendar;
+}();
+
+window.CustomCalendar = CustomCalendar;
 
 /***/ }),
 

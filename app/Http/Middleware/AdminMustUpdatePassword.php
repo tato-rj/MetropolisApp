@@ -21,7 +21,7 @@ class AdminMustUpdatePassword
         $admin = Admin::byEmail($request->email);
 
         if ($admin->exists() && $this->isDefaultPassword($admin, $request)) {
-            return redirect(route('admin.password.required-reset'));
+            return redirect(route('admin.password.required-reset', ['admin' => $admin->email]));
         }
 
         return $next($request);

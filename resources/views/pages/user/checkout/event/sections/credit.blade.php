@@ -12,7 +12,6 @@
 	<input type="hidden" name="time" value="{{$form->time}}">
 	<input type="hidden" name="duration" value="{{$form->duration}}">
 	<input type="hidden" name="participants" value="{{$form->participants}}">
-	{{-- <input type="hidden" name="price" value="{{$form->space->priceFor($form->participants, $form->duration, auth()->user()->bonusesLeft($form->space))}}"> --}}
 
 	<input type="hidden" name="paymentMethod" value="creditCard">
 	<input type="hidden" name="card_token">

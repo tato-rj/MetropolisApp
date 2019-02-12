@@ -112,6 +112,7 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
+    'safe_pass_update'     => 'Você não pode mudar a senha de outro usuário.',
 
     /*
     |--------------------------------------------------------------------------

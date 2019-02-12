@@ -30,7 +30,35 @@ class AccessTest extends AppTest
     	$this->post(route('admin.login.submit'), [
     		'email' => $this->admin->email,
     		'password' => 'metropolis'
-    	]);	
+    	]);
+    }
+
+    /** @test */
+    public function admins_are_denied_the_first_login_if_they_try_to_update_a_different_email_than_their_own()
+    {
+        $this->expectException('Illuminate\Validation\ValidationException');
+
+        $anotherAdmin = create(Admin::class);
+
+        $this->post(route('admin.password.required-save', ['verify' => $this->admin->email]), [
+            'email' => $anotherAdmin->email,
+            'password' => 'newpass',
+            'password_confirmation' => 'newpass'
+        ]);
+    }
+
+    /** @test */
+    public function admins_must_use_the_same_email_when_updating_their_password_for_the_first_time()
+    {
+        $anotherAdmin = create(Admin::class);
+
+        $this->post(route('admin.password.required-save', ['verify' => $this->admin->email]), [
+            'email' => $this->admin->email,
+            'password' => 'newpass',
+            'password_confirmation' => 'newpass'
+        ]);
+
+        $this->assertTrue(auth()->guard('admin')->check());
     }
 
     /** @test */

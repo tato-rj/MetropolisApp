@@ -68,7 +68,7 @@ class ResetPasswordController extends Controller
     public function saveNewPassword(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email|max:255|exists:admins',
+            'email' => 'required|string|email|max:255|exists:admins|safePassUpdate',
             'password' => 'required|string|min:6|confirmed|not_in:metropolis',
         ]);
 

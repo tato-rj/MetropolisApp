@@ -6,7 +6,7 @@
 		<div><strong class="text-teal mr-2">INVESTIMENTO</strong><strong class="{{! $workshop->fee ? 'text-red' : null}}">{{$workshop->fee ? feeToString($workshop->fee) : 'Gratuito'}}</strong></div>
 	</div>
 	<div class="col-8 d-apart flex-column">
-		<div class="mb-2">
+		<div class="mb-2 w-100">
 			@include('pages.workshops.sections.share')
 			<h5 class="mb-2"><strong>{{$workshop->name}}</strong></h5>
 			<div>{{$workshop->headline}}</div>

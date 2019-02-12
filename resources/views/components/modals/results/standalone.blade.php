@@ -22,7 +22,7 @@
 	</li>
 	@endadmin
 
-	@user($event->creator_type)
+	@user($event->creator_type && $event->reference)
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Reserva #</strong></span>
 		<span>{{$event->reference}}</span>

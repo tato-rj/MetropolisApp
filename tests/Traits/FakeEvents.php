@@ -2,7 +2,7 @@
 
 namespace Tests\Traits;
 
-use App\Space;
+use App\{Space, User};
 
 trait FakeEvents
 {
@@ -40,9 +40,10 @@ trait FakeEvents
         return $this->post(route('client.events.purchase'), $data);
     }
 
-    public function adminCreateNewEvent(Space $space = null)
+    public function adminCreateNewEvent(Space $space = null, User $user = null)
     {
         $data = [
+            'user_id' => $user ? $user->id : null,
             'space_id' => $space ? $space->id : $this->space->id,
             'participants' => 1,
             'guests' => null,

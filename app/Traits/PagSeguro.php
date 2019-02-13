@@ -31,6 +31,11 @@ trait PagSeguro
         return $query->where('transaction_code', $code);
     }
 
+    public function scopeUnpaid($query)
+    {
+        return $query->whereNull('transaction_code')->where('status_id', 0)->whereNotNull('reference');
+    }
+
     public function getStatusAttribute()
     {
         if (array_key_exists($this->status_id, $this->statusArray))

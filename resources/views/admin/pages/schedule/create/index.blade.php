@@ -5,6 +5,13 @@
 .sa-icon.sa-success .sa-fix, .sa-icon.sa-success.animate::after, .sa-icon.sa-success.animate::before {
     background-color: #f8f9fa;
 }
+
+.easy-autocomplete { width: 100% !important; }
+.easy-autocomplete input {
+  border-radius: 0 !important; 
+  box-shadow: none !important;
+  width: 100%;
+}
 </style>
 @endpush
 
@@ -88,6 +95,10 @@
 
 <script type="text/javascript">
 
+</script>
+
+<script type="text/javascript">
+
 let $loadingBox = $('#loading-box');
 let $emptyBox = $('#empty-box');
 let $resultsBox = $('#results-box');
@@ -120,13 +131,10 @@ $('button#search').on('click', function() {
 
       showResults(data);
 
-      $('input[name="send_emails"]').on('click', function() {
-        if ($(this).val() == 'true') {
-          $('#emails').fadeIn();
-        } else {
-          $('#emails').hide();
-        }
-      });
+      toggleContainer('input[name="send_emails"]');
+      toggleContainer('input[name="bill_user"]');
+      autocomplete('input[name="user_name"]');
+
     }).fail(function(response) {
       console.log(response);
 
@@ -169,6 +177,38 @@ function showFail(message) {
   $loadingBox.hide();
   $failBox.find('.feedback').text(message);
   $failBox.show();
+}
+
+function toggleContainer(element) {
+  $(element).on('click', function() {
+    let target = $(this).attr('data-target');
+
+    if ($(this).val() == 'true') {
+      $(target).fadeIn();
+    } else {
+      $(target).hide();
+    }
+  });
+}
+
+function autocomplete(element) {
+  let $input = $(element);
+  let array = $input.attr('data-autocomplete');
+  let options = {
+    data: JSON.parse(array),
+    getValue: 'name',
+    list: {
+      onSelectItemEvent: function() {
+        let email = $input.getSelectedItemData().email;
+        let id = $input.getSelectedItemData().id;
+
+        $('input[name="user_email"]').val(email).trigger("change");
+        $('input[name="user_id"]').val(id).trigger("change");
+      }
+    }
+  };
+
+  $input.easyAutocomplete(options);
 }
 </script>
 <script type="text/javascript">

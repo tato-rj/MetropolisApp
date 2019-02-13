@@ -28,6 +28,15 @@ class EventTest extends AppTest
 	}
 
 	/** @test */
+	public function it_knows_if_its_payment_has_been_submitted()
+	{
+		$unpaidEvent = create(Event::class, ['reference' => '123', 'transaction_code' => null]);
+		$paidEvent = create(Event::class);
+
+		$this->assertCount(1, Event::unpaid()->get());
+	}
+
+	/** @test */
 	public function it_knows_if_it_is_a_future_event()
 	{
 		$event = create(Event::class, [

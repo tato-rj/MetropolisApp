@@ -67,17 +67,17 @@
 						<span>{{$form->participants}} {{trans_choice('words.pessoas', $form->participants)}}</span>
 					</li>
 					<div class="mt-3 border-top pt-3">
-						<p class="mb-2">Quer que enviemos um email de confirmação para os participantes desse evento?</p>
-						<div class="custom-control custom-radio">
-						  <input required type="radio" value="true" id="yes" name="send_emails" class="custom-control-input">
-						  <label class="custom-control-label" for="yes">Sim</label>
+						<p class="mb-2">Quer que enviemos um email de convite para os participantes desse evento?</p>
+						<div class="custom-control custom-radio mb-2">
+						  <input required data-target="#emails" type="radio" value="true" id="yes_send" name="send_emails" class="custom-control-input">
+						  <label class="custom-control-label" for="yes_send">Sim</label>
 						</div>
-						<div class="custom-control custom-radio">
-						  <input required type="radio" value="false" id="no" name="send_emails" class="custom-control-input">
-						  <label class="custom-control-label" for="no">Não</label>
+						<div class="custom-control custom-radio mb-2">
+						  <input required data-target="#emails" type="radio" value="false" id="no_send" name="send_emails" class="custom-control-input">
+						  <label class="custom-control-label" for="no_send">Não</label>
 						</div>
 					</div>
-					<li class="mt-3" id="emails" style="display: none;">
+					<li class="my-3" id="emails" style="display: none;">
 						<div>
 							@for($i=1; $i<=$form->participants; $i++)
 							<div class="icon-input position-relative mb-2">
@@ -87,6 +87,29 @@
 							</div>
 							@endfor
 						</div>
+					</li>
+
+					<div class="mt-4">
+						<p class="mb-2">Quer enviar a cobrança desse evento para algum usuário?</p>
+						<div class="custom-control custom-radio mb-2">
+						  <input required data-target="#search-user" type="radio" value="true" id="yes_bill" name="bill_user" class="custom-control-input">
+						  <label class="custom-control-label" for="yes_bill">Sim, vou enviar por email a cobrança de <strong>{{feeToString($price)}}</strong></label>
+						</div>
+						<div class="custom-control custom-radio mb-2">
+						  <input required data-target="#search-user" type="radio" value="false" id="no_bill" name="bill_user" class="custom-control-input">
+						  <label class="custom-control-label" for="no_bill">Não, estou fazendo essa reserva para o escritório</label>
+						</div>
+					</div>
+					<li class="my-3" id="search-user" style="display: none;">
+						<div class="mb-2">
+							<input name="user_name" data-autocomplete="{{json_encode($usersArray)}}" placeholder="Escreva aqui o nome do usuário">
+							<input type="hidden" name="user_id">
+						</div>
+						<div class="icon-input position-relative bg-grey-lighter mb-2">
+						<input type="email" readonly name="user_email" class="form-control bg-transparent border-0">
+							<i class="text-grey fas fa-file-invoice-dollar"></i>
+						</div>
+						<div><small>Nós enviaremos um email para o usuário selecionado com instruções para pagar por essa reserva. Esta só será confirmada <u>após a confirmação do pagamento</u> dessa cobrança.</small></div>
 					</li>
 				</ul>
 				<div class="bg-teal text-white d-flex flex-wrap">

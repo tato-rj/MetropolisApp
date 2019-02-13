@@ -190,17 +190,24 @@ class EventsController extends Controller
      */
     public function store(Request $request, CreateEventForm $form)
     {
-        $event = auth()->guard('admin')->user()->events()->create([
+        $admin = auth()->guard('admin')->user();
+        $user = User::find($request->user_id);
+        $pagseguro = new PagSeguro;
+
+        $event = Event::create([
+            'creator_id' => $user ? $user->id : $admin->id,
+            'creator_type' => $user ? get_class($user) : get_class($admin),
+            'reference' => $user ? $pagseguro->generateReference($prefix = 'E', $user) : null,
             'space_id' => $form->space_id,
             'participants' => $form->participants,
             'starts_at' => $form->starts_at,
             'emails' => serialize($form->emails),
             'ends_at' => $form->ends_at,
             'verified_at' => now(),
-            'status_id' => 3
+            'status_id' => $user ? 0 : 3
         ]);
 
-        event(new EventCreated($event));
+        event(new EventCreated($event, $user));
 
         return redirect()->route('admin.schedule.index')->with('status', 'A reserva na ' . $event->space->name . ' foi criada com sucesso.');
     }

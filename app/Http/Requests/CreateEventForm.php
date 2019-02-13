@@ -25,6 +25,7 @@ class CreateEventForm extends FormRequest
     {
         return [
             'space_id' => 'required|exists:spaces,id',
+            'user_id' => 'nullable|exists:users,id',
             'participants' => 'required',
             'starts_at' => 'required|date',
             'ends_at' => 'required|date'

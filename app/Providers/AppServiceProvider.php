@@ -18,7 +18,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'spaces' => \App\Space::all(),
                 'basicPlans' => \App\Plan::where('type', 'básico')->get(),
-                'completePlans' => \App\Plan::where('type', 'completo')->get()
+                'completePlans' => \App\Plan::where('type', 'completo')->get(),
+                'memberships_count' => \App\Membership::count()
             ]);
         });
 

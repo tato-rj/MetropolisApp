@@ -28,6 +28,7 @@ class CreateEventsTable extends Migration
             $table->timestamp('ends_at')->nullable();
             $table->timestamp('verified_at')->nullable();
             $table->tinyInteger('status_id')->default(0);
+            $table->boolean('has_conflict')->default(false);
             $table->timestamps();
         });
     }

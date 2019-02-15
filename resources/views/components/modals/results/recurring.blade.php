@@ -29,6 +29,10 @@
 		<span class="text-teal mr-1"><strong>Email</strong></span>
 		<span>{{$event->creator->email}}</span>
 	</li>
+	<li class="mb-2">
+		<span class="text-teal mr-1"><strong>Telefone</strong></span>
+		<span>{{$event->creator->phone}}</span>
+	</li>
 	@endadmin
 
 	<li class="mb-2">

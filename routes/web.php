@@ -33,7 +33,7 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 		Route::get('load-fields', 'PaymentsController@loadFields')->name('load-fields');
 
-		Route::get('/completar/{reference}', 'PaymentsController@create')->name('create');
+		Route::get('completar', 'PaymentsController@create')->name('create');
 	});
 
 	Route::prefix('cadastro')->name('profile.')->group(function() {

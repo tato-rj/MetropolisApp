@@ -11,7 +11,7 @@ class AdminController extends Controller
     {
     	$ranking = Workshop::popular()->take(5)->get();
     	$upcomingWorkshop = Workshop::upcoming()->orderBy('starts_at', 'asc')->first();
-    	$latestUsers = User::latest()->take(20)->get();
+    	$latestUsers = User::latest()->take(18)->get();
     	$membershipsCount = Membership::count();
     	$plans = Plan::all();
 
@@ -21,8 +21,11 @@ class AdminController extends Controller
     public function schedule()
     {
         $eventsArray = Event::calendar();
-        
-    	return view('admin.pages.schedule.index', compact('eventsArray'));
+        $eventsToday = Event::today();
+        $eventsCount = $eventsToday->count();
+        $conflictsCount = $eventsToday->withConflict()->count();
+
+    	return view('admin.pages.schedule.index', compact(['eventsArray', 'eventsCount', 'conflictsCount']));
     }
 
     public function users()

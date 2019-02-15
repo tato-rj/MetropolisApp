@@ -40,13 +40,30 @@ class SpaceTest extends AppTest
 	/** @test */
 	public function it_knows_if_it_is_available_on_any_given_time()
 	{
-		$this->space->events()->save($this->pastEvent);
+		Event::truncate();
 
-		$this->space->events()->save($this->futureEvent);
+        $pastEvent = make(Event::class, [
+            'starts_at' => now()->copy()->subHours(5),
+            'ends_at' => now()->copy()->subHours(2),
+        ]);
+
+        $currentEvent = make(Event::class, [
+            'starts_at' => now()->copy()->subHour(),
+            'ends_at' => now()->copy()->addHour(),
+        ]);
+        
+        $futureEvent = make(Event::class, [
+            'starts_at' => now()->copy()->addHours(5),
+            'ends_at' => now()->copy()->addHours(8),
+        ]);
+
+		$this->space->events()->save($pastEvent);
+
+		$this->space->events()->save($futureEvent);
 
 		$this->assertTrue($this->space->checkAvailability(now(), $duration = 1)->status);
 
-		$this->space->events()->save($this->currentEvent);
+		$this->space->events()->save($currentEvent);
 
 		$this->assertFalse($this->space->checkAvailability(now(), $duration = 1)->status);
 	}

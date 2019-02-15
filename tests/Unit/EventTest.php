@@ -30,7 +30,7 @@ class EventTest extends AppTest
 	/** @test */
 	public function it_knows_if_its_payment_has_been_submitted()
 	{
-		$unpaidEvent = create(Event::class, ['reference' => '123', 'transaction_code' => null]);
+		$unpaidEvent = create(Event::class, ['status_id' => 99]);
 		$paidEvent = create(Event::class);
 
 		$this->assertCount(1, Event::unpaid()->get());
@@ -70,5 +70,38 @@ class EventTest extends AppTest
 
 		$this->assertTrue($event->hasPassed);
 		$this->assertFalse($event->isCurrent);
+	}
+
+	/** @test */
+	public function it_checks_and_marks_any_conflicts_upon_creation_on_a_non_shared_space()
+	{
+		Event::truncate();
+
+		$nonSharedSpace = create(Space::class, ['is_shared' => false, 'capacity' => 5]);
+
+		$event1 = create(Event::class, ['space_id' => $nonSharedSpace, 'participants' => 1]);
+	
+		$event2 = create(Event::class, ['space_id' => $nonSharedSpace, 'participants' => 1]);
+
+		$this->assertFalse($event1->fresh()->has_conflict);
+		$this->assertTrue($event2->fresh()->has_conflict);
+	}
+
+	/** @test */
+	public function it_checks_and_marks_any_conflicts_upon_creation_on_a_shared_space()
+	{
+		Event::truncate();
+
+		$sharedSpace = create(Space::class, ['is_shared' => true, 'capacity' => 5]);
+
+		$event1 = create(Event::class, ['space_id' => $sharedSpace, 'participants' => 2]);
+		$event2 = create(Event::class, ['space_id' => $sharedSpace, 'participants' => 2]);
+		$event3 = create(Event::class, ['space_id' => $sharedSpace, 'participants' => 1]);
+		$event4 = create(Event::class, ['space_id' => $sharedSpace, 'participants' => 1]);
+
+		$this->assertFalse($event1->fresh()->has_conflict);
+		$this->assertFalse($event2->fresh()->has_conflict);
+		$this->assertFalse($event3->fresh()->has_conflict);
+		$this->assertTrue($event4->fresh()->has_conflict);
 	}
 }

@@ -33,8 +33,11 @@ class PagSeguro
             $this->credentials = \PagSeguro\Configuration\Configure::getAccountCredentials();
 
             $this->session = PagSeguroSession::create($this->credentials);
+
+            if (! $this->session)
+                throw new \Exception;
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Não foi possível conectar com o PagSeguro.');
+            abort(424, 'O serviço do PagSeguro está fora do ar. Por favor tente novamente mais tarde.');
         }
 	}
 

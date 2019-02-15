@@ -24,6 +24,7 @@
     transform: rotate(-45deg);
 }
 </style>
+@stack('header')
 </head>
 
 <body>

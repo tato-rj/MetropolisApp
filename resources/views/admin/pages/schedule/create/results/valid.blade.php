@@ -101,13 +101,13 @@
 						</div>
 					</div>
 					<li class="my-3" id="search-user" style="display: none;">
-						<div class="mb-2">
-							<input name="user_name" data-autocomplete="{{json_encode($usersArray)}}" placeholder="Escreva aqui o nome do usuário">
-							<input type="hidden" name="user_id">
-						</div>
-						<div class="icon-input position-relative bg-grey-lighter mb-2">
-						<input type="email" readonly name="user_email" class="form-control bg-transparent border-0">
-							<i class="text-grey fas fa-file-invoice-dollar"></i>
+						<div class="form-group">
+							<select class="form-control" name="user_id">
+								<option value="" selected>Escolha o usuário</option>
+								@foreach($users as $user)
+								<option value="{{$user->id}}">{{$user->name}}</option>
+								@endforeach
+							</select>
 						</div>
 						<div><small>Nós enviaremos um email para o usuário selecionado com instruções para pagar por essa reserva. Esta só será confirmada <u>após a confirmação do pagamento</u> dessa cobrança.</small></div>
 					</li>

@@ -16,7 +16,15 @@
 @endpush
 
 @section('content')
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="row">
   <div class="col-12 mb-5">
     <div class="row w-100 mx-auto mb-2">
@@ -133,7 +141,6 @@ $('button#search').on('click', function() {
 
       toggleContainer('input[name="send_emails"]');
       toggleContainer('input[name="bill_user"]');
-      autocomplete('input[name="user_name"]');
 
     }).fail(function(response) {
       console.log(response);
@@ -191,25 +198,6 @@ function toggleContainer(element) {
   });
 }
 
-function autocomplete(element) {
-  let $input = $(element);
-  let array = $input.attr('data-autocomplete');
-  let options = {
-    data: JSON.parse(array),
-    getValue: 'name',
-    list: {
-      onSelectItemEvent: function() {
-        let email = $input.getSelectedItemData().email;
-        let id = $input.getSelectedItemData().id;
-
-        $('input[name="user_email"]').val(email).trigger("change");
-        $('input[name="user_id"]').val(id).trigger("change");
-      }
-    }
-  };
-
-  $input.easyAutocomplete(options);
-}
 </script>
 <script type="text/javascript">
 

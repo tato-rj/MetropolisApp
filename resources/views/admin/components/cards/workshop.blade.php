@@ -1,4 +1,4 @@
-<div class="card border-0 shadow-sm h-100">
+<div class="card border-0 shadow-sm {{$height ?? 'h-100'}}">
 	@if(! empty($note))
 	<div class="absolute-top-right bg-white py-1 px-2 text-uppercase text-teal"><small><strong>{{$note}}</strong></small></div>
 	@endif

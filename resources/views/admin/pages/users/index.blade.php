@@ -53,9 +53,6 @@ $(document).ready( function () {
     	}
     });
 
-    $('#users-table tr').on('click', function() {
-    	window.location.href = $(this).attr('data-url');
-    });
 } );
 </script>
 @endpush

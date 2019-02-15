@@ -15,6 +15,8 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 		Route::prefix('modificar')->name('update.')->group(function() {
 
 			Route::post('data', 'EventsController@updateDatetime')->name('datetime');
+
+			Route::post('/conflict/{event}', 'EventsController@updateConflict')->name('conflict');
 	
 		});
 

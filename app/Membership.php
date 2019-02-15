@@ -22,6 +22,7 @@ class Membership extends Metropolis
     {
         return $this->user->events()->create([
             'plan_id' => $this->plan->id,
+            'space_id' => 1,
             'reference' => $this->reference,
             'fee' => $this->plan->fee/100,
             'starts_at' => $this->created_at->setTime(office()->day_starts_at,0,0),
@@ -54,6 +55,7 @@ class Membership extends Metropolis
 
         return $this->user->events()->create([
             'plan_id' => $this->plan->id,
+            'space_id' => 1,
             'transaction_code' => $xml->code,
             'reference' => $this->reference,
             'fee' => $this->plan->fee/100,

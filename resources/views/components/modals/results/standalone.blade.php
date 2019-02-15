@@ -1,3 +1,17 @@
+@admin($user_type)
+<div class="alert alert-{{$event->has_conflict ? 'red' : 'grey'}} d-flex d-apart">
+	<div>
+		<i class="fas fa-{{$event->has_conflict ? 'skull-crossbones' : 'check'}} mr-2"></i>{{$event->has_conflict ? 'Essa reserva está com conflito. Já resolveu esse problema?' : 'Reserva sem conflitos.'}}
+	</div>
+	<div>
+		<form method="POST" action="{{route('admin.schedule.update.conflict', $event->id)}}">
+			@csrf
+			<button type="submit" class="btn btn-{{$event->has_conflict ? 'red' : 'grey'}} font-weight-bold btn-sm">{{$event->has_conflict ? 'Remover conflito' : 'Marcar conflito'}}</button>
+		</form>
+	</div>
+</div>
+@endadmin
+
 <ul class="list-flat px-3 py-2">
 	@if($event->bonus()->exists())
 	<div class="alert alert-green border-0 text-center p-2" role="alert">
@@ -19,6 +33,10 @@
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Email</strong></span>
 		<span>{{$event->creator->email}}</span>
+	</li>
+	<li class="mb-2">
+		<span class="text-teal mr-1"><strong>Telefone</strong></span>
+		<span>{{$event->creator->phone}}</span>
 	</li>
 	@endadmin
 
@@ -115,6 +133,13 @@
 <div class="bg-light py-2 px-3">
 	<p class="text-muted m-0"><small>Para alterar esse evento, envie um email para <a href="mailto:contato@metropolis.com" class="link-red">contato@metropolis.com</a></small></p>
 </div>
+
+@if($event->isUnpaid)
+<div class="py-2 px-3 mt-2 text-center">
+	<div class="text-red mb-2"><strong>FALTANDO PAGAMENTO</strong></div>
+	<a href="{{route('client.payments.create', ['referencia' => $event->reference])}}" class="btn btn-red btn-block">Pague agora</a>
+</div>
+@endif
 @enduser
 
 {{-- <div class="text-right mt-3">

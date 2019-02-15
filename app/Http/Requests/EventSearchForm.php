@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Space;
 
-class CheckEventsForm extends FormRequest
+class EventSearchForm extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

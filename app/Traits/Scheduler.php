@@ -28,6 +28,9 @@ trait Scheduler
         $startDate = $date;
         $endDate = $date->copy()->addHours($duration);
 
+        if (! $startDate->isSameDay($endDate))
+            return collect();
+
         $query = [
             ['space_id', $this->id],
             ['starts_at', '<=', $endDate],

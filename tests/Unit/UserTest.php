@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\AppTest;
-use App\{User, Event, Plan, Membership, Bonus, Payment, Workshop};
+use App\{User, Event, Plan, Membership, Bonus, Payment, Workshop, Space};
 
 class UserTest extends AppTest
 {
@@ -164,20 +164,22 @@ class UserTest extends AppTest
 	public function it_knows_how_many_bonus_hours_it_has_left()
 	{
 		$this->signIn();
+		
+		$space = create(Space::class, ['capacity' => 10]);
 
 		$plan = create(Plan::class, [
-			'bonus_spaces' => $this->space->id,
+			'bonus_spaces' => $space->id,
 			'bonus_limit' => 3
 		]);
 
-		$this->assertNull(auth()->user()->bonusesLeft($this->space));
+		$this->assertNull(auth()->user()->bonusesLeft($space));
 
 		$this->subscribeToNewPlan($plan);
 		
-		$this->assertEquals(auth()->user()->bonusesLeft($this->space), $plan->bonus_limit);
+		$this->assertEquals(auth()->user()->bonusesLeft($space), $plan->bonus_limit);
 
 		$data = array_merge([
-            'type' => $this->space->slug,
+            'type' => $space->slug,
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],
             'date' => now(),
@@ -187,7 +189,7 @@ class UserTest extends AppTest
 
         $this->post(route('client.events.purchase'), $data);
         
-        $this->assertEquals(auth()->user()->fresh()->bonusesLeft($this->space), 1);
+        $this->assertEquals(auth()->user()->fresh()->bonusesLeft($space), 1);
 	}
 
 	/** @test */

@@ -14,11 +14,12 @@ trait PagSeguro
 		6 => 'Devolvida',
 		7 => 'Cancelada',
 		8 => 'Debitado',
-		9 => 'Retenção temporária'
+		9 => 'Retenção temporária',
+        99 => 'Aguardando confirmação do cliente'
 	];
 
 	protected $confirmedStatusArray = [3, 4, 8];
-	protected $waitingStatusArray = [0, 1, 2, 5];
+	protected $waitingStatusArray = [0, 1, 2, 5, 99];
 	protected $cancelledStatusArray = [6, 7, 9];
 
     public function scopeByReference($query, $reference)
@@ -33,7 +34,12 @@ trait PagSeguro
 
     public function scopeUnpaid($query)
     {
-        return $query->whereNull('transaction_code')->where('status_id', 0)->whereNotNull('reference');
+        return $query->where('status_id', 99);
+    }
+
+    public function getIsUnpaidAttribute()
+    {
+        return $this->status_id == 99;
     }
 
     public function getStatusAttribute()

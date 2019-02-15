@@ -21,7 +21,7 @@ class BillEvent extends Mailable implements ShouldQueue
     public function __construct(Event $event)
     {
         $this->event = $event;
-        $this->url = route('client.payments.create', $this->event->reference);
+        $this->url = route('client.payments.create', ['referencia' => $this->event->reference]);
     }
 
     /**

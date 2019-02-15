@@ -46,4 +46,21 @@ class EventTest extends AppTest
 
 		$this->assertEquals(carbon('2019-03-05T08:00:00'), $event->fresh()->starts_at);
 	}
+
+	/** @test */
+	public function an_admin_can_update_the_conflict_status_of_an_event()
+	{
+    	$this->signIn($this->admin, 'admin');
+
+		$sharedSpace = create(Space::class, ['is_shared' => true, 'capacity' => 3]);
+
+		create(Event::class, ['space_id' => $sharedSpace, 'participants' => 2]);
+		$event = create(Event::class, ['space_id' => $sharedSpace, 'participants' => 2]);
+
+		$this->assertTrue($event->has_conflict);
+
+		$this->post(route('admin.schedule.update.conflict', $event->id));
+
+		$this->assertFalse($event->fresh()->has_conflict);
+	}
 }

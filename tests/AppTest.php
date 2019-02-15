@@ -21,19 +21,19 @@ abstract class AppTest extends TestCase
         $this->space = create(Space::class, ['is_shared' => false]);
 
         $this->pastEvent = create(Event::class, [
-            'space_id' => 100,
+            'space_id' => $this->space,
             'starts_at' => now()->copy()->subHours(5),
             'ends_at' => now()->copy()->subHours(2),
         ]);
 
         $this->currentEvent = create(Event::class, [
-            'space_id' => 100,
+            'space_id' => $this->space,
             'starts_at' => now()->copy()->subHour(),
             'ends_at' => now()->copy()->addHour(),
         ]);
         
         $this->futureEvent = create(Event::class, [
-            'space_id' => 100,
+            'space_id' => $this->space,
             'starts_at' => now()->copy()->addHours(5),
             'ends_at' => now()->copy()->addHours(8),
         ]);

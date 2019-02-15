@@ -96132,11 +96132,11 @@ var CustomCalendar = function () {
 				},
 
 				eventRender: function eventRender(event, element, view) {
-					if (event.doesOverlap) {
-						$(element).addClass('btn-red');
-					} else if (event.end.isBefore(moment())) {
+					if (event.end.isBefore(moment()) || event.statusForUser == 'Cancelado') {
 						$(element).addClass('btn-grey');
-					} else if (event.statusForUser != 'Confirmado') {
+					} else if (event.has_conflict) {
+						$(element).addClass('btn-red');
+					} else if (event.statusForUser != 'Confirmado' && event.statusForUser != 'Cancelado') {
 						$(element).addClass('btn-yellow');
 					} else {
 						$(element).addClass('btn-teal');

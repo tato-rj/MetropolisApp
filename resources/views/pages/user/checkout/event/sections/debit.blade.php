@@ -1,6 +1,7 @@
 <form id="form-debit" method="POST" action="{{route('client.events.purchase')}}">
 	@csrf
 	{{-- EVENT --}}
+	<input type="hidden" name="reference" value="{{request('referencia')}}">
 	<input type="hidden" name="space_id" value="{{$form->space->id}}">
 	<input type="hidden" name="description" value="{{$form->space->name}}">
 	<input type="hidden" name="date" value="{{$form->date}}">

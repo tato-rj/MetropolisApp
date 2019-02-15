@@ -1,5 +1,15 @@
 <?php 
 
+function randomNumber($length) {
+    $result = '';
+
+    for($i = 0; $i < $length; $i++) {
+        $result .= mt_rand(0, 9);
+    }
+
+    return $result;
+}
+
 function snake_str($snake)
 {
     return ucfirst(str_replace('_', ' ', $snake));
@@ -23,7 +33,7 @@ function percentage($value, $total)
     if ($total == 0)
         return 0;
     
-    return $value * 100 / $total;
+    return round($value * 100 / $total);
 }
 
 function monthPt($index, $type)

@@ -1,6 +1,7 @@
 <form id="form-credit" method="POST" action="{{route('client.events.purchase')}}">
 	@csrf
 	{{-- EVENT --}}
+	<input type="hidden" name="reference" value="{{request('referencia')}}">
 	<input type="hidden" name="type" value="{{$form->type}}">
 	@if($form->emails)
 	@foreach($form->emails as $email)

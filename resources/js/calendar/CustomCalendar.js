@@ -68,15 +68,15 @@ class CustomCalendar
 	    },
 
 	    eventRender: function( event, element, view ) {
-	      if (event.doesOverlap) {
-	        $(element).addClass('btn-red');
-	      } else if (event.end.isBefore(moment())) {
-	        $(element).addClass('btn-grey');
-	      } else if (event.statusForUser != 'Confirmado') {
-	        $(element).addClass('btn-yellow');
-	      } else {
-	        $(element).addClass('btn-teal');
-	      }
+	    	if (event.end.isBefore(moment()) || event.statusForUser == 'Cancelado') {
+	    		$(element).addClass('btn-grey');
+	    	} else if (event.has_conflict) {
+	    		$(element).addClass('btn-red');
+	    	} else if (event.statusForUser != 'Confirmado' && event.statusForUser != 'Cancelado') {
+	    		$(element).addClass('btn-yellow');
+	    	} else {
+	    		$(element).addClass('btn-teal');
+	    	}
 
 	      if (event.plan_id === null) {
 	        $(element).attr('data-modal', '#event-modal');

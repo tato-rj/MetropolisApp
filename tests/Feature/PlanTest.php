@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\AppTest;
-use App\{Plan, User};
+use App\{Plan, User, Space};
 use App\Events\MembershipCreated;
 use App\Mail\ConfirmMembership;
 use Illuminate\Support\Facades\Mail;
@@ -56,7 +56,7 @@ class PlanTest extends AppTest
 		$this->assertFalse(auth()->user()->membership()->exists());
 
 		$this->subscribeToNewPlan($this->plan);
-
+		
 		$this->subscribeToNewPlan($this->plan);
 	}
 

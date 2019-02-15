@@ -14,17 +14,7 @@ use App\Services\PagSeguro\PagSeguro;
 class EventsController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource (ADMINS ONLY).
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,7 +26,7 @@ class EventsController extends Controller
     }
 
     /**
-     * Checks if the space is free for booking.
+     * Checks if the space is free for booking (ADMINS ONLY).
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -86,29 +76,43 @@ class EventsController extends Controller
      */
     public function purchase(Request $request, SpaceSearchForm $form, CreditCardForm $cardForm)
     {
-        $authorization = $form->space->authorize($form);
-        
-        if (! $authorization->status)
-            return redirect()->back()->with('error', $authorization->getMessage());
-        
         $pagseguro = new PagSeguro;
+        $scheduledEvent = null;
 
+        if ($request->reference) {
+            
+            $reference = $request->reference;
+            $scheduledEvent = Event::byReference($request->reference)->first();
+
+        } else {
+            $authorization = $form->space->authorize($form);
+            
+            if (! $authorization->status)
+                return redirect()->back()->with('error', $authorization->getMessage());
+
+            $reference = $pagseguro->generateReference($prefix = 'E', $form->user);
+        }
+        
         $price = $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space));
-
-        $reference = $pagseguro->generateReference($prefix = 'E', $form->user);
-
+        
         $status = $pagseguro->event($form->user, $request, $price)->purchase($reference);
-      
+
         if ($status instanceof \Exception)
             return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
 
         if ($request->save_card)
             auth()->user()->updateCard($cardForm);
 
-        $event = $form->user->schedule($form, $reference);
+        if ($scheduledEvent) {
+            $scheduledEvent->update(['status_id' => 0]);
+            
+            $event = $scheduledEvent;
+        } else {
+            $event = $form->user->schedule($form, $reference);            
+        }
 
         event(new EventCreated($event));
-
+        
         return redirect()->route('client.events.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
     }
 
@@ -192,11 +196,12 @@ class EventsController extends Controller
     {
         $admin = auth()->guard('admin')->user();
         $user = User::find($request->user_id);
+        $creator = $user ?? $admin;
         $pagseguro = new PagSeguro;
 
         $event = Event::create([
-            'creator_id' => $user ? $user->id : $admin->id,
-            'creator_type' => $user ? get_class($user) : get_class($admin),
+            'creator_id' => $creator->id,
+            'creator_type' => get_class($creator),
             'reference' => $user ? $pagseguro->generateReference($prefix = 'E', $user) : null,
             'space_id' => $form->space_id,
             'participants' => $form->participants,
@@ -204,7 +209,7 @@ class EventsController extends Controller
             'emails' => serialize($form->emails),
             'ends_at' => $form->ends_at,
             'verified_at' => now(),
-            'status_id' => $user ? 0 : 3
+            'status_id' => $user ? 99 : 3
         ]);
 
         event(new EventCreated($event, $user));
@@ -261,6 +266,14 @@ class EventsController extends Controller
 
         return view('components.alerts.success', ['message' => 'O email foi atualizado com sucesso.'])->render();
    }
+
+   public function updateConflict(Event $event)
+   {
+       $event->update(['has_conflict' => ! $event->has_conflict]);
+
+       return redirect()->back()->with('status', 'O conflito foi atualizado com sucesso.');
+   }
+
     /**
      * Remove the specified resource from storage.
      *

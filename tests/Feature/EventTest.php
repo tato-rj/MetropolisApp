@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\AppTest;
-use App\{Event, User, Newsletter};
+use App\{Event, User, Newsletter, Space};
 use App\Mail\{ConfirmEvent, InviteToEvent};
 use Illuminate\Support\Facades\Mail;
 use App\Events\EventCreated;
@@ -75,8 +75,10 @@ class EventTest extends AppTest
 
 		$this->signIn();
 
+		$space = create(Space::class);
+
 		$data = array_merge([
-            'type' => $this->space->slug,
+            'type' => $space->slug,
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],
             'date' => now(),
@@ -94,8 +96,10 @@ class EventTest extends AppTest
 	{
 		$this->signIn();
 
+		$space = create(Space::class);
+
 		$data = array_merge([
-            'type' => $this->space->slug,
+            'type' => $space->slug,
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],
             'date' => now(),
@@ -117,8 +121,10 @@ class EventTest extends AppTest
 	{
 		$this->signIn();
 
+		$space = create(Space::class, ['capacity' => 10]);
+
 		$data = array_merge([
-            'type' => $this->space->slug,
+            'type' => $space->slug,
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],
             'date' => now(),
@@ -136,8 +142,10 @@ class EventTest extends AppTest
 	{
 		$this->signIn();
 
+		$space = create(Space::class);
+
 		$data = array_merge([
-            'type' => $this->space->slug,
+            'type' => $space->slug,
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest1@email.com'],
             'date' => now(),

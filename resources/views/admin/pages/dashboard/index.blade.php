@@ -4,7 +4,7 @@
 	@include('admin.pages.dashboard.sections.intro')
 	<div class="row">
 		<div class="col-4">
-			@include('admin.components.cards.workshop', ['workshop' => $upcomingWorkshop, 'note' => 'Próximo Workshop'])
+			@include('admin.components.cards.workshop', ['workshop' => $upcomingWorkshop, 'note' => 'Próximo Workshop', 'height' => 'auto'])
 		</div>
 		<div class="col-4">
 			@include('admin.pages.dashboard.sections.workshop-ranking')

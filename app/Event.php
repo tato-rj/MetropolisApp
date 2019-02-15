@@ -11,6 +11,16 @@ class Event extends Metropolis implements Reservation
 
 	protected $dates = ['starts_at', 'ends_at', 'verified_at'];
     protected $appends = ['title', 'start', 'end', 'duration', 'status', 'statusForUser', 'statusColor'];
+    protected $casts = ['has_conflict' => 'boolean'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::creating(function($event) {
+            $event->checkForConflict();
+        });
+    }
 
 	public function creator()
 	{
@@ -109,29 +119,33 @@ class Event extends Metropolis implements Reservation
 
     public function scopeCalendar($query)
     {
-        $eventsTypes = $query->orderBy('starts_at')->get()->groupBy('title');
-
-        // $eventsCount = $events->count();
-
-        $doesOverlap = false;
-
-        $results = collect();
-
-        $eventsTypes->each(function($events) use ($results) {
-            
-            $eventsCount = $events->count();
-
-            for ($i = 0; $i < $events->count(); $i++) {
-                if ($i+1 < $eventsCount && empty($events[$i]->doesOverlap))
-                    $events[$i]->doesOverlap = $events[$i+1]->doesOverlap = $events[$i]->ends_at->gt($events[$i+1]->starts_at);
-
-                $events[$i] = $events[$i]->only(['id', 'title', 'start', 'end', 'plan_id', 'notified_at', 'statusForUser', 'editable', 'doesOverlap']);
-
-                $results->push($events[$i]);
-            }
-            
+        $array = $query->get()->map(function($item, $index) {
+            return $item->only(['id', 'title', 'start', 'end', 'plan_id', 'notified_at', 'statusForUser', 'editable', 'has_conflict', 'participants']);
         });
 
-        return $results;
+        return $array;
+    }
+
+    public function checkForConflict()
+    {
+        $results = $this->space->checkAvailability(
+            $this->starts_at, 
+            $this->starts_at->diffInHours($this->ends_at), 
+            $this->participants, 
+            $includePlan = true);
+
+        $this->has_conflict = ! $results->status;
+    }
+
+    public function scopeToday($query)
+    {
+        $office = office();
+
+        return $query->where('ends_at', '>', now()->setTime($office->day_starts_at,0,0))->where('starts_at', '<', now()->setTime($office->day_ends_at,0,0));
+    }
+
+    public function scopeWithConflict($query)
+    {
+        return $query->where('has_conflict', true);
     }
 }

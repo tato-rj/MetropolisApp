@@ -15,8 +15,9 @@ use Faker\Generator as Faker;
 
 $factory->define(App\User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->firstName . ' ' . $faker->lastName,
         'email' => $faker->unique()->safeEmail,
+        'phone' => $faker->tollFreePhoneNumber,
         'email_verified_at' => now(),
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
@@ -25,7 +26,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Admin::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->firstName . ' ' . $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'role' => 'manager',
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
@@ -34,21 +35,17 @@ $factory->define(App\Admin::class, function (Faker $faker) {
 });
 
 $factory->define(App\Event::class, function(Faker $faker) {
-    $user = create('App\User');
-
 	return [
-        'reference' => '1',
+        'reference' => $faker->swiftBicNumber,
         'transaction_code' => $faker->uuid,
         'space_id' => function() {
             return create('App\Space')->id;
         },
-        'creator_id' => function() use ($user) {
-            return $user->id;
+        'creator_id' => function() {
+            return create('App\User')->id;
         },
-        'creator_type' => function() use ($user) {
-            return get_class($user);
-        },
-        'fee' => 100,
+        'creator_type' => 'App\User',
+        'fee' => $faker->numberBetween(35,250),
 		'starts_at' => now(),
 		'ends_at' => now()->addHour(),
         'participants' => 1,
@@ -114,17 +111,17 @@ $factory->define(App\Space::class, function(Faker $faker) {
 });
 
 $factory->define(App\Membership::class, function(Faker $faker) {
-    $plan = create('App\Plan', ['name' => 'semanal']);
-
     return [
         'user_id' => function() {
             return create('App\User')->id;
         },
-        'plan_id' => function() use ($plan) {
-            return $plan->id;
+        'plan_id' => function() {
+            return create('App\Plan', ['name' => 'semanal'])->id;
         },
-        'reference' => $faker->word,
-        'next_payment_at' => $plan->renewsAt()
+        'reference' => $faker->swiftBicNumber,
+        'next_payment_at' => function() {
+            return create('App\Plan', ['name' => 'semanal'])->renewsAt();
+        }
     ];
 });
 
@@ -152,20 +149,5 @@ $factory->define(App\WorkshopFile::class, function(Faker $faker) {
         'path' => $faker->imageUrl(),
         'name' => $faker->word,
         'extension' => $faker->word
-    ];
-});
-
-$factory->define(App\Membership::class, function(Faker $faker) {
-    $plan = create('App\Plan', ['name' => 'semanal']);
-
-    return [
-        'user_id' => function() {
-            return create('App\User')->id;
-        },
-        'plan_id' => function() use ($plan) {
-            return $plan->id;
-        },
-        'reference' => $faker->word,
-        'next_payment_at' => $plan->renewsAt()
     ];
 });

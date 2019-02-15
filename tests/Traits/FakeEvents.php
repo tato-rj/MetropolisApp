@@ -27,8 +27,10 @@ trait FakeEvents
     {
         $user = $user ?? auth()->user();
 
+        $space = create(Space::class, ['capacity' => 10]);
+
         $data = array_merge([
-            'type' => $this->space->slug,
+            'type' => $space->slug,
             'participants' => 1,
             'guests' => null,
             'date' => now(),
@@ -42,13 +44,15 @@ trait FakeEvents
 
     public function adminCreateNewEvent(Space $space = null, User $user = null)
     {
+        $emptySpace = create(Space::class);
+
         $data = [
             'user_id' => $user ? $user->id : null,
-            'space_id' => $space ? $space->id : $this->space->id,
+            'space_id' => $space ? $space->id : $emptySpace->id,
             'participants' => 1,
             'guests' => null,
-            'starts_at' => now(),
-            'ends_at' => now()->addHour(),
+            'starts_at' => now()->copy()->addMinutes(15),
+            'ends_at' => now()->copy()->addMinutes(75),
             'duration' => 2
         ];
 
@@ -69,7 +73,7 @@ trait FakeEvents
         $user = $user ?? auth()->user();
 
         $data = array_merge(['plan_id' => $plan->id, 'save_card' => $saveCard], $this->cardFields);
-
+        
         return $this->post(route('plan.subscribe'), $data);
     }
 

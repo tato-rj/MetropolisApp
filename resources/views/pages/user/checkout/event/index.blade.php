@@ -45,6 +45,11 @@
 	</div>
 </div>
 
+@if ($errors->any())
+@include('components.alerts.error', ['message' => 'Não foi possível realizar o seu pedido nesse momento.'])
+@endif
+
+
 @endsection
 
 @push('scripts')

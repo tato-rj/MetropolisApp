@@ -14,10 +14,10 @@ class SpaceSearchForm extends FormRequest
      */
     public function authorize()
     {
-        return $this->setTime();
+        return $this->prepareEvent();
     }
 
-    public function setTime()
+    public function prepareEvent()
     {
         try {
 

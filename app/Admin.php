@@ -2,11 +2,12 @@
 
 namespace App;
 
+use App\Contracts\Person;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\Admin\ResetPasswordNotification;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements Person
 {
     use Notifiable;
 

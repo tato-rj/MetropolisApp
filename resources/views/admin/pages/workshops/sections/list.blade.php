@@ -3,11 +3,15 @@
 </div>
 
 <div class="row mb-4">
-	@foreach($workshops as $workshop)
+	@forelse($workshops as $workshop)
 	<div class="col-4 mb-4">
-		@include('admin.components.cards.workshop')
+		@include('admin.components.cards.workshop', ['editable' => true])
 	</div>
-	@endforeach
+	@empty
+    <div class="col-12 d-flex flex-center" style="height: 400px">
+        <p class="text-grey"><i>Nenhum workshop foi criado</i></p>
+    </div>
+	@endforelse
 </div>
 
 <div class="d-flex justify-content-center">

@@ -9,23 +9,22 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-    	$ranking = Workshop::popular()->take(5)->get();
-    	$upcomingWorkshop = Workshop::upcoming()->orderBy('starts_at', 'asc')->first();
+    	$ranking = Workshop::popular()->take(8)->get();
     	$latestUsers = User::latest()->take(18)->get();
     	$membershipsCount = Membership::count();
     	$plans = Plan::all();
+        $eventsArray = Event::today()->calendar();
+        $eventsToday = Event::today();
 
-    	return view('admin.pages.dashboard.index', compact(['ranking', 'upcomingWorkshop', 'latestUsers', 'membershipsCount', 'plans']));
+    	return view('admin.pages.dashboard.index', compact(['ranking', 'latestUsers', 'membershipsCount', 'plans', 'eventsArray', 'eventsToday']));
     }
 
     public function schedule()
     {
         $eventsArray = Event::calendar();
         $eventsToday = Event::today();
-        $eventsCount = $eventsToday->count();
-        $conflictsCount = $eventsToday->withConflict()->count();
 
-    	return view('admin.pages.schedule.index', compact(['eventsArray', 'eventsCount', 'conflictsCount']));
+    	return view('admin.pages.schedule.index', compact(['eventsArray', 'eventsToday']));
     }
 
     public function users()
@@ -46,6 +45,6 @@ class AdminController extends Controller
     {
         $payments = Payment::all();
 
-    	return view('admin.pages.payments.index', compact('payments'));
+    	return view('admin.pages.payments.index', compact(['payments']));
     }
 }

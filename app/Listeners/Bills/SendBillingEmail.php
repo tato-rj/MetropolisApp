@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Providers;
+namespace App\Listeners\Bills;
 
-use App\Events\EventCreated;
+use App\Events\BillCreated;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BillPayment;
 
-class SendInvitationEmail
+class SendBillingEmail
 {
     /**
      * Create the event listener.
@@ -21,11 +23,11 @@ class SendInvitationEmail
     /**
      * Handle the event.
      *
-     * @param  EventCreated  $event
+     * @param  BillCreated  $event
      * @return void
      */
-    public function handle(EventCreated $event)
+    public function handle(BillCreated $event)
     {
-        //
+        Mail::to($event->bill->email)->send(new BillPayment($event->bill));
     }
 }

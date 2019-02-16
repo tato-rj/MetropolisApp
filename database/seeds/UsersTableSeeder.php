@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         factory(User::class, mt_rand(60,80))->create()->each(function ($user) {
-        	$this->createEvents($user, $chance = 9);
+        	$this->createEvents($user, $chance = 8);
         	$this->createPlans($user, $chance = 2);
             $this->signupForWorkshops($user, $chance = 7);
         });
@@ -51,8 +51,11 @@ class UsersTableSeeder extends Seeder
     {
     	if (mt_rand(1,10) < $chance) {
     		$plan = Plan::inRandomOrder()->first();
+            $reference = randomNumber(12);
 
-    		$user->subscribe($plan, randomNumber(12));
+    		$user->subscribe($plan, $reference);
+
+            Event::byReference($reference)->first()->update(['transaction_code' => randomNumber(12)]);
         }
     }
 

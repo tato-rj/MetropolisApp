@@ -15,16 +15,12 @@ class BonusTest extends AppTest
 	{
 		$this->signIn();
 
-        Space::find(1)->update(['is_shared' => true, 'capacity' => 100]);
-
-        $space = create(Space::class);
-
-        $plan = create(Plan::class, ['bonus_spaces' => $space->id]);
+        $plan = create(Plan::class, ['bonus_spaces' => $this->conference->id]);
 
 		$this->subscribeToNewPlan($plan);
 
         $data = array_merge([
-            'type' => $space->slug,
+            'type' => $this->conference->slug,
             'participants' => 1,
             'guests' => null,
             'date' => now(),

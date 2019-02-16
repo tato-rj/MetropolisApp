@@ -4,7 +4,7 @@ namespace Tests;
 
 use Tests\Utilities\ExceptionHandling;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\{Space, Event, Plan, Payment, Workshop};
+use App\{Space, Event, Plan, Payment, Workshop, User};
 use Tests\Traits\FakeEvents;
 
 abstract class AppTest extends TestCase
@@ -18,36 +18,24 @@ abstract class AppTest extends TestCase
         $this->disableExceptionHandling();
 
         $this->workspace = create(Space::class, ['is_shared' => true, 'capacity' => 12]);
-        $this->space = create(Space::class, ['is_shared' => false]);
 
-        $this->pastEvent = create(Event::class, [
-            'space_id' => $this->space,
-            'starts_at' => now()->copy()->subHours(5),
-            'ends_at' => now()->copy()->subHours(2),
-        ]);
-
-        $this->currentEvent = create(Event::class, [
-            'space_id' => $this->space,
-            'starts_at' => now()->copy()->subHour(),
-            'ends_at' => now()->copy()->addHour(),
-        ]);
-        
-        $this->futureEvent = create(Event::class, [
-            'space_id' => $this->space,
-            'starts_at' => now()->copy()->addHours(5),
-            'ends_at' => now()->copy()->addHours(8),
-        ]);
+        $this->conference = create(Space::class, ['is_shared' => false]);
 
         $this->workshop = create(Workshop::class);
+
+        $this->event = create(Event::class);
 
         $this->plan = create(Plan::class);
 
         $this->payment = create(Payment::class);
+
+        $this->user = create(User::class);
     }
 
     protected function signIn($user = null, $guard = null)
     {
-        $user = ($user) ?: create('App\User');
+        $user = $user ?? create('App\User');
+
         return $this->actingAs($user, $guard);
     }
 }

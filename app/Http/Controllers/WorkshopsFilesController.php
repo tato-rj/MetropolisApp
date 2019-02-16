@@ -28,7 +28,7 @@ class WorkshopsFilesController extends Controller
                     $filename),
                 'name' => $name,
                 'extension' => $extension
-            ]);            
+            ]);
         } catch (\Exception $e) {
             return response()->json('Não foi possível fazer o upload nesse momento...', 404);
         }

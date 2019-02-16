@@ -9,6 +9,7 @@
 @include('pages.welcome.sections._lead')
 @include('pages.about.sections.highlight')
 @include('pages.welcome.sections.steps')
+@include('pages.welcome.sections.workshop')
 @include('pages.welcome.sections.icons')
 @include('pages.welcome.sections.grid')
 @include('pages.welcome.sections.partners')

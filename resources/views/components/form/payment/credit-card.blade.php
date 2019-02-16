@@ -1,4 +1,4 @@
-@if(auth()->user()->hasCard)
+@if(auth()->guard('web')->check() && auth()->user()->hasCard)
 <div class="accordion mt-5 mb-4" id="card-preference">
 
   <div class="bg-light border-top border-x px-4 py-3"><i class="fas fa-credit-card mr-2 text-grey"></i>Você tem um cartão de crédito salvo. O que gostaria de fazer?</div>

@@ -269,7 +269,7 @@ class EventsController extends Controller
 
    public function updateConflict(Event $event)
    {
-       $event->update(['has_conflict' => ! $event->has_conflict]);
+       $event->setConflict();
 
        return redirect()->back()->with('status', 'O conflito foi atualizado com sucesso.');
    }

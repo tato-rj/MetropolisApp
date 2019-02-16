@@ -20,7 +20,7 @@ class UserTest extends AppTest
 	{
 		$this->signIn();
 
-		auth()->user()->events()->save($this->currentEvent);
+		auth()->user()->events()->save($this->event);
 		
 		$this->assertInstanceOf(Event::class, auth()->user()->events()->first()); 
 	}
@@ -197,11 +197,11 @@ class UserTest extends AppTest
 	{
 		$this->signIn();
 
-		$plan = create(Plan::class, ['bonus_limit' => 2, 'bonus_spaces' => $this->space]);
+		$plan = create(Plan::class, ['bonus_limit' => 2, 'bonus_spaces' => $this->conference]);
 
 		$this->subscribeToNewPlan($plan);
 
-		auth()->user()->useBonus($this->futureEvent, $duration = 1);
+		auth()->user()->useBonus(create(Event::class, ['space_id' => $this->conference]), $duration = 1);
 
 		$this->assertCount(1, auth()->user()->fresh()->bonuses);
 	}

@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Event;
+use App\Contracts\Reservation;
 
 class BillEvent extends Mailable implements ShouldQueue
 {
@@ -18,7 +18,7 @@ class BillEvent extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Event $event)
+    public function __construct(Reservation $event)
     {
         $this->event = $event;
         $this->url = route('client.payments.create', ['referencia' => $this->event->reference]);
@@ -31,6 +31,6 @@ class BillEvent extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('Confirme a sua reserva')->markdown('emails.events.bill');
+        return $this->subject('Cobrança do MetropolisRio')->markdown('emails.events.bill');
     }
 }

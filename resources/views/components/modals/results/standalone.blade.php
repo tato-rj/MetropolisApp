@@ -1,4 +1,5 @@
 @admin($user_type)
+@if(! $event->hasPassed && $event->statusForUser != 'Cancelado')
 <div class="alert alert-{{$event->has_conflict ? 'red' : 'grey'}} d-flex d-apart">
 	<div>
 		<i class="fas fa-{{$event->has_conflict ? 'skull-crossbones' : 'check'}} mr-2"></i>{{$event->has_conflict ? 'Essa reserva está com conflito. Já resolveu esse problema?' : 'Reserva sem conflitos.'}}
@@ -10,6 +11,7 @@
 		</form>
 	</div>
 </div>
+@endif
 @endadmin
 
 <ul class="list-flat px-3 py-2">

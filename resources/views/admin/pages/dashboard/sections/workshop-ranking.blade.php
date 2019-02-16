@@ -5,7 +5,7 @@
         </div>
 
         <div class="list-group list-group-flush">
-            @foreach($ranking as $workshop)
+            @forelse($ranking as $workshop)
             <div class="d-flex align-items-center list-group-item list-group-item-action border-0">
                 <h2 class="text-teal mr-3"><strong>{{$loop->iteration}}</strong></h2>
                 <div style="width: 86%">
@@ -15,6 +15,10 @@
                     <p class="m-0"><small>Número de reservas: {{$workshop->attendees_count}}</small></p>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="d-flex flex-center" style="height: 300px">
+                <p class="text-muted"><i>Nenhum workshop foi criado</i></p>
+            </div>
+            @endforelse
         </div>
     </div>

@@ -58,7 +58,21 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 
 	});
 
-	Route::get('/pagamentos', 'AdminController@payments')->name('payments');
+	Route::prefix('pagamentos')->name('payments.')->group(function() {
+
+		Route::get('', 'AdminController@payments')->name('index');
+
+	});
+
+	Route::prefix('cobrancas')->name('bills.')->group(function() {
+
+		Route::get('/pendentes', 'BillsController@pending')->name('pending');
+
+		Route::get('/nova', 'BillsController@create')->name('create');
+
+		Route::post('', 'BillsController@store')->name('store');
+
+	});
 	
 });
 

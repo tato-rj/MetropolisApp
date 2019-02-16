@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Contracts\Person;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,7 +10,7 @@ use App\Http\Requests\SpaceSearchForm;
 use App\Notifications\MailResetPasswordNotification;
 use App\Traits\{HasBonus, HasCreditCard};
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, Person
 {
     use Notifiable, HasBonus, HasCreditCard;
 

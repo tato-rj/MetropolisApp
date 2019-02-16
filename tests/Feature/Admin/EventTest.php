@@ -31,12 +31,10 @@ class EventTest extends AppTest
 	public function an_admin_can_update_the_events_start_and_end_date()
 	{
     	$this->signIn($this->admin, 'admin');
-
-    	$space = create(Space::class);
 		
-		$this->adminCreateNewEvent($space);
+		$this->adminCreateNewEvent($this->workspace);
 
-		$event = $space->events->first();
+		$event = $this->workspace->events->first();
 
 		$this->post(route('admin.schedule.update.datetime'), [
 			'event_id' => $event->id,
@@ -52,10 +50,9 @@ class EventTest extends AppTest
 	{
     	$this->signIn($this->admin, 'admin');
 
-		$sharedSpace = create(Space::class, ['is_shared' => true, 'capacity' => 3]);
-
-		create(Event::class, ['space_id' => $sharedSpace, 'participants' => 2]);
-		$event = create(Event::class, ['space_id' => $sharedSpace, 'participants' => 2]);
+		create(Event::class, ['space_id' => $this->workspace, 'participants' => 6]);
+	
+		$event = create(Event::class, ['space_id' => $this->workspace, 'participants' => 7]);
 
 		$this->assertTrue($event->has_conflict);
 

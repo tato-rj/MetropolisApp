@@ -10,20 +10,20 @@ class SpaceTest extends AppTest
 	/** @test */
 	public function it_has_many_events()
 	{
-		$this->space->events()->save($this->currentEvent);
-		$this->assertInstanceOf(Event::class, $this->space->events()->first());
+		$this->conference->events()->save($this->event);
+		$this->assertInstanceOf(Event::class, $this->conference->events()->first());
 	}
 
 	/** @test */
 	public function it_knows_its_day_length()
 	{
-		$this->assertInternalType('int', $this->space->day_length);
+		$this->assertInternalType('int', $this->conference->day_length);
 	}
 
 	/** @test */
 	public function it_knows_its_starting_and_ending_hours()
 	{
-		$this->assertTrue($this->space->day_starts_at < $this->space->day_ends_at);
+		$this->assertTrue($this->conference->day_starts_at < $this->conference->day_ends_at);
 	}
 
 	/** @test */
@@ -57,15 +57,15 @@ class SpaceTest extends AppTest
             'ends_at' => now()->copy()->addHours(8),
         ]);
 
-		$this->space->events()->save($pastEvent);
+		$this->conference->events()->save($pastEvent);
 
-		$this->space->events()->save($futureEvent);
+		$this->conference->events()->save($futureEvent);
 
-		$this->assertTrue($this->space->checkAvailability(now(), $duration = 1)->status);
+		$this->assertTrue($this->conference->checkAvailability(now(), $duration = 1)->status);
 
-		$this->space->events()->save($currentEvent);
+		$this->conference->events()->save($currentEvent);
 
-		$this->assertFalse($this->space->checkAvailability(now(), $duration = 1)->status);
+		$this->assertFalse($this->conference->checkAvailability(now(), $duration = 1)->status);
 	}
 
 	/** @test */

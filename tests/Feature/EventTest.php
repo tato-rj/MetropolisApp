@@ -75,10 +75,8 @@ class EventTest extends AppTest
 
 		$this->signIn();
 
-		$space = create(Space::class);
-
 		$data = array_merge([
-            'type' => $space->slug,
+            'type' => $this->workspace->slug,
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],
             'date' => now(),
@@ -96,10 +94,8 @@ class EventTest extends AppTest
 	{
 		$this->signIn();
 
-		$space = create(Space::class);
-
 		$data = array_merge([
-            'type' => $space->slug,
+            'type' => $this->workspace->slug,
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],
             'date' => now(),
@@ -121,10 +117,8 @@ class EventTest extends AppTest
 	{
 		$this->signIn();
 
-		$space = create(Space::class, ['capacity' => 10]);
-
 		$data = array_merge([
-            'type' => $space->slug,
+            'type' => $this->workspace->slug,
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest2@email.com'],
             'date' => now(),
@@ -142,10 +136,8 @@ class EventTest extends AppTest
 	{
 		$this->signIn();
 
-		$space = create(Space::class);
-
 		$data = array_merge([
-            'type' => $space->slug,
+            'type' => $this->workspace->slug,
             'participants' => 3,
             'emails' => ['guest1@email.com', 'guest1@email.com'],
             'date' => now(),

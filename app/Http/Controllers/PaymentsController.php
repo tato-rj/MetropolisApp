@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ShowPaymentForm;
 use App\Services\PagSeguro\PagSeguro;
-use App\{Payment, Event};
+use App\{Payment, Event, Bill};
 
 class PaymentsController extends Controller
 {
@@ -24,5 +24,17 @@ class PaymentsController extends Controller
         $pagseguro = new PagSeguro;
 
         return view('pages.user.checkout.event.index', compact(['form', 'pagseguro']));
+    }
+
+    public function bill(Request $request)
+    {
+        if (! Bill::byReference($request->referencia)->exists())
+            abort(404);
+
+        $pagseguro = new PagSeguro;
+
+        $bill = Bill::byReference($request->referencia)->first();
+
+        return view('pages.bills.index', compact(['pagseguro', 'bill']));
     }
 }

@@ -34,6 +34,9 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 		Route::get('load-fields', 'PaymentsController@loadFields')->name('load-fields');
 
 		Route::get('completar', 'PaymentsController@create')->name('create');
+
+		Route::get('cobranca', 'PaymentsController@bill')->name('bill');
+
 	});
 
 	Route::prefix('cadastro')->name('profile.')->group(function() {
@@ -115,8 +118,4 @@ Route::prefix('eventos')->name('events.')->group(function() {
 
 	Route::get('/buscar', 'EventsController@search')->name('search');
 
-});
-
-Route::get('/mail/confirm', function() {
-	return new \App\Mail\ConfirmPlan(auth()->user());
 });

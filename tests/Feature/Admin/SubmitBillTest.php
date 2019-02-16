@@ -3,10 +3,10 @@
 namespace Tests\Feature\Admin;
 
 use Tests\AppTest;
-use App\{Admin, User};
+use App\{Admin, User, Bill};
 use Tests\Traits\FakeEvents;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\{ConfirmEvent, BillEvent};
+use App\Mail\{ConfirmEvent, BillEvent, BillPayment};
 
 class SubmitBillTest extends AppTest
 {	
@@ -26,13 +26,11 @@ class SubmitBillTest extends AppTest
 
 		$this->signIn($this->admin, 'admin');
 
-		$user = create(User::class);
-
-		$this->adminCreateNewEvent($space = null, $user);
+		$this->adminCreateNewEvent($space = null, $this->user);
 
 		$this->assertCount(0, $this->admin->events);
 
-		$this->assertCount(1, $user->events()->unpaid()->get());
+		$this->assertCount(1, $this->user->events()->unpaid()->get());
 	}
 
 	/** @test */
@@ -42,11 +40,9 @@ class SubmitBillTest extends AppTest
 
 		$this->signIn($this->admin, 'admin');
 
-		$user = create(User::class);
+		$this->adminCreateNewEvent($space = null, $this->user);
 
-		$this->adminCreateNewEvent($space = null, $user);
-
-		$event = $user->events()->unpaid()->first();
+		$event = $this->user->events()->unpaid()->first();
 
 		$url = route('client.payments.create', ['referencia' => $event->reference]);
 
@@ -62,13 +58,11 @@ class SubmitBillTest extends AppTest
 	{
 		$this->signIn($this->admin, 'admin');
 
-		$user = create(User::class);
+		$this->adminCreateNewEvent($space = null, $this->user);
 
-		$this->adminCreateNewEvent($space = null, $user);
+		$event = $this->user->events()->unpaid()->first();
 
-		$event = $user->events()->unpaid()->first();
-
-		$this->signIn($user, 'web');
+		$this->signIn($this->user, 'web');
 		
 		$this->get(route('client.payments.create', ['referencia' => $event->reference]))
 			 ->assertSee($event->fee);
@@ -79,11 +73,9 @@ class SubmitBillTest extends AppTest
 	{
 		$this->signIn($this->admin, 'admin');
 
-		$user = create(User::class);
+		$this->adminCreateNewEvent($space = null, $this->user);
 
-		$this->adminCreateNewEvent($space = null, $user);
-
-		$event = $user->events()->unpaid()->first();
+		$event = $this->user->events()->unpaid()->first();
 
 		$this->signIn(create(User::class), 'web');
 
@@ -91,5 +83,51 @@ class SubmitBillTest extends AppTest
 
 		$this->get(route('client.payments.create', ['referencia' => $event->reference]))
 			 ->assertSee($event->fee);		 
+	}
+
+	/** @test */
+	public function an_admin_can_create_an_submit_a_generic_bill()
+	{
+		Mail::fake();
+
+		$this->signIn($this->admin, 'admin');
+		
+		$bill = make(Bill::class);
+
+		$this->post(route('admin.bills.store'), $bill->toArray());
+
+		$bill = Bill::first();
+
+		$this->assertDatabaseHas('bills', ['title' => $bill->title]);
+
+		$url = route('client.payments.bill', ['referencia' => $bill->reference]);
+
+        Mail::assertQueued(BillPayment::class, function ($mail) use ($url) {
+            return $mail->url === $url;
+        });
+	}
+
+	/** @test */
+	public function an_admin_can_resubmit_an_existing_generic_bill_without_creating_a_new_one()
+	{
+		Mail::fake();
+
+		$this->signIn($this->admin, 'admin');
+		
+		$billRequest = make(Bill::class);
+
+		$this->post(route('admin.bills.store'), $billRequest->toArray());
+
+        Mail::assertQueued(BillPayment::class);
+
+		$bill = Bill::first();
+
+		$this->assertCount(1, Bill::all());
+
+		$this->post(route('admin.bills.store'), $bill->toArray());
+
+        Mail::assertQueued(BillPayment::class);
+
+		$this->assertCount(1, Bill::all());
 	}
 }

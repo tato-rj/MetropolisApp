@@ -83,6 +83,16 @@ trait PagSeguro
             'verified_at' => now()
         ]);
 
+        if (in_array($this->status_id, $this->cancelledStatusArray))
+            $this->setConflict(false);
+
+        return $this;
+    }
+
+    public function setConflict($boolean = null)
+    {
+        $this->update(['has_conflict' => $boolean ?? ! $this->has_conflict]);
+
         return $this;
     }
 

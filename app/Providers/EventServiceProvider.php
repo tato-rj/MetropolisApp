@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use App\Events\{EventCreated, MembershipCreated};
+use App\Events\{EventCreated, MembershipCreated, BillCreated};
+use App\Listeners\Bills\SendBillingEmail;
 use App\Listeners\Events\SendInvitationEmail;
 use App\Listeners\Events\SendConfirmationEmail as SendEventConfirmationEmail;
 use App\Listeners\Memberships\SendConfirmationEmail as SendMembershipConfirmationEmail;
@@ -25,6 +26,9 @@ class EventServiceProvider extends ServiceProvider
         EventCreated::class => [
             SendEventConfirmationEmail::class,
             SendInvitationEmail::class
+        ],
+        BillCreated::class => [
+            SendBillingEmail::class
         ],
         MembershipCreated::class => [
             SendMembershipConfirmationEmail::class

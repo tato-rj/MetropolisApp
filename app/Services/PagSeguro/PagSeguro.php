@@ -7,6 +7,7 @@ use PagSeguro\Configuration\Configure;
 use PagSeguro\Services\Session as PagSeguroSession;
 use PagSeguro\Domains\Requests\DirectPreApproval\Plan as PagSeguroPlan;
 use App\{User, Plan, Event};
+use App\Contracts\Person;
 use Illuminate\Http\Request;
 
 class PagSeguro
@@ -58,7 +59,18 @@ class PagSeguro
 
     public function referenceToModel($reference)
     {
-        return substr($reference, 0, 1) == 'W' ? 'App\UserWorkshop' : 'App\Event';
+        $initial = substr($reference, 0, 1);
+        
+        $models = [
+            'W' => 'App\UserWorkshop',
+            'E' => 'App\Event',
+            'B' => 'App\Bill'
+        ];
+
+        if (! array_key_exists($initial, $models))
+            abort(404, 'Evento não encontrado com número de referência ' . $reference);
+
+        return  $models[$initial];
     }
 
 	public function createPlan($selectedPlan)
@@ -79,7 +91,7 @@ class PagSeguro
         }
 	}
 
-    public function generateReference($prefix, User $user)
+    public function generateReference($prefix, Person $user)
     {
         return $prefix . '-' . now()->timestamp . $user->id; 
     }

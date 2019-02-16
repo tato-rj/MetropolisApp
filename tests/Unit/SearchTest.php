@@ -34,14 +34,12 @@ class SearchTest extends AppTest
 	{
 		$this->signIn();
 
-		$this->space = $this->workspace;
+		create(Event::class, ['space_id' => $this->workspace->id], 12);
 
-		create(Event::class, ['space_id' => $this->space->id], 12);
-
-		$eventsCount = $this->space->events->count();
+		$eventsCount = $this->workspace->events->count();
 
         $this->createNewEvent();
 
-        $this->assertEquals($eventsCount, $this->space->fresh()->events->count());
+        $this->assertEquals($eventsCount, $this->workspace->fresh()->events->count());
 	}
 }

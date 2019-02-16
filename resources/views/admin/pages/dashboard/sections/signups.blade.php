@@ -6,11 +6,15 @@
             </div>
 
             <div class="d-flex flex-wrap justify-content-center align-items-center">
-                @foreach($latestUsers as $user)
+                @forelse($latestUsers as $user)
                 <a data-toggle="tooltip" data-placement="top" title="{{$user->name}}" href="{{route('admin.users.edit', $user->id)}}" class="link-none">
                     <div class="bg-grey-dark text-white rounded-circle d-flex flex-center m-1" style="width: 3rem; height: 3rem; font-size: 1.2em; padding-bottom: 1px">{{$user->name[0]}}</div>
                 </a>
-                @endforeach
+                @empty
+                <div class="d-flex flex-center" style="height: 100px">
+                    <p class="text-grey"><i>Nenhum usuário cadastrado</i></p>
+                </div>
+                @endforelse
             </div>
         </div>
     </div>

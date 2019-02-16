@@ -96069,6 +96069,12 @@ var CustomCalendar = function () {
 		this.element = $(element);
 		this.isEditable = false;
 		this.createButton = null;
+		this.defaultView = 'month';
+		this.defaultHeader = {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'newEvent month,agendaWeek,agendaDay'
+		};
 	}
 
 	_createClass(CustomCalendar, [{
@@ -96081,6 +96087,7 @@ var CustomCalendar = function () {
 
 			this.element.fullCalendar({
 				minTime: '08:00',
+				defaultView: object.defaultView,
 				navLinks: true,
 				maxTime: '18:00',
 				allDaySlot: false,
@@ -96090,11 +96097,7 @@ var CustomCalendar = function () {
 					end: app.office.day_ends_at + ':00'
 				},
 				customButtons: createButton,
-				header: {
-					left: 'prev,next today',
-					center: 'title',
-					right: 'newEvent month,agendaWeek,agendaDay'
-				},
+				header: object.defaultHeader,
 				selectConstraint: "businessHours",
 				views: {
 					month: {
@@ -96132,7 +96135,7 @@ var CustomCalendar = function () {
 				},
 
 				eventRender: function eventRender(event, element, view) {
-					if (event.end.isBefore(moment()) || event.statusForUser == 'Cancelado') {
+					if (event.end.isBefore(moment({ hour: 0 })) || event.statusForUser == 'Cancelado') {
 						$(element).addClass('btn-grey');
 					} else if (event.has_conflict) {
 						$(element).addClass('btn-red');
@@ -96196,6 +96199,14 @@ var CustomCalendar = function () {
 			this.isEditable = true;
 			this.updateDatetimeUrl = this.element.attr('data-update-datetime');
 			this.createEventUrl = this.element.attr('data-create-event');
+
+			return this;
+		}
+	}, {
+		key: 'view',
+		value: function view(_view) {
+			this.defaultView = _view;
+			this.defaultHeader = false;
 
 			return this;
 		}

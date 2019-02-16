@@ -19,9 +19,11 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before
 @endpush
 
 @section('content')
+
 	@include('admin.pages.payments.sections.table')
 
 	@include('components.modals.payment')
+
 @endsection
 
 @push('scripts')

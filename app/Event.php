@@ -18,7 +18,7 @@ class Event extends Metropolis implements Reservation
         parent::boot();
 
         self::creating(function($event) {
-            $event->checkForConflict();
+            $event->markConflict();            
         });
     }
 
@@ -47,9 +47,14 @@ class Event extends Metropolis implements Reservation
         return $this->creator_id;
     }
 
+    public function getHasConflictAttribute($value)
+    {
+        return $this->statusForUser == 'Cancelado' ? false : (bool)$value;
+    }
+
     public function getHasPassedAttribute()
     {
-    	return $this->ends_at < now();
+    	return $this->ends_at < now()->today();
     }
 
     public function getIsCurrentAttribute()
@@ -126,7 +131,7 @@ class Event extends Metropolis implements Reservation
         return $array;
     }
 
-    public function checkForConflict()
+    public function markConflict()
     {
         $results = $this->space->checkAvailability(
             $this->starts_at, 

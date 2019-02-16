@@ -53,6 +53,22 @@ $factory->define(App\Event::class, function(Faker $faker) {
 	];
 });
 
+$factory->define(App\Bill::class, function(Faker $faker) {
+    return [
+        'creator_id' => function() {
+            return create('App\Admin')->id;
+        },
+        'name' => $faker->firstName . ' ' . $faker->lastName,
+        'email' => $faker->email,
+        'title' => $faker->sentence,
+        'description' => $faker->sentence,
+        'reference' => $faker->swiftBicNumber,
+        'transaction_code' => $faker->uuid,
+        'fee' => $faker->numberBetween(35,250),
+        'status_id' => 0
+    ];
+});
+
 $factory->define(App\Plan::class, function(Faker $faker) {
     return [
         'type' => $faker->word,

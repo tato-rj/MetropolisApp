@@ -34,9 +34,9 @@ class BillsController extends Controller
 		if (! $bill) {
 			$bill = Bill::create([
 				'creator_id' => auth()->guard('admin')->user()->id,
+				'recipient_name' => $form->recipient_name,
+				'recipient_email' => $form->recipient_email,
 				'name' => $form->name,
-				'email' => $form->email,
-				'title' => $form->title,
 				'description' => $form->description,
 				'fee' => $form->fee,
 				'reference' => $reference
@@ -45,7 +45,7 @@ class BillsController extends Controller
 
         event(new BillCreated($bill));
 
-		return redirect()->back()->with('status', 'A cobrança foi enviada para ' . $form->email);
+		return redirect()->back()->with('status', 'A cobrança foi enviada para ' . $form->recipient_email);
 	}
 
 	public function purchase(Request $request, BillPaymentForm $form)
@@ -60,6 +60,6 @@ class BillsController extends Controller
         if ($request->save_card)
             auth()->user()->updateCard($cardForm);
 
-        return redirect()->route('client.events.index')->with('status', 'O seu pagamento foi realizado com sucesso.');
+        return redirect()->route('client.home')->with('status', 'O seu pagamento foi realizado com sucesso.');
 	}
 }

@@ -24,9 +24,9 @@ class CreateBillForm extends FormRequest
     public function rules()
     {
         return [
+            'recipient_name' => 'required',
+            'recipient_email' => 'required|email',
             'name' => 'required',
-            'email' => 'required|email',
-            'title' => 'required',
             'description' => 'required',
             'fee' => 'required'
         ];

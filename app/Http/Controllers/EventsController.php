@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\EventCreated;
+use App\Events\{EventCreated, EventUpdated};
 use App\{Event, Space, User};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -250,6 +250,8 @@ class EventsController extends Controller
             return view('components.alerts.error', ['message' => 'Não foi possível atualizar o evento nesse momento.'])->render();
         
         }
+
+        event(new EventUpdated($event));
 
         return view('components.alerts.success', ['message' => 'O evento foi atualizado com sucesso.'])->render();
    }

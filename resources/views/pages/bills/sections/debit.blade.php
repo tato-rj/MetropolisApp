@@ -1,4 +1,4 @@
-<form id="form-debit" method="POST" action="{{route('client.events.purchase')}}">
+<form id="form-debit" method="POST" action="{{route('client.payments.bill.purchase')}}">
 	@csrf
 	{{-- EVENT --}}
 	<input type="hidden" name="reference" value="{{$bill->reference}}">

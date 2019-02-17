@@ -6,7 +6,6 @@ use App\Events\MembershipCreated;
 use App\Mail\ConfirmMembership;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Mail;
 
 class SendConfirmationEmail
 {
@@ -18,6 +17,6 @@ class SendConfirmationEmail
      */
     public function handle(MembershipCreated $event)
     {
-        Mail::to($event->user->email)->send(new ConfirmMembership($event->user));
+        \Mail::to($event->user->email)->send(new ConfirmMembership($event->user));
     }
 }

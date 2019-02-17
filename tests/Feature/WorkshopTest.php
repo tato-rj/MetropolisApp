@@ -4,7 +4,9 @@ namespace Tests\Feature;
 
 use Tests\AppTest;
 use App\Events\WorkshopSignup;
-use App\User;
+use App\{User, WorkshopFile};
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmWorkshop;
 
 class WorkshopTest extends AppTest
 {
@@ -32,5 +34,22 @@ class WorkshopTest extends AppTest
 		$unauthenticatedUser = create(User::class);
 		
 		$this->signUpToNewWorkshop($this->workshop, $unauthenticatedUser);
+	}
+
+	/** @test */
+	public function users_receive_an_email_confirming_the_workshop_signup_containg_all_material_for_download()
+	{
+		Mail::fake();
+
+		$this->signIn();
+
+		create(WorkshopFile::class, ['workshop_id' => $this->workshop->id]);
+		create(WorkshopFile::class, ['workshop_id' => $this->workshop->id]);
+		
+		$files = $this->workshop->files->pluck('path');
+
+		$this->signUpToNewWorkshop($this->workshop);
+
+        Mail::assertQueued(ConfirmWorkshop::class);
 	}
 }

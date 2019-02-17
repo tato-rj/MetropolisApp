@@ -6,7 +6,7 @@ use Tests\AppTest;
 use App\{Admin, User, Bill};
 use Tests\Traits\FakeEvents;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\{ConfirmEvent, BillEvent, BillPayment};
+use App\Mail\{ConfirmEvent, EventPayment, BillPayment};
 
 class SubmitBillTest extends AppTest
 {	
@@ -48,7 +48,7 @@ class SubmitBillTest extends AppTest
 
 		Mail::assertNotQueued(ConfirmEvent::class);
 
-        Mail::assertQueued(BillEvent::class, function ($mail) use ($url) {
+        Mail::assertQueued(EventPayment::class, function ($mail) use ($url) {
             return $mail->url === $url;
         });
 	}
@@ -98,7 +98,7 @@ class SubmitBillTest extends AppTest
 
 		$bill = Bill::first();
 
-		$this->assertDatabaseHas('bills', ['title' => $bill->title]);
+		$this->assertDatabaseHas('bills', ['name' => $bill->name]);
 
 		$url = route('client.payments.bill', ['referencia' => $bill->reference]);
 

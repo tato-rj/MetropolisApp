@@ -1,6 +1,6 @@
 <div class="card border-0 shadow-sm">
     <div class="row no-gutters">
-        <div class="col-12 alert-red alert-accent-top font-weight-bold p-2 text-center">Total de {{$memberships_count}} {{str_plural('assinatura', $memberships_count)}}</div>
+        <div class="col-12 alert-red alert-accent-top font-weight-bold p-2 text-center">Total de {{$memberships_count}} {{trans_choice('words.assinaturas', $memberships_count)}}</div>
         @foreach($plans as $plan)
         <div class="col-6 col-sm-4 col-md-6 col-lg-4 text-white text-center py-4 {{$loop->iteration % 2 == 0 ? 'bg-red' : 'bg-red-light'}}">
             <div class="text-center">

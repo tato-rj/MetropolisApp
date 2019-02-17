@@ -58,9 +58,9 @@ $factory->define(App\Bill::class, function(Faker $faker) {
         'creator_id' => function() {
             return create('App\Admin')->id;
         },
-        'name' => $faker->firstName . ' ' . $faker->lastName,
-        'email' => $faker->email,
-        'title' => $faker->sentence,
+        'recipient_name' => $faker->firstName . ' ' . $faker->lastName,
+        'recipient_email' => $faker->email,
+        'name' => $faker->sentence,
         'description' => $faker->sentence,
         'reference' => $faker->swiftBicNumber,
         'transaction_code' => $faker->uuid,

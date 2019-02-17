@@ -6,22 +6,23 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Contracts\Reservation;
+use App\{Workshop, User};
 
-class BillEvent extends Mailable implements ShouldQueue
+class ConfirmWorkshop extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public $event, $url;
+    public $workshop, $user;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Reservation $event)
+    public function __construct(Workshop $workshop, User $user)
     {
-        $this->event = $event;
-        $this->url = route('client.payments.create', ['referencia' => $this->event->reference]);
+        $this->workshop = $workshop;
+        $this->user = $user;
     }
 
     /**
@@ -31,6 +32,6 @@ class BillEvent extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('Cobrança do MetropolisRio')->markdown('emails.events.bill');
+        return $this->subject('Workshop confirmado!')->markdown('emails.workshops.confirm');
     }
 }

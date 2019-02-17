@@ -16,7 +16,6 @@ class AdminController extends Controller
         $eventsArray = Event::today()->calendar();
         $eventsToday = Event::today();
         
-        // return $eventsArray;
     	return view('admin.pages.dashboard.index', compact(['ranking', 'latestUsers', 'membershipsCount', 'plans', 'eventsArray', 'eventsToday']));
     }
 
@@ -37,7 +36,7 @@ class AdminController extends Controller
 
     public function workshops()
     {
-        $workshops = Workshop::paginate(6);
+        $workshops = Workshop::orderBy('starts_at')->paginate(6);
 
     	return view('admin.pages.workshops.index', compact('workshops'));
     }

@@ -5,6 +5,9 @@ namespace Tests\Feature\Admin;
 use Tests\AppTest;
 use App\{Admin, Event, Space};
 use Tests\Traits\FakeEvents;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UpdateEvent;
+use App\Events\EventUpdated;
 
 class EventTest extends AppTest
 {
@@ -30,6 +33,8 @@ class EventTest extends AppTest
 	/** @test */
 	public function an_admin_can_update_the_events_start_and_end_date()
 	{
+		$this->expectsEvents(EventUpdated::class);
+
     	$this->signIn($this->admin, 'admin');
 		
 		$this->adminCreateNewEvent($this->workspace);
@@ -43,6 +48,26 @@ class EventTest extends AppTest
 		]);
 
 		$this->assertEquals(carbon('2019-03-05T08:00:00'), $event->fresh()->starts_at);
+	}
+
+	/** @test */
+	public function the_user_receives_an_email_confirming_the_update_made_by_an_admin()
+	{
+		Mail::fake();
+
+    	$this->signIn($this->admin, 'admin');
+		
+		$this->adminCreateNewEvent($this->workspace);
+
+		$event = $this->workspace->events->first();
+
+		$this->post(route('admin.schedule.update.datetime'), [
+			'event_id' => $event->id,
+			'starts_at' => '2019-03-05T08:00:00',
+			'ends_at' => '2019-03-05T09:00:00'
+		]);
+
+		Mail::assertQueued(UpdateEvent::class);
 	}
 
 	/** @test */

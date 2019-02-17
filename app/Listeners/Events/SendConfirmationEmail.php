@@ -3,10 +3,9 @@
 namespace App\Listeners\Events;
 
 use App\Events\EventCreated;
-use App\Mail\{ConfirmEvent, BillEvent};
+use App\Mail\{ConfirmEvent, EventPayment};
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Mail;
 
 class SendConfirmationEmail
 {
@@ -18,8 +17,8 @@ class SendConfirmationEmail
      */
     public function handle(EventCreated $event)
     {
-        $mail = $event->user ?  new BillEvent($event->event) : new ConfirmEvent($event->event);
+        $mail = $event->user ?  new EventPayment($event->event) : new ConfirmEvent($event->event);
 
-        Mail::to($event->event->creator->email)->send($mail);
+        \Mail::to($event->event->creator->email)->send($mail);
     }
 }

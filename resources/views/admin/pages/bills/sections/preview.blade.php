@@ -3,12 +3,12 @@
 		<img src="{{asset('images/brand/logo.svg')}}" width="90">
 	</div>
 	<div class="p-5">
-		<h6><strong>Olá <span id="preview-name"></span></strong></h6>
+		<h6><strong>Olá <span id="preview-recipient_name"></span></strong></h6>
 		<p class="text-muted">Você está recebendo este email para pagar uma cobrança do escritório MetropolisRio.</p>
 
 		<div class="p-4 text-muted mb-3" style="background-color: #EDEFF2">
 			<p class="mb-1"><strong>Para que é esta cobrança?</strong></p>
-			<p id="preview-title"><i>...</i></p>
+			<p id="preview-name"><i>...</i></p>
 			<p class="mb-1"><strong>Um pouco mais sobre este evento</strong></p>
 			<p id="preview-description">...</p>
 			<p class="mb-1"><strong>Valor</strong></p>

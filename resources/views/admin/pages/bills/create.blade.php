@@ -14,11 +14,11 @@
 		<form method="POST" action="{{route('admin.bills.store')}}">
 			@csrf
 
-			@input(['bag' => 'default', 'name' => 'name', 'placeholder' => 'Nome do recipiente', 'classes' => 'to-preview'])
+			@input(['bag' => 'default', 'name' => 'recipient_name', 'placeholder' => 'Nome do recipiente', 'classes' => 'to-preview'])
 
-			@input(['bag' => 'default', 'type' => 'email', 'name' => 'email', 'placeholder' => 'Email de quem vai receber a cobrança'])
+			@input(['bag' => 'default', 'type' => 'email', 'name' => 'recipient_email', 'placeholder' => 'Email de quem vai receber a cobrança'])
 
-			@input(['bag' => 'default', 'name' => 'title', 'placeholder' => 'Nome dessa cobrança', 'classes' => 'to-preview'])
+			@input(['bag' => 'default', 'name' => 'name', 'placeholder' => 'Nome dessa cobrança', 'classes' => 'to-preview'])
 			
 			@textarea(['bag' => 'default', 'name' => 'description', 'placeholder' => 'Escreva aqui uma curta descriçao', 'limit' => 255, 'classes' => 'to-preview'])
 			

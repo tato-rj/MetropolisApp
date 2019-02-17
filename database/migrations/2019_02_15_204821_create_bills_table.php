@@ -17,8 +17,8 @@ class CreateBillsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('creator_id');
             $table->string('name');
-            $table->string('email');
-            $table->string('title');
+            $table->string('recipient_email');
+            $table->string('recipient_name');
             $table->string('description');
             $table->string('reference')->nullable();
             $table->string('transaction_code')->nullable();

@@ -3,11 +3,15 @@
 		<ul class="list-flat p-4" id="review">
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Nome</strong></span>
-				<span>{{$bill->title}}</span>
+				<span>{{$bill->name}}</span>
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Descrição</strong></span>
 				<span>{{$bill->description}}</span>
+			</li>
+			<li class="mb-2">
+				<span class="text-teal mr-1"><strong>Cobrança enviada para</strong></span>
+				<span>{{$bill->recipient_name}}</span>
 			</li>
 		</ul>
 		<div class="bg-teal text-white d-flex flex-wrap">

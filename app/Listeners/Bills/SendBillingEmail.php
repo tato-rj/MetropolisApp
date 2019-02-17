@@ -5,7 +5,6 @@ namespace App\Listeners\Bills;
 use App\Events\BillCreated;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\BillPayment;
 
 class SendBillingEmail
@@ -28,6 +27,6 @@ class SendBillingEmail
      */
     public function handle(BillCreated $event)
     {
-        Mail::to($event->bill->email)->send(new BillPayment($event->bill));
+        \Mail::to($event->bill->recipient_email)->send(new BillPayment($event->bill));
     }
 }

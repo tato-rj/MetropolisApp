@@ -6,7 +6,6 @@ use App\Events\EventCreated;
 use App\Mail\InviteToEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Mail;
 use App\Newsletter;
 
 class SendInvitationEmail
@@ -22,7 +21,7 @@ class SendInvitationEmail
         if ($event->event->emails) {
             foreach ($event->event->emails as $email) {
                 if ($email) {
-                    Mail::to($email)->send(new InviteToEvent($event->event));
+                    \Mail::to($email)->send(new InviteToEvent($event->event));
                     Newsletter::storeOrFail($email);
                 }
             }

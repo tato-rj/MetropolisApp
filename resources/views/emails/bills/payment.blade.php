@@ -1,12 +1,12 @@
 @component('mail::message')
-# Olá {{$event->name}}
+# Olá {{$event->recipient_name}}
 
 Você está recebendo este email para pagar uma cobrança do escritório MetropolisRio. 
 
 @component('mail::panel')
 <div style="padding: 1em">
 	<p style="margin-bottom: .25em"><strong>Para que é esta cobrança?</strong></p>
-	<p style="margin-bottom: 1em">{{$event->title}}</p>
+	<p style="margin-bottom: 1em">{{$event->name}}</p>
 	<p style="margin-bottom: .25em"><strong>Um pouco mais sobre este evento</strong></p>
 	<p style="margin-bottom: 0">{{$event->description}}</p>
 </div>

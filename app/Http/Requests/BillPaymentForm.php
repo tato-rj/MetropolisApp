@@ -20,7 +20,7 @@ class BillPaymentForm extends FormRequest
     public function validateBill()
     {
         $this->bill = Bill::byReference($this->reference)->firstOrFail();
-        $this->type = $this->bill->title;
+        $this->type = $this->bill->name;
         $this->user = auth()->guard('web')->user();
 
         return $this->bill;

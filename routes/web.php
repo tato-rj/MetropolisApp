@@ -78,7 +78,7 @@ Route::get('/consultoria', function () {
 
 Route::get('/contato', function () {
     return view('pages.contact.index');
-});
+})->name('contact');
 
 Route::prefix('planos')->name('plan.')->group(function() {
 
@@ -120,4 +120,8 @@ Route::prefix('eventos')->name('events.')->group(function() {
 
 	Route::get('/buscar', 'EventsController@search')->name('search');
 
+});
+
+Route::get('mail', function() {
+	return new App\Mail\ConfirmWorkshop(\App\Workshop::first(), auth()->user());
 });

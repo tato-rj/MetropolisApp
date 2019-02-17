@@ -26,7 +26,7 @@
                     <span class="{{checkActive(['admin.bills.create', 'admin.bills.pending'], 'text-teal')}}"><i class="fas fa-receipt" style="width: 1.8rem"></i>Cobranças &#9662;</span>
                 </a>
                 <div id="bills-menu" class="collapse nav-link {{checkActive(['admin.bills.create', 'admin.bills.pending'], 'show')}}" style="margin-left: 1.8rem" data-parent="#menu-list">
-                    <a href="{{route('admin.bills.create')}}" class="d-block mb-2 link-none">
+                    <a href="{{route('admin.bills.create')}}" class="d-block mb-1 link-none">
                         <span class="{{checkActive(['admin.bills.create'], 'text-teal')}}">Nova</span>
                     </a>
                     <a href="{{route('admin.bills.pending')}}" class="d-block link-none">

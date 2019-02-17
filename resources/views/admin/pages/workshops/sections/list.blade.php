@@ -5,7 +5,7 @@
 <div class="row mb-4">
 	@forelse($workshops as $workshop)
 	<div class="col-4 mb-4">
-		@include('admin.components.cards.workshop', ['editable' => true])
+		@include('admin.components.cards.workshop', ['editable' => true, 'note' => $loop->first ? 'PRÓXIMO WORKSHOP' : null])
 	</div>
 	@empty
     <div class="col-12 d-flex flex-center" style="height: 400px">

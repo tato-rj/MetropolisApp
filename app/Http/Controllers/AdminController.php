@@ -15,7 +15,8 @@ class AdminController extends Controller
     	$plans = Plan::all();
         $eventsArray = Event::today()->calendar();
         $eventsToday = Event::today();
-
+        
+        // return $eventsArray;
     	return view('admin.pages.dashboard.index', compact(['ranking', 'latestUsers', 'membershipsCount', 'plans', 'eventsArray', 'eventsToday']));
     }
 

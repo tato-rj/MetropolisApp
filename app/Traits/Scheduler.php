@@ -9,7 +9,7 @@ trait Scheduler
 {
     public function checkAvailability($date, $duration, $participants = null, $includePlan = false)
     {
-        if (! office()->isWorkingDay($date))
+        if ($duration <= office()->day_length && ! office()->isWorkingDay($date))
             return new Report($this, $date, false);
 
         if (! $this->is_shared)

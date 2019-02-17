@@ -37,9 +37,9 @@
 <section class="container-fluid">
     <div class="row" style="min-height: 100vh;">
         <div class="col-lg-6 col-md-6 col-12 d-flex flex-center">
-            <div class="px-6">
-                <h1 class="text-teal mb-4" style="font-size: 6rem"><strong>404</strong></h1>
-                <h4 class="mb-4 text-muted">Ops, não conseguimos encontrar esta página!</h4>
+            <div class="p-5">
+                <h1 class="text-teal mb-3" style="font-size: 6rem"><strong>404</strong></h1>
+                <h4 class="mb-4 text-muted">Opa, não conseguimos encontrar esta página!</h4>
                 <a href="{{route('welcome')}}" class="btn btn-red">Voltar para página principal</a>
             </div>
         </div>

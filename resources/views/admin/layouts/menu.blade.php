@@ -22,8 +22,8 @@
                 <a href="{{route('admin.payments.index')}}" class="nav-link link-inherit"><i class="fas fa-credit-card" style="width: 1.8rem"></i>Pagamentos</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="" data-toggle="collapse" data-target="#bills-menu" class="nav-link pb-0 link-none">
-                    <span class="{{checkActive(['admin.bills.create', 'admin.bills.pending'], 'text-teal')}}"><i class="fas fa-receipt" style="width: 1.8rem"></i>Cobranças</span>
+                <a href="" data-toggle="collapse" data-target="#bills-menu" class="nav-link  pb-0 link-none">
+                    <span class="{{checkActive(['admin.bills.create', 'admin.bills.pending'], 'text-teal')}}"><i class="fas fa-receipt" style="width: 1.8rem"></i>Cobranças &#9662;</span>
                 </a>
                 <div id="bills-menu" class="collapse nav-link {{checkActive(['admin.bills.create', 'admin.bills.pending'], 'show')}}" style="margin-left: 1.8rem" data-parent="#menu-list">
                     <a href="{{route('admin.bills.create')}}" class="d-block mb-2 link-none">

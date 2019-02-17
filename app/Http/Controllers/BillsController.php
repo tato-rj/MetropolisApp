@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateBillForm;
 use App\Services\PagSeguro\PagSeguro;
 use App\Bill;
+use App\Http\Requests\BillPaymentForm;
 use App\Events\BillCreated;
 
 class BillsController extends Controller
@@ -45,5 +46,20 @@ class BillsController extends Controller
         event(new BillCreated($bill));
 
 		return redirect()->back()->with('status', 'A cobrança foi enviada para ' . $form->email);
+	}
+
+	public function purchase(Request $request, BillPaymentForm $form)
+	{
+        $pagseguro = new PagSeguro;
+		
+		$status = $pagseguro->event($form->user, $request, $form->bill->fee)->purchase($form->bill->reference);
+
+        if ($status instanceof \Exception)
+            return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
+
+        if ($request->save_card)
+            auth()->user()->updateCard($cardForm);
+
+        return redirect()->route('client.events.index')->with('status', 'O seu pagamento foi realizado com sucesso.');
 	}
 }

@@ -18,7 +18,7 @@ class Event extends Metropolis implements Reservation
         parent::boot();
 
         self::creating(function($event) {
-            $event->markConflict();            
+            $event->markConflict();
         });
     }
 

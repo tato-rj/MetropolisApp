@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
         	'password' => bcrypt('maiden')
         ]);
 
-        factory(User::class, mt_rand(60,80))->create()->each(function ($user) {
+        factory(User::class, mt_rand(50,60))->create()->each(function ($user) {
         	$this->createEvents($user, $chance = 8);
         	$this->createPlans($user, $chance = 2);
             $this->signupForWorkshops($user, $chance = 7);

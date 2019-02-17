@@ -37,6 +37,8 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 		Route::get('cobranca', 'PaymentsController@bill')->name('bill');
 
+		Route::post('cobranca', 'BillsController@purchase')->name('bill.purchase');
+
 	});
 
 	Route::prefix('cadastro')->name('profile.')->group(function() {

@@ -107,12 +107,23 @@ class PagSeguroController extends Controller
         return preg_replace('/[^[:alnum:]-]/', '', $code);
     }
 
-    public function handle(PagseguroResponse $data)
+    public function status($transaction_code)
     {
-    	try {
-    		return 'GETTING THERE!';
-    	} catch (\Exception $e) {
-    		logger($e->getMessage());
-    	}
+        $pagseguro = new PagSeguro;
+
+        $payment = Payment::byCode($transaction_code)->firstOrFail();
+
+        $status = $pagseguro->status($payment)->get();
+
+        return view('components.modals.results.payment', compact('payment'))->render();
     }
+
+    // public function handle(PagseguroResponse $data)
+    // {
+    // 	try {
+    // 		return 'GETTING THERE!';
+    // 	} catch (\Exception $e) {
+    // 		logger($e->getMessage());
+    // 	}
+    // }
 }

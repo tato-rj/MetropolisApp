@@ -2,34 +2,31 @@
 
 namespace App\Services\PagSeguro;
 
-use PagSeguro\Services\Transactions\Search\Reference;
-use App\Event;
+use PagSeguro\Services\Transactions\Search\Code;
+use App\Payment;
 
 class StatusManager
 {
-	protected $pagseguro, $event;
+	protected $pagseguro, $payment, $status;
 
-	public function __construct(PagSeguro $pagseguro, Event $event)
+	public function __construct(PagSeguro $pagseguro, Payment $payment)
 	{
 		$this->pagseguro = $pagseguro;
-		$this->event = $event;
+		$this->payment = $payment;
 	}
 
-	public function checkEvent($options)
-	{
+	public function get()
+	{     
         try {
-            return Reference::search($this->pagseguro->credentials, $this->event->reference, $options);
+            $response = Code::search($this->pagseguro->credentials, $this->payment->reservation->transaction_code);
         } catch (\Exception $e) {
-            dd($e);
+            abort(404, $e->getMessage());
         }
-	}
 
-	public function checkPlan($options)
-	{
-        try {
-            return \PagSeguro\Services\Transactions\Search\Date::search($this->pagseguro->credentials, $options);
-        } catch (\Exception $e) {
-            dd($e);
-        }
+		$this->status = $response->getStatus();
+
+		$this->payment->reservation->setStatus($this->status);
+        
+        return $this->status;
 	}
 }

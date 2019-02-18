@@ -8,7 +8,14 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <div>
+          
+        </div>
+        <div id="loading">
+          <div class="p-4 d-flex justify-content-center align-items-center">
+            <span class="text-muted"><i>Carregando...</i></span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -62,7 +62,13 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 	});
 });
 
-Route::post('/status/ajax', 'EventsController@ajax')->name('status.ajax');
+Route::prefix('status')->middleware('auth')->name('status.')->group(function() {
+
+	Route::post('ajax', 'EventsController@ajax')->name('ajax');
+
+	Route::get('{transaction_code}', 'PagSeguroController@status')->name('payment');
+
+});
 
 Route::get('/', function () {
     return view('pages.welcome.index');

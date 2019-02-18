@@ -117,31 +117,6 @@ class EventsController extends Controller
     }
 
     /**
-     * Checks the status of a current reservation.
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function status(Event $event, Request $request)
-    {
-        $pagseguro = new PagSeguro;
-
-        $status = $pagseguro->status($event)->checkEvent([
-            'initial_date' => null,
-            'final_date' => null,
-            'page' => 1,
-            'max_per_page' => 5,
-        ]);
-
-        if (! $status)
-            abort(404);
-
-        $event->setStatus($status->getTransactions()[0]->getStatus());
-
-        return $event;
-    }
-
-    /**
      * Invites the participants.
      * 
      * @param  \Illuminate\Http\Request  $request

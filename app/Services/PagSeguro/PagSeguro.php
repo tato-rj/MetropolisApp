@@ -6,7 +6,7 @@ use PagSeguro\Library;
 use PagSeguro\Configuration\Configure;
 use PagSeguro\Services\Session as PagSeguroSession;
 use PagSeguro\Domains\Requests\DirectPreApproval\Plan as PagSeguroPlan;
-use App\{User, Plan, Event};
+use App\{User, Plan, Event, Payment};
 use App\Contracts\Person;
 use Illuminate\Http\Request;
 
@@ -42,9 +42,9 @@ class PagSeguro
         }
 	}
 
-    public function status(Event $event)
+    public function status(Payment $payment)
     {
-        return new StatusManager($this, $event);
+        return new StatusManager($this, $payment);
     }
 
 	public function plan(User $user, Plan $plan, Request $request)

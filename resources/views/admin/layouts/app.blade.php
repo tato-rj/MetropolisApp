@@ -57,6 +57,32 @@
 <script src="{{ mix('js/admin.js') }}"></script>
 
 <script type="text/javascript">
+$('.payment-item').on('click', function() {
+  $payment = $(this);
+  let url = $payment.attr('data-url-status');
+  let modalId = $payment.attr('data-modal');
+  let $modal = $(modalId);
+
+  $modal.modal('show');
+
+  $.get(url,
+    function(data, status){
+
+      $modal.find('.modal-body > div:first-child').html(data);
+
+      fullDatePT($modal.find('.date'));
+
+      $modal.find('#loading').hide();
+
+    }).fail(function(error) {
+      $modal.find('.modal-body > div:first-child').html('<p class="text-center my-4 text-red">Não foi possível processar o seu pedido nesse momento</p>');
+
+      $modal.find('#loading').hide();
+    });
+});
+</script>
+
+<script type="text/javascript">
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 });
@@ -65,7 +91,7 @@ $(document).ready(function() {
   fullDatePT($('.date-pt'));
 });
 
-$('#event-modal, #plan-modal').on('hidden.bs.modal', function (e) {
+$('#event-modal, #plan-modal, #payment-modal').on('hidden.bs.modal', function (e) {
   $(this).find('.modal-body > div:first-child').html('');
   $(this).find('#loading').show();
   $(this).find('.modal-footer').hide();

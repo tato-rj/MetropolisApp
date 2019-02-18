@@ -16,7 +16,7 @@
   				</thead>
   				<tbody>
   					@foreach(auth()->user()->payments as $payment)
-  					<tr class="cursor-pointer" title="Clique para ver mais detalhes" data-toggle="modal" data-target="#payment-modal">
+  					<tr class="cursor-pointer payment-item" title="Clique para ver mais detalhes" data-url-status="{{route('status.payment', ['reference' => $payment->reservation->transaction_code])}}" data-modal="#payment-modal">
   						<td style="width:16.66%">{{$payment->created_at->format('d/m/Y')}}</td>
   						<td style="width:50%">{{$payment->reservation->name}}</td>
   						<td style="width:16.66%">{{feeToString($payment->reservation->fee)}}</td>

@@ -132,4 +132,15 @@ class PagSeguroController extends Controller
 
         return redirect()->back()->with('status', 'Esta transação com ' . $payment->user->name . ' foi cancelada com sucesso.');
     }
+
+    public function refund($transaction_code)
+    {
+        $pagseguro = new PagSeguro;
+
+        $payment = Payment::byCode($transaction_code)->firstOrFail();
+
+        $pagseguro->refund($payment);
+
+        return redirect()->back()->with('status', 'Esta transação com ' . $payment->user->name . ' foi cancelada e o estorno iniciado com sucesso.');
+    }
 }

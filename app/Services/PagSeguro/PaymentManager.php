@@ -21,8 +21,17 @@ class PaymentManager
 		    abort(404, $e->getMessage());
 		}
 
-		$payment->reservation->cancel();
-        
-        return $status;
+		return $payment->reservation->cancel();
+	}
+
+	public function refund(Payment $payment)
+	{
+		try {
+		    $response = \PagSeguro\Services\Transactions\Refund::create($this->pagseguro->credentials, $payment->reservation->transaction_code);
+		} catch (Exception $e) {
+		    abort(404, $e->getMessage());
+		}
+
+		return $payment->reservation->cancel();
 	}
 }

@@ -54,6 +54,13 @@ class PagSeguro
         return $manager->cancel($payment);
     }
 
+    public function refund(Payment $payment)
+    {
+        $manager = new PaymentManager($this);
+
+        return $manager->refund($payment);
+    }
+
 	public function plan(User $user, Plan $plan, Request $request)
 	{
 		return new CheckoutPlan($this, $user, $plan, $request);

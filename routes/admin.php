@@ -64,6 +64,8 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 
 		Route::post('cancel/{transaction_code}', 'PagSeguroController@cancel')->name('cancel');
 
+		Route::post('refund/{transaction_code}', 'PagSeguroController@refund')->name('refund');
+
 	});
 
 	Route::prefix('cobrancas')->name('bills.')->group(function() {

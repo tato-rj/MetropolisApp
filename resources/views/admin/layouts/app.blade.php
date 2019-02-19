@@ -57,6 +57,7 @@
 <script src="{{ mix('js/admin.js') }}"></script>
 
 <script type="text/javascript">
+
 $('.payment-item').on('click', function() {
   $payment = $(this);
   let url = $payment.attr('data-url-status');
@@ -74,9 +75,24 @@ $('.payment-item').on('click', function() {
 
       $modal.find('#loading').hide();
 
+      $('.toggle-content').on('click', function() {
+
+        $parent = $($(this).attr('data-parent'));
+        $sibling = $parent.siblings();
+        $sibling.show();
+        $parent.hide();
+      });
     }).fail(function(error, status) {
-      let message = error.status == 401 || error.status == 403
-         ? 'Você não tem autorização para ver detalhes desse pagamento.' : 'Não foi possível processar o seu pedido nesse momento';
+      let message;
+      console.log(error);
+      if (error.status == 401 || error.status == 403) {
+        message = 'Você não tem autorização para ver detalhes desse pagamento.';
+      } else if (error.status == 424) {
+        message = 'O serviço do PagSeguro está fora do ar.';
+      } else {
+        message = 'Não foi possível processar o seu pedido nesse momento';
+      }
+
       $modal.find('.modal-body > div:first-child').html('<p class="text-center my-4 text-red">' + message + '</p>');
 
       $modal.find('#loading').hide();

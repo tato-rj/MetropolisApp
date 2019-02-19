@@ -35,5 +35,21 @@
 			@endif
 		</small>
 	</li>
-
 </ul>
+
+@admin(auth()->guard('admin')->check())
+@if($payment->reservation->canBeCancelled())
+	<div class="border-top pt-3 mt-3 d-apart align-items-center">
+		<p class="text-muted mb-0 mr-2"><small>Este pagamento ainda não foi confirmado, você pode cancelar a cobrança a qualquer momento.</small></p>
+		<form method="POST" action="{{route('admin.payments.cancel', ['transaction_code' => $payment->reservation->transaction_code])}}">
+			@csrf
+			<button type="submit" class="btn btn-red btn-sm">Cancelar pagamento</button>
+		</form>
+	</div>
+@elseif($payment->reservation->canBeReturned())
+	<div class="border-top pt-3 mt-3 d-apart align-items-center">
+		<p class="text-muted mb-0 mr-2"><small>Esta transação já foi finalizada. Deseja estornar o pagamento?</small></p>
+		<button class="btn btn-red btn-sm">Estornar o pagamento</button>
+	</div>
+@endif
+@endadmin

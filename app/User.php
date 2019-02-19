@@ -29,6 +29,11 @@ class User extends Authenticatable implements MustVerifyEmail, Person
         return $array[0];
     }
 
+    public function isAdmin()
+    {
+        return false;
+    }
+
     public function events()
     {
         return $this->morphMany(Event::class, 'creator');

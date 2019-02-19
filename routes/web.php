@@ -62,7 +62,7 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 	});
 });
 
-Route::prefix('status')->middleware('auth')->name('status.')->group(function() {
+Route::prefix('status')->name('status.')->group(function() {
 
 	Route::post('ajax', 'EventsController@ajax')->name('ajax');
 

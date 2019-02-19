@@ -74,8 +74,10 @@ $('.payment-item').on('click', function() {
 
       $modal.find('#loading').hide();
 
-    }).fail(function(error) {
-      $modal.find('.modal-body > div:first-child').html('<p class="text-center my-4 text-red">Não foi possível processar o seu pedido nesse momento</p>');
+    }).fail(function(error, status) {
+      let message = error.status == 401 || error.status == 403
+         ? 'Você não tem autorização para ver detalhes desse pagamento.' : 'Não foi possível processar o seu pedido nesse momento';
+      $modal.find('.modal-body > div:first-child').html('<p class="text-center my-4 text-red">' + message + '</p>');
 
       $modal.find('#loading').hide();
     });

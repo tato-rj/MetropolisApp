@@ -19,6 +19,11 @@ class Admin extends Authenticatable implements Person
     {
         return $this->morphMany(Event::class, 'creator');
     }
+
+    public function isAdmin()
+    {
+        return true;
+    }
     
     public function isManager()
     {

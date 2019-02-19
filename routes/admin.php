@@ -62,6 +62,8 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 
 		Route::get('', 'AdminController@payments')->name('index');
 
+		Route::post('cancel/{transaction_code}', 'PagSeguroController@cancel')->name('cancel');
+
 	});
 
 	Route::prefix('cobrancas')->name('bills.')->group(function() {

@@ -113,17 +113,23 @@ class PagSeguroController extends Controller
 
         $payment = Payment::byCode($transaction_code)->firstOrFail();
 
-        $status = $pagseguro->status($payment)->get();
+        if (! auth()->guard('admin')->check())
+            $this->authorize('view', $payment);
+
+        if (app()->environment() != 'testing')
+            $pagseguro->status($payment)->get();
 
         return view('components.modals.results.payment', compact('payment'))->render();
     }
 
-    // public function handle(PagseguroResponse $data)
-    // {
-    // 	try {
-    // 		return 'GETTING THERE!';
-    // 	} catch (\Exception $e) {
-    // 		logger($e->getMessage());
-    // 	}
-    // }
+    public function cancel($transaction_code)
+    {
+        $pagseguro = new PagSeguro;
+
+        $payment = Payment::byCode($transaction_code)->firstOrFail();
+
+        $pagseguro->cancel($payment);
+
+        return redirect()->back()->with('status', 'Esta transação com ' . $payment->user->name . ' foi cancelada com sucesso.');
+    }
 }

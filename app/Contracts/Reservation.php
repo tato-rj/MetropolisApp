@@ -12,4 +12,7 @@ interface Reservation
     public function setStatus($status_id);
     public function setTransactionCode($code);
     public function getOwnerIdAttribute();
+    public function canBeCancelled();
+    public function canBeReturned();
+    public function cancel();
 }

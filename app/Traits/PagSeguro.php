@@ -50,6 +50,21 @@ trait PagSeguro
         return 'Status não disponível';
     }
 
+    public function canBeCancelled()
+    {
+        return in_array($this->status_id, $this->waitingStatusArray);
+    }
+
+    public function canBeReturned()
+    {
+        return in_array($this->status_id, $this->confirmedStatusArray);
+    }
+
+    public function cancel()
+    {
+        return $this->setStatus(7);
+    }
+
     public function getStatusForUserAttribute()
     {
     	if (! array_key_exists($this->status_id, $this->statusArray))

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateBillForm;
 use App\Services\PagSeguro\PagSeguro;
 use App\Bill;
-use App\Http\Requests\BillPaymentForm;
+use App\Http\Requests\{BillPaymentForm, CreditCardForm};
 use App\Events\BillCreated;
 
 class BillsController extends Controller
@@ -48,7 +48,7 @@ class BillsController extends Controller
 		return redirect()->back()->with('status', 'A cobrança foi enviada para ' . $form->recipient_email);
 	}
 
-	public function purchase(Request $request, BillPaymentForm $form)
+	public function purchase(Request $request, BillPaymentForm $form, CreditCardForm $cardForm)
 	{
         $pagseguro = new PagSeguro;
 		

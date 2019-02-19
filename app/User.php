@@ -51,7 +51,7 @@ class User extends Authenticatable implements MustVerifyEmail, Person
 
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class)->latest();
     }
 
     public function bonuses()

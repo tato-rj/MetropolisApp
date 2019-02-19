@@ -306,24 +306,34 @@ $('input[name="select-card"]').on('change', function() {
   let $input = $(this);
   let url = $input.attr('data-url');
   let target = $input.parent().attr('data-target');
-
+  let $submitButton = $('button#submit');
+  
   $('.loading-icons').children().hide();
   $input.parent().siblings('.loading-icons').children('.text-grey').show();
 
-  $.get(url, function(data) {
-    $('#card-preference .collapse').html('');
-    $(target).html(data);
+  if ($submitButton.is(':disabled')) {
 
-    if ($input.attr('id') == 'existing-card-radio') {
-      let $cardNumberInput = $('input[name="card_number"]');
-      let $form = $($('button#submit').attr('data-target'));    
+    console.log('Por favor espere a última operação se completar.');
+  } else {
+    $submitButton.add('input[name="select-card"]').prop('disabled', true);
 
-      getCardFlag($cardNumberInput, $cardNumberInput.cleanVal(), $form);
-    } else if ($input.attr('id') == 'new-card-radio') {
-      createMasks();
-    }
+    $.get(url, function(data) {
+      $('#card-preference .collapse').html('');
+      $(target).html(data);
 
-    $input.parent().siblings('.loading-icons').children('.text-grey').hide();
-    $input.parent().siblings('.loading-icons').children('.text-green').show();
-  });
+      if ($input.attr('id') == 'existing-card-radio') {
+        let $cardNumberInput = $('input[name="card_number"]');
+        let $form = $($submitButton.attr('data-target'));    
+
+        getCardFlag($cardNumberInput, $cardNumberInput.cleanVal(), $form);
+      } else if ($input.attr('id') == 'new-card-radio') {
+        createMasks();
+      }
+
+      $input.parent().siblings('.loading-icons').children('.text-grey').hide();
+      $input.parent().siblings('.loading-icons').children('.text-green').show();
+    }).always(function() {
+      $submitButton.add('input[name="select-card"]').prop('disabled', false);
+    });
+  }
 });

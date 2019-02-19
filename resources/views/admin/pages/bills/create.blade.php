@@ -35,7 +35,7 @@
 				@include('components/form/error', ['bag' => 'default', 'field' => 'fee'])
 			</div>
 
-			<button type="submit" class="btn btn-red">Criar nova cobrança</button>
+			<button type="submit" class="btn btn-red show-overlay">Criar nova cobrança</button>
 		</form>
 	</div>
 	<div class="col-6 mx-auto">

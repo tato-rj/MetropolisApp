@@ -57,6 +57,16 @@
 <script src="{{ mix('js/admin.js') }}"></script>
 
 <script type="text/javascript">
+$(document).on('click', '.show-overlay', function() {
+  $('#loading-overlay').fadeIn('fast');
+});
+
+$(document).on('click', '.toggle-content', function() {
+  $parent = $($(this).attr('data-parent'));
+  $sibling = $parent.siblings();
+  $sibling.show();
+  $parent.hide();
+});
 
 $('.payment-item').on('click', function() {
   $payment = $(this);
@@ -75,13 +85,6 @@ $('.payment-item').on('click', function() {
 
       $modal.find('#loading').hide();
 
-      $('.toggle-content').on('click', function() {
-
-        $parent = $($(this).attr('data-parent'));
-        $sibling = $parent.siblings();
-        $sibling.show();
-        $parent.hide();
-      });
     }).fail(function(error, status) {
       let message;
       console.log(error);

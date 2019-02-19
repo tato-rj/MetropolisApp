@@ -27,7 +27,7 @@
 
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Status</strong></span>
-		<span class="status-label text-{{$payment->reservation->statusColor}}">{{$payment->reservation->statusForUser}}</span>
+		<span class="status-label text-{{$payment->reservation->statusColor}}">{{$payment->reservation->status}}</span>
 		
 		<small class="text-muted verified-at">
 			@if($payment->reservation->verified_at)
@@ -47,7 +47,7 @@
 					<button class="btn btn-secondary btn-sm mr-2 toggle-content" data-parent="#confirm-cancel">Não</button>
 					<form method="POST" action="{{route('admin.payments.cancel', ['transaction_code' => $payment->reservation->transaction_code])}}">
 						@csrf
-						<button type="submit" class="btn btn-red btn-sm">Sim</button>
+						<button class="btn btn-red btn-sm show-overlay">Sim</button>
 					</form>
 				</div>
 			</div>
@@ -68,7 +68,7 @@
 					<button class="btn btn-secondary btn-sm mr-2 toggle-content" data-parent="#confirm-cancel">Não</button>
 					<form method="POST" action="{{route('admin.payments.refund', ['transaction_code' => $payment->reservation->transaction_code])}}">
 						@csrf
-						<button type="submit" class="btn btn-red btn-sm">Sim</button>
+						<button type="submit" class="btn btn-red btn-sm show-overlay">Sim</button>
 					</form>
 				</div>
 			</div>

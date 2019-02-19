@@ -119,7 +119,7 @@
 						<input type="hidden" name="participants" value="{{$form->participants}}">
 						<input type="hidden" name="starts_at" value="{{$form->starts_at}}">
 						<input type="hidden" name="ends_at" value="{{$form->ends_at}}">
-						<button type="submit" class="btn btn-red h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>
+						<button type="submit" class="btn btn-red h-100 px-4 show-overlay" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>
 					</div>
 				</div>
 			</div>

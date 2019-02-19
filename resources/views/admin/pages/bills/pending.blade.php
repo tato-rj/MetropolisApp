@@ -28,7 +28,7 @@
 						<input type="hidden" name="name" value="{{$bill->name}}">
 						<input type="hidden" name="description" value="{{$bill->description}}">
 						<input type="hidden" name="fee" value="{{$bill->fee}}">
-						<button class="btn alert-warning font-weight-bold bg-transparent btn-block" title="Clique aqui para enviar esta cobrança por email novamente">Reenviar cobrança</button>
+						<button class="btn alert-warning font-weight-bold bg-transparent btn-block show-overlay" title="Clique aqui para enviar esta cobrança por email novamente">Reenviar cobrança</button>
 					</form>
 
 				</div>

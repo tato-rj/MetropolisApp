@@ -5,7 +5,7 @@
   <div class="card">
     <div class="px-4 py-3 d-apart">
   		<div class="custom-control custom-radio custom-control-inline" data-toggle="collapse" data-target="#existing-card">
-  		  <input type="radio" id="existing-card-radio" name="select-card" data-url="{{route('client.payments.load-fields', ['fields' => 'existing'])}}" class="custom-control-input">
+  		  <input required type="radio" id="existing-card-radio" name="select-card" data-url="{{route('client.payments.load-fields', ['fields' => 'existing'])}}" class="custom-control-input">
   		  <label class="custom-control-label" for="existing-card-radio">
   		  	Vou usar o cartão 
   		  	@include('components.form.payment.card-preview', ['user' => auth()->user()])
@@ -26,7 +26,7 @@
   <div class="card">
     <div class="px-4 py-3 d-apart">
   		<div class="custom-control custom-radio custom-control-inline" data-toggle="collapse" data-target="#new-card">
-  		  <input type="radio" id="new-card-radio" name="select-card" data-url="{{route('client.payments.load-fields', ['fields' => 'new'])}}" class="custom-control-input">
+  		  <input required type="radio" id="new-card-radio" name="select-card" data-url="{{route('client.payments.load-fields', ['fields' => 'new'])}}" class="custom-control-input">
   		  <label class="custom-control-label" for="new-card-radio">Prefiro usar um cartão novo</label>
   		</div>
       <div class="loading-icons">

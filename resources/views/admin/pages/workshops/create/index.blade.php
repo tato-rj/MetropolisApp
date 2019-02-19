@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	<div class="mt-4 pt-4 border-top text-right">
-		<button type="submit" class="btn btn-red">Criar novo workshop</button>
+		<button type="submit" class="btn btn-red show-overlay">Criar novo workshop</button>
 	</div>
 </form>
 

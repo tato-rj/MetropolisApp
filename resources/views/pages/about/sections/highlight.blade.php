@@ -3,7 +3,7 @@
     <div class="row">
 
       <div class="col-md-3 mr-md-auto my-3">
-        <p class="lead-lg text-right">Mais do que um espaço de trabalho convencional</p>
+        <p class="lead-lg text-right m-0">Mais do que um espaço de trabalho convencional</p>
       </div>
 
       <div class="col-md-4 my-3">

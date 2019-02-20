@@ -10,9 +10,9 @@
   </thead>
   <tbody>
     @foreach($users as $user)
-    <tr class="cursor-pointer">
-      <td><a title="Clique para editar" href="{{route('admin.users.edit', $user->id)}}" class="link-none"><i class="fas fa-external-link-alt mr-2 fa-sm text-teal"></i>{{$user->name}}</a></td>
-      <td><a title="Clique para editar" href="{{route('admin.users.edit', $user->id)}}" class="link-none">{{$user->email}}</a></td>
+    <tr class="cursor-pointer user" data-url="{{route('admin.users.edit', $user->id)}}" title="Ver dados do usuário">
+      <td>{{$user->name}}</td>
+      <td>{{$user->email}}</td>
       <td>{{$user->membership()->exists() ? $user->membership->plan->displayName : '-'}}</td>
       <td>{{$user->events()->count()}}</td>
       <td>{{$user->created_at->format('d/m/Y')}}</td>

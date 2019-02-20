@@ -41,6 +41,7 @@
 @if($payment->reservation->canBeCancelled())
 	<div class="border-top pt-3 mt-3">
 		<div id="confirm-cancel" style="display: none;">
+			<p class="text-muted mb-2"><small>O evento será cancelado e o usuário não será cobrado por este pagamento.</small></p>
 			<div class="d-apart align-items-center">
 				<p class="text-red mb-0 mr-2"><small><i class="fas fa-exclamation-triangle mr-2"></i>Tem certeza de que deseja cancelar esta transação?</small></p>
 				<div class="d-flex align-items-center">
@@ -62,6 +63,7 @@
 @elseif($payment->reservation->canBeReturned())
 	<div class="border-top pt-3 mt-3">
 		<div id="confirm-cancel" style="display: none;">
+			<p class="text-muted mb-2"><small>O evento será cancelado e o usuário receberá o dinheiro de volta.</small></p>
 			<div class="d-apart align-items-center">
 				<p class="text-red mb-0 mr-2"><small><i class="fas fa-exclamation-triangle mr-2"></i>Tem certeza de que deseja estornar este pagamento?</small></p>
 				<div class="d-flex align-items-center">

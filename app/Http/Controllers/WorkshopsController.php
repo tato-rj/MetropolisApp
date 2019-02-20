@@ -107,6 +107,11 @@ class WorkshopsController extends Controller
         return view('pages.workshops.show.index', compact('workshop'));
     }
 
+    public function details(Workshop $workshop)
+    {
+        return view('admin.pages.workshops.details.index', compact('workshop'));        
+    }
+
     public function ajax(Workshop $workshop)
     {
         $reservation = auth()->user()->workshops()->find($workshop->id)->reservation;

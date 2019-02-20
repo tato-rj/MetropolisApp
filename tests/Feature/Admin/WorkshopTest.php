@@ -157,17 +157,13 @@ class WorkshopTest extends AppTest
         Storage::disk('public')->assertMissing($file->path);
     }
 
-    // /** @test */
-    // public function an_admin_can_create_a_new_event()
-    // {
-    //     $this->signIn($this->admin, 'admin');
+    /** @test */
+    public function an_admin_can_see_all_users_signed_up_for_a_workshop()
+    {
+        $this->signIn($this->admin, 'admin');
 
-    //     $event = make(Event::class, [
-    //         'starts_at' => now()->copy()->addWeeks(2),
-    //         'ends_at' => now()->copy()->addWeeks(2)->addHour()]);
+        $this->user->signup($this->workshop);
 
-    //     $this->post(route('admin.schedule.store'), $event)->assertSessionHas('status');
-
-    //     $this->assertInstanceOf(Event::class, $this->admin->events()->first());
-    // }
+        $this->get(route('admin.workshops.details', $this->workshop->slug))->assertSee($this->user->name);
+    }
 }

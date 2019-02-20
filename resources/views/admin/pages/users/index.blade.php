@@ -26,6 +26,10 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
 
 <script type="text/javascript">
+$('.user').on('click', function() {
+	window.location.href = $(this).attr('data-url');
+});
+
 $(document).ready( function () {
     $('#users-table').DataTable({
     	'language': {

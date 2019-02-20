@@ -44,6 +44,8 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 
 		Route::get('{workshop}', 'WorkshopsController@edit')->name('edit');
 
+		Route::get('{workshop}/details', 'WorkshopsController@details')->name('details');
+
 		Route::post('{workshop}', 'WorkshopsController@update')->name('update');
 
 		Route::delete('{workshop}', 'WorkshopsController@destroy')->name('destroy');

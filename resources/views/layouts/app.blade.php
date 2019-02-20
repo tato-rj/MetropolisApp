@@ -83,6 +83,7 @@
 @endif
 
 <script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ asset('js/share.js') }}"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {

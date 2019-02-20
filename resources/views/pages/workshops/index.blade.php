@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('header')
+
+@endpush
+
 @section('content')
 
 @include('pages.workshops.sections._lead')

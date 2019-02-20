@@ -7165,7 +7165,8 @@ button.bg-dark:focus {
   display: table-cell !important;
 }
 
-.d-flex {
+.d-flex,
+#social-links ul {
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
@@ -7458,7 +7459,8 @@ button.bg-dark:focus {
           flex-direction: column-reverse !important;
 }
 
-.flex-wrap {
+.flex-wrap,
+#social-links ul {
   -ms-flex-wrap: wrap !important;
       flex-wrap: wrap !important;
 }
@@ -21383,6 +21385,71 @@ video {
   width: 100%;
   height: 100%;
   z-index: -100;
+}
+
+#social-links ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-size: 1.25em;
+}
+
+#social-links ul li {
+  margin-right: .8rem;
+}
+
+#social-links ul li a {
+  color: inherit;
+}
+
+#social-links a:not(.share-light) .fa-facebook-square {
+  -webkit-transition: .2s;
+  transition: .2s;
+  color: #3b5998;
+}
+
+#social-links a:not(.share-light) .fa-facebook-square:hover {
+  color: #2d4373;
+}
+
+#social-links a:not(.share-light) .fa-twitter {
+  -webkit-transition: .2s;
+  transition: .2s;
+  color: #1DA1F2;
+}
+
+#social-links a:not(.share-light) .fa-twitter:hover {
+  color: #0c85d0;
+}
+
+#social-links a:not(.share-light) .fa-linkedin {
+  -webkit-transition: .2s;
+  transition: .2s;
+  color: #0077B5;
+}
+
+#social-links a:not(.share-light) .fa-linkedin:hover {
+  color: #005582;
+}
+
+#social-links a:not(.share-light) .fa-whatsapp {
+  -webkit-transition: .2s;
+  transition: .2s;
+  color: #25D366;
+}
+
+#social-links a:not(.share-light) .fa-whatsapp:hover {
+  color: #1da851;
+}
+
+#social-links a.share-light span {
+  -webkit-transition: .2s;
+  transition: .2s;
+  color: #B8C2CC;
+}
+
+#social-links a.share-light span:hover {
+  color: #9aa9b7;
 }
 
 .nav-tabs .nav-link:not(.active) {

@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-default mb-5 border-bottom py-2 px-3">
 			<div class="d-apart align-items-center">
-				@include('pages.workshops.show.sections.share')
+				@include('components.share.icons', ['url' => route('workshops.show', $workshop->slug), 'style' => 'share-light', 'description' => $workshop->headline])
 				<div class="text-muted">
 					<small>Atualizado no dia {{$workshop->updated_at->format('d/m/Y')}}</small>
 				</div>

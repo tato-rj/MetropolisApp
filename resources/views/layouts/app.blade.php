@@ -3,8 +3,12 @@
 
 <head>
     <meta charset="utf-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <meta name="description" content="A MetropolisRio oferece um espaço moderno de co-working, salas de reunião e workshops para você se aperfeiçoar ainda mais na sua área de trabalho.">
 
     <title>{{ config('app.name') }} | O seu espaço de co-working no RJ</title>
     

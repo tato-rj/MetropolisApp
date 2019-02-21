@@ -33,8 +33,11 @@ trait Scheduler
 
         $query = [
             ['space_id', $this->id],
-            ['starts_at', '<=', $endDate],
-            ['ends_at', '>', $startDate]
+            ['starts_at', '<', $endDate],
+            ['ends_at', '>', $startDate],
+            ['status_id', '!=', 6],
+            ['status_id', '!=', 7],
+            ['status_id', '!=', 9],
         ];
 
         if ($includePlan) {
@@ -43,14 +46,14 @@ trait Scheduler
             $events = $this->events()->doesnthave('plan')->where($query);
         }
 
-        for ($i = 1; $i < $endDate->diffInHours($startDate); $i++) {
-            $events->orWhere([
-                ['space_id', $this->id],
-                ['starts_at', '<=', $endDate->copy()->addHours($i)],
-                ['ends_at', '>', $startDate->copy()->addHours($i)]
-            ]);
-        }
-
+        // for ($i = 1; $i < $endDate->diffInHours($startDate); $i++) {
+        //     $events->orWhere([
+        //         ['space_id', $this->id],
+        //         ['starts_at', '<', $endDate->copy()->addHours($i)],
+        //         ['ends_at', '>', $startDate->copy()->addHours($i)],
+        //     ]);
+        // }
+        
         return $events->get();
     }
 

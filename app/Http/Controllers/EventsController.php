@@ -34,7 +34,7 @@ class EventsController extends Controller
     public function search(Request $request, SpaceSearchForm $form)
     {
         $report = $form->space->checkAvailability($form->starts_at, $request->duration, $request->participants);
-
+        
         return view('pages.search.results', compact(['form', 'report']));
     }
 

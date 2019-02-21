@@ -82,7 +82,7 @@
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Status</strong></span>
 		
-		<span class="status-label text-{{$event->statusColor}}">{{$event->statusForUser}}</span>
+		<span class="status-label text-{{$event->statusColor}}">{{$event->status}}</span>
 		
 		<small class="text-muted verified-at">
 			@if($event->verified_at)

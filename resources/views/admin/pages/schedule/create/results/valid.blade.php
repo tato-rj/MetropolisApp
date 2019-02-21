@@ -29,7 +29,7 @@
 				@endif
 			@else
 				<div class="alert alert-yellow">
-					<i class="fas fa-exclamation-triangle mr-2"></i><strong>Atenção!</strong> A {{$form->space->name}} está sendo usada nesse momento. 
+					<i class="fas fa-exclamation-triangle mr-2"></i><strong>Atenção!</strong> A {{$form->space->name}} está sendo usada nesse intervalo. 
 				</div>
 				<div class="pl-4">
 					<p class="text-red">Você pode confirmar essa reserva mas será responsável por solucionar o problema.</p>

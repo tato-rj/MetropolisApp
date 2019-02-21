@@ -46,14 +46,20 @@ trait Scheduler
             $events = $this->events()->doesnthave('plan')->where($query);
         }
 
-        // for ($i = 1; $i < $endDate->diffInHours($startDate); $i++) {
-        //     $events->orWhere([
-        //         ['space_id', $this->id],
-        //         ['starts_at', '<', $endDate->copy()->addHours($i)],
-        //         ['ends_at', '>', $startDate->copy()->addHours($i)],
-        //     ]);
-        // }
-        
+        for ($i = 1; $i < $endDate->diffInHours($startDate); $i++) {
+            $planCheck = $includePlan ? null: 'AND plan_id IS NULL';
+            $events->orWhereRaw(
+                'space_id = ' . $this->id . 
+                ' AND starts_at < "' . $endDate->copy()->subHours($i) . '"' .
+                ' AND ends_at > "' . $startDate->copy()->addHours($i) . '"' .
+                ' AND status_id NOT IN (6,7,9) '.$planCheck);
+            // $events->orWhere([
+            //     ['space_id', $this->id],
+            //     ['starts_at', '<', $endDate->copy()->addHours($i)],
+            //     ['ends_at', '>', $startDate->copy()->addHours($i)],
+            // ]);
+        }
+
         return $events->get();
     }
 

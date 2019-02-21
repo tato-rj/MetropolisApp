@@ -8,6 +8,9 @@ trait FakeEvents
 {
     protected $cardFields =  [
         'card_holder_name' => 'John Doe',
+        'card_token' => 'token',
+        'card_hash' => 'hash',
+        'card_brand' => 'VISA',
         'card_number' => '4111111111111111',
         'card_brand' => 'VISA',
         'cvv' => '123',
@@ -81,11 +84,9 @@ trait FakeEvents
     {
         return $this->post(route('client.profile.update.creditCard'), [
             'card_holder_name' => 'John Doe',
-            'card_number' => '4111111111111111',
+            'card_hash' => 'hash',
+            'card_token' => 'token',
             'card_brand' => 'VISA',
-            'cvv' => '123',
-            'expiry_month' => '12',
-            'expiry_year' => '2030',
             'card_holder_document_type' => 'CPF',
             'card_holder_document_value' => '111.111.111-11',
             'address_zip' => '20-040-006',

@@ -23,7 +23,7 @@ trait HasCreditCard
 
 	public function getHasCardAttribute()
 	{
-		return $this->card_hash;
+		return $this->card_hash != null;
 	}
 
 	public function updateCard(CreditCardForm $form)
@@ -46,18 +46,5 @@ trait HasCreditCard
 		}
 
 		return $this->save();
-	}
-
-	public function card($field)
-	{
-		if (! in_array($field, $this->cardFields))
-			return null;
-
-		return $field;
-		// try {
-		// 	return decrypt($this->$field);		
-		// } catch (\Exception $e) {
-		// 	return null;
-		// }
 	}
 }

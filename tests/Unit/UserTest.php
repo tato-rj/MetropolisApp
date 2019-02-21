@@ -217,18 +217,4 @@ class UserTest extends AppTest
 
 		$this->assertTrue(auth()->user()->fresh()->hasCard);
 	}
-
-	/** @test */
-	public function it_knows_hows_to_decrypt_its_card_information()
-	{
-		$this->signIn();
-
-		$this->postCreditCard()->assertSessionHas('status');
-
-		$this->assertNull(auth()->user()->card(null));
-
-		$this->assertNull(auth()->user()->card('invalid'));
-		
-		$this->assertEquals(auth()->user()->card('card_number'), '4111111111111111');
-	}
 }

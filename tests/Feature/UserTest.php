@@ -61,20 +61,6 @@ class UserTest extends AppTest
 	}
 
 	/** @test */
-	public function the_users_card_information_is_stored_encrypted()
-	{
-		$this->signIn();
-
-		$this->postCreditCard();
-
-		$this->assertNotEquals(auth()->user()->card_number, '4111111111111111');
-		$this->assertNotEquals(auth()->user()->cvv, '123');
-
-		$this->assertEquals(decrypt(auth()->user()->card_number), '4111111111111111');
-		$this->assertEquals(decrypt(auth()->user()->cvv), '123');
-	}
-
-	/** @test */
 	public function users_cannot_update_their_names_with_a_single_word()
 	{
 		$this->signIn();

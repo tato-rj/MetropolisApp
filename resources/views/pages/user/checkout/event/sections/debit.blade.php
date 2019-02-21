@@ -2,13 +2,17 @@
 	@csrf
 	{{-- EVENT --}}
 	<input type="hidden" name="reference" value="{{request('referencia')}}">
-	<input type="hidden" name="space_id" value="{{$form->space->id}}">
+	<input type="hidden" name="type" value="{{$form->type}}">
+	@if($form->emails)
+	@foreach($form->emails as $email)
+	<input type="hidden" name="emails[]" value="{{$email}}">
+	@endforeach
+	@endif
 	<input type="hidden" name="description" value="{{$form->space->name}}">
 	<input type="hidden" name="date" value="{{$form->date}}">
 	<input type="hidden" name="time" value="{{$form->time}}">
 	<input type="hidden" name="duration" value="{{$form->duration}}">
 	<input type="hidden" name="participants" value="{{$form->participants}}">
-	<input type="hidden" name="price" value="{{fromCents($form->space->priceFor($form->participants, $form->duration))}}">
 
 	<input type="hidden" name="paymentMethod" value="eft">
 	<input type="hidden" name="card_token">

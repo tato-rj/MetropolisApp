@@ -30,12 +30,9 @@ class CreditCardForm extends FormRequest
     public function rules()
     {
         return [
+            'card_hash' => 'required',
+            'card_token' => 'required',
             'card_holder_name' => 'required',
-            'card_number' => 'required',
-            'card_brand' => 'required',
-            'cvv' => 'required',
-            'expiry_month' => 'required',
-            'expiry_year' => 'required',
             'card_holder_document_type' => 'required',
             'card_holder_document_value' => 'required',
             'address_zip' => 'required',

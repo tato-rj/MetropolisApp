@@ -7,12 +7,10 @@ use App\Http\Requests\CreditCardForm;
 trait HasCreditCard
 {
 	protected $cardFields = [
-			'card_holder_name', 
-			'card_number', 
+			'card_hash', 
+			'card_token', 
+			'card_holder_name',
 			'card_brand',
-			'cvv', 
-			'expiry_month', 
-			'expiry_year', 
 			'card_holder_document_type', 
 			'card_holder_document_value', 
 			'address_zip', 
@@ -25,7 +23,7 @@ trait HasCreditCard
 
 	public function getHasCardAttribute()
 	{
-		return $this->card_number && $this->cvv;
+		return $this->card_hash;
 	}
 
 	public function updateCard(CreditCardForm $form)
@@ -33,7 +31,8 @@ trait HasCreditCard
 		$this->card_lastfour = substr($form->card_number, -4);
 
 		foreach ($this->cardFields as $field) {
-			$this->$field = $form->$field ? encrypt($form->$field) : null;
+			$this->$field = $form->$field;
+			// $this->$field = $form->$field ? encrypt($form->$field) : null;
 		}
 
 		return $this->save();
@@ -55,10 +54,11 @@ trait HasCreditCard
 		if (! in_array($field, $this->cardFields))
 			return null;
 
-		try {
-			return decrypt($this->$field);		
-		} catch (\Exception $e) {
-			return null;
-		}
+		return $field;
+		// try {
+		// 	return decrypt($this->$field);		
+		// } catch (\Exception $e) {
+		// 	return null;
+		// }
 	}
 }

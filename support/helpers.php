@@ -261,6 +261,9 @@ function greeting()
 
 function clean($string)
 {
+    if (! $string)
+        return null;
+    
 	return preg_replace("/[^0-9]/", "", $string);
 }
 

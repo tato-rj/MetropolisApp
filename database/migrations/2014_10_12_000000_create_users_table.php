@@ -20,13 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('phone');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->text('card_holder_name')->nullable(); 
-            $table->text('card_number')->nullable(); 
+            $table->string('card_hash')->nullable(); 
+            $table->string('card_token')->nullable(); 
+            $table->text('card_holder_name')->nullable();
             $table->text('card_brand')->nullable();
-            $table->text('card_lastfour')->nullable(); 
-            $table->text('cvv')->nullable(); 
-            $table->text('expiry_month')->nullable(); 
-            $table->text('expiry_year')->nullable(); 
+            $table->text('card_lastfour')->nullable();
             $table->text('card_holder_document_type')->nullable(); 
             $table->text('card_holder_document_value')->nullable(); 
             $table->text('address_zip')->nullable(); 

@@ -216,6 +216,14 @@ $(document).on('click', 'button#submit', function(event) {
 	let $form = $($button.attr('data-target'));
 	let buttonOriginalText = $button.text();
 
+  if ($form.find('input[name="card_hash"]').val()) {
+    $button.prop('disabled', true);
+    $button.text('PROCESSANDO O SEU PEDIDO...');
+
+    $form.submit();
+    return;
+  }
+
   if (! $form.find('input[name="card_number"]').val()) {
     alert('Por favor preencha o número do cartão corretamente');
     return;
@@ -253,7 +261,6 @@ $(document).on('click', 'button#submit', function(event) {
 			$button.text(buttonOriginalText);
 		}
 	});
-
 });
 
 $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {

@@ -32,7 +32,6 @@ trait HasCreditCard
 
 		foreach ($this->cardFields as $field) {
 			$this->$field = $form->$field;
-			// $this->$field = $form->$field ? encrypt($form->$field) : null;
 		}
 
 		return $this->save();

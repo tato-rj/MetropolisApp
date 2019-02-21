@@ -76,7 +76,6 @@ class EventsController extends Controller
      */
     public function purchase(Request $request, SpaceSearchForm $form, CreditCardForm $cardForm)
     {
-        // return $request->all();
         $pagseguro = new PagSeguro;
         $scheduledEvent = null;
 

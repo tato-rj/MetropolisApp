@@ -10,7 +10,7 @@
 
 @section('content')
 
-@include('pages.user.checkout._lead', ['image' => $workshop->cover_image])
+@include('pages.user.checkout._lead', ['image' => $workshop->cover_image_path])
 
 <div class="container my-5">
 	<div class="row">

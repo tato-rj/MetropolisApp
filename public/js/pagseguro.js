@@ -398,7 +398,7 @@ $('input[name="select-card"]').on('change', function () {
         var $cardNumberInput = $('input[name="card_number"]');
         var $form = $($submitButton.attr('data-target'));
 
-        getCardFlag($cardNumberInput, $cardNumberInput.cleanVal(), $form);
+        // getCardFlag($cardNumberInput, $cardNumberInput.cleanVal(), $form);
       } else if ($input.attr('id') == 'new-card-radio') {
         createMasks();
       }

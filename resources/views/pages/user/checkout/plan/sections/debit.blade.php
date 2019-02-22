@@ -1,13 +1,7 @@
 <form id="form-debit" method="POST" action="{{route('plan.subscribe')}}">
 	@csrf
 	{{-- EVENT --}}
-	<input type="hidden" name="space_id" value="{{$plan->id}}">
-	<input type="hidden" name="description" value="{{$plan->name}}">
-	<input type="hidden" name="date" value="{{request()->date}}">
-	<input type="hidden" name="time" value="{{request()->time}}">
-	<input type="hidden" name="duration" value="{{request()->duration}}">
-	<input type="hidden" name="participants" value="{{request()->participants}}">
-	<input type="hidden" name="price" value="{{fromCents($plan->priceFor(request()->participants, request()->duration))}}">
+	<input type="hidden" name="plan_id" value="{{$plan->id}}">
 
 	<input type="hidden" name="paymentMethod" value="eft">
 	<input type="hidden" name="card_token">

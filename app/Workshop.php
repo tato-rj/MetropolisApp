@@ -26,7 +26,7 @@ class Workshop extends Metropolis
 
     public function attendees()
     {
-    	return $this->belongsToMany(User::class, 'user_workshops', 'workshop_id', 'user_id')->withTimestamps();
+    	return $this->belongsToMany(User::class, 'user_workshops', 'workshop_id', 'user_id')->latest()->withTimestamps();
     }
 
     public function files()

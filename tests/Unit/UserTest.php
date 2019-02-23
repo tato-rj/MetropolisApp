@@ -107,6 +107,22 @@ class UserTest extends AppTest
 	}
 
 	/** @test */
+	public function it_knows_how_to_unsubscribe_from_a_plan()
+	{
+		$this->signIn();
+
+		auth()->user()->subscribe($this->plan, 'reference');
+
+		$this->assertFalse(auth()->user()->events->first()->status_id == 7);
+		$this->assertTrue(auth()->user()->hasPlan);
+
+		auth()->user()->unsubscribe();
+
+		$this->assertFalse(auth()->user()->fresh()->hasPlan);
+		$this->assertTrue(auth()->user()->events->first()->fresh()->status_id == 7);
+	}
+
+	/** @test */
 	public function it_knows_if_it_has_an_upcoming_event()
 	{
 		$this->signIn();

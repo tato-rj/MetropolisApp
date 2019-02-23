@@ -66,16 +66,27 @@ class User extends Authenticatable implements MustVerifyEmail, Person
 
     public function getHasPlanAttribute()
     {
-        return $this->membership()->exists();
+        return $this->membership()->exists() && $this->membership->next_payment_at;
     }
 
     public function subscribe(Plan $plan, $reference)
     {
-        $this->membership()->create([
+        return $this->membership()->create([
             'plan_id' => $plan->id,
             'next_payment_at' => $plan->renewsAt(),
             'reference' => $reference,
         ])->start();
+    }
+
+    public function unsubscribe()
+    {
+        $this->membership->update([
+            'next_payment_at' => null,
+            'subscription_ends_at' => now(),
+            'status' => 'Suspensa'
+        ]);
+
+        return $this->membership->stop();
     }
 
     public function schedule(SpaceSearchForm $form, $reference = null)

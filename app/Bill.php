@@ -23,4 +23,9 @@ class Bill extends Metropolis implements Reservation
 
         return $this;
     }
+
+    public function cancel()
+    {        
+        return $this->setStatus(7);
+    }
 }

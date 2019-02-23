@@ -30,4 +30,11 @@ class UserWorkshop extends Metropolis implements Reservation
     {
         return $this->user_id;
     }
+    
+    public function cancel()
+    {
+        event(new \App\Events\EventCanceled($this));
+        
+        return $this->setStatus(7);
+    }
 }

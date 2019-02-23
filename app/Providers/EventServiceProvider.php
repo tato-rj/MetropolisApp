@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use App\Events\{EventCreated, EventUpdated, MembershipCreated, BillCreated, WorkshopSignup};
+use App\Events\{EventCreated, EventUpdated, EventCanceled, MembershipCreated, BillCreated, WorkshopSignup};
 use App\Listeners\Bills\SendBillingEmail;
 use App\Listeners\Workshops\SendConfirmationEmail as SendWorkshopConfirmationEmail;
 use App\Listeners\Events\{SendInvitationEmail, SendUpdateEmail};
 use App\Listeners\Events\SendConfirmationEmail as SendEventConfirmationEmail;
 use App\Listeners\Memberships\SendConfirmationEmail as SendMembershipConfirmationEmail;
+use App\Listeners\Memberships\CancelMembership;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         EventUpdated::class => [
             SendUpdateEmail::class
+        ],
+        EventCanceled::class => [
+            CancelMembership::class
         ],
         BillCreated::class => [
             SendBillingEmail::class

@@ -42,6 +42,11 @@ class Event extends Metropolis implements Reservation
         return $this->hasOne(Bonus::class);
     }
 
+    public function cancel()
+    {        
+        return $this->setStatus(7);
+    }
+
     public function getOwnerIdAttribute()
     {
         return $this->creator_id;

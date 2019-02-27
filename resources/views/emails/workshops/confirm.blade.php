@@ -15,7 +15,7 @@ A sua reserva está confirmada! Aqui vão os detalhes do evento:
 	<p>Material para download</p>
 
 	@foreach($workshop->files as $file)
-	<p style="margin-bottom: 5px"><a href="{{$file->download_path}}">{{$file->name . '.' . $file->extension}}</a></p>
+	<p style="margin-bottom: 5px"><a href="{{asset($file->download_path)}}">{{$file->name . '.' . $file->extension}}</a></p>
 	@endforeach
 
 </div>

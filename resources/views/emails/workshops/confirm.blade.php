@@ -4,21 +4,21 @@
 A sua reserva está confirmada! Aqui vão os detalhes do evento:
 @component('mail::panel')
 	<img src="{{asset($workshop->cover_image_path)}}" style="margin-bottom: .75em">
-<ul>
-	<li><strong>Workshop:</strong> {{$workshop->name}}</li>
-	<li><strong>Data:</strong> {{toFormattedDateStringPt($workshop->starts_at)}}</li>
-	<li><strong>Hora da chegada:</strong> {{$workshop->starts_at->hour}}:00</li>
-	<li><strong>Hora da saída:</strong> {{$workshop->ends_at->hour}}:00</li>
-</ul>
+
+	<p style="margin-bottom: 5px"><strong>Workshop:</strong> {{$workshop->name}}</p>
+	<p style="margin-bottom: 5px"><strong>Data:</strong> {{toFormattedDateStringPt($workshop->starts_at)}}</p>
+	<p style="margin-bottom: 5px"><strong>Hora da chegada:</strong> {{$workshop->starts_at->hour}}:00</p>
+	<p style="margin-bottom: 5px"><strong>Hora da saída:</strong> {{$workshop->ends_at->hour}}:00</p>
+
 @endcomponent
 
 <div>
 	<p>Material para download</p>
-	<ul>
-		@foreach($workshop->files as $file)
-		<li style="margin-bottom: .25em"><a href="{{$file->download_path}}">{{$file->name . '.' . $file->extension}}</a></li>
-		@endforeach
-	</ul>
+
+	@foreach($workshop->files as $file)
+	<p style="margin-bottom: 5px"><a href="{{$file->download_path}}">{{$file->name . '.' . $file->extension}}</a></p>
+	@endforeach
+
 </div>
 
 <div style="margin: 40px 0;">

@@ -2,15 +2,14 @@
 # Olá {{$user->first_name}}
 
 A sua reserva está confirmada! Aqui vão os detalhes do evento:
-@component('mail::panel')
+<div style="border-bottom: 1px solid lightgrey; margin-bottom: 15px; padding-bottom: 15px">
 	<img src="{{asset($workshop->cover_image_path)}}" style="margin-bottom: .75em">
-
 	<p style="margin-bottom: 5px"><strong>Workshop:</strong> {{$workshop->name}}</p>
 	<p style="margin-bottom: 5px"><strong>Data:</strong> {{toFormattedDateStringPt($workshop->starts_at)}}</p>
 	<p style="margin-bottom: 5px"><strong>Hora da chegada:</strong> {{$workshop->starts_at->hour}}:00</p>
-	<p style="margin-bottom: 5px"><strong>Hora da saída:</strong> {{$workshop->ends_at->hour}}:00</p>
+	<p style="margin-bottom: 0"><strong>Hora da saída:</strong> {{$workshop->ends_at->hour}}:00</p>
+</div>
 
-@endcomponent
 
 <div>
 	<p>Material para download</p>

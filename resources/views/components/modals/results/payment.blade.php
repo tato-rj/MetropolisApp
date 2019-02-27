@@ -38,7 +38,7 @@
 </ul>
 
 @admin(auth()->guard('admin')->check())
-@if($payment->reservation->canBeCancelled())
+{{-- @if($payment->reservation->canBeCancelled())
 	<div class="border-top pt-3 mt-3">
 		<div id="confirm-cancel" style="display: none;">
 			<p class="text-muted mb-2"><small>O evento será cancelado e o usuário não será cobrado por este pagamento.</small></p>
@@ -46,7 +46,7 @@
 				<p class="text-red mb-0 mr-2"><small><i class="fas fa-exclamation-triangle mr-2"></i>Tem certeza de que deseja cancelar esta transação?</small></p>
 				<div class="d-flex align-items-center">
 					<button class="btn btn-secondary btn-sm mr-2 toggle-content" data-parent="#confirm-cancel">Não</button>
-					<form method="POST" action="{{route('admin.payments.cancel', ['transaction_code' => $payment->reservation->transaction_code])}}">
+					<form method="POST" action="{{route('status.cancel', ['transaction_code' => $payment->reservation->transaction_code])}}">
 						@csrf
 						<button class="btn btn-red btn-sm show-overlay">Sim</button>
 					</form>
@@ -82,5 +82,5 @@
 			</div>
 		</div>
 	</div>
-@endif
+@endif --}}
 @endadmin

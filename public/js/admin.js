@@ -96117,7 +96117,7 @@ var CustomCalendar = function () {
 
 					$modal.modal('show');
 
-					$.post(ajaxUrl, { event_id: event.id, user_type: app.user.type }, function (data, status) {
+					$.get(ajaxUrl, { event_id: event.id, user_type: app.user.type }, function (data, status) {
 						$modal.find('.modal-body > div:first-child').html(data);
 
 						$modal.find('.modal-footer input[name="event_id"]').val(event.id);
@@ -96135,11 +96135,11 @@ var CustomCalendar = function () {
 				},
 
 				eventRender: function eventRender(event, element, view) {
-					if (event.end.isBefore(moment({ hour: 0 })) || event.statusForUser == 'Cancelado') {
+					if (event.end.isBefore(moment({ hour: 0 })) || event.statusForUser == 'Cancelada') {
 						$(element).addClass('btn-grey');
 					} else if (event.has_conflict) {
 						$(element).addClass('btn-red');
-					} else if (event.statusForUser != 'Confirmado' && event.statusForUser != 'Cancelado') {
+					} else if (event.statusForUser != 'Confirmado' && event.statusForUser != 'Cancelada') {
 						$(element).addClass('btn-yellow');
 					} else {
 						$(element).addClass('btn-teal');

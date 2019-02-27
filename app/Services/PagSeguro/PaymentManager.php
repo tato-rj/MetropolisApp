@@ -21,7 +21,7 @@ class PaymentManager
 		    abort(404, $e->getMessage());
 		}
 
-		return $payment->reservation->cancel();
+		return $response;
 	}
 
 	public function refund(Payment $payment)
@@ -32,6 +32,6 @@ class PaymentManager
 		    abort(404, $e->getMessage());
 		}
 
-		return $payment->reservation->cancel();
+		return $response;
 	}
 }

@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\AppTest;
-use App\{User, Workshop, WorkshopFile};
+use App\{User, Workshop, WorkshopFile, Payment};
 
 class WorkshopTest extends AppTest
 {
@@ -15,6 +15,20 @@ class WorkshopTest extends AppTest
 		$this->workshop->attendees()->save(auth()->user());
 
 		$this->assertInstanceOf(User::class, $this->workshop->attendees()->find(auth()->user()->id));
+	}
+
+	/** @test */
+	public function it_has_a_payment()
+	{
+		$this->signIn();
+
+		$reservation = auth()->user()->signup($this->workshop);
+
+		$reservation->update(['reference' => 'ref', 'transaction_code' => 'code']);
+
+		Payment::record($reservation);
+
+		$this->assertInstanceOf(Payment::class, $reservation->payment); 
 	}
 
 	/** @test */

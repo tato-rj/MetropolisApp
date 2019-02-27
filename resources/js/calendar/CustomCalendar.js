@@ -50,7 +50,7 @@ class CustomCalendar
 
 			$modal.modal('show');
 	    	
-			$.post(ajaxUrl, {event_id: event.id, user_type: app.user.type},
+			$.get(ajaxUrl, {event_id: event.id, user_type: app.user.type},
 				function(data, status){
 					$modal.find('.modal-body > div:first-child').html(data);
 
@@ -71,11 +71,11 @@ class CustomCalendar
 	    },
 
 	    eventRender: function( event, element, view ) {
-	    	if (event.end.isBefore(moment({hour: 0})) || event.statusForUser == 'Cancelado') {
+	    	if (event.end.isBefore(moment({hour: 0})) || event.statusForUser == 'Cancelada') {
 	    		$(element).addClass('btn-grey');
 	    	} else if (event.has_conflict) {
 	    		$(element).addClass('btn-red');
-	    	} else if (event.statusForUser != 'Confirmado' && event.statusForUser != 'Cancelado') {
+	    	} else if (event.statusForUser != 'Confirmado' && event.statusForUser != 'Cancelada') {
 	    		$(element).addClass('btn-yellow');
 	    	} else {
 	    		$(element).addClass('btn-teal');

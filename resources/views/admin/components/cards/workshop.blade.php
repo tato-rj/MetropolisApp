@@ -12,14 +12,13 @@
 			</a>
 			<p class="mb-1"><small>{{$workshop->starts_at->format('d/m/Y')}} às {{$workshop->starts_at->format('H')}} horas</small></p>
 			<p>{{$workshop->headline}}</p>
+		
+			@include('components.workshops.files-count')
+			@include('components.workshops.attendees-count')
 		</div>
-		@if($editable)
-		@include('components.workshops.files-count')
-		@include('components.workshops.attendees-count')
-		<div class="d-flex">
+		<div class="d-flex mt-2">
 			<a href="{{route('admin.workshops.details', $workshop->slug)}}" class="btn btn-teal mr-2">Ver detalhes</a>
 			<a href="{{route('admin.workshops.edit', $workshop->slug)}}" class="btn btn-red">Editar</a>
 		</div>
-		@endif
 	</div>
 </div>

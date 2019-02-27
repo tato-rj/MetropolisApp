@@ -251,6 +251,23 @@ class EventsController extends Controller
        return redirect()->back()->with('status', 'O conflito foi atualizado com sucesso.');
    }
 
+   public function cancel(Event $event)
+   {
+        if ($event->payment()->exists()) {
+            $pagseguro = new PagSeguro;
+
+            if ($event->canBeReturned()) {
+                $pagseguro->refund($event->payment);
+            } else {
+                $pagseguro->cancel($event->payment);                
+            }
+        }
+
+        $event->cancel();
+
+        return redirect()->back()->with('status', 'Este evento foi cancelado com sucesso.');
+   }
+
     /**
      * Remove the specified resource from storage.
      *

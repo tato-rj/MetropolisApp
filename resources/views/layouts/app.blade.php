@@ -90,6 +90,13 @@ $(document).ready(function() {
   fullDatePT($('.date-pt'));
 });
 
+$(document).on('click', '.toggle-content', function() {
+  $parent = $($(this).attr('data-parent'));
+  $sibling = $parent.siblings();
+  $sibling.show();
+  $parent.hide();
+});
+
 $('#event-modal, #plan-modal, #payment-modal').on('hidden.bs.modal', function (e) {
   $(this).find('.modal-body > div:first-child').html('');
   $(this).find('#loading').show();

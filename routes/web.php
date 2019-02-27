@@ -21,7 +21,7 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 		Route::post('/{event}', 'EventsController@update')->name('update');
 
-		Route::post('/{event}/status', 'EventsController@status')->name('status');
+		// Route::post('/{event}/status', 'EventsController@status')->name('status');
 	
 		Route::post('/{event}/emails', 'EventsController@updateEmails')->name('update.emails');
 
@@ -64,7 +64,7 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 
 Route::prefix('status')->name('status.')->group(function() {
 
-	Route::post('ajax', 'EventsController@ajax')->name('ajax');
+	Route::get('ajax', 'EventsController@ajax')->name('ajax');
 
 	Route::get('{transaction_code}', 'PagSeguroController@status')->name('payment');
 
@@ -125,6 +125,8 @@ Route::prefix('workshop')->name('workshops.')->group(function() {
 Route::prefix('eventos')->name('events.')->group(function() {
 
 	Route::get('/buscar', 'EventsController@search')->name('search');
+
+	Route::post('{event}', 'EventsController@cancel')->name('cancel');
 
 });
 

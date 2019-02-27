@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\AppTest;
-use App\{Event, Space, User, Bonus};
+use App\{Event, Space, User, Bonus, Payment};
 
 class EventTest extends AppTest
 {
@@ -17,6 +17,14 @@ class EventTest extends AppTest
 	public function it_belongs_to_a_user()
 	{
 		$this->assertInstanceOf(User::class, $this->event->creator); 
+	}
+
+	/** @test */
+	public function it_has_a_payment()
+	{
+		Payment::record($this->event);
+		
+		$this->assertInstanceOf(Payment::class, $this->event->payment); 
 	}
 
 	/** @test */

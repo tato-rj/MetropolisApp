@@ -3,13 +3,20 @@
 namespace Tests\Feature;
 
 use Tests\AppTest;
-use App\{Event, User, Newsletter, Space};
+use App\{Event, User, Newsletter, Space, Payment, Admin};
 use App\Mail\{ConfirmEvent, InviteToEvent};
 use Illuminate\Support\Facades\Mail;
 use App\Events\EventCreated;
 
 class EventTest extends AppTest
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->admin = create(Admin::class);
+    }
+
 	/** @test */
 	public function authenticated_users_can_create_an_event()
 	{
@@ -148,5 +155,53 @@ class EventTest extends AppTest
 		$this->post(route('client.events.purchase'), $data);
 
 		$this->assertCount(1, Newsletter::all());
+	}
+
+	/** @test */
+	public function both_the_user_and_an_admin_can_see_a_button_to_cancel_the_payment_for_an_event()
+	{
+		$this->signIn();
+
+		$this->createNewEvent();
+
+		$event = auth()->user()->events->first();
+
+		$this->get(route('status.ajax', ['event_id' => $event->id, 'user_type' => get_class(auth()->user())]))->assertSee('Cancelar');
+
+		$this->logout();
+
+		$this->signIn($this->admin, 'admin');
+
+		$this->get(route('status.ajax', ['event_id' => $event->id, 'user_type' => get_class(auth()->user())]))->assertSee('Cancelar');
+	}
+
+	/** @test */
+	public function the_option_to_cancel_does_not_appear_for_cancelled_events()
+	{
+		$this->signIn();
+
+		$this->createNewEvent();
+
+		$event = auth()->user()->events->first();
+
+		$event->setStatus(7);
+
+		$this->get(route('status.ajax', ['event_id' => $event->id, 'user_type' => get_class(auth()->user())]))->assertDontSee('Cancelar');		 
+	}
+
+	/** @test */
+	public function an_authorized_user_can_cancel_an_unconfirmed_event()
+	{
+		$this->signIn();
+
+		$this->createNewEvent();
+
+		$event = auth()->user()->events->first();
+
+		$this->assertFalse($event->statusForUser == 'Cancelada');
+
+		$this->post(route('events.cancel', $event->id));
+
+		$this->assertTrue($event->fresh()->statusForUser == 'Cancelada');
 	}
 }

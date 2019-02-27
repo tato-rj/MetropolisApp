@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use App\Payment;
+
 trait PagSeguro
 {
 	protected $statusArray = [
@@ -18,9 +20,15 @@ trait PagSeguro
         99 => 'Aguardando confirmação do cliente'
 	];
 
+    protected $daysForRefund = 7;
 	protected $confirmedStatusArray = [3, 4, 8];
 	protected $waitingStatusArray = [0, 1, 2, 5, 99];
 	protected $cancelledStatusArray = [6, 7, 9];
+
+    public function payment()
+    {
+        return $this->morphOne(Payment::class, 'reservation');
+    }
 
     public function scopeByReference($query, $reference)
     {
@@ -57,7 +65,7 @@ trait PagSeguro
 
     public function canBeReturned()
     {
-        return in_array($this->status_id, $this->confirmedStatusArray);
+        return in_array($this->status_id, $this->confirmedStatusArray) && $this->created_at->diffInDays(now()) <= $this->daysForRefund;
     }
 
     public function getStatusForUserAttribute()
@@ -72,7 +80,7 @@ trait PagSeguro
             return $this->statusArray[$this->status_id];
 
         if (in_array($this->status_id, $this->cancelledStatusArray))
-            return 'Cancelado';
+            return 'Cancelada';
     }
 
     public function getStatusColorAttribute()

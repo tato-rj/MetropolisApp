@@ -38,4 +38,9 @@ abstract class AppTest extends TestCase
 
         return $this->actingAs($user, $guard);
     }
+
+    protected function logout()
+    {
+        \Auth::logout();
+    }
 }

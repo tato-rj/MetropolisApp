@@ -2,9 +2,14 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
         <div class="form-group">
-            <input type="text" name="name" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Nome completo" value="{{old('name')}}">
+            <input type="text" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" aria-describedby="name" placeholder="Nome completo" value="{{old('name')}}">
 
             @include('components/form/error', ['field' => 'name'])
+        </div>
+        <div class="form-group">
+            <input type="text" name="phone" class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}" aria-describedby="phone" placeholder="Telefone" value="{{old('phone')}}">
+
+            @include('components/form/error', ['field' => 'phone'])
         </div>
         <div class="form-group">
             <input type="email" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Email" value="{{old('email')}}">

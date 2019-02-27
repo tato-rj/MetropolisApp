@@ -7,13 +7,13 @@ class UsersTableSeeder extends Seeder
 {
     public function run()
     {
-        User::create([
-        	'name' => 'Arthur Villar',
-            'email' => 'arthurvillar@gmail.com',
-            'phone' => '(21) 9123-4567',
-        	'email_verified_at' => now(),
-        	'password' => bcrypt('maiden')
-        ]);
+        // User::create([
+        // 	'name' => 'Arthur Villar',
+        //     'email' => 'arthurvillar@gmail.com',
+        //     'phone' => '(21) 9123-4567',
+        // 	'email_verified_at' => now(),
+        // 	'password' => bcrypt('maiden')
+        // ]);
 
         factory(User::class, mt_rand(50,60))->create()->each(function ($user) {
         	$this->createEvents($user, $chance = 8);

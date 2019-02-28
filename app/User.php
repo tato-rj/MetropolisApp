@@ -41,7 +41,13 @@ class User extends Authenticatable implements MustVerifyEmail, Person
 
     public function workshops()
     {
-        return $this->belongsToMany(Workshop::class, 'user_workshops')->withTimestamps();
+        return $this->belongsToMany(Workshop::class, 'user_workshops')->withPivot('id', 'reference', 'transaction_code', 'verified_at', 'status_id')->withTimestamps();
+    }
+
+    public function validWorkshops()
+    {
+        return $this->belongsToMany(Workshop::class, 'user_workshops')->whereNotIn('status_id', [6, 7, 9])->withPivot('id', 'reference', 'transaction_code', 'verified_at', 'status_id')->withTimestamps();
+        
     }
 
     public function upcomingWorkshops()

@@ -28,7 +28,7 @@ trait Scheduler
         $startDate = $date;
         $endDate = $date->copy()->addHours($duration);
 
-        if (! $startDate->isSameDay($endDate))
+        if ($duration > 12)
             return collect();
 
         $query = [

@@ -54,7 +54,7 @@ class Event extends Metropolis implements Reservation
 
     public function getHasConflictAttribute($value)
     {
-        return $this->statusForUser == 'Cancelado' ? false : (bool)$value;
+        return $this->statusForUser == 'Cancelada' ? false : (bool)$value;
     }
 
     public function getHasPassedAttribute()

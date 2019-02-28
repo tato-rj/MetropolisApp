@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-default mb-4">
 			@forelse($workshops as $workshop)
-			@include('pages.workshops.sections.event')
+			@include('pages.workshops.sections.event', ['showReservation' => false])
 			@empty
 			<div class="text-center text-muted py-6"><i>Não encontramos nenhum workshop no período escolhido</i></div>
 			@endforelse

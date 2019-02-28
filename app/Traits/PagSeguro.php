@@ -88,7 +88,7 @@ trait PagSeguro
         if ($this->statusForUser == 'Confirmado')
             return 'green';
 
-        if ($this->statusForUser == 'Cancelado')
+        if ($this->statusForUser == 'Cancelada')
             return 'danger';
 
         return 'warning';

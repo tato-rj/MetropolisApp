@@ -60,7 +60,7 @@ class WorkshopsController extends Controller
 
         event(new WorkshopSignup($workshop));
 
-        return redirect()->route('client.events.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
+        return redirect()->route('client.workshops.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
     }
 
     /**
@@ -107,17 +107,37 @@ class WorkshopsController extends Controller
         return view('pages.workshops.show.index', compact('workshop'));
     }
 
+    public function status(Request $request)
+    {
+        $user_type = $request->user_type;
+        $reservation = UserWorkshop::find($request->reservation_id);
+
+        return view('components.modals.results.workshop', compact(['reservation', 'user_type']))->render();
+    }
+
     public function details(Workshop $workshop)
     {
         return view('admin.pages.workshops.details.index', compact('workshop'));        
     }
 
-    public function ajax(Workshop $workshop)
-    {
-        $reservation = auth()->user()->workshops()->find($workshop->id)->reservation;
+   public function cancel(Workshop $workshop, Request $request)
+   {
+        $reservation = UserWorkshop::find($request->reservation_id);
 
-        return view('components.modals.workshop', compact('reservation'))->render();
-    }
+        if ($reservation->payment()->exists()) {
+            $pagseguro = new PagSeguro;
+
+            if ($reservation->canBeReturned()) {
+                $pagseguro->refund($reservation->payment);
+            } else {
+                $pagseguro->cancel($reservation->payment);                
+            }
+        }
+
+        $reservation->cancel();
+
+        return redirect()->back()->with('status', 'Esta reserva foi cancelada com sucesso.');
+   }
 
     /**
      * Show the form for editing the specified resource.

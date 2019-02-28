@@ -66,12 +66,16 @@ Route::prefix('status')->name('status.')->group(function() {
 
 	Route::get('ajax', 'EventsController@ajax')->name('ajax');
 
+	Route::get('workshop', 'WorkshopsController@status')->name('workshop');
+
 	Route::get('{transaction_code}', 'PagSeguroController@status')->name('payment');
 
 });
 
 Route::get('/', function () {
-    return view('pages.welcome.index');
+	$workshops = \App\Workshop::upcoming()->take(3)->get();
+
+    return view('pages.welcome.index', compact('workshops'));
 })->name('welcome');
 
 Route::get('/quem-somos', function () {
@@ -111,10 +115,10 @@ Route::prefix('workshop')->name('workshops.')->group(function() {
 	Route::get('/{workshop}', 'WorkshopsController@show')->name('show');
 
 	Route::prefix('/{workshop}')->middleware(['auth', 'verified'])->group(function() {
-
-		Route::get('/ajax', 'WorkshopsController@ajax')->name('ajax');
 		
 		Route::get('/pagamento', 'WorkshopsController@payment')->name('payment');
+
+		Route::post('cancel', 'WorkshopsController@cancel')->name('cancel');
 
 		Route::post('', 'WorkshopsController@purchase')->name('purchase');
 
@@ -128,8 +132,4 @@ Route::prefix('eventos')->name('events.')->group(function() {
 
 	Route::post('{event}', 'EventsController@cancel')->name('cancel');
 
-});
-
-Route::get('mail', function() {
-	return new App\Mail\ConfirmWorkshop(\App\Workshop::first(), auth()->user());
 });

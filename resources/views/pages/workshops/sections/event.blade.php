@@ -21,9 +21,10 @@
 			@include('components.workshops.files-count')
 		</div>
 		<div class="w-100 d-flex align-items-center justify-content-end">
+			@if($showReservation)
+			<button data-url-status="{{route('status.workshop', ['reservation_id' => $workshop->reservation->id, 'user_type' => get_class(auth()->user())])}}" data-modal="#event-modal" class="reservation-item btn btn-red"><strong><i class="fas fa-info-circle mr-2"></i>Detalhes da reserva</strong></button>
+			@else
 			<a href="{{route('workshops.show', $workshop->slug)}}" class="btn btn-teal"><strong><i class="fas fa-info-circle mr-2"></i>Mais informações</strong></a>
-			@if(auth()->guard('web')->check() && auth()->guard('web')->user()->workshops->contains($workshop))
-			<button class="btn btn-red ml-2">Cancelar</button>
 			@endif
 		</div>
 	</div>

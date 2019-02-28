@@ -19,8 +19,7 @@ class AppServiceProvider extends ServiceProvider
                 'spaces' => \App\Space::all(),
                 'basicPlans' => \App\Plan::where('type', 'básico')->get(),
                 'completePlans' => \App\Plan::where('type', 'completo')->get(),
-                'memberships_count' => \App\Membership::count(),
-                'upcomingWorkshop' => \App\Workshop::upcoming()->orderBy('starts_at', 'asc')->first()
+                'memberships_count' => \App\Membership::count()
             ]);
         });
 

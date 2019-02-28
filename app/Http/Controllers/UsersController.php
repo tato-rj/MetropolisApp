@@ -48,7 +48,7 @@ class UsersController extends Controller
      */
     public function workshops()
     {
-        $workshops = auth()->user()->workshops()->paginate(4);
+        $workshops = auth()->user()->validWorkshops()->paginate(4);
 
         return view('pages.user.workshops.index', compact('workshops'));
     }

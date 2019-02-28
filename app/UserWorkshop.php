@@ -16,6 +16,11 @@ class UserWorkshop extends Metropolis implements Reservation
     	return $this->belongsTo(Workshop::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function getNameAttribute()
     {
     	return $this->workshop->name;
@@ -30,7 +35,17 @@ class UserWorkshop extends Metropolis implements Reservation
     {
         return $this->user_id;
     }
-    
+
+    public function setStatus($status_id)
+    {
+        $this->update([
+            'status_id' => $status_id,
+            'verified_at' => now()
+        ]);
+
+        return $this;
+    }
+
     public function cancel()
     {
         event(new \App\Events\EventCanceled($this));

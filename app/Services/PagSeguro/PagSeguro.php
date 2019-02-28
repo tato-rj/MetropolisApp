@@ -6,7 +6,7 @@ use PagSeguro\Library;
 use PagSeguro\Configuration\Configure;
 use PagSeguro\Services\Session as PagSeguroSession;
 use PagSeguro\Domains\Requests\DirectPreApproval\Plan as PagSeguroPlan;
-use App\{User, Plan, Event, Payment};
+use App\{User, Plan, Event, Payment, Membership};
 use App\Contracts\Person;
 use Illuminate\Http\Request;
 
@@ -47,18 +47,28 @@ class PagSeguro
         return new StatusManager($this, $payment);
     }
 
-    public function cancel(Payment $payment)
+    public function cancel(Event $event)
     {
         $manager = new PaymentManager($this);
 
-        return $manager->cancel($payment);
+        return $manager->cancel($event);
     }
 
-    public function refund(Payment $payment)
+    public function refund(Event $event)
     {
         $manager = new PaymentManager($this);
 
-        return $manager->refund($payment);
+        return $manager->refund($event);
+    }
+
+    public function unsubscribe(Membership $membership)
+    {
+        if (testing())
+            return true;
+
+        $manager = new PaymentManager($this);
+
+        return $manager->unsubscribe($membership);        
     }
 
 	public function plan(User $user, Plan $plan, Request $request)
@@ -99,7 +109,6 @@ class PagSeguro
         
         try {
             $response = $plan->register($this->credentials);
-            dd($response);
         } catch (\Exception $e) {
             dd($e->getMessage());
         }

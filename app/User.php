@@ -86,13 +86,7 @@ class User extends Authenticatable implements MustVerifyEmail, Person
 
     public function unsubscribe()
     {
-        $this->membership->update([
-            'next_payment_at' => null,
-            'subscription_ends_at' => now(),
-            'status' => 'Suspensa'
-        ]);
-
-        return $this->membership->stop();
+        return $this->membership->delete();
     }
 
     public function schedule(SpaceSearchForm $form, $reference = null)

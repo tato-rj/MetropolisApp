@@ -8,6 +8,15 @@ class Membership extends Metropolis
 {
     protected $dates = ['next_payment_at', 'subscription_ends_at', 'renewed_at','canceled_at'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function($membership) {
+            $membership->user->events()->byReference($membership->reference)->get()->each->cancel();
+        });
+    }
+
     public function plan()
     {
     	return $this->belongsTo(Plan::class);
@@ -32,7 +41,7 @@ class Membership extends Metropolis
 
     public function stop()
     {
-        return $this->user->events->each->cancel();
+        // return $this->user->events->each->cancel();
     }
 
     public function getStatusForUserAttribute()
@@ -46,6 +55,13 @@ class Membership extends Metropolis
             'status' => $status,
             'verified_at' => now()
         ]);
+    }
+
+    public function setTransactionCode($code)
+    {
+        $this->update(['transaction_code' => $code]);
+
+        return $this;
     }
 
     public function renew($xml)

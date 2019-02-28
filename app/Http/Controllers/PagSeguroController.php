@@ -30,7 +30,9 @@ class PagSeguroController extends Controller
         $xml = simplexml_load_string($response);
 
         try {
-            Membership::where('reference', $xml->reference)->first()->setStatus($xml->status);
+            $membership = Membership::where('reference', $xml->reference)->first();
+            $membership->setStatus($xml->status);
+            $membership->setTransactionCode($xml->code);
 
             return $response;
         } catch (\Exception $e) {
@@ -42,7 +44,7 @@ class PagSeguroController extends Controller
 
     public function transaction(Request $request)
     {
-        if (app()->environment() == 'testing') {
+        if (testing()) {
             $response = $request->xml;
         } else {
             $code = $this->cleanCode($request->notificationCode);

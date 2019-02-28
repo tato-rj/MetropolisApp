@@ -2,7 +2,7 @@
 
 namespace App\Services\PagSeguro;
 
-use App\Payment;
+use App\{Event, Membership};
 
 class PaymentManager
 {
@@ -13,10 +13,10 @@ class PaymentManager
 		$this->pagseguro = $pagseguro;
 	}
 
-	public function cancel(Payment $payment)
+	public function cancel(Event $event)
 	{
 		try {
-		    $response = \PagSeguro\Services\Transactions\Cancel::create($this->pagseguro->credentials, $payment->reservation->transaction_code);
+		    $response = \PagSeguro\Services\Transactions\Cancel::create($this->pagseguro->credentials, $event->transaction_code);
 		} catch (Exception $e) {
 		    abort(404, $e->getMessage());
 		}
@@ -24,10 +24,25 @@ class PaymentManager
 		return $response;
 	}
 
-	public function refund(Payment $payment)
+	public function refund(Event $event)
 	{
 		try {
-		    $response = \PagSeguro\Services\Transactions\Refund::create($this->pagseguro->credentials, $payment->reservation->transaction_code);
+		    $response = \PagSeguro\Services\Transactions\Refund::create($this->pagseguro->credentials, $event->transaction_code);
+		} catch (Exception $e) {
+		    abort(404, $e->getMessage());
+		}
+
+		return $response;
+	}
+
+	public function unsubscribe(Membership $membership)
+	{
+		$status = new \PagSeguro\Domains\Requests\DirectPreApproval\Cancel();
+
+		try {
+			$status->setPreApprovalCode($membership->transaction_code);
+			
+		    $response = $status->register($this->pagseguro->credentials);
 		} catch (Exception $e) {
 		    abort(404, $e->getMessage());
 		}

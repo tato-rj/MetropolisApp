@@ -179,7 +179,3 @@
 </div>
 
 @endif
-
-{{-- <div class="text-right mt-3">
-	<button class="btn btn-red btn-sm">Cancelar esta reserva</button>
-</div> --}}

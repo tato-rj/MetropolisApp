@@ -1,11 +1,9 @@
-@extends('errors::illustrated-layout')
+@extends('errors::layout')
 
-@section('code', '429')
-@section('title', __('Too Many Requests'))
+@section('code', 429)
 
-@section('image')
-    <div style="background-image: url({{ asset('/svg/403.svg') }});" class="absolute pin bg-cover bg-no-repeat md:bg-left lg:bg-center">
-    </div>
+@section('message', 'Você está fazendo muitos pedidos, mantenha a calma.')
+
+@section('action')
+<a href="{{route('welcome')}}" class="btn btn-red">Voltar para página principal</a>
 @endsection
-
-@section('message', __('Sorry, you are making too many requests to our servers.'))

@@ -133,3 +133,13 @@ Route::prefix('eventos')->name('events.')->group(function() {
 	Route::post('{event}', 'EventsController@cancel')->name('cancel');
 
 });
+
+Route::get('plan/create', function() {
+	$planos = \App\Plan::where('id', '!=', 1)->get();
+
+	// foreach ($planos as $plan) {
+	// 	(new \App\Services\PagSeguro\PagSeguro)->createPlan($plan);
+	// }
+
+	return 'Planos criados';
+});

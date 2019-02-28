@@ -1,5 +1,10 @@
 <?php 
 
+function testing()
+{
+    return app()->environment() == 'testing';
+}
+
 function randomNumber($length) {
     $result = '';
 

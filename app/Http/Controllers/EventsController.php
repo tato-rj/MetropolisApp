@@ -253,18 +253,23 @@ class EventsController extends Controller
 
    public function cancel(Event $event)
    {
+        $pagseguro = new PagSeguro;
+        
         if ($event->payment()->exists()) {
-            $pagseguro = new PagSeguro;
-
             if ($event->canBeReturned()) {
-                $pagseguro->refund($event->payment);
+                $pagseguro->refund($event);
             } else {
-                $pagseguro->cancel($event->payment);                
+                $pagseguro->cancel($event);                
             }
         }
 
-        $event->cancel();
+        if ($event->plan()->exists()) {
+            $pagseguro->unsubscribe($event->creator->membership);
 
+            $event->creator->unsubscribe();
+        } else {
+            $event->cancel();
+        }
         return redirect()->back()->with('status', 'Este evento foi cancelado com sucesso.');
    }
 

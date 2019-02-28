@@ -71,4 +71,22 @@ class PlanTest extends AppTest
 
 		$this->assertCount(1, auth()->user()->fresh()->eventsArray());
 	}
+
+	/** @test */
+	public function a_membership_is_cancelled_if_one_of_its_events_is_cancelled()
+	{
+		$this->signIn();
+
+		$this->subscribeToNewPlan($this->plan);
+
+		$membershipEvent = auth()->user()->events->first();
+
+		$this->assertTrue(auth()->user()->hasPlan);
+		$this->assertFalse($membershipEvent->statusForUser == 'Cancelada');
+
+		$this->post(route('events.cancel', $membershipEvent->id));
+
+		$this->assertFalse(auth()->user()->fresh()->hasPlan);
+		$this->assertTrue($membershipEvent->fresh()->statusForUser == 'Cancelada');
+	}
 }

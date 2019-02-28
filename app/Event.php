@@ -43,7 +43,7 @@ class Event extends Metropolis implements Reservation
     }
 
     public function cancel()
-    {        
+    {
         return $this->setStatus(7);
     }
 

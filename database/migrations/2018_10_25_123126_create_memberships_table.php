@@ -18,6 +18,7 @@ class CreateMembershipsTable extends Migration
             $table->unsignedInteger('plan_id');
             $table->unsignedInteger('user_id');
             $table->string('reference')->nullable();
+            $table->string('transaction_code')->nullable();
             $table->timestamp('next_payment_at')->nullable();
             $table->timestamp('subscription_ends_at')->nullable();
             $table->timestamp('verified_at')->nullable();

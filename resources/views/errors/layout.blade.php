@@ -1,57 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.raw')
 
-        <title>@yield('title')</title>
+@push('header')
+<style type="text/css">
+.page_404{
+    background:#fff; font-family: 'Arvo', serif;
+    margin-bottom: -60px;
+    overflow: hidden;
+}
 
-        <!-- Fonts -->
-        <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+.four_zero_four_bg{
+    background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+    height: 420px;
+    margin: 0 auto;
+    background-position: center;
+ }
+ 
+ 
+ .four_zero_four_bg h1{
+ font-size:80px;
+ }
+ 
+  .four_zero_four_bg h3{
+             font-size:80px;
+             }
+             
+             .link_404{          
+    color: #fff!important;
+    padding: 10px 20px;
+    background: #39ac31;
+    margin: 20px 0;
+    display: inline-block;}
+    .contant_box_404{ margin-top:-50px;}
+</style>
+@endpush
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 36px;
-                padding: 20px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title">
-                    @yield('message')
+@section('content')
+<section class="container-fluid">
+    <div class="row pt-5">
+        <div class="col-lg-6 col-md-8 col-12 mx-auto text-center">
+            <img src="{{asset('images/brand/logo.svg')}}" width="90">
+            <div class="page_404 w-100">
+                <div class="text-center">
+                    <div class="four_zero_four_bg"></div>
                 </div>
             </div>
+            <h1 class="text-teal mb-3" style="font-size: 6rem"><strong>
+            
+                @yield('code')
+            
+            </strong></h1>
+            <h4 class="mb-4 text-muted">
+
+                @yield('message')
+            
+            </h4>
+
+            @yield('action')
+
         </div>
-    </body>
-</html>
+    </div>
+</section>
+
+@endsection

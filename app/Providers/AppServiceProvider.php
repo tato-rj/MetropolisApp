@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
 
+        \View::composer('admin.layouts.menu', function($view) {
+            $view->with(['pending_bills_count' => $pendingBills = \App\Bill::whereNull('verified_at')->count()]);
+        });
+
         \Validator::extend('safePassUpdate', 'App\Rules\SafePassUpdate@passes');
     }
 

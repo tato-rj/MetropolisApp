@@ -128,9 +128,9 @@ class WorkshopsController extends Controller
             $pagseguro = new PagSeguro;
 
             if ($reservation->canBeReturned()) {
-                $pagseguro->refund($reservation->payment);
+                $pagseguro->refund($reservation);
             } else {
-                $pagseguro->cancel($reservation->payment);                
+                $pagseguro->cancel($reservation);                
             }
         }
 

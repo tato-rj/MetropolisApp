@@ -30,7 +30,7 @@
                         <span class="{{checkActive(['admin.bills.create'], 'text-teal')}}">Nova</span>
                     </a>
                     <a href="{{route('admin.bills.pending')}}" class="d-block link-none">
-                        <span class="{{checkActive(['admin.bills.pending'], 'text-teal')}}">Pendentes</span>
+                        <span class="{{checkActive(['admin.bills.pending'], 'text-teal')}}">Pendentes {{$pending_bills_count ? "({$pending_bills_count})" : null}}</span>
                     </a>
                 </div>
             </li>

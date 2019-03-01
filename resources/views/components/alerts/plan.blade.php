@@ -8,7 +8,7 @@
 		<strong>{{auth()->user()->membership->plan->displayName}}</strong> | Aguardando confirmação
 	@else
 	<i class="fas fa-exclamation-triangle"></i>
-		<strong>{{auth()->user()->membership->plan->displayName}}</strong> | Esse plano foi cancelado e <u>não se renovará</u>
+		<strong>{{auth()->user()->membership->plan->displayName}}</strong> | A renovação automática foi <u>cancelada</u>
 	@endif
 </div>
 @endsubscribed

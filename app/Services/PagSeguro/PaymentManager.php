@@ -3,6 +3,7 @@
 namespace App\Services\PagSeguro;
 
 use App\{Event, Membership};
+use App\Contracts\Reservation;
 
 class PaymentManager
 {
@@ -13,7 +14,7 @@ class PaymentManager
 		$this->pagseguro = $pagseguro;
 	}
 
-	public function cancel(Event $event)
+	public function cancel(Reservation $event)
 	{
 		try {
 		    $response = \PagSeguro\Services\Transactions\Cancel::create($this->pagseguro->credentials, $event->transaction_code);
@@ -24,7 +25,7 @@ class PaymentManager
 		return $response;
 	}
 
-	public function refund(Event $event)
+	public function refund(Reservation $event)
 	{
 		try {
 		    $response = \PagSeguro\Services\Transactions\Refund::create($this->pagseguro->credentials, $event->transaction_code);

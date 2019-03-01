@@ -1,5 +1,6 @@
 <ul class="list-flat px-3 py-2">
 
+	@if($event->creator->membership()->exists())
 	<div class="bg-{{$event->plan->color}} text-white px-2 py-1 font-weight-bold">{{$event->plan->displayName}}</div>
 	<div class="mb-3 bg-light p-2 d-flex d-apart">
 		<div>Renovação automática</div>
@@ -13,6 +14,9 @@
 			@endif
 		</div>
 	</div>
+	@else
+	<div class="alert alert-grey"><strong>{{$event->plan->display_name}}</strong> cancelado com sucesso</div>
+	@endif
 
 	@admin($user_type)
 	<li class="mb-2">

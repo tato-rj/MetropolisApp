@@ -20,8 +20,6 @@ Route::prefix('cliente')->name('client.')->middleware(['auth', 'verified'])->gro
 		Route::post('/comprar', 'EventsController@purchase')->name('purchase');
 
 		Route::post('/{event}', 'EventsController@update')->name('update');
-
-		// Route::post('/{event}/status', 'EventsController@status')->name('status');
 	
 		Route::post('/{event}/emails', 'EventsController@updateEmails')->name('update.emails');
 

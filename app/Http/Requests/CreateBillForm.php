@@ -27,7 +27,7 @@ class CreateBillForm extends FormRequest
             'recipient_name' => 'required',
             'recipient_email' => 'required|email',
             'name' => 'required',
-            'description' => 'required',
+            'description' => 'required|max:100',
             'fee' => 'required'
         ];
     }

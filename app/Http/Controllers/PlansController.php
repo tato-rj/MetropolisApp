@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Plan, User, Event};
+use App\{Plan, User, Event, Membership};
 use Illuminate\Http\Request;
 use App\Http\Requests\{SubscribeForm, CreditCardForm};
 use App\Events\MembershipCreated;
@@ -65,25 +65,15 @@ class PlansController extends Controller
         return redirect()->route('client.events.index')->with('status', 'A sua assinatura foi realizada com sucesso. Aproveite o seu novo espaço de trabalho!');
     }
 
-    public function status(Event $event, Request $request)
+    public function toggle(Membership $membership)
     {
         $pagseguro = new PagSeguro;
 
-        $status = $pagseguro->status($event)->checkPlan([
-            'initial_date' => '2019-01-25T03:00',
-            'final_date' => '2019-01-25T04:56',
-            'page' => 1,
-            'max_per_page' => 100,
-        ]);
+        $pagseguro->toggle($membership);
 
-        if (! $status)
-            abort(404);
+        $membership->toggle();
 
-        dd($status);
-        
-        $event->setStatus($status->getTransactions()[0]->getStatus());
-
-        return $event;
+        return redirect()->back()->with('status', 'A sua preferência foi atualizada com sucesso.');        
     }
 
     /**

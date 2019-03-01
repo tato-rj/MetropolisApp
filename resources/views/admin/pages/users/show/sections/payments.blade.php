@@ -9,7 +9,7 @@
     </thead>
     <tbody>
       @foreach($payments as $payment)
-      <tr class="cursor-pointer" data-toggle="modal" data-target="#payment-modal" title="Clique para ver mais detalhes">
+      <tr>
         <td>{{$payment->created_at->format('d/m/Y')}}</td>
         <td>{{$payment->reservation->name}}</td>
         <td>{{feeToString($payment->reservation->fee)}}</td>

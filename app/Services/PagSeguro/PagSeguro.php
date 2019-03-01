@@ -71,6 +71,13 @@ class PagSeguro
         return $manager->unsubscribe($membership);        
     }
 
+    public function toggle(Membership $membership)
+    {
+        $manager = new StatusManager($this);
+
+        return $manager->toggle($membership);
+    }
+
 	public function plan(User $user, Plan $plan, Request $request)
 	{
 		return new CheckoutPlan($this, $user, $plan, $request);

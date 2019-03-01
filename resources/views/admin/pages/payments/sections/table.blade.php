@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     @foreach($payments as $payment)
-    <tr class="cursor-pointer payment-item" data-url-status="{{route('status.payment', ['transaction_code' => $payment->reservation->transaction_code])}}" data-modal="#payment-modal" title="Clique para ver mais detalhes">
+    <tr>
       <td>{{$payment->created_at->format('d/m/Y')}}</td>
       <td>{{$payment->reservation->name}}</td>
       <td>{{$payment->user->name}}</td>

@@ -3,30 +3,33 @@
 namespace App\Services\PagSeguro;
 
 use PagSeguro\Services\Transactions\Search\Code;
-use App\Payment;
+use App\{Payment, Membership};
 
 class StatusManager
 {
-	protected $pagseguro, $payment, $status;
+	protected $pagseguro;
 
-	public function __construct(PagSeguro $pagseguro, Payment $payment)
+	public function __construct(PagSeguro $pagseguro)
 	{
 		$this->pagseguro = $pagseguro;
-		$this->payment = $payment;
 	}
 
-	public function get()
-	{     
-        try {
-            $response = Code::search($this->pagseguro->credentials, $this->payment->reservation->transaction_code);
-        } catch (\Exception $e) {
-            abort(404, $e->getMessage());
-        }
+	public function toggle(Membership $membership)
+	{
+		$status = new \PagSeguro\Domains\Requests\DirectPreApproval\Status();
 
-		$this->status = $response->getStatus();
+		try {
+			$status->setPreApprovalCode($membership->transaction_code);
 
-		$this->payment->reservation->setStatus($this->status);
-        
-        return $this->status;
+			$newStatus = $membership->isActive() ? 'SUSPENDED' : 'ACTIVE';
+
+			$status->setStatus($newStatus);
+			
+		    $response = $status->register($this->pagseguro->credentials);
+		} catch (\Exception $e) {
+		    abort(404, $e->getMessage());
+		}
+
+		return $response;
 	}
 }

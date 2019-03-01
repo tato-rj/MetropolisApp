@@ -87,6 +87,13 @@ class Membership extends Metropolis
         ]);
     }
 
+    public function toggle()
+    {
+        $status = $this->isActive() ? 'SUSPENDED' : 'ACTIVE';
+
+        return $this->update(['status' => $status]);
+    }
+
     public function scopeByReference($query, $reference)
     {
         return $query->where('reference', $reference);

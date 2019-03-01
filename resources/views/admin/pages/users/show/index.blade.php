@@ -16,9 +16,7 @@ div.dataTables_paginate li.next a:after, div.dataTables_paginate li.last a:after
 table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_desc_disabled:before {
     content: none;
 }
-</style>
 
-<style type="text/css">
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
     background-color: #f8f9fa;
     border-color: #dee2e6 #dee2e6 #f8f9fa;
@@ -52,7 +50,7 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before
     @include('admin.pages.users.show.sections.info')
   </div>
   <div class="tab-pane fade" id="tab-schedule" role="tabpanel">
-    @include('admin.pages.users.show.sections.schedule', ['eventsArray' => $user->eventsArray()])
+    @include('admin.pages.users.show.sections.schedule', ['eventsArray' => $user->eventsArray($editable = false, $activeOnly = false)])
   </div>
   <div class="tab-pane fade" id="tab-workshops" role="tabpanel">
     @include('admin.pages.users.show.sections.workshops', ['workshops' => $user->workshops])
@@ -62,7 +60,6 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before
   </div>
 </div>
 
-@include('components.modals.payment')
 @include('components.modals.event')
 @include('components.modals.plan')
 @endsection

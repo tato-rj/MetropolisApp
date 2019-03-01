@@ -22,8 +22,6 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before
 
 	@include('admin.pages.payments.sections.table')
 
-	@include('components.modals.payment')
-
 @endsection
 
 @push('scripts')

@@ -1,11 +1,16 @@
 <ul class="list-flat px-3 py-2">
 
-	<div class="mb-3">
-		<p class="m-0 text-muted"><small>Esta reserva faz parte da sua assinatura do</small></p>
-		<div>
-			<a class="text-uppercase" href="/planos">
-				<strong><span class="text-{{$event->plan->color}}">{{$event->plan->displayName}}</span></strong>
-			</a>
+	<div class="bg-{{$event->plan->color}} text-white px-2 py-1 font-weight-bold">{{$event->plan->displayName}}</div>
+	<div class="mb-3 bg-light p-2 d-flex d-apart">
+		<div>Renovação automática</div>
+		<div class="btn-group">
+			@if($event->creator->membership->isActive())
+			<div class="btn-green btn btn-sm" style="cursor: default;">Sim</div>
+			<a href="{{route('plan.toggle', $event->creator->membership->id)}}" class="btn-light border text-grey btn btn-sm">Não</a>
+			@else
+			<a href="{{route('plan.toggle', $event->creator->membership->id)}}" class="btn-light border text-grey btn btn-sm">Sim</a>
+			<div class="btn-green btn btn-sm" style="cursor: default;">Não</div>
+			@endif
 		</div>
 	</div>
 
@@ -58,14 +63,6 @@
 				({{'atualizado no dia ' . $event->verified_at->format('d/m') . ' às ' . $event->verified_at->format('H:i')}})
 			@endif
 		</small>
-	</li>
-
-	<li class="mb-2">
-		<span class="text-teal mr-1"><strong>Renovação automática</strong></span>
-		<div class="btn-group">
-			<a href="" class="btn-green btn btn-sm">Ligada</a>
-			<a href="" class="btn-light text-grey btn btn-sm">Desligada</a>
-		</div>
 	</li>
 </ul>
 

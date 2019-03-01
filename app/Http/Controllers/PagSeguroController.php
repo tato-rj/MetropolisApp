@@ -108,19 +108,4 @@ class PagSeguroController extends Controller
     {
         return preg_replace('/[^[:alnum:]-]/', '', $code);
     }
-
-    public function status($transaction_code)
-    {
-        $pagseguro = new PagSeguro;
-
-        $payment = Payment::byCode($transaction_code)->firstOrFail();
-
-        if (! auth()->guard('admin')->check())
-            $this->authorize('view', $payment);
-
-        if (app()->environment() != 'testing')
-            $pagseguro->status($payment)->get();
-
-        return view('components.modals.results.payment', compact('payment'))->render();
-    }
 }

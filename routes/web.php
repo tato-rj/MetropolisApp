@@ -68,8 +68,6 @@ Route::prefix('status')->name('status.')->group(function() {
 
 	Route::get('workshop', 'WorkshopsController@status')->name('workshop');
 
-	Route::get('{transaction_code}', 'PagSeguroController@status')->name('payment');
-
 });
 
 Route::get('/', function () {
@@ -100,10 +98,12 @@ Route::prefix('planos')->name('plan.')->group(function() {
 
 		Route::get('pagamento', 'PlansController@payment')->name('payment');
 
+		Route::get('/{membership}/toggle', 'PlansController@toggle')->name('toggle');
+
 		Route::post('assinar', 'PlansController@subscribe')->name('subscribe');
 		
 		Route::post('/{event}/status', 'PlansController@status')->name('status');
-	
+
 	});
 
 });

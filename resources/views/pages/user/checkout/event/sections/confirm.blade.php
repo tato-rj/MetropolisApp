@@ -29,6 +29,9 @@
 			</li>
 			@endbonus
 		</ul>
+
+		@include('components.form.payment.agree')
+
 		<div class="bg-teal text-white d-flex flex-wrap">
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
 			<div class="d-flex xs-w-100">

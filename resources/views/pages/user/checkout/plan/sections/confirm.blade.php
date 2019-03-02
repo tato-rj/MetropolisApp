@@ -14,6 +14,9 @@
 				<span>{{ucfirst($plan->cycle())}}</span>
 			</li>
 		</ul>
+
+		@include('components.form.payment.agree')
+
 		<div class="bg-teal text-white d-flex flex-wrap">
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO</strong></div>
 			<div class="d-flex xs-w-100">

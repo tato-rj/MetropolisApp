@@ -120,4 +120,9 @@ trait PagSeguro
 
         return $this;
     }
+
+    public function scopeActive($query)
+    {
+        return $query->whereNotIn('status_id', [6,7,9]);
+    }
 }

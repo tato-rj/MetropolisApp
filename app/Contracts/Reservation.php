@@ -6,6 +6,7 @@ interface Reservation
 {
     public function scopeByReference($query, $reference);
     public function scopeByCode($query, $code);
+    public function scopeActive($query);
     public function getStatusAttribute();
     public function getStatusForUserAttribute();
     public function getStatusColorAttribute();

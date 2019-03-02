@@ -225,7 +225,12 @@ $(document).on('click', 'button#submit', function(event) {
   }
 
   if (! $form.find('input[name="card_number"]').val()) {
-    alert('Por favor preencha o número do cartão corretamente');
+    alert('Por favor preencha o número do cartão corretamente.');
+    return;
+  }
+
+  if (! $('input[name="agree"]').prop('checked')) {
+    alert('Você precisa aceitar os termos e condições para efetuar essa compra.');
     return;
   }
 

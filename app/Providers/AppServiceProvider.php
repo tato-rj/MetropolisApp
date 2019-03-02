@@ -27,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with(['pending_bills_count' => $pendingBills = \App\Bill::whereNull('verified_at')->count()]);
         });
 
+        \View::composer('pages.welcome.sections.workshops', function($view) {
+            $view->with(['workshops' => \App\Workshop::upcoming()->take(3)->get()]);
+        });
+
         \Validator::extend('safePassUpdate', 'App\Rules\SafePassUpdate@passes');
     }
 

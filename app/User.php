@@ -129,6 +129,7 @@ class User extends Authenticatable implements MustVerifyEmail, Person
     public function getCurrentEventsAttribute()
     {
         return $this->events()
+                    ->active()
                     ->whereDate('starts_at', '<=', now()->toDateTimeString())
                     ->whereDate('ends_at', '>=', now()->toDateTimeString())
                     ->get();

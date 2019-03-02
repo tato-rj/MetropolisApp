@@ -26,7 +26,11 @@
             </div>
             <div class="mb-3">
               <p class="mb-1"><strong>Email</strong></p>
-              <p class="m-0">contato@metropolis.com</p>
+              <a href="mailto:contato@metropolisrio.com.br" class="link-none">contato@metropolisrio.com.br</a>
+            </div>
+            <div class="mb-3">
+              <p class="mb-1"><strong>Suporte</strong></p>
+              <a href="{{route('terms')}}" class="link-none">Termos & Condições</a>
             </div>
           </div>
 

@@ -36,7 +36,7 @@
 				</div>
 			</div>
 			<div class="text-right mt-2">
-				@include('pages.user.checkout.workshop.sections.pagseguro')
+				@include('components.form.payment.pagseguro-logo')
 			</div>
 		</div>
 		<div class="col-default">

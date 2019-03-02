@@ -18,7 +18,7 @@
 
 			@include('pages.user.checkout.plan.sections.credit')
 			<div class="text-right mt-2">
-				@include('pages.user.checkout.plan.sections.pagseguro')
+				@include('components.form.payment.pagseguro-logo')
 			</div>
 		</div>
 		<div class="col-default">

@@ -69,9 +69,7 @@ Route::prefix('status')->name('status.')->group(function() {
 });
 
 Route::get('/', function () {
-	$workshops = \App\Workshop::upcoming()->take(3)->get();
-
-    return view('pages.welcome.index', compact('workshops'));
+    return view('pages.welcome.index');
 })->name('welcome');
 
 Route::get('/quem-somos', function () {
@@ -85,6 +83,10 @@ Route::get('/consultoria', function () {
 Route::get('/contato', function () {
     return view('pages.contact.index');
 })->name('contact');
+
+Route::get('/termos-e-condicoes', function () {
+    return view('pages.terms.index');
+})->name('terms');
 
 Route::prefix('planos')->name('plan.')->group(function() {
 

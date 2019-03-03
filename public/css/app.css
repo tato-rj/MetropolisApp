@@ -21456,6 +21456,10 @@ video {
   opacity: .6;
 }
 
+.btn {
+  font-weight: bold;
+}
+
 .price:before {
   content: 'R$';
   font-weight: bold;

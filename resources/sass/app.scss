@@ -14,6 +14,10 @@
   opacity: .6;
 }
 
+.btn {
+  font-weight: bold;
+}
+
 .btn, .alert, .form-control, .card, .card-header, .modal-content, .modal-header {
 	@extend .rounded-0;
 }

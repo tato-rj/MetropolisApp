@@ -15,15 +15,13 @@
 
     </ul>
     @guest
-    <a class="btn btn-red my-2 my-sm-0" href="{{route('client.home')}}"><strong>Área do Cliente</strong></a>
+    <a class="btn btn-red my-2 my-sm-0" href="{{route('client.home')}}">Área do Cliente</a>
     @else
     <div class="btn-group">
-        <a class="btn btn-red my-2 my-sm-0" href="{{route('client.home')}}"><strong><i class="fas fa-user mr-2"></i>Painel de Controle</strong></a>
+        <a class="btn btn-red my-2 my-sm-0" href="{{route('client.home')}}"><i class="fas fa-user mr-2"></i>Painel de Controle</a>
         <form method="POST" action="{{route('logout')}}">
             @csrf
-            <button type="submit" id="logout" class="btn btn-light my-2 my-sm-0" href="{{route('logout')}}">
-                <strong>Sair</strong>
-            </button>
+            <button type="submit" id="logout" class="btn btn-light my-2 my-sm-0" href="{{route('logout')}}">Sair</button>
         </form>
     </div>
     @endguest

@@ -1,15 +1,59 @@
 <section class="container mt-5 mb-7">
 	<div class="row">
-		<div class="col-default">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Felis imperdiet proin fermentum leo vel orci porta non. Sagittis purus sit amet volutpat consequat. Tincidunt arcu non sodales neque. Porttitor massa id neque aliquam vestibulum morbi. Id eu nisl nunc mi ipsum faucibus vitae aliquet nec. A diam maecenas sed enim. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. Senectus et netus et malesuada fames ac turpis. Elementum facilisis leo vel fringilla est ullamcorper eget nulla. Tortor at auctor urna nunc. Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet commodo nulla facilisi nullam vehicula ipsum. Cursus mattis molestie a iaculis at erat pellentesque adipiscing. Proin fermentum leo vel orci porta non pulvinar. Quisque non tellus orci ac auctor augue mauris augue neque. Elementum eu facilisis sed odio morbi quis. Pulvinar sapien et ligula ullamcorper. Justo nec ultrices dui sapien eget.</p>
+		<div class="col-default" id="terms-list">
+			<ol>
+				<li><strong>Lorem ipsum dolor sit amet</strong>
+					<ol>
+						<li>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+						<li>Felis imperdiet proin fermentum leo vel orci porta non.</li>
+						<li>Sagittis purus sit amet volutpat consequat.</li>
+						<li>Tincidunt arcu non sodales neque. Porttitor massa id neque aliquam vestibulum morbi.</li>
+						<li>Faucibus scelerisque eleifend donec pretium vulputate sapien nec.</li>
+						<li>Aliquam sem et tortor consequat id porta nibh venenatis.</li>
+						<li>Pretium quam vulputate dignissim suspendisse in.</li>
+						<li>Elit eget gravida cum sociis natoque penatibus.</li>
+					</ol>
+				</li>
 
-			<p>Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec. Aliquam sem et tortor consequat id porta nibh venenatis. Pretium quam vulputate dignissim suspendisse in. Elit eget gravida cum sociis natoque penatibus. Justo eget magna fermentum iaculis eu non diam phasellus vestibulum. Metus dictum at tempor commodo. Volutpat maecenas volutpat blandit aliquam. Sem fringilla ut morbi tincidunt augue interdum velit. Accumsan in nisl nisi scelerisque eu ultrices. Sit amet luctus venenatis lectus magna fringilla. Turpis in eu mi bibendum. Fringilla phasellus faucibus scelerisque eleifend donec. Et ligula ullamcorper malesuada proin libero.</p>
+				<li><strong>Id eu nisl nunc mi ipsum faucibus vitae aliquet nec</strong></li>
+				
+				<p>A diam maecenas sed enim. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. Senectus et netus et malesuada fames ac turpis. Elementum facilisis leo vel fringilla est ullamcorper eget nulla. Tortor at auctor urna nunc. Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet commodo nulla facilisi nullam vehicula ipsum. Cursus mattis molestie a iaculis at erat pellentesque adipiscing. Proin fermentum leo vel orci porta non pulvinar. Quisque non tellus orci ac auctor augue mauris augue neque. Elementum eu facilisis sed odio morbi quis. Pulvinar sapien et ligula ullamcorper. Justo nec ultrices dui sapien eget.</p>
 
-			<p>Purus viverra accumsan in nisl nisi scelerisque. Scelerisque eu ultrices vitae auctor eu augue ut lectus. In hendrerit gravida rutrum quisque non tellus. Mollis nunc sed id semper risus in hendrerit gravida. Felis imperdiet proin fermentum leo vel orci. Lacus viverra vitae congue eu. Vitae purus faucibus ornare suspendisse. Tincidunt vitae semper quis lectus. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus et. Lectus sit amet est placerat. Molestie at elementum eu facilisis sed odio. Enim tortor at auctor urna nunc id. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula. Eu nisl nunc mi ipsum faucibus vitae aliquet nec. Pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus. Natoque penatibus et magnis dis parturient montes nascetur ridiculus. Dui ut ornare lectus sit amet est placerat. Mauris pharetra et ultrices neque ornare aenean euismod. Felis eget nunc lobortis mattis. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus.</p>
+				<li><strong>Fringilla phasellus</strong>
+					<ol>
+						<li>Pretium quam vulputate dignissim suspendisse in.</li>
+						<li>Elit eget gravida cum sociis natoque penatibus.</li>
+					</ol>
+				</li>
 
-			<p>Volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris. Sed arcu non odio euismod lacinia. Dis parturient montes nascetur ridiculus. Non arcu risus quis varius quam quisque id diam vel. Arcu odio ut sem nulla. Aliquam ultrices sagittis orci a scelerisque. Aliquet nec ullamcorper sit amet risus nullam eget felis eget. Quis viverra nibh cras pulvinar mattis nunc sed blandit. Id donec ultrices tincidunt arcu non sodales neque. Erat pellentesque adipiscing commodo elit. Mauris a diam maecenas sed enim ut sem viverra aliquet. Adipiscing diam donec adipiscing tristique risus nec feugiat in fermentum. Arcu odio ut sem nulla.</p>
+				<li><strong>Justo eget magna fermentum iaculis eu non diam phasellus vestibulum</strong></li>
+				
+				<li><strong>Metus dictum at tempor commodo.</strong></li>
 
-			<p>Quam nulla porttitor massa id neque aliquam. Morbi tristique senectus et netus et. Sed libero enim sed faucibus turpis in eu. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices eros. Imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Est sit amet facilisis magna etiam. Ligula ullamcorper malesuada proin libero nunc consequat interdum varius sit. Pharetra vel turpis nunc eget lorem dolor sed viverra. Ac orci phasellus egestas tellus rutrum. Diam maecenas sed enim ut sem viverra aliquet eget. Enim sed faucibus turpis in eu mi.</p>
+				<p>Volutpat maecenas volutpat blandit aliquam. Sem fringilla ut morbi tincidunt augue interdum velit. Accumsan in nisl nisi scelerisque eu ultrices. Sit amet luctus venenatis lectus magna fringilla. Turpis in eu mi bibendum. Fringilla phasellus faucibus scelerisque eleifend donec. Et ligula ullamcorper malesuada proin libero.
+				</p>
+					
+				<li><strong>Lorem ipsum dolor sit amet</strong>
+					<ol>
+						<li>Sagittis purus sit amet volutpat consequat.</li>
+						<li>Tincidunt arcu non sodales neque. Porttitor massa id neque aliquam vestibulum morbi.</li>
+					</ol>
+				</li>
+				<li><strong>Id eu nisl nunc mi ipsum faucibus vitae aliquet nec</strong></li>
+				<p>A diam maecenas sed enim. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. Senectus et netus et malesuada fames ac turpis. Elementum facilisis leo vel fringilla est ullamcorper eget nulla. Tortor at auctor urna nunc. Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet commodo nulla facilisi nullam vehicula ipsum. Cursus mattis molestie a iaculis at erat pellentesque adipiscing. Proin fermentum leo vel orci porta non pulvinar. Quisque non tellus orci ac auctor augue mauris augue neque. Elementum eu facilisis sed odio morbi quis. Pulvinar sapien et ligula ullamcorper. Justo nec ultrices dui sapien eget.</p>
+
+				<li><strong>Fringilla phasellus</strong>
+					<ol>
+						<li>Faucibus scelerisque eleifend donec pretium vulputate sapien nec.</li>
+						<li>Aliquam sem et tortor consequat id porta nibh venenatis.</li>
+						<li>Pretium quam vulputate dignissim suspendisse in.</li>
+					</ol>
+				</li>
+
+				<li><strong>Justo eget magna fermentum iaculis eu non diam phasellus vestibulum</strong></li>
+
+				<p>Volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris. Sed arcu non odio euismod lacinia. Dis parturient montes nascetur ridiculus. Non arcu risus quis varius quam quisque id diam vel. Arcu odio ut sem nulla. Aliquam ultrices sagittis orci a scelerisque. Aliquet nec ullamcorper sit amet risus nullam eget felis eget. Quis viverra nibh cras pulvinar mattis nunc sed blandit. Id donec ultrices tincidunt arcu non sodales neque. Erat pellentesque adipiscing commodo elit. Mauris a diam maecenas sed enim ut sem viverra aliquet. Adipiscing diam donec adipiscing tristique risus nec feugiat in fermentum. Arcu odio ut sem nulla.</p>
+			</ol>
 		</div>
 	</div>
 </section>

@@ -1,6 +1,6 @@
 <section class="mb-7 container">
   <div class="row">
-  	<div class="col-8">
+  	<div class="col-lg-8 col-md-7 col-12">
   		<div>
 	  		<p class="mb-0 text-grey"><small>WORKSHOPS</small></p>
 	  		<h3>Conheça os nossos workshops</h3>
@@ -10,8 +10,8 @@
         </p>
 	  	</div>
   	</div>
-    <div class="col-4">
-      <div class="border">
+    <div class="col-lg-4 col-md-5 col-12">
+      <div class="border mt-4">
         <div class="alert-grey text-center px-3 py-2" style="color: #9aa9b7">Próximos eventos</div>
         @foreach($workshops as $workshop)
         <div class="px-3">

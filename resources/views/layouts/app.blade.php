@@ -86,6 +86,11 @@
 <script src="{{ asset('js/share.js') }}"></script>
 
 <script type="text/javascript">
+$('.navbar-toggler').on('click', function() {
+  $(this).toggleClass('is-active');
+  $('.navbar-collapse').fadeToggle();
+});
+
 $(document).ready(function() {
   fullDatePT($('.date-pt'));
 });
@@ -110,6 +115,7 @@ if ($('#scroll-mark').length > 0) {
   let $limit = $scrollMark - $navHeight;
   let $itemsToShow = $('.show-on-scroll');
   let $logoutButton = $navbar.find('button#logout');
+  let $hamburger = $navbar.find('.hamburger');
   let $cookieAlert = $('#cookie-alert');
 
   $(window).scroll(function() {
@@ -119,6 +125,7 @@ if ($('#scroll-mark').length > 0) {
       $navbar.addClass('navbar-light position-fixed bg-white shadow-sm py-2 px-4 slideInDown').removeClass('navbar-dark py-4 px-5');
       $logoutButton.addClass('btn-red-outline').removeClass('btn-light');
       $itemsToShow.fadeIn();
+      $hamburger.addClass('hamburger-dark');
       
       if (! getCookie('cookie_consent'))
         $cookieAlert.show();
@@ -126,6 +133,7 @@ if ($('#scroll-mark').length > 0) {
     } else {
       $navbar.removeClass('navbar-light bg-white shadow-sm position-fixed py-2 px-4 slideInDown').addClass('navbar-dark py-4 px-5');
       $logoutButton.addClass('btn-light').removeClass('btn-red-outline');
+      $hamburger.removeClass('hamburger-dark');
       $itemsToShow.fadeOut();
     }
   });

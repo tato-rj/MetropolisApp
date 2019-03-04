@@ -1,5 +1,5 @@
 @import 'bootstrap';
-@import 'node_modules/fullcalendar/dist/fullcalendar.min';
+@import '~fullcalendar/dist/fullcalendar.min';
 @import 'variables';
 @import 'responsive';
 @import 'components/calendar';
@@ -9,6 +9,9 @@
 @import 'components/loaders';
 @import 'components/custom';
 @import 'components/share';
+@import 'components/hamburgers';
+
+button:focus {outline:0;}
 
 .nav-tabs .nav-link:not(.active) {
   opacity: .6;

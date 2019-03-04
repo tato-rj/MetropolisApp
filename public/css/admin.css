@@ -19680,10 +19680,6 @@ trix-editor .attachment__remove--icon:hover::before {
     margin-bottom: 1.5rem !important;
   }
 
-  .toggle-finder {
-    width: 100%;
-  }
-
   .step-icon {
     width: 4rem !important;
   }
@@ -19698,6 +19694,36 @@ trix-editor .attachment__remove--icon:hover::before {
 }
 
 @media (max-width: 991.98px) {
+  .navbar {
+    padding-left: 1.5rem !important;
+  }
+
+  .navbar-collapse {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    text-align: center;
+    padding-top: 6em;
+    font-size: 1.25em;
+  }
+
+  .navbar-collapse .btn {
+    font-size: 1em;
+    margin-top: 1.25em !important;
+  }
+
+  select[name="time"],
+  select[name="participants"] {
+    border-left: 1px solid #ced4da !important;
+  }
+
+  .toggle-finder {
+    width: 100%;
+  }
+
   .plans .cover {
     height: 250px;
   }
@@ -22011,6 +22037,10 @@ trix-toolbar .trix-button {
 
 .trix-content h1 {
   font-size: 1.25em;
+}
+
+.navbar-toggler {
+  border: none !important;
 }
 
 .modal-content {

@@ -1,0 +1,18 @@
+$hamburger-layer-color: #f8f9fa;
+$hamburger-layer-height: 3px;
+
+@import '~hamburgers/_sass/hamburgers/hamburgers';
+
+.hamburger-dark {
+	.hamburger-inner {
+		background-color: #212529;
+
+		&:after {
+			background-color: #212529;
+		}
+
+		&:before {
+			background-color: #212529;
+		}
+	}
+}

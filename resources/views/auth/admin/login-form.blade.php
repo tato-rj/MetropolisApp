@@ -21,7 +21,7 @@
             @include('components/form/error', ['field' => 'remember'])
         </div>
 
-        <button type="submit" class="btn btn-red btn-block">LOGIN</button>
+        <button type="submit" class="btn btn-red btn-block">Entrar</button>
     </form>
     <div>
         <p class="mb-0">

@@ -13,6 +13,7 @@
     margin-right: 8px;
     border-bottom-right-radius: 16px;
     border-top-right-radius: 16px;
+	border-left: 4px solid #E3342F;
 }
 #terms-list > ol > li, #terms-list p {margin-bottom: 1.75em; color: #343a40}
 #terms-list > ol > li > ol > li {margin-bottom: .5em; margin-top: .5em}

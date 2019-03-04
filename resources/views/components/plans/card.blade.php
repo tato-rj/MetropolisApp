@@ -12,7 +12,7 @@
       <div class="p-3 text-muted">
         @include('components.plans.icons.'.str_slug($plan->type))
       </div>
-      <a href="{{route('plan.confirm', ['plan_id' => $plan->id])}}" class="btn btn-{{$plan->color}} btn-block"><strong>Assinar</strong></a>
+      <a href="{{route('plan.confirm', ['plan_id' => $plan->id])}}" class="btn btn-{{$plan->color}} btn-block">Assinar</a>
     </div>
   </div>
 </div>

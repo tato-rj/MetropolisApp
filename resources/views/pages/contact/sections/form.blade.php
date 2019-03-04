@@ -24,7 +24,7 @@
 					<textarea class="form-control rounded-0" name="message" rows="4" placeholder="Escreva aqui a sua mensagem"></textarea>
 				</div>
 				<div class="text-center">
-					<button type="submit" class=" btn btn-wide btn-red rounded-0"><strong>Envie a minha mensagem</strong></button>
+					<button type="submit" class=" btn btn-wide btn-red rounded-0">Envie a minha mensagem</button>
 				</div>
 			</form>
 		</div>

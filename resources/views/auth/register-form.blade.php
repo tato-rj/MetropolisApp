@@ -30,12 +30,12 @@
             <input type="password" name="password_confirmation" class="form-control {{ $errors->has('password-confirm') ? ' is-invalid' : '' }}" aria-describedby="password-confirm" placeholder="Confirme o seu password">
         </div>
 
-        <button type="submit" class="btn btn-red btn-block">CONTINUAR</button>
+        <button type="submit" class="btn btn-red btn-block">Entrar</button>
     </form>
     <div class="mb-4">
         <p class="lead text-muted text-center my-3">- ou se preferir -</p>
-        <a href="" class="btn btn-facebook btn-block text-left"><i class="fab fa-facebook fa-lg border-right mr-3" style="width: 34px"></i>Continuar com Facebook</a>
-        <a href="" class="btn btn-google btn-block text-left"><i class="fab fa-google border-right mr-3" style="width: 34px"></i>Continuar com Google</a>
+        <a href="" class="btn btn-facebook btn-block text-left"><i class="fab fa-facebook fa-lg border-right mr-3" style="width: 34px"></i>Entrar com Facebook</a>
+        <a href="" class="btn btn-google btn-block text-left"><i class="fab fa-google border-right mr-3" style="width: 34px"></i>Entrar com Google</a>
     </div>
     <div>
         <p class="m-0">

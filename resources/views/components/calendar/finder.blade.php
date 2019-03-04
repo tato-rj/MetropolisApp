@@ -48,7 +48,7 @@
 					</select>
 					@endforeach
 
-					<button type="submit" class="col-lg-2 col-6 btn btn-teal">Procurar</button>
+					<button type="submit" class="col-lg-2 col-6 btn btn-teal"><strong>Procurar</strong></button>
 				</div>
 			</form>
 		</div>

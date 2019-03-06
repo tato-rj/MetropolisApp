@@ -22922,10 +22922,6 @@ button:focus {
   outline: 0;
 }
 
-.overflow-x-hidden {
-  overflow-y: hidden;
-}
-
 .nav-tabs .nav-link:not(.active) {
   opacity: .6;
 }

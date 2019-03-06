@@ -87,7 +87,8 @@
 
 <script type="text/javascript">
 $('.navbar-toggler').on('click', function() {
-  $(this).toggleClass('is-active position-fixed');
+  $(this).toggleClass('is-active');
+  $('body').toggleClass('overflow-x-hidden');
   $('.navbar-collapse').fadeToggle();
 });
 

@@ -1,5 +1,5 @@
-<div class="row mb-5 {{! $loop->last ? 'pb-5 border-bottom' : null}}">
-	<div class="col-4">
+<div class="row mb-4 {{! $loop->last ? 'pb-4 border-bottom' : null}}">
+	<div class="col-lg-4 col-md-4 col-12 mb-3">
 		<img src="{{asset($workshop->cover_image_path)}}" class="w-100 mb-3">
 		
 		<div class="mb-1"><strong class="text-teal mr-2">DATA</strong>{{$workshop->starts_at->format('d/m/Y')}}</div>
@@ -8,7 +8,7 @@
 		
 		<div><strong class="text-teal mr-2">INVESTIMENTO</strong><strong class="{{! $workshop->fee ? 'text-red' : null}}">{{$workshop->fee ? feeToString($workshop->fee) : 'Gratuito'}}</strong></div>
 	</div>
-	<div class="col-8 d-apart flex-column">
+	<div class="col-lg-8 col-md-8 col-12 d-apart flex-column">
 		<div class="mb-2 w-100">
 			<div class="mb-1">
 				@include('components.share.icons', ['url' => route('workshops.show', $workshop->slug), 'description' => $workshop->headline])

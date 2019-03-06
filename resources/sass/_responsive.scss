@@ -22,6 +22,25 @@
 			margin: 0 !important;
 		}
 	}
+
+	.alternate-divs {
+		.row {
+			> div:first-of-type {
+				order: 2;
+			}
+			> div:last-of-type {
+				order: 1;
+			}
+		}
+	}
+
+	.filter-form {
+		width: 100%;
+
+		select {
+			width: 50% !important;
+		}
+	}
 }
 @include media-breakpoint-down(md) {
 	.navbar {

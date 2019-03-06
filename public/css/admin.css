@@ -19691,6 +19691,26 @@ trix-editor .attachment__remove--icon:hover::before {
   .plans .description {
     margin: 0 !important;
   }
+
+  .alternate-divs .row > div:first-of-type {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+  }
+
+  .alternate-divs .row > div:last-of-type {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+  }
+
+  .filter-form {
+    width: 100%;
+  }
+
+  .filter-form select {
+    width: 50% !important;
+  }
 }
 
 @media (max-width: 991.98px) {

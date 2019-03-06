@@ -1,10 +1,10 @@
-<div class="d-apart align-items-center">
-	<div>
+<div class="d-apart align-items-center flex-wrap">
+	<div class="d-none d-md-flex">
 		@if(! $workshops->isEmpty())
 		<p class="m-0 text-muted"><small>Mostrando {{$workshops->firstItem()}} - {{$workshops->lastItem()}} de {{$workshops->total()}} {{str_plural('workshops', $workshops->total())}}</small></p>
 		@endif
 	</div>
-	<div>
+	<div class="filter-form">
 		<form method="GET" action="{{\URL::current()}}">
 			<div class="d-flex">
 				<select class="form-control {{!empty($bg) ? 'bg-' . $bg : null}}" name="filtro" onchange="this.form.submit()" style="border-top: 0; border-bottom: 0; border-right: 0; width: auto">

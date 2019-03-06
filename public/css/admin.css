@@ -19716,6 +19716,12 @@ trix-editor .attachment__remove--icon:hover::before {
   .fc-left {
     margin-bottom: 1rem;
   }
+
+  button#logout {
+    color: #212529 !important;
+    background-color: #f8f9fa !important;
+    border-color: #f8f9fa !important;
+  }
 }
 
 @media (max-width: 991.98px) {

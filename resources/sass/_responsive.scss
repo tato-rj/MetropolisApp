@@ -45,6 +45,12 @@
 	.fc-right, .fc-left {
 		margin-bottom: 1rem;
 	}
+
+	button#logout {
+	    color: #212529 !important;
+	    background-color: #f8f9fa !important;
+	    border-color: #f8f9fa !important;
+	}
 }
 @include media-breakpoint-down(md) {
 	.navbar {

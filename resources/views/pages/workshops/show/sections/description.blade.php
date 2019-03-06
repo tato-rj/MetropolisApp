@@ -10,7 +10,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-default mb-5">
+		<div class="col-default mb-2">
 			@include('pages.workshops.show.sections.intro')
 		</div>
 		<div class="col-default mb-4">

@@ -8,7 +8,7 @@
 					@include('pages.user.home.sections.button', [
 						'title' => 'AGENDA', 'icon' => 'calendar-alt', 'url' => route('client.events.index')])
 					@include('pages.user.home.sections.button', [
-						'title' => 'WORKSHOPS', 'icon' => 'chalkboard-teacher', 'url' => route('client.workshops.index')])
+						'title' => 'MEUS WORKSHOPS', 'icon' => 'chalkboard-teacher', 'url' => route('client.workshops.index')])
 					@include('pages.user.home.sections.button', [
 						'title' => 'CADASTRO', 'icon' => 'address-card', 'url' => route('client.profile.show')])
 					@include('pages.user.home.sections.button', [

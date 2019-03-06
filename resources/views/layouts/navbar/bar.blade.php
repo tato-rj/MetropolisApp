@@ -1,6 +1,6 @@
 <nav class="navbar animated animation-fast navbar-expand-lg navbar-dark position-absolute w-100 z-20 py-4">
   <a class="navbar-brand" href="/"><img src="{{asset('images/brand/logo.svg')}}" width="60"></a>
-  <button class="navbar-toggler z-10 hamburger hamburger--squeeze" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler z-10 hamburger hamburger--squeeze" style="top: 20px; right: 16px;" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="hamburger-box">
       <span class="hamburger-inner"></span>
     </span>

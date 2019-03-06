@@ -87,7 +87,7 @@
 
 <script type="text/javascript">
 $('.navbar-toggler').on('click', function() {
-  $(this).toggleClass('is-active');
+  $(this).toggleClass('is-active position-fixed');
   $('.navbar-collapse').fadeToggle();
 });
 
@@ -122,7 +122,7 @@ if ($('#scroll-mark').length > 0) {
     let $scrollTop = $(this).scrollTop();
 
     if ($scrollTop > $limit){
-      $navbar.addClass('navbar-light position-fixed bg-white shadow-sm py-2 px-4 slideInDown').removeClass('navbar-dark py-4 px-5');
+      $navbar.addClass('navbar-light position-fixed bg-white shadow-sm py-2 slideInDown').removeClass('navbar-dark py-4');
       $logoutButton.addClass('btn-red-outline').removeClass('btn-light');
       $itemsToShow.fadeIn();
       $hamburger.addClass('hamburger-dark');
@@ -131,7 +131,7 @@ if ($('#scroll-mark').length > 0) {
         $cookieAlert.show();
       
     } else {
-      $navbar.removeClass('navbar-light bg-white shadow-sm position-fixed py-2 px-4 slideInDown').addClass('navbar-dark py-4 px-5');
+      $navbar.removeClass('navbar-light bg-white shadow-sm position-fixed py-2 slideInDown').addClass('navbar-dark py-4');
       $logoutButton.addClass('btn-light').removeClass('btn-red-outline');
       $hamburger.removeClass('hamburger-dark');
       $itemsToShow.fadeOut();

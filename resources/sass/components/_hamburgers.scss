@@ -6,6 +6,7 @@ $hamburger-layer-height: 3px;
 .hamburger-dark {
 	.hamburger-inner {
 		background-color: #212529;
+		margin-top: 1px;
 
 		&:after {
 			background-color: #212529;

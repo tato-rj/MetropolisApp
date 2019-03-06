@@ -18933,6 +18933,10 @@ a.fc-more:hover {
     margin-top: 1.25em !important;
   }
 
+  .navbar-collapse .nav-link {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+
   select[name="time"],
   select[name="participants"] {
     border-left: 1px solid #ced4da !important;
@@ -22883,6 +22887,7 @@ video {
 
 .hamburger-dark .hamburger-inner {
   background-color: #212529;
+  margin-top: 1px;
 }
 
 .hamburger-dark .hamburger-inner:after {

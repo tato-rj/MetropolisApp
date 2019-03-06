@@ -18929,6 +18929,11 @@ a.fc-more:hover {
   .filter-form select {
     width: 50% !important;
   }
+
+  .fc-right,
+  .fc-left {
+    margin-bottom: 1rem;
+  }
 }
 
 @media (max-width: 991.98px) {

@@ -41,6 +41,10 @@
 			width: 50% !important;
 		}
 	}
+
+	.fc-right, .fc-left {
+		margin-bottom: 1rem;
+	}
 }
 @include media-breakpoint-down(md) {
 	.navbar {

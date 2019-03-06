@@ -1,4 +1,4 @@
-<div class="p-2 border d-inline-block">
+<div class="p-2 d-inline-block">
 	<p class="text-muted mb-0 ml-2"><small>LEGENDA</small></p>
 	<div class="m-2 d-flex align-items-center">
 		<div class="mr-2 shadow-sm btn-yellow" style="width: 20px; height: 20px;"></div>

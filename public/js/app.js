@@ -94615,13 +94615,13 @@ var CustomDatePicker = function () {
         _classCallCheck(this, CustomDatePicker);
 
         this.element = $(element);
-        this.today = moment(this.element.attr('data-now')).locale('pt').format("D [de] MMMM [de] YYYY");
+        // this.today = moment(this.element.attr('data-now')).locale('pt').format("D [de] MMMM [de] YYYY");
     }
 
     _createClass(CustomDatePicker, [{
         key: 'create',
         value: function create() {
-            this.element.val(this.today).datepicker({
+            this.element.datepicker({
                 onSelect: function onSelect(dateText, date) {
                     var month = parseInt(date.selectedMonth) + 1;
                     var string = date.selectedYear + '-' + month + '-' + date.selectedDay;

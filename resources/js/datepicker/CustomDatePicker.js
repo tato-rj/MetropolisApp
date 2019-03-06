@@ -2,11 +2,11 @@ class CustomDatePicker
 {
     constructor(element) {
     	this.element = $(element);
-        this.today = moment(this.element.attr('data-now')).locale('pt').format("D [de] MMMM [de] YYYY");
+        // this.today = moment(this.element.attr('data-now')).locale('pt').format("D [de] MMMM [de] YYYY");
     }
 
     create() {
-        this.element.val(this.today).datepicker({
+        this.element.datepicker({
             onSelect: function(dateText, date) {
                 let month = parseInt(date.selectedMonth)+1;
                 let string = date.selectedYear + '-' + month + '-' + date.selectedDay;

@@ -14,7 +14,9 @@
 				@include('components.share.icons', ['url' => route('workshops.show', $workshop->slug), 'description' => $workshop->headline])
 			</div>
 			
-			<h5 class="mb-2"><strong>{{$workshop->name}}</strong></h5>
+			<a href="{{route('workshops.show', $workshop->slug)}}" class="link-inherit">
+				<h5 class="mb-2"><strong>{{$workshop->name}}</strong></h5>
+			</a>
 			
 			<div>{{$workshop->headline}}</div>
 			

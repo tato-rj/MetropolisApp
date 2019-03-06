@@ -1,4 +1,4 @@
-<section class="container-fluid py-8" style="background-image: url({{asset('images/misc/cityline.png')}});
+<section class="container-fluid pb-8" style="background-image: url({{asset('images/misc/cityline.png')}});
     background-position: bottom;
     background-repeat: no-repeat;">
 	<div class="row">

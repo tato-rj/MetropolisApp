@@ -1,4 +1,6 @@
-<section class="container-fluid py-8 bg-light">
+<section class="container-fluid py-8" style="background-image: url({{asset('images/misc/cityline.png')}});
+    background-position: bottom;
+    background-repeat: no-repeat;">
 	<div class="row">
 		<div class="col-10 mx-auto text-center">
 			<h3 class="mb-4">{{auth()->check() ? 'Tem alguma dúvida?' : 'Marque uma visita'}}</h3>

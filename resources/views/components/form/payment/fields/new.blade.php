@@ -7,7 +7,7 @@
 </div>
 
 <div class="form-row">
-	<div class="col-8">
+	<div class="col-lg-8 col-md-8 col-sm-8 col-12">
 		<div class="form-group">
 			<label class="control-label" for="card_number"><small>Número do cartão</small></label>
 			<input required type="text" maxlength="19" class="form-control" name="card_number" id="card_number" placeholder="Número do cartão" 
@@ -17,7 +17,7 @@
 			<label class="text-danger m-0 card-validation" id="card-invalid" style="display: none;"><small>O número do cartão é inválido</small></label>
 		</div>
 	</div>
-	<div class="col-4">
+	<div class="col-lg-4 col-md-4 col-sm-4 col-12">
 		<label class="control-label" for="cvv"><small>Código de segurança</small></label>
 		<div class="d-flex">
 			<input required type="text" class="form-control" maxlength="4" name="cvv" id="cvv" placeholder="CVV">

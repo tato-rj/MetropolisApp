@@ -1,6 +1,6 @@
 <section class="container mb-6">
   <div class="row">
-    <div class="col-default mb-5 pr-0 border-bottom">
+    <div class="col-default mb-5 p-0 border-bottom">
       @include('pages.workshops.sections.filters')
     </div>
   </div>

@@ -35,7 +35,6 @@ class CreateWorkshopsTable extends Migration
             $table->string('transaction_code')->nullable();
             $table->timestamp('verified_at')->nullable();
             $table->tinyInteger('status_id')->default(0);
-            $table->unique(['user_id', 'workshop_id']);
             $table->timestamps();
         });
     }

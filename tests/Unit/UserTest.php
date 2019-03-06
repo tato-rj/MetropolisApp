@@ -62,18 +62,6 @@ class UserTest extends AppTest
 	}
 
 	/** @test */
-	public function it_cannot_signup_twice_to_the_same_workshop()
-	{
-		$this->signIn();
-
-		auth()->user()->signup($this->workshop);
-
-		$this->expectException('Illuminate\Database\QueryException');
-
-		auth()->user()->signup($this->workshop);
-	}
-
-	/** @test */
 	public function it_has_many_payments()
 	{
 		$this->signIn();

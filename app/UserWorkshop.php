@@ -10,7 +10,7 @@ class UserWorkshop extends Metropolis implements Reservation
     use PagSeguro;
 
     protected $dates = ['starts_at', 'ends_at', 'verified_at'];
-    
+
     public function workshop()
     {
     	return $this->belongsTo(Workshop::class);

@@ -27,6 +27,8 @@ class WorkshopsController extends Controller
     
     public function payment(Workshop $workshop)
     {
+        $this->authorize('signup', $workshop);
+
         if ($workshop->isFree) {
             auth()->user()->signup($workshop);
 
@@ -42,6 +44,8 @@ class WorkshopsController extends Controller
 
     public function purchase(Workshop $workshop, Request $request, CreditCardForm $form)
     {
+        $this->authorize('signup', $workshop);
+
         $pagseguro = new PagSeguro;
 
         $user = auth()->user();

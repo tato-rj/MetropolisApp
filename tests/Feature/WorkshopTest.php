@@ -107,4 +107,31 @@ class WorkshopTest extends AppTest
 
 		$this->assertTrue($reservation->fresh()->statusForUser == 'Cancelada');
 	}
+
+	/** @test */
+	public function a_user_cannot_signup_to_the_same_workshop()
+	{
+		$this->signIn();
+
+		$this->signUpToNewWorkshop($this->workshop);
+
+		$this->expectException('Illuminate\Auth\Access\AuthorizationException');
+
+		$this->signUpToNewWorkshop($this->workshop);
+	}
+
+	/** @test */
+	public function a_user_can_signup_to_the_same_workshop_only_if_it_has_cancelled_its_prior_reservation()
+	{
+		$this->signIn();
+
+		$this->signUpToNewWorkshop($this->workshop);
+
+		UserWorkshop::where('user_id', auth()->user()->id)->first()->cancel();
+
+		$this->signUpToNewWorkshop($this->workshop);
+
+		$this->assertCount(2, auth()->user()->fresh()->workshops);
+		$this->assertCount(1, auth()->user()->fresh()->validWorkshops);
+	}
 }

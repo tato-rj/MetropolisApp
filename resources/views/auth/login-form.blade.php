@@ -2,13 +2,13 @@
     <form method="POST" action="{{ route('login') }}" class="mb-3">
         @csrf
         <div class="form-group">
-            <input type="email" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Meu e-mail" value="{{old('email')}}">
+            <input required type="email" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Meu e-mail" value="{{old('email')}}">
 
             @include('components/form/error', ['field' => 'email'])
         </div>
 
         <div class="form-group mb-2">
-            <input type="password" name="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" aria-describedby="password" placeholder="Password">
+            <input required type="password" name="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" aria-describedby="password" placeholder="Password">
 
             @include('components/form/error', ['field' => 'password'])
         </div>

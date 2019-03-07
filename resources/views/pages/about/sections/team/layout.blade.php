@@ -49,5 +49,14 @@
 			<a href="" class="p-2 link-inherit"><i class="fab fa-facebook-f"></i></a>
 		@endslot
 		@endcomponent
+
+		@component('pages.about.sections.team.member', [
+			'image' => 'larissa', 'name' => 'Larissa Pochmann', 'position' => 'workshops',
+			'fields' => ['ADMINISTRAÇÃO DE EVENTOS', 'SUPORTE AO CLIENTE', 'PLANEJAMENTO E LOGÍSTICA']])
+		@slot('icons')
+			<a href="" class="p-2 link-inherit"><i class="far fa-envelope"></i></a>
+			<a href="" class="p-2 link-inherit"><i class="fab fa-facebook-f"></i></a>
+		@endslot
+		@endcomponent
 	</div>
 </section>

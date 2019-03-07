@@ -14,6 +14,11 @@ class Bill extends Metropolis implements Reservation
         return $this->creator_id;
     }
 
+    public function scopePending($query)
+    {
+        return $query->whereNull('verified_at');
+    }
+
     public function setStatus($status_id)
     {
         $this->update([

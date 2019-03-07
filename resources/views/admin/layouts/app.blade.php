@@ -33,12 +33,12 @@
 
 </head>
 
-<body>
+<body class="bg-light">
 
     <div id="app">
         @include('admin.layouts.header')
         @include('admin.layouts.menu')
-        <main class="container-fluid py-4 px-4 bg-light">
+        <main class="container-fluid py-4 px-4">
           @yield('content')
           @include('admin.layouts.footer')
         </main>
@@ -52,9 +52,36 @@
 @include('components.alerts.error', ['message' => session('error')])
 @endif
 
+@include('components.overlays.admin-load')
 @include('components.overlays.loading')
+@include('components.overlays.responsive')
 
 <script src="{{ mix('js/admin.js') }}"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#app').css('margin-left', $('.navmenu').outerWidth());
+  $('#admin-load-overlay').fadeOut('fast');
+});
+
+$('button#toggle-menu').on('click', function() {
+  
+  if ($('#menu-list .menu-labels').is(':visible')) {
+    $(this).css('transform', 'rotate(180deg)');
+  } else {
+    $(this).css('transform', 'rotate(0deg)');
+  }
+
+  $('#menu-list .menu-labels').toggle();
+  $('#app').css('margin-left', $('.navmenu').outerWidth());
+});
+
+$('.nav-icon').on('click', function() {
+  $('button#toggle-menu').css('transform', 'rotate(0deg)');
+  $('#menu-list .menu-labels').show();
+  $('#app').css('margin-left', $('.navmenu').outerWidth());
+});
+</script>
 
 <script type="text/javascript">
 $(document).on('click', '.show-overlay', function() {

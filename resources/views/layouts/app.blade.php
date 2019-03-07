@@ -86,6 +86,7 @@
 <script src="{{ asset('js/share.js') }}"></script>
 
 <script type="text/javascript">
+
 $('.navbar-toggler').on('click', function() {
   $(this).toggleClass('is-active position-fixed');
   $('.navbar-collapse').fadeToggle();

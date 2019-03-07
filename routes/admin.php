@@ -82,6 +82,8 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 
 		Route::post('', 'BillsController@store')->name('store');
 
+		Route::delete('{bill}', 'BillsController@destroy')->name('destroy');
+
 	});
 	
 });

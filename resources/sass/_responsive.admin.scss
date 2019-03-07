@@ -1,0 +1,9 @@
+@include media-breakpoint-down(md) {
+	body {
+		overflow: hidden;
+	}
+
+	#responsive-overlay {
+		display: block !important;
+	}
+}

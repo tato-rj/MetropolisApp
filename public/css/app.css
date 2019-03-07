@@ -21175,11 +21175,11 @@ html .ui-button.ui-state-disabled:active {
   width: 51px;
   height: 51px;
   margin: 6px;
-  border: 6px solid #fff;
+  border: 2px solid #4DC0B5;
   border-radius: 50%;
   -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
           animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+  border-color: #4DC0B5 transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {

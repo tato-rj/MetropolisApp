@@ -13,7 +13,7 @@ class BillsController extends Controller
 {
 	public function pending()
 	{
-        $pendingBills = Bill::whereNull('verified_at')->get();
+        $pendingBills = Bill::pending()->get();
 
         return view('admin.pages.bills.pending', compact('pendingBills'));		
 	}
@@ -61,5 +61,14 @@ class BillsController extends Controller
             auth()->user()->updateCard($cardForm);
 
         return redirect()->route('client.home')->with('status', 'O seu pagamento foi realizado com sucesso.');
+	}
+
+	public function destroy(Bill $bill)
+	{
+		$this->authorize('delete', $bill);
+		
+		$bill->delete();
+
+		return redirect()->back()->with('status', 'A cobrança foi removida com sucesso.');
 	}
 }

@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top bg-teal">
-  <a class="navbar-brand">
+  <a href="{{route('admin.dashboard')}}" class="navbar-brand link-none">
   	<img src="{{asset('images/brand/logo_white.svg')}}" width="60">
   </a>
   <form method="POST" action="{{route('logout')}}">

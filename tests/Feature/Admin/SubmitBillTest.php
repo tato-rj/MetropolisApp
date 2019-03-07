@@ -130,4 +130,44 @@ class SubmitBillTest extends AppTest
 
 		$this->assertCount(1, Bill::all());
 	}
+
+	/** @test */
+	public function an_admin_can_a_remove_generic_bill()
+	{
+		$this->signIn($this->admin, 'admin');
+		
+		$bill = make(Bill::class);
+
+		$this->post(route('admin.bills.store'), $bill->toArray());
+
+		$bill = Bill::first();
+
+		$this->assertDatabaseHas('bills', ['name' => $bill->name]);
+
+		$this->delete(route('admin.bills.destroy', $bill->id));
+
+		$this->assertDatabaseMissing('bills', ['name' => $bill->name]);
+	}
+
+	/** @test */
+	public function an_admin_cannot_a_remove_generic_bill_that_has_already_being_paid()
+	{
+		$this->signIn($this->admin, 'admin');
+		
+		$bill = make(Bill::class);
+
+		$this->post(route('admin.bills.store'), $bill->toArray());
+
+		$bill = Bill::first();
+
+		$this->assertDatabaseHas('bills', ['name' => $bill->name]);
+
+		$bill->update(['verified_at' => now()]);
+
+		$this->expectException('Illuminate\Auth\Access\AuthorizationException');
+
+		$this->delete(route('admin.bills.destroy', $bill->id));
+
+		$this->assertDatabaseHas('bills', ['name' => $bill->name]);
+	}
 }

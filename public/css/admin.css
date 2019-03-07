@@ -19667,104 +19667,13 @@ trix-editor .attachment__remove--icon:hover::before {
   cursor: not-allowed;
 }
 
-@media (max-width: 767.98px) {
-  .xs-w-100 {
-    width: 100%;
-  }
-
-  .display-4 {
-    font-size: 2.5rem;
-  }
-
-  .mb-4-sm {
-    margin-bottom: 1.5rem !important;
-  }
-
-  .step-icon {
-    width: 4rem !important;
-  }
-
-  .plans .icons {
-    margin-bottom: 1.5em !important;
-  }
-
-  .plans .description {
-    margin: 0 !important;
-  }
-
-  .alternate-divs .row > div:first-of-type {
-    -webkit-box-ordinal-group: 3;
-        -ms-flex-order: 2;
-            order: 2;
-  }
-
-  .alternate-divs .row > div:last-of-type {
-    -webkit-box-ordinal-group: 2;
-        -ms-flex-order: 1;
-            order: 1;
-  }
-
-  .filter-form {
-    width: 100%;
-  }
-
-  .filter-form select {
-    width: 50% !important;
-  }
-
-  .fc-right,
-  .fc-left {
-    margin-bottom: 1rem;
-  }
-
-  button#logout {
-    color: #212529 !important;
-    background-color: #f8f9fa !important;
-    border-color: #f8f9fa !important;
-  }
-}
-
 @media (max-width: 991.98px) {
-  .navbar {
-    padding-left: 1.5rem !important;
+  body {
+    overflow: hidden;
   }
 
-  .navbar-collapse {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: black;
-    text-align: center;
-    padding-top: 6em;
-    font-size: 1.25em;
-  }
-
-  .navbar-collapse .btn {
-    font-size: 1em;
-    margin-top: 1.25em !important;
-  }
-
-  .navbar-collapse .nav-link {
-    color: rgba(255, 255, 255, 0.5) !important;
-  }
-
-  select[name="time"],
-  select[name="participants"] {
-    border-left: 1px solid #ced4da !important;
-  }
-
-  .toggle-finder {
-    width: 100%;
-  }
-
-  .plans .cover {
-    height: 250px;
-  }
-
-  .plans .description {
-    margin-right: 0 !important;
+  #responsive-overlay {
+    display: block !important;
   }
 }
 
@@ -21957,11 +21866,11 @@ html .ui-button.ui-state-disabled:active {
   width: 51px;
   height: 51px;
   margin: 6px;
-  border: 6px solid #fff;
+  border: 2px solid #4DC0B5;
   border-radius: 50%;
   -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
           animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+  border-color: #4DC0B5 transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
@@ -22329,7 +22238,6 @@ video {
 }
 
 #app {
-  margin-left: 232px;
   margin-top: 63.23px;
 }
 
@@ -22343,7 +22251,6 @@ video {
 @media (min-width: 768px) {
   .navbar.fixed-left {
     bottom: 0;
-    width: 232px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-flow: column nowrap;

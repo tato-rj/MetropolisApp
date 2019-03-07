@@ -90,4 +90,85 @@
 	submitButton: 'button[type="submit"]'
 })).create();
 </script>
+
+<script type="text/javascript">
+(function() {
+  let uploadUrl, removeUrl, uploadAttachment;
+  let button = $('trix-editor').closest('form').find('button[type="submit"]');
+
+  Trix.config.attachments.preview.caption = {
+    name: false,
+    size: false
+  };
+  
+  uploadUrl = '/admin/workshops/images/upload';
+  removeUrl = '/admin/workshops/images/remove';
+
+  document.addEventListener("trix-attachment-add", function(event) {
+    let attachment;
+    attachment = event.attachment;
+
+    if (attachment.file) {
+      return uploadAttachment(attachment);
+    }
+  });
+
+  document.addEventListener("trix-attachment-remove", function(event) 
+  {
+  	button.prop('disabled', true);
+
+  	$.post(removeUrl, {'image_path': event.attachment.attachment.previewURL}, function(response){
+  		if(! response.passes) {
+  			console.log('A imagem foi removida com sucesso.');
+  		} else {
+  			console.log('Não foi possível remover esta imagem.');
+  		}
+  		button.prop('disabled', false);
+  	});
+  });
+
+  uploadAttachment = function(attachment) 
+  {
+    let file, id, form, key, xhr;
+
+    file = attachment.file;
+    form = new FormData;
+
+    form.append("Content-Type", file.type);
+    form.append("image", file);
+
+    button.prop('disabled', true);
+
+    xhr = new XMLHttpRequest;
+    xhr.open("POST", uploadUrl, true);
+
+    xhr.upload.onprogress = function(event) {
+      let progress;
+      progress = event.loaded / event.total * 100;
+
+      return attachment.setUploadProgress(progress);
+    };
+    
+    xhr.onload = function(request) {
+    	var href, url;
+    	button.prop('disabled', false);
+
+    	if (xhr.status === 200) {
+    		url = href = xhr.response;
+
+    		return attachment.setAttributes({
+    			url: url,
+    			href: href
+    		});
+    	} else {
+    		console.log('Não foi possível fazer o upload dessa imagem...');
+    	}
+    };
+
+    return xhr.send(form);
+  };
+
+}).call(this);
+
+</script>
 @endpush

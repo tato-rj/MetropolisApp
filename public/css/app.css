@@ -22929,6 +22929,77 @@ video {
   background-color: #212529;
 }
 
+trix-editor {
+  color: #495057;
+  overflow-y: scroll;
+  border-radius: 0;
+  background: white;
+}
+
+trix-editor figure {
+  position: relative;
+  width: 60%;
+  margin: 0 auto;
+}
+
+trix-editor figcaption {
+  display: none;
+}
+
+trix-editor .attachment__progress {
+  position: absolute;
+  z-index: 1;
+  height: 20px;
+  top: calc(50% - 10px);
+  left: 5%;
+  width: 90%;
+  opacity: 0.9;
+  -webkit-transition: opacity 200ms ease-in;
+  transition: opacity 200ms ease-in;
+}
+
+trix-editor h1 {
+  font-size: 1.25em;
+}
+
+trix-toolbar button[data-trix-attribute="code"],
+trix-toolbar button[data-trix-action="decreaseNestingLevel"],
+trix-toolbar button[data-trix-action="increaseNestingLevel"] {
+  display: none;
+}
+
+trix-toolbar .trix-button-group {
+  border-radius: 0 !important;
+}
+
+trix-toolbar .trix-button {
+  border-bottom: none !important;
+}
+
+.trix-disabled {
+  pointer-events: none;
+  background: #f1f3f5 !important;
+}
+
+.trix-content img {
+  width: 80%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.trix-content figure {
+  margin: 0 !important;
+}
+
+.trix-content figcaption {
+  display: none;
+}
+
+.trix-content h1 {
+  font-size: 1.25em;
+}
+
 button:focus {
   outline: 0;
 }

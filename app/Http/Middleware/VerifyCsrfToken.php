@@ -20,6 +20,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/pagseguro/event/notification',
-        '/pagseguro/plan/notification'
+        '/pagseguro/plan/notification',
+        '/admin/workshops/images/upload',
+        '/admin/workshops/images/remove',
     ];
 }

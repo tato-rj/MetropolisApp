@@ -100,6 +100,22 @@ class WorkshopsController extends Controller
         return redirect()->route('admin.workshops.edit', $workshop->slug)->with('status', 'O workshop foi criado com sucesso.');
     }
 
+    public function imageUpload(Request $request)
+    {
+        $path = $request->file('image')->store('workshops/content_images', 'public');
+
+        return asset('storage/' . $path);
+    }
+
+    public function imageRemove(Request $request)
+    {
+        $file = strstr($request->image_path, 'workshops');
+
+        \Storage::disk('public')->delete($file);
+
+        return response(200);
+    }
+
     /**
      * Display the specified resource.
      *

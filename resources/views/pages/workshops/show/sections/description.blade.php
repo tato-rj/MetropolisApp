@@ -15,7 +15,9 @@
 		</div>
 		<div class="col-default mb-4">
 			<p><strong>Sobre o workshop</strong></p>
-			{!! $workshop->description !!}
+			<div class="trix-content"> 
+				{!! $workshop->description !!}
+			</div>
 		</div>
 		@if($workshop->hasFiles())
 		<div class="col-default mb-4">

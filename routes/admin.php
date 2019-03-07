@@ -42,6 +42,14 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 
 		Route::post('novo', 'WorkshopsController@store')->name('store');
 
+		Route::prefix('images')->group(function() {
+
+			Route::post('upload', 'WorkshopsController@imageUpload');
+
+			Route::post('remove', 'WorkshopsController@imageRemove');
+
+		});
+
 		Route::get('{workshop}', 'WorkshopsController@edit')->name('edit');
 
 		Route::get('{workshop}/details', 'WorkshopsController@details')->name('details');

@@ -99,35 +99,37 @@
 			data-participants="{{$event->participants}}"
 			data-toggle="collapse" href="#emails">
 			{{$event->participants}} {{trans_choice('words.pessoas', $event->participants)}} 
+			@if($event->participants > 1)
 			<small class="text-teal"><i class="fas fa-caret-down"></i></small>
+			@endif
 		</span>
+		@if($event->participants > 1 && $event->emails)
 		<div class="collapse mt-2" id="emails">
 			<div class="bg-light px-4 py-3">
 				<ul class="list-flat">
 					@user($user_type)
 					<li><span class="text-muted"><small><i class="fas fa-user mr-2"></i>{{$event->creator->email}}</small></span></li>
 					@enduser
-					@if($event->emails)
-						<div class=""> 
-							@foreach($event->emails as $email)
-							<li class="d-flex justify-content-between align-items-baseline">
-								<span class="text-muted mr-3"><small>{{$loop->iteration}}</small></span>
-								<input class="form-control-plaintext form-control-sm event-email m-0" 
-									autocomplete="new-password"
-									readonly 
-									placeholder="Insira o email aqui..." 
-									type="email" 
-									value="{{$email}}">
-								<span class="ml-3 text-teal edit font-weight-bold cursor-pointer">editar</span>
-								<span class="ml-3 text-warning save font-weight-bold cursor-pointer" data-url="{{route('client.events.update.emails', $event->id)}}" style="display: none;">salvar</span>
-								<span class="text-teal ml-3 saved" style="display: none;"><i class="fas fa-check-circle"></i></span>
-							</li>
-							@endforeach
-						</div>
-					@endif
+					<div class=""> 
+						@foreach($event->emails as $email)
+						<li class="d-flex justify-content-between align-items-baseline">
+							<span class="text-muted mr-3"><small>{{$loop->iteration + 1}}</small></span>
+							<input class="form-control-plaintext form-control-sm event-email m-0" 
+								autocomplete="new-password"
+								readonly 
+								placeholder="Insira o email aqui..." 
+								type="email" 
+								value="{{$email}}">
+							<span class="ml-3 text-teal edit font-weight-bold cursor-pointer">editar</span>
+							<span class="ml-3 text-warning save font-weight-bold cursor-pointer" data-url="{{route('client.events.update.emails', $event->id)}}" style="display: none;">salvar</span>
+							<span class="text-teal ml-3 saved" style="display: none;"><i class="fas fa-check-circle"></i></span>
+						</li>
+						@endforeach
+					</div>
 				</ul>
 			</div>
 		</div>
+		@endif
 	</li>
 </ul>
 

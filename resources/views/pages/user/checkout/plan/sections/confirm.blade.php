@@ -25,7 +25,4 @@
 		</div>
 		<button id="submit" data-target="#form-credit" class="p-3 btn btn-red btn-block font-weight-bold">CONFIRMAR ASSINATURA</button>
 	</div>
-	<div class="px-2">
-		<small>Ao finalizar o pagamento, você concorda com os <a class="link-default" href="#">Termos de uso</a>. Política de Privacidade © Metropolis Rio. Todos os direitos reservados.</small>
-	</div>
 </div>

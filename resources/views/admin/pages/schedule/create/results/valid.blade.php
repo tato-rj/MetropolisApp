@@ -109,7 +109,7 @@
 								@endforeach
 							</select>
 						</div>
-						<div><small>Nós enviaremos um email para o usuário selecionado com instruções para pagar por essa reserva. Esta só será confirmada <u>após a confirmação do pagamento</u> dessa cobrança.</small></div>
+						<div><small>Nós enviaremos um email para o usuário selecionado com instruções para pagar por essa reserva. Esta só será confirmada <u>após a confirmação do pagamento</u> da cobrança.</small></div>
 					</li>
 				</ul>
 				<div class="bg-teal text-white d-flex flex-wrap">

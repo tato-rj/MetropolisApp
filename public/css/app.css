@@ -22938,7 +22938,7 @@ trix-editor {
 
 trix-editor figure {
   position: relative;
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -22998,6 +22998,11 @@ trix-toolbar .trix-button {
 
 .trix-content h1 {
   font-size: 1.25em;
+}
+
+span.attachment__name,
+span.attachment__size {
+  display: none;
 }
 
 button:focus {

@@ -1,5 +1,5 @@
 <div class="col-lg-8 col-10 mx-auto">
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('login') }}" class="mb-3">
         @csrf
         <div class="form-group">
             <input type="email" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="email" placeholder="Meu e-mail" value="{{old('email')}}">

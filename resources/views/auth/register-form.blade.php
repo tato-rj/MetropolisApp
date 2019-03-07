@@ -1,5 +1,5 @@
 <div class="col-lg-8 col-10 mx-auto">
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" class="mb-3">
         @csrf
         <div class="form-group">
             <input type="text" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" aria-describedby="name" placeholder="Nome completo" value="{{old('name')}}">

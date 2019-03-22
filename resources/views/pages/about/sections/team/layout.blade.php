@@ -22,7 +22,7 @@
 
 		@component('pages.about.sections.team.member', [
 			'image' => 'marco', 'name' => 'Marco Fernandes', 'position' => 'technologia',
-			'fields' => ['PROGRAMAÇÃO', 'ADMINISTRADOR DE REDE', 'AQUISIÇÕES', 'ASSISTÊNCIA TÉCNICA']])
+			'fields' => ['PROGRAMAÇÃO', 'ADMINISTRADOR DE EMAILS', 'AQUISIÇÕES', 'ASSISTÊNCIA TÉCNICA']])
 		@slot('icons')
 			<a href="" class="p-2 link-inherit"><i class="far fa-envelope"></i></a>
 			<a href="" class="p-2 link-inherit"><i class="fab fa-linkedin-in"></i></a>

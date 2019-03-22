@@ -34,5 +34,19 @@ class AdminsTableSeeder extends Seeder
             'role' => 'manager',
         	'password' => bcrypt('metropolis')
         ]);
+        
+        Admin::create([
+            'name' => 'Paulo Henrique Paiva',
+            'email' => 'paulo@metropolisrio.com.br',
+            'role' => 'manager',
+            'password' => bcrypt('metropolis')
+        ]);
+        
+        Admin::create([
+            'name' => 'Larissa Pochmann',
+            'email' => 'larissa@metropolisrio.com.br',
+            'role' => 'manager',
+            'password' => bcrypt('metropolis')
+        ]);
     }
 }

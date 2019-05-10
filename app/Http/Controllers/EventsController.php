@@ -64,7 +64,7 @@ class EventsController extends Controller
         }
 
         $pagseguro = new PagSeguro;
-        dd($pagseguro);
+        dd($pagseguro->session->getResult());
         return view('pages.user.checkout.event.index', compact(['form', 'pagseguro']));
     }
 

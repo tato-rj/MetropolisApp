@@ -66,7 +66,7 @@ class EventsController extends Controller
         $pagseguro = new PagSeguro;
 
         if (! $pagseguro->session->getResult())
-            return redirect()->back()->with('error', 'O Pagseguro está fora do ar, por favor tente novamente mais tarde.');
+            return redirect()->back()->with('error', 'O Pagseguro não conseguiu validar a sua sessão, por favor tente novamente mais tarde.');
 
         return view('pages.user.checkout.event.index', compact(['form', 'pagseguro']));
     }

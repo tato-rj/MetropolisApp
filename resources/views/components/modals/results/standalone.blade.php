@@ -82,7 +82,11 @@
 	<li class="mb-2">
 		<span class="text-teal mr-1"><strong>Status</strong></span>
 		
-		<span class="status-label text-{{$event->statusColor}}">{{$event->status}}</span>
+		<span class="status-label text-{{$event->statusColor}}">{{$event->status}}
+		@if($event->status == 'Processando o pedido')
+		<a href="#" class="link-blue ml-2"><small><i class="fas fa-sync-alt mr-2"></i>atualizar</small></a>
+		@endif
+		</span>
 		
 		<small class="text-muted verified-at">
 			@if($event->verified_at)

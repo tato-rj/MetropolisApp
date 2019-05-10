@@ -36,7 +36,14 @@ class CheckoutPlan implements Checkout
             $this->document()->withParameters('CNPJ', pagseguro('cnpj'))
         );
         $preApproval->setSender()->setAddress()->withParameters(
-            'Avenida Rio Branco', '151', 'Centro', '20040006', 'Rio de Janeiro', 'RJ', 'BRA', 'Grupo 401'
+            $this->request->address_street, 
+            $this->request->address_number, 
+            $this->request->address_district, 
+            clean($this->request->address_zip), 
+            $this->request->address_city, 
+            $this->request->address_state, 
+            'BRA', 
+            $this->request->address_complement
         );
         $preApproval->setSender()->setPhone()->withParameters(21, 31991377);
         $preApproval->setPaymentMethod()->setCreditCard()->setToken($this->request->card_token);

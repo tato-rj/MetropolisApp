@@ -205,7 +205,7 @@ $(document).on('keyup', 'input[name="card_number"]', function() {
 	if (cardNumber.length == 6) {
 		getCardFlag(input, cardNumber, $form);
 	} else if (cardNumber.length < 6) {
-		input.css('background-image', 'url(http://metropolis.test/images/icons/credit.png)');
+		input.css('background-image', 'url(https://metropolisrio.com.br/images/icons/credit.png)');
 		$form.find('input[name="card_brand"]').val('');
 		$form.find('#card-invalid').hide();
 	}
@@ -253,6 +253,8 @@ $(document).on('click', 'button#submit', function(event) {
 					console.log(response.message);
 					return false;
 				}
+
+        console.log('Sender hash: ' + response.senderHash);
 
 				$form.find('input[name="card_hash"]').val(response.senderHash);
 

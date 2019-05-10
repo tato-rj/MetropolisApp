@@ -30,7 +30,7 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before
 <script type="text/javascript">
 $(document).ready( function () {
     $('#payments-table').DataTable({
-		'order': [[0, 'desc']],
+		'aaSorting': [],
     	'language': {
 		    "sEmptyTable": "Nenhum registro encontrado",
 		    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",

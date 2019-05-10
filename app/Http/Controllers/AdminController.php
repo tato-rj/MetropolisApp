@@ -43,7 +43,7 @@ class AdminController extends Controller
 
     public function payments()
     {
-        $payments = Payment::all();
+        $payments = Payment::latest()->get();
 
     	return view('admin.pages.payments.index', compact(['payments']));
     }

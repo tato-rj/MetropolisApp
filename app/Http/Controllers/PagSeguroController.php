@@ -32,7 +32,7 @@ class PagSeguroController extends Controller
                 ]
             );
         } catch (\Exception $e) {
-            die('arg');
+            die($e->getMessage());
         }
 
         return $response;

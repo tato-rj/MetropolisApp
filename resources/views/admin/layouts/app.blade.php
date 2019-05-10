@@ -148,6 +148,8 @@ $('#event-modal, #plan-modal, #payment-modal').on('hidden.bs.modal', function (e
 $(document).on('click', 'button.event-status', function() {
   let url = $(this).attr('data-url');
   let code = $(this).attr('data-code');
+  
+  console.log('Checando o status da reserva...');
 
   $.ajax({
   url: url,

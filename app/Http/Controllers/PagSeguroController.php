@@ -34,7 +34,7 @@ class PagSeguroController extends Controller
                  */
                 $request->code
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             die($e->getMessage());
         }
 

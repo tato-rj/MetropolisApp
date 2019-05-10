@@ -23,7 +23,13 @@ class PagSeguroController extends Controller
             $response = \PagSeguro\Services\Transactions\Search\Reference::search(
                 /** @var \PagSeguro\Domains\AccountCredentials | \PagSeguro\Domains\ApplicationCredentials $credential */
                 $pagseguro->credentials,
-                $request->reference
+                $request->reference,
+                [
+                    'initial_date' => '2019-5-9T00:00',
+                    'final_date' => '2019-5-9T13:30',
+                    'page' => 1,
+                    'max_per_page' => 10,
+                ]
             );
         } catch (\Exception $e) {
             die($e->getMessage());

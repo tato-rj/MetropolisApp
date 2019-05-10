@@ -85,7 +85,7 @@
 		<span class="status-label text-{{$event->statusColor}}">{{$event->status}}
 		@admin($user_type)
 		@if($event->status == 'Processando o pedido')
-		<button class="btn btn-sm btn-link align-text-top p-0 ml-2 event-status" data-code="{{$event->reference}}" data-url="{{route('pagseguro.event.status')}}"><i class="fas fa-sync-alt mr-1"></i>atualizar</button>
+		<button class="btn btn-sm btn-link align-text-top p-0 ml-2 event-status" data-reference="{{$event->reference}}" data-url="{{route('pagseguro.event.status')}}"><i class="fas fa-sync-alt mr-1"></i>atualizar</button>
 		@endif
 		@endadmin
 		</span>

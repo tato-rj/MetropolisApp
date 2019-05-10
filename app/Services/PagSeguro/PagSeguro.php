@@ -132,7 +132,7 @@ class PagSeguro
         $message = '<strong>Mensagem do PagSeguro</strong> | ';
 
         if ($error->getCode() == 500)
-            return $message . 'O ambiente sandbox está indisponível nesse momento';
+            return $message . 'O Pagseguro está indisponível nesse momento';
 
         $response = $this->parseResponse($error);
 

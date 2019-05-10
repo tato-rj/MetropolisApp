@@ -135,11 +135,11 @@ Route::prefix('eventos')->name('events.')->group(function() {
 });
 
 Route::get('plan/create', function() {
-	$planos = \App\Plan::where('id', '!=', 1)->get();
+	$planos = \App\Plan::all();
 
-	// foreach ($planos as $plan) {
-	// 	(new \App\Services\PagSeguro\PagSeguro)->createPlan($plan);
-	// }
+	foreach ($planos as $plan) {
+		(new \App\Services\PagSeguro\PagSeguro)->createPlan($plan);
+	}
 
 	return 'Planos criados';
 });

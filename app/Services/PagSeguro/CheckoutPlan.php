@@ -30,10 +30,10 @@ class CheckoutPlan implements Checkout
         $preApproval->setPlan($this->plan->code);
         $preApproval->setReference($reference);
         $preApproval->setSender()->setName($this->user->name);
-        $preApproval->setSender()->setEmail('c38672894586801235492@sandbox.pagseguro.com.br');
+        $preApproval->setSender()->setEmail(pagseguro('vendor'));
         $preApproval->setSender()->setHash($this->request->card_hash);
         $preApproval->setSender()->setDocuments(
-            $this->document()->withParameters('CNPJ', '00000000000000')
+            $this->document()->withParameters('CNPJ', pagseguro('cnpj'))
         );
         $preApproval->setSender()->setAddress()->withParameters(
             'Avenida Rio Branco', '151', 'Centro', '20040006', 'Rio de Janeiro', 'RJ', 'BRA', 'Grupo 401'

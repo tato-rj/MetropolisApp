@@ -34,9 +34,9 @@ class CheckoutEvent implements Checkout
             $reference, $this->request->description, 1, $this->price
         );
         $creditCard->setSender()->setName($this->user->name);
-        $creditCard->setSender()->setEmail('c38672894586801235492@sandbox.pagseguro.com.br');
+        $creditCard->setSender()->setEmail(pagseguro('vendor'));
         $creditCard->setSender()->setPhone()->withParameters(21, 31991377);
-        $creditCard->setSender()->setDocument()->withParameters('CNPJ', '00000000000000');
+        $creditCard->setSender()->setDocument()->withParameters('CNPJ', pagseguro('cnpj'));
         $creditCard->setSender()->setHash($this->request->card_hash);
         $creditCard->setShipping()->setAddress()->withParameters(
             $this->request->address_street, 

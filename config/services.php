@@ -34,7 +34,9 @@ return [
         'model' => App\User::class,
         'token' => env('PAGSEGURO_AMBIENTE') == 'sandbox' ? env('PAGSEGURO_SANDBOX') : env('PAGSEGURO_TOKEN'),
         'email' => env('PAGSEGURO_EMAIL'),
-        'env' => env('PAGSEGURO_AMBIENTE')
+        'vendor' => env('PAGSEGURO_VENDOR_EMAIL'),
+        'env' => env('PAGSEGURO_AMBIENTE'),
+        'cnpj' => env('PAGSEGURO_CNPJ')
     ],
 
 ];

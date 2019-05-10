@@ -8,6 +8,13 @@ use App\{Event, Membership, Payment};
 
 class PagSeguroController extends Controller
 {
+    protected $baseurl;
+
+    public function __construct()
+    {
+        $this->baseurl = (pagseguro('env') == 'sandbox') ? 'https://ws.sandbox.pagseguro.uol.com.br' : 'https://ws.pagseguro.uol.com.br';
+    }
+
     public function notification(Request $request)
     {
         try {
@@ -23,7 +30,7 @@ class PagSeguroController extends Controller
     {
         $code = $this->cleanCode($request->notificationCode);
 
-        $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/notifications/'.$code.'?email='.pagseguro('email').'&token='.pagseguro('token');
+        $url = $this->baseurl . '/v2/pre-approvals/notifications/'.$code.'?email='.pagseguro('email').'&token='.pagseguro('token');
 
         $response = client()->get($url)->getBody();
         
@@ -49,7 +56,7 @@ class PagSeguroController extends Controller
         } else {
             $code = $this->cleanCode($request->notificationCode);
 
-            $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/notifications/'.$code.'?email='.pagseguro('email').'&token='.pagseguro('token');
+            $url = $this->baseurl . '/v2/transactions/notifications/'.$code.'?email='.pagseguro('email').'&token='.pagseguro('token');
 
             $response = client()->get($url)->getBody();
         }

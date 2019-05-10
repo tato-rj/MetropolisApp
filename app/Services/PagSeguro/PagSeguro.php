@@ -26,7 +26,7 @@ class PagSeguro
         Library::cmsVersion()->setName('Metropolis')->setRelease('1.0');
         Library::moduleVersion()->setName('Metropolis')->setRelease('1.0');
 
-        Configure::setEnvironment('sandbox');
+        Configure::setEnvironment(pagseguro('env'));
         Configure::setCharset('UTF-8');
         Configure::setAccountCredentials(pagseguro('email'), pagseguro('token'));
         Configure::setLog(true, storage_path('logs/pagseguro_'. date('Y-m-d') .'.txt'));

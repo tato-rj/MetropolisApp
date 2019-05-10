@@ -48,6 +48,6 @@
 @endsection
 
 @push('scripts')
-<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+<script type="text/javascript" src="https://stc{{pagseguro('env') == 'sandbox' ? '.sandbox' : null}}.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
 <script type="text/javascript" src="{{mix('js/pagseguro.js')}}"></script>
 @endpush

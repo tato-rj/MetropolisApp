@@ -145,7 +145,7 @@ $('#event-modal, #plan-modal, #payment-modal').on('hidden.bs.modal', function (e
   $(this).find('.modal-footer').hide();
 });
 
-$('button.event-status').on('click', function() {
+$(document).on('click', 'button.event-status', function() {
   let url = $(this).attr('data-url');
   let code = $(this).attr('data-code');
 

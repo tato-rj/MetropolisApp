@@ -84,7 +84,7 @@
 		
 		<span class="status-label text-{{$event->statusColor}}">{{$event->status}}
 		@if($event->status == 'Processando o pedido')
-		<a  class="link-blue ml-2 event-status"><small><i class="fas fa-sync-alt mr-1"></i>atualizar</small></a>
+		<button class="btn btn-sm btn-warning ml-2 event-status"><i class="fas fa-sync-alt mr-1"></i>atualizar</button>
 		@endif
 		</span>
 		

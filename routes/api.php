@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 
 Route::post('/pagseguro/notification', 'PagSeguroController@notification')->name('pagseguro.event.notification');
 
+Route::get('/pagseguro/status', 'PagSeguroController@status')->name('pagseguro.event.status');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

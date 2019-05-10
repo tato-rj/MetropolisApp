@@ -15,6 +15,32 @@ class PagSeguroController extends Controller
         $this->baseurl = (pagseguro('env') == 'sandbox') ? 'https://ws.sandbox.pagseguro.uol.com.br' : 'https://ws.pagseguro.uol.com.br';
     }
 
+    public function status(Request $request)
+    {
+        $pagseguro = new PagSeguro;
+
+        try {
+            $response = \PagSeguro\Services\Transactions\Search\Code::search(
+                /** @var \PagSeguro\Domains\AccountCredentials | \PagSeguro\Domains\ApplicationCredentials $credential */
+                $pagseguro->credentials,
+                /**
+                 * Código que identifica a transação. Código da transação que será consultada.
+                 *
+                 * Presença: Obrigatória.
+                 * Tipo: Texto.
+                 * Formato: Uma sequência de 36 caracteres, com os hífens, ou 32 caracteres, sem os hífens.
+                 *
+                 * @var string $transactionCode
+                 */
+                $request->code
+            );
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+
+        return $response;
+    }
+
     public function notification(Request $request)
     {
         try {

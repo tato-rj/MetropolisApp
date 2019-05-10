@@ -38,7 +38,7 @@ class WorkshopsController extends Controller
         }
 
         $pagseguro = new PagSeguro;
-        return $pagseguro;
+
         return view('pages.user.checkout.workshop.index', compact(['workshop', 'pagseguro']));
     }
 

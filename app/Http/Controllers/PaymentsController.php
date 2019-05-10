@@ -22,7 +22,7 @@ class PaymentsController extends Controller
     public function create(Request $request, ShowPaymentForm $form)
     {
         $pagseguro = new PagSeguro;
-
+        return $pagseguro;
         return view('pages.user.checkout.event.index', compact(['form', 'pagseguro']));
     }
 

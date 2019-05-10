@@ -25,8 +25,8 @@ class PagSeguroController extends Controller
                 $pagseguro->credentials,
                 $request->reference,
                 [
-                    'initial_date' => now()->copy()->subDay()->format('Y-m-dTH:i'),
-                    'final_date' => now()->copy()->format('Y-m-dTH:i'),
+                    'initial_date' => now()->copy()->subDay()->format('Y-m-d\TH:i'),
+                    'final_date' => now()->copy()->format('Y-m-d\TH:i'),
                     'page' => 1,
                     'max_per_page' => 10,
                 ]

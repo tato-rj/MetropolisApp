@@ -19,6 +19,10 @@
                 <label class="mb-1"><small>Email</small></label>
                 <input type="text" name="email" class="form-control" value="{{auth()->user()->email}}" required>
               </div>
+              <div class="form-group">
+                <label class="mb-1"><small>Telefone</small></label>
+                <input type="text" name="phone" class="form-control" value="{{auth()->user()->phone}}" required>
+              </div>
 
               <button type="submit" class="btn btn-red mt-1">Atualizar</button>
           </form>

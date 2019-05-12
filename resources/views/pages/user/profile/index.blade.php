@@ -9,7 +9,9 @@
 @endsection
 
 @push('scripts')
-
+<script type="text/javascript">
+$('input[name="phone"]').inputmask("(21) 99999-9999");
+</script>
 <script type="text/javascript">
 $('.edit-field').on('click', function() {
 	let $button = $(this);

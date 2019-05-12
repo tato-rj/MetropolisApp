@@ -38,6 +38,11 @@
             'label' => 'Email',
             'value' => auth()->user()->email,
             'field' => 'email'])
+
+          @include('pages.user.profile.sections.show-field', [
+            'label' => 'Telefone',
+            'value' => auth()->user()->phone,
+            'field' => 'phone'])
         </div>
       </div>
 

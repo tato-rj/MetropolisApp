@@ -30,7 +30,7 @@ class CheckoutPlan implements Checkout
         $preApproval->setPlan($this->plan->code);
         $preApproval->setReference($reference);
         $preApproval->setSender()->setName($this->user->name);
-        $preApproval->setSender()->setEmail(pagseguro('vendor'));
+        $preApproval->setSender()->setEmail($this->user->email);
         $preApproval->setSender()->setHash($this->request->card_hash);
         $preApproval->setSender()->setDocuments(
             $this->document()->withParameters('CNPJ', pagseguro('cnpj'))
@@ -45,7 +45,7 @@ class CheckoutPlan implements Checkout
             'BRA', 
             $this->request->address_complement
         );
-        $preApproval->setSender()->setPhone()->withParameters(21, 31991377);
+        $preApproval->setSender()->setPhone()->withParameters(21, $this->user->phone ?? 31991377);
         $preApproval->setPaymentMethod()->setCreditCard()->setToken($this->request->card_token);
         $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setName($this->request->card_holder_name);
         $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setBirthDate('01/10/1979');

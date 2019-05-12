@@ -62,7 +62,7 @@ class CheckoutEvent implements Checkout
         $creditCard->setInstallment()->withParameters(1, $this->price);
         $creditCard->setHolder()->setBirthdate('01/10/1979');
         $creditCard->setHolder()->setName($this->request->card_holder_name);
-        $creditCard->setHolder()->setPhone()->withParameters(21, 31991377);
+        $creditCard->setHolder()->setPhone()->withParameters(21, $this->user->phone ?? 31991377);
         $creditCard->setHolder()->setDocument()->withParameters($this->request->card_holder_document_type, clean($this->request->card_holder_document_value));
         $creditCard->setMode('DEFAULT');
 

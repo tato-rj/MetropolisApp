@@ -98,11 +98,14 @@ class UsersController extends Controller
         $request->validate([
             'name' => ['required', 'min:4', 'max:255', 'string', new FullName],
             'email' => 'required|email',
+            'phone' => 'required',
         ]);
 
         auth()->user()->update([
             'name' => ucwords($request->name),
-            'email' => $request->email]);
+            'email' => $request->email,
+            'phone' => $request->phone
+        ]);
 
         return redirect()->back()->with('status', 'O seu cadastro foi atualizado com sucesso.');
     }

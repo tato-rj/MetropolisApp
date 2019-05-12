@@ -67,7 +67,8 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => ucwords($data['name']),
-            'phone' => $data['phone'],
+            'area_code' => phone_fields($data['phone'])['code'],
+            'phone' => phone_fields($data['phone'])['number'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

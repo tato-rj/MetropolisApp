@@ -272,6 +272,14 @@ function clean($string)
 	return preg_replace("/[^0-9]/", "", $string);
 }
 
+function phone_fields($string)
+{
+    $code = str_replace(["(", ")"], "", substr($string, 0, 4));
+    $number = str_replace(["-", "–"], '', preg_replace('/\s+/', '', preg_replace("/\([^)]+\)/", "", $string)));
+
+    return ['code' => $code, 'number' => $number];
+}
+
 function cleanFileName($filename)
 {
     return preg_replace('/\\.[^.\\s]{3,4}$/', '', $filename);

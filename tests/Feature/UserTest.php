@@ -13,7 +13,8 @@ class UserTest extends AppTest
 
 		$this->post(route('client.profile.update'), [
 			'name' => 'New Name',
-			'email' => auth()->user()->email])->assertSessionHas('status');
+			'email' => auth()->user()->email,
+			'phone' => '(21) 123-123'])->assertSessionHas('status');
 
 		$this->assertEquals(auth()->user()->name, 'New Name');
 	}
@@ -69,7 +70,8 @@ class UserTest extends AppTest
 
 		$this->post(route('client.profile.update'), [
 			'name' => 'NoWay',
-			'email' => auth()->user()->email]);
+			'email' => auth()->user()->email,
+			'phone' => '(21) 123-123']);
 	}
 
 	/** @test */
@@ -81,6 +83,7 @@ class UserTest extends AppTest
 
 		$this->post(route('client.profile.update'), [
 			'name' => 'Good Name',
-			'email' => 'nah']);
+			'email' => 'nah',
+			'phone' => '(21) 123-123']);
 	}
 }

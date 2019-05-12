@@ -45,7 +45,7 @@ class CheckoutPlan implements Checkout
             'BRA', 
             $this->request->address_complement
         );
-        $preApproval->setSender()->setPhone()->withParameters(21, $this->user->phone ?? 31991377);
+        $preApproval->setSender()->setPhone()->withParameters($this->user->area_code, $this->user->phone);
         $preApproval->setPaymentMethod()->setCreditCard()->setToken($this->request->card_token);
         $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setName($this->request->card_holder_name);
         $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setBirthDate('01/10/1979');

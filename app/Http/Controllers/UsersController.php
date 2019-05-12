@@ -104,7 +104,8 @@ class UsersController extends Controller
         auth()->user()->update([
             'name' => ucwords($request->name),
             'email' => $request->email,
-            'phone' => $request->phone
+            'area_code' => phone_fields($request->phone)['code'],
+            'phone' => phone_fields($request->phone)['number']
         ]);
 
         return redirect()->back()->with('status', 'O seu cadastro foi atualizado com sucesso.');

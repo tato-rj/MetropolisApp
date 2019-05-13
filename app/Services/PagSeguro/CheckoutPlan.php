@@ -67,7 +67,6 @@ class CheckoutPlan implements Checkout
         try {
             return $preApproval->register($this->pagseguro->credentials);
         } catch (\Exception $error) {
-            dd($error);
             return $error;
         }
 	}

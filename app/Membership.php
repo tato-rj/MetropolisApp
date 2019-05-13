@@ -103,12 +103,4 @@ class Membership extends Metropolis
     {
         return $this->status == 'ACTIVE';
     }
-
-    public function hasEnded()
-    {
-        if (is_null($this->subscription_ends_at))
-            return false;
-
-        return $this->subscription_ends_at->lte(now());
-    }
 }

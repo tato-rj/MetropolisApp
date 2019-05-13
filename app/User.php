@@ -67,7 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail, Person
 
     public function membership()
     {
-        return $this->hasOne(Membership::class);
+        return $this->hasOne(Membership::class)->where('status', '!=','CANCELLED');
     }
 
     public function getFormattedPhoneAttribute()

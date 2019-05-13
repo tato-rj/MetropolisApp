@@ -12,7 +12,7 @@
     @foreach($payments as $payment)
     <tr class="{{$payment->reservation()->exists() ? null : 'opacity-4'}}">
       <td>{{$payment->created_at->format('d/m/Y')}}</td>
-      <td>{{$payment->reservation_ame}}</td>
+      <td>{{$payment->reservation_name}}</td>
       <td>{{$payment->user->name}}</td>
       <td>{{feeToString($payment->reservation_fee)}}</td>
       @if($payment->reservation()->exists())

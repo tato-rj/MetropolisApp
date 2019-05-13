@@ -81,12 +81,12 @@ class PlanTest extends AppTest
 
 		$membershipEvent = auth()->user()->events->first();
 
-		$this->assertTrue(auth()->user()->hasPlan);
+		$this->assertTrue(auth()->user()->hasPlan());
 		$this->assertFalse($membershipEvent->statusForUser == 'Cancelada');
 
 		$this->post(route('events.cancel', $membershipEvent->id));
 
-		$this->assertFalse(auth()->user()->fresh()->hasPlan);
+		$this->assertFalse(auth()->user()->fresh()->hasPlan());
 		$this->assertTrue($membershipEvent->fresh()->statusForUser == 'Cancelada');
 	}
 }

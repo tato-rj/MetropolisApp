@@ -102,11 +102,11 @@ class UserTest extends AppTest
 		auth()->user()->subscribe($this->plan, 'reference');
 
 		$this->assertFalse(auth()->user()->events->first()->status_id == 7);
-		$this->assertTrue(auth()->user()->hasPlan);
+		$this->assertTrue(auth()->user()->hasPlan());
 
 		auth()->user()->unsubscribe();
 
-		$this->assertFalse(auth()->user()->fresh()->hasPlan);
+		$this->assertFalse(auth()->user()->fresh()->hasPlan());
 		$this->assertTrue(auth()->user()->events->first()->fresh()->status_id == 7);
 	}
 

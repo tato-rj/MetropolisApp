@@ -26,7 +26,7 @@ class CheckoutPlan implements Checkout
             return true;
 
         $preApproval = new Accession();
-        
+        dd($this->plan->code);
         $preApproval->setPlan($this->plan->code);
         $preApproval->setReference($reference);
         $preApproval->setSender()->setName($this->user->name);
@@ -52,7 +52,7 @@ class CheckoutPlan implements Checkout
         $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setDocuments(
             $this->document()->withParameters($this->request->card_holder_document_type, clean($this->request->card_holder_document_value))
         );
-        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setPhone()->withParameters(21, 31991377);
+        $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setPhone()->withParameters($this->user->area_code, $this->user->phone);
         $preApproval->setPaymentMethod()->setCreditCard()->setHolder()->setBillingAddress()->withParameters(
             $this->request->address_street, 
             $this->request->address_number, 

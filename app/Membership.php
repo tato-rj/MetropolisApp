@@ -103,4 +103,9 @@ class Membership extends Metropolis
     {
         return $this->status == 'ACTIVE';
     }
+
+    public function setToRenew()
+    {
+        return $this->next_payment_at;
+    }
 }

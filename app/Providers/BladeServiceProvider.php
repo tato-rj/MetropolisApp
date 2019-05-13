@@ -14,7 +14,7 @@ class BladeServiceProvider extends ServiceProvider
     public function boot()
     {
         \Blade::if('subscribed', function () {
-            return auth()->check() && auth()->user()->membership()->exists() && auth()->user()->membership->isActive();
+            return auth()->check() && auth()->user()->hasPlan();
         });
 
         \Blade::if('bonus', function(\App\Space $space) {

@@ -77,7 +77,7 @@ class User extends Authenticatable implements MustVerifyEmail, Person
 
     public function getHasPlanAttribute()
     {
-        return $this->membership()->exists() && $this->membership->next_payment_at;
+        return $this->membership()->exists() && $this->membership->isActive();
     }
 
     public function subscribe(Plan $plan, $reference)

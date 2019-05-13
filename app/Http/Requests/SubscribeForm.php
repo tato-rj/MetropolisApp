@@ -13,7 +13,7 @@ class SubscribeForm extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check() && ! (auth()->user()->membership()->exists() && auth()->user()->membership->isActive());
+        return auth()->check() && ! auth()->user()->hasPlan();
     }
 
     /**

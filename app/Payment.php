@@ -13,11 +13,6 @@ class Payment extends Metropolis
     	return $this->belongsTo(User::class);
     }
 
-    public function getNameAttribute($name)
-    {
-        return $name ?? 'Este evento não existe mais';
-    }
-
     public function reservation()
     {
     	return $this->morphTo();
@@ -28,6 +23,8 @@ class Payment extends Metropolis
         if ($reservation && ! $this->byCode($reservation->transaction_code)->exists()) {
         	return $this->create([
         		'user_id' => $reservation->owner_id,
+                'reservation_name' => $reservation->name,
+                'reservation_fee' => $reservation->fee,
         		'reservation_id' => $reservation->id,
         		'reservation_type' => get_class($reservation),
         		'transaction_code' => $reservation->transaction_code

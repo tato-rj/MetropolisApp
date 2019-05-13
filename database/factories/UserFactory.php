@@ -106,6 +106,12 @@ $factory->define(App\Payment::class, function(Faker $faker) {
         'user_id' => function() {
             return create('App\User')->id;
         },
+        'reservation_name' => function() use ($event) {
+            return $event->name;
+        },
+        'reservation_fee' => function() use ($event) {
+            return $event->fee;
+        },        
         'reservation_id' => function() use ($event) {
             return $event->id;
         },

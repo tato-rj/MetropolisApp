@@ -16,7 +16,7 @@
   				</thead>
   				<tbody>
   					@foreach(auth()->user()->payments as $payment)
-  					<tr class="{{$payment->reservation()->exists() ?? null : 'opacity-4'}}">
+  					<tr class="{{$payment->reservation()->exists() ? null : 'opacity-4'}}">
   						<td style="width:16.66%">{{$payment->created_at->format('d/m/Y')}}</td>
   						<td style="width:50%">{{$payment->reservation_name}}</td>
   						<td style="width:16.66%">{{feeToString($payment_reservation->fee)}}</td>

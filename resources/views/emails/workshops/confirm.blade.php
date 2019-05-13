@@ -1,7 +1,7 @@
 @component('mail::message')
 # Olá {{$user->first_name}}
 
-A sua reserva está confirmada! Aqui vão os detalhes do evento:
+O seu pedido foi recebido com sucesso! Por favor aguarde a confirmação do seu pagamento para finalizarmos a reserva. Aqui vão os detalhes do evento:
 <div style="border-bottom: 1px solid lightgrey; margin-bottom: 15px; padding-bottom: 15px">
 	<img src="{{asset($workshop->cover_image_path)}}" style="margin-bottom: .75em">
 	<p style="margin-bottom: 5px"><strong>Workshop:</strong> {{$workshop->name}}</p>

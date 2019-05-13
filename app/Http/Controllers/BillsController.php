@@ -60,7 +60,7 @@ class BillsController extends Controller
         if ($request->save_card)
             auth()->user()->updateCard($cardForm);
 
-        return redirect()->route('client.home')->with('status', 'O seu pagamento foi realizado com sucesso.');
+        return redirect()->route('client.home')->with('status', 'O seu pagamento foi recebido com sucesso. Por favor aguarde até que a transação seja finalizada.');
 	}
 
 	public function destroy(Bill $bill)

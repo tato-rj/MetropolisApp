@@ -13,6 +13,11 @@ class Payment extends Metropolis
     	return $this->belongsTo(User::class);
     }
 
+    public function getNameAttribute($name)
+    {
+        return $name ?? 'Este evento não existe mais';
+    }
+
     public function reservation()
     {
     	return $this->morphTo();

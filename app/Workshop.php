@@ -18,6 +18,8 @@ class Workshop extends Metropolis
         self::deleting(function($workshop) {
             \Storage::disk('public')->delete($workshop->cover_image);
 
+            $workshop->attendees()->detach();
+
             $workshop->files->each(function($file) {
                 $file->delete();
             });

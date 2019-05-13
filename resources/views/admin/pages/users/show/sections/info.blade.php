@@ -23,7 +23,7 @@
 				<p class="text-muted mb-3"><i>Nenhum cartão salvo</i></p>
 				@endif
 
-				@if($user->hasPlan)
+				@if($user->hasPlan())
 				<p class="text-{{$user->membership->plan->color}} mb-3">{{$user->membership->plan->displayName}} <small class="text-green">(próxima cobrança será no dia {{toFormattedDateStringPt($user->membership->next_payment_at)}})</small></p>
 				@else
 				<p class="text-muted mb-3"><i>Nenhum plano assinado</i></p>

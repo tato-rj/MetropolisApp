@@ -28,7 +28,7 @@ class CheckoutPlan implements Checkout
         $preApproval = new Accession();
 
         $preApproval->setPlan($this->plan->code);
-        $preApproval->setReference($this->plan->id);
+        $preApproval->setReference($reference);
         $preApproval->setSender()->setName($this->user->name);
         $preApproval->setSender()->setEmail($this->user->email);
         $preApproval->setSender()->setHash($this->request->card_hash);
@@ -67,6 +67,7 @@ class CheckoutPlan implements Checkout
         try {
             return $preApproval->register($this->pagseguro->credentials);
         } catch (\Exception $error) {
+            dd($error);
             return $error;
         }
 	}

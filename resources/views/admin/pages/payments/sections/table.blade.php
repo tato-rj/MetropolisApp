@@ -10,12 +10,16 @@
   </thead>
   <tbody>
     @foreach($payments as $payment)
-    <tr>
+    <tr class="{{$payment->reservation()->exists() ? null : 'opacity-4'}}">
       <td>{{$payment->created_at->format('d/m/Y')}}</td>
-      <td>{{$payment->reservation->name}}</td>
+      <td>{{$payment->reservation_ame}}</td>
       <td>{{$payment->user->name}}</td>
-      <td>{{feeToString($payment->reservation->fee)}}</td>
-      <td class="text-{{$payment->reservation->statusColor}}">{{$payment->reservation->status}}</td>
+      <td>{{feeToString($payment->reservation_fee)}}</td>
+      @if($payment->reservation()->exists())
+      <td style="width:16.66%" class="text-{{$payment->reservation->statusColor}}">{{$payment->reservation->status}}</td>
+      @else
+      <td style="width:16.66%" class="text-danger">Removido</td>
+      @endif
     </tr>
     @endforeach
   </tbody>

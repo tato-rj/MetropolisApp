@@ -72,7 +72,7 @@ class User extends Authenticatable implements MustVerifyEmail, Person
 
     public function getFormattedPhoneAttribute()
     {
-        return '(' . $this->area_code . ')' . ' ' . $this->phone;
+        return '(' . $this->area_code . ')' . ' ' . implode('-', str_split($this->phone, 5));
     }
 
     public function getHasPlanAttribute()

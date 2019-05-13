@@ -21,7 +21,7 @@
               </div>
               <div class="form-group">
                 <label class="mb-1"><small>Telefone</small></label>
-                <input type="text" name="phone" class="form-control" value="{{auth()->user()->formatted_phone}}" required>
+                <input type="text" name="phone" class="form-control" value="{{auth()->user()->phone}}" required>
               </div>
 
               <button type="submit" class="btn btn-red mt-1">Atualizar</button>
@@ -41,7 +41,7 @@
 
           @include('pages.user.profile.sections.show-field', [
             'label' => 'Telefone',
-            'value' => auth()->user()->phone,
+            'value' => auth()->user()->formatted_phone,
             'field' => 'phone'])
         </div>
       </div>

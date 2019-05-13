@@ -75,7 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail, Person
         return '(' . $this->area_code . ')' . ' ' . implode('-', str_split($this->phone, 5));
     }
 
-    public function getHasPlanAttribute()
+    public function hasPlan()
     {
         return $this->membership()->exists() && $this->membership->isActive();
     }

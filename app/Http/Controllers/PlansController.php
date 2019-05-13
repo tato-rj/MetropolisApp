@@ -62,7 +62,7 @@ class PlansController extends Controller
 
         event(new MembershipCreated($user));
 
-        return redirect()->route('client.events.index')->with('status', 'A sua assinatura foi realizada com sucesso. Aproveite o seu novo espaço de trabalho!');
+        return redirect()->route('client.events.index')->with('status', 'O seu pedido foi realizado com sucesso. A assinatura será confirmada assim que o pagamento estiver completo.');
     }
 
     public function toggle(Membership $membership)

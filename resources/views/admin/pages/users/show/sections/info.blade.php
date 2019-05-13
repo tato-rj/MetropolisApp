@@ -4,7 +4,7 @@
 			<div class="p-2">
 				<p class="text-teal mb-3">Nome</p>
 				<p class="text-teal mb-3">Email</p>
-				<p class="text-teal mb-3">Telephone</p>
+				<p class="text-teal mb-3">Telefone</p>
 				<p class="text-teal mb-3">Cartão</p>
 				<p class="text-teal mb-3">Plano</p>
 			</div>
@@ -13,7 +13,7 @@
 
 				<p class="mb-3">{{$user->email}} <small class="text-green">(verificado no dia {{$user->email_verified_at->format('d/m/Y')}})</small></p>
 
-				<p class="mb-3">{{$user->phone}}</p>
+				<p class="mb-3">{{$user->formatted_phone}}</p>
 
 				@if($user->hasCard)
 				<div class="mb-3">

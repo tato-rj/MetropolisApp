@@ -34,7 +34,7 @@ class WorkshopsController extends Controller
 
             event(new WorkshopSignup($workshop));
 
-            return redirect()->route('client.workshops.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
+            return redirect()->route('client.workshops.index')->with('status', 'O seu pedido foi realizado com sucesso. A reserva será confirmada assim que o pagamento estiver completo.');
         }
 
         $pagseguro = new PagSeguro;

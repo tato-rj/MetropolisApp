@@ -21,7 +21,7 @@
               </div>
               <div class="form-group">
                 <label class="mb-1"><small>Telefone</small></label>
-                <input type="text" name="phone" class="form-control" value="{{auth()->user()->phone}}" required>
+                <input type="text" name="phone" class="form-control" value="{{auth()->user()->formatted_phone}}" required>
               </div>
 
               <button type="submit" class="btn btn-red mt-1">Atualizar</button>

@@ -10,7 +10,8 @@ class UsersTableSeeder extends Seeder
         User::create([
         	'name' => 'João da Silva',
             'email' => 'joao@email.com',
-            'phone' => '(21) 9123-4567',
+            'area_code' => '21',
+            'phone' => '91234567',
         	'email_verified_at' => now(),
         	'password' => bcrypt('maiden')
         ]);

@@ -116,7 +116,7 @@ class EventsController extends Controller
 
         event(new EventCreated($event));
         
-        return redirect()->route('client.events.index')->with('status', 'A sua reserva foi confirmada com sucesso.');
+        return redirect()->route('client.events.index')->with('status', 'O seu pedido foi realizado com sucesso. A reserva será confirmada assim que o pagamento estiver completo.');
     }
 
     /**

@@ -35,7 +35,7 @@ class CheckoutEvent implements Checkout
         );
         $creditCard->setSender()->setName($this->user->name);
         $creditCard->setSender()->setEmail($this->user->email);
-        $creditCard->setSender()->setPhone()->withParameters(21, 31991377);
+        $creditCard->setSender()->setPhone()->withParameters($this->user->area_code, $this->user->phone);
         $creditCard->setSender()->setDocument()->withParameters($this->request->card_holder_document_type, $this->request->card_holder_document_value);
         $creditCard->setSender()->setHash($this->request->card_hash);
         $creditCard->setShipping()->setAddress()->withParameters(

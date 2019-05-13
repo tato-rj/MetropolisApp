@@ -1,9 +1,9 @@
 @component('mail::message')
 # Olá {{$event->creator->first_name}}
 
-A sua reserva está confirmada! Aqui vão os detalhes do evento:
+O seu pedido foi realizado com sucesso. A reserva será confirmada assim que o pagamento estiver completo. Aqui vão os detalhes do evento:
 @component('mail::panel')
-<ul style="font-size: 1.2em">
+<ul>
 	<li><strong>Espaço:</strong> {{$event->space->name}}</li>
 	<li><strong>Data:</strong> {{toFormattedDateStringPt($event->starts_at)}}</li>
 	<li><strong>Hora da chegada:</strong> {{$event->starts_at->hour}}:00</li>

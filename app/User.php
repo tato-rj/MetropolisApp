@@ -70,6 +70,11 @@ class User extends Authenticatable implements MustVerifyEmail, Person
         return $this->hasOne(Membership::class);
     }
 
+    public function getFormattedPhoneAttribute()
+    {
+        return '(' . $this->area_code . ')' . ' ' . $this->phone;
+    }
+
     public function getHasPlanAttribute()
     {
         return $this->membership()->exists() && $this->membership->next_payment_at;

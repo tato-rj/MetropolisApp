@@ -193,7 +193,7 @@ getCardFlag = function getCardFlag(input, cardNumber, form) {
       showValidationMessage(form, 'valid');
     },
     error: function error() {
-      input.css('background-image', 'url(http://metropolis.test/images/icons/credit.png)');
+      input.css('background-image', 'url(https://metropolisrio.com.br/images/icons/credit.png)');
       form.find('input[name="card_brand"]').val('');
       showValidationMessage(form, 'invalid');
     },
@@ -245,7 +245,7 @@ $(document).ready(function () {
       });
     },
     error: function error(data) {
-      console.log('NO...');
+      console.log('O Pagseguro não conseguiu carregar as bandeiras dos cartões');
     },
     complete: function complete(data) {
       console.log(data);

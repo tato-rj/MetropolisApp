@@ -26,8 +26,8 @@ class CheckoutPlan implements Checkout
             return true;
 
         $preApproval = new Accession();
-        dd($this->plan->code);
-        $preApproval->setPlan($this->plan->code);
+
+        $preApproval->setPlan($this->plan->id);
         $preApproval->setReference($reference);
         $preApproval->setSender()->setName($this->user->name);
         $preApproval->setSender()->setEmail($this->user->email);

@@ -10,6 +10,7 @@
         </p>
 	  	</div>
   	</div>
+    @if(! $workshops->isEmpty())
     <div class="col-lg-4 col-md-5 col-12">
       <div class="border mt-4">
         <div class="alert-grey text-center px-3 py-2" style="color: #9aa9b7">Próximos eventos</div>
@@ -25,5 +26,6 @@
         @endforeach
       </div>
     </div>
+    @endif
   </div>
 </section>

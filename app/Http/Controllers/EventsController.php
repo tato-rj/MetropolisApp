@@ -262,7 +262,7 @@ class EventsController extends Controller
             if ($event->canBeReturned()) {
                 $pagseguro->refund($event);
             } else {
-                $pagseguro->cancel($event);                
+                $pagseguro->cancel($event);
             }
         }
 

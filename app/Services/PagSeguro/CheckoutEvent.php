@@ -39,7 +39,7 @@ class CheckoutEvent implements Checkout
     public function eft($reference)
     {
         $onlineDebit = new \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit();
-
+dd($reference);
         $onlineDebit->setMode('DEFAULT');
         $onlineDebit->setReceiverEmail(pagseguro('email'));
         $onlineDebit->setCurrency("BRL");
@@ -65,7 +65,7 @@ class CheckoutEvent implements Checkout
         );
         $onlineDebit->setShipping()->setAddressRequired()->withParameters('FALSE');
         $onlineDebit->setBankName($this->request->bank_name);
-dd($onlineDebit);
+
         return $onlineDebit;
     }
 

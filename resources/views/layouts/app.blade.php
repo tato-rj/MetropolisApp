@@ -77,18 +77,14 @@
 </head>
 
 <body>
-    {{-- TEMPORARY PASSWORD FOR DEVELOPMENT PHASE --}}
-    @if(session()->has('gate'))
-    <div id="app">
-        @include('layouts.navbar.bar')
-        <main>
-            @yield('content')
-        </main>
-        @include('layouts.footer.layout')
-    </div>
-    @else
-      @include('layouts/dev')
-    @endif
+
+  <div id="app">
+      @include('layouts.navbar.bar')
+      <main>
+          @yield('content')
+      </main>
+      @include('layouts.footer.layout')
+  </div>
 
 @include('components.alerts.event')
 

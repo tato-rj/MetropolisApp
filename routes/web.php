@@ -1,7 +1,7 @@
 <?php
 
 // For development only
-App\Http\Controllers\Auth\GateController::auth();
+// App\Http\Controllers\Auth\GateController::auth();
 
 Auth::routes(['verify' => true]);
 

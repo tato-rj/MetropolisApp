@@ -66,7 +66,7 @@ class CheckoutEvent implements Checkout
         //     ''
         // );
         $onlineDebit->setShipping()->setAddressRequired()->withParameters('FALSE');
-        dd($onlineDebit);
+
         $onlineDebit->setBankName($this->request->bank_name);
 
         return $onlineDebit;

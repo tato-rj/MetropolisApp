@@ -1,12 +1,13 @@
 <section class="container mb-8">
   <div class="row align-items-center">
     <div class="col-lg-6 col-md-10 col-sm-10 col-12 mx-auto">
-      <div class="video-btn-wrapper mb-4 position-relative cursor-pointer">
+    <img src="{{asset('images/video-cover.jpg')}}" class="w-100">
+{{--       <div class="video-btn-wrapper mb-4 position-relative cursor-pointer">
         <video id="video" class="w-100 rounded shadow-center" poster="{{asset('images/video-cover.jpg')}}">
           <source src="{{asset('videos/escritorio.mp4')}}" type="video/mp4">
         </video>
         <div id="play-button" class="absolute-center bg-red text-white rounded px-4 py-2"><i class="fas fa-play fa-1x"></i></div>
-      </div>
+      </div> --}}
     </div>
 
     <div class="col-lg-6 col-12">

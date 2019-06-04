@@ -72,6 +72,8 @@ Route::get('/', function () {
     return view('pages.welcome.index');
 })->name('welcome');
 
+Route::post('/contato', 'HomeController@email')->name('contact.send');
+
 Route::get('/quem-somos', function () {
     return view('pages.about.index');
 });

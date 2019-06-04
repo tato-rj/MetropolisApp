@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'ola@metropolisrio.com.br'),
-        'name' => env('MAIL_FROM_NAME', 'Metropolis'),
+        'address' => env('MAIL_FROM_ADDRESS', 'contato@metropolisrio.com.br'),
+        'name' => env('MAIL_FROM_NAME', 'MetropolisRio'),
     ],
 
     /*

@@ -52,7 +52,9 @@ class CheckoutEvent implements Checkout
         $onlineDebit->setSender()->setEmail($this->user->email);
         $onlineDebit->setSender()->setPhone()->withParameters($this->user->area_code, $this->user->phone);
         $onlineDebit->setSender()->setDocument()->withParameters($this->request->card_holder_document_type, $this->request->card_holder_document_value);
+
         $onlineDebit->setSender()->setHash($this->request->card_hash);
+                        dd($onlineDebit);
         $onlineDebit->setShipping()->setShipping()->setAddress()->withParameters(
             'Rua Santa Clara', 
             '5', 
@@ -63,7 +65,6 @@ class CheckoutEvent implements Checkout
             'BRA', 
             ''
         );
-                                dd($onlineDebit);
         $onlineDebit->setShipping()->setAddressRequired()->withParameters('FALSE');
         $onlineDebit->setBankName($this->request->bank_name);
 

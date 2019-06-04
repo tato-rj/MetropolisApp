@@ -28,7 +28,7 @@ class CheckoutEvent implements Checkout
         $method = $this->request->paymentMethod;
 
         $purchase = $this->$method($reference);
-        dd($purchase);
+
         try {
             return $purchase->register($this->pagseguro->credentials);
         } catch (\Exception $error) {

@@ -38,7 +38,36 @@ class CheckoutEvent implements Checkout
 
     public function eft($reference)
     {
-        dd('HERE!');
+        dd($this->request->all());
+        $onlineDebit = new \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit();
+
+        $onlineDebit->setMode('DEFAULT');
+        $onlineDebit->setReceiverEmail(pagseguro('email'));
+        $onlineDebit->setCurrency("BRL");
+        $onlineDebit->addItems()->withParameters(
+            $reference, $this->request->description, 1, $this->price
+        );
+        $onlineDebit->setReference($reference);
+        $onlineDebit->setExtraAmount(0.00);
+        $onlineDebit->setSender()->setName($this->user->name);
+        $onlineDebit->setSender()->setEmail($this->user->email);
+        $onlineDebit->setSender()->setPhone()->withParameters($this->user->area_code, $this->user->phone);
+        $onlineDebit->setSender()->setDocument()->withParameters($this->request->card_holder_document_type, $this->request->card_holder_document_value);
+        $onlineDebit->setSender()->setHash($this->request->card_hash);
+        $onlineDebit->setShipping()->setShipping()->setAddress()->withParameters(
+            $this->request->address_street, 
+            $this->request->address_number, 
+            $this->request->address_district, 
+            clean($this->request->address_zip), 
+            $this->request->address_city, 
+            $this->request->address_state, 
+            'BRA', 
+            $this->request->address_complement
+        );
+        $onlineDebit->setShipping()->setAddressRequired()->withParameters('FALSE');
+        $onlineDebit->setBankName($bankName);
+
+        return $onlineDebit;
     }
 
     public function creditCard($reference)
@@ -83,6 +112,8 @@ class CheckoutEvent implements Checkout
         $creditCard->setHolder()->setPhone()->withParameters($this->user->area_code, $this->user->phone);
         $creditCard->setHolder()->setDocument()->withParameters($this->request->card_holder_document_type, clean($this->request->card_holder_document_value));
         $creditCard->setMode('DEFAULT');
+
+        return $creditCard;
     }
 
 	public function document($type, $value)

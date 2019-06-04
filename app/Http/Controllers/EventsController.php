@@ -89,7 +89,7 @@ class EventsController extends Controller
 
         } else {
             $authorization = $form->space->authorize($form);
-            dd('test');
+            
             if (! $authorization->status)
                 return redirect()->back()->with('error', $authorization->getMessage());
 

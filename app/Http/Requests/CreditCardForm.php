@@ -33,13 +33,13 @@ class CreditCardForm extends FormRequest
             'card_hash' => 'required',
             'card_token' => 'required',
             'card_holder_name' => 'required',
-            'card_holder_document_type' => 'required',
-            'card_holder_document_value' => 'required',
-            'address_zip' => 'required',
-            'address_street' => 'required|min:4',
-            'address_district' => 'required',
-            'address_city' => 'required',
-            'address_state' => 'required'
+            'card_holder_document_type' => 'sometimes',
+            'card_holder_document_value' => 'sometimes',
+            'address_zip' => 'sometimes',
+            'address_street' => 'sometimes|min:4',
+            'address_district' => 'sometimes',
+            'address_city' => 'sometimes',
+            'address_state' => 'sometimes'
         ];
     }
 }

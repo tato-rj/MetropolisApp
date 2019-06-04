@@ -46,7 +46,7 @@
 </div>
 
 @if ($errors->any())
-@include('components.alerts.error', ['message' => 'Não foi possível realizar o seu pedido nesse momento.'])
+	@include('components.alerts.error', ['message' => 'Não foi possível realizar o seu pedido nesse momento. Verifique se o formulário foi corretamente preenchido e tente novamente.'])
 @endif
 
 

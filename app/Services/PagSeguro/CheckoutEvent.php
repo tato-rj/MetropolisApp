@@ -46,6 +46,7 @@ class CheckoutEvent implements Checkout
         $onlineDebit->addItems()->withParameters(
             $reference, $this->request->description, 1, $this->price
         );
+                        dd($onlineDebit);
         $onlineDebit->setReference($reference);
         $onlineDebit->setExtraAmount('0.00');
         $onlineDebit->setSender()->setName($this->user->name);

@@ -46,11 +46,11 @@ class CheckoutEvent implements Checkout
         $onlineDebit->addItems()->withParameters(
             $reference, $this->request->description, 1, $this->price
         );
-                        dd($onlineDebit);
         $onlineDebit->setReference($reference);
         $onlineDebit->setExtraAmount('0.00');
         $onlineDebit->setSender()->setName($this->user->name);
         $onlineDebit->setSender()->setEmail($this->user->email);
+                        dd($onlineDebit);
         $onlineDebit->setSender()->setPhone()->withParameters($this->user->area_code, $this->user->phone);
         $onlineDebit->setSender()->setDocument()->withParameters($this->request->card_holder_document_type, $this->request->card_holder_document_value);
         $onlineDebit->setSender()->setHash($this->request->card_hash);

@@ -36,7 +36,7 @@ class CheckoutEvent implements Checkout
         }
 	}
 
-    public function etf($reference)
+    public function eft($reference)
     {
         dd('HERE!');
     }

@@ -27,7 +27,7 @@ class CheckoutEvent implements Checkout
 
         $creditCard = new CreditCard();
 
-        // dd($this->request);
+        dd($this->request->all());
 
         $creditCard->setReceiverEmail(pagseguro('email'));
         $creditCard->setReference($reference);
@@ -74,6 +74,11 @@ class CheckoutEvent implements Checkout
             return $error;
         }
 	}
+
+    public function method($reference)
+    {
+        
+    }
 
 	public function document($type, $value)
 	{

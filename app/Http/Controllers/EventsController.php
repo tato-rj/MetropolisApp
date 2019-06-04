@@ -89,7 +89,7 @@ class EventsController extends Controller
 
         } else {
             $authorization = $form->space->authorize($form);
-            
+            dd('test');
             if (! $authorization->status)
                 return redirect()->back()->with('error', $authorization->getMessage());
 
@@ -99,7 +99,7 @@ class EventsController extends Controller
         $price = $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space));
         
         $status = $pagseguro->event($form->user, $request, $price)->purchase($reference);
-dd($status);
+
         if ($status instanceof \Exception)
             return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
 

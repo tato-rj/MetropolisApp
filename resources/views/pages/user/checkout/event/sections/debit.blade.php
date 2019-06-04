@@ -15,6 +15,7 @@
 	<input type="hidden" name="participants" value="{{$form->participants}}">
 
 	<input type="hidden" name="paymentMethod" value="eft">
+	<input type="hidden" name="bank_name">
 	<input type="hidden" name="card_token">
 	<input type="hidden" name="card_hash">
 	<input type="hidden" name="card_brand">

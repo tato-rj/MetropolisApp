@@ -121,6 +121,7 @@ getCardFlag = function(input, cardNumber, form)
 			let icon = response.brand.name;
 			input.css('background-image', 'url(https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/68x30/' + icon + '.png)');
 			form.find('input[name="card_brand"]').val(icon);
+      form.find('input[name="bank_name"]').val(icon);
 			showValidationMessage(form, 'valid');
 		},
 		error: function() {

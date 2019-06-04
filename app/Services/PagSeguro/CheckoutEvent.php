@@ -67,7 +67,7 @@ class CheckoutEvent implements Checkout
         // );
         $onlineDebit->setShipping()->setAddressRequired()->withParameters('FALSE');
 
-        $onlineDebit->setBankName($this->request->bank_name);
+        $onlineDebit->setBankName('bradesco');
 
         return $onlineDebit;
     }

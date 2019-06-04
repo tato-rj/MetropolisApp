@@ -38,7 +38,6 @@ class CheckoutEvent implements Checkout
 
     public function eft($reference)
     {
-        dd($this->request->all());
         $onlineDebit = new \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit();
 
         $onlineDebit->setMode('DEFAULT');

@@ -54,10 +54,10 @@ class CheckoutEvent implements Checkout
         $onlineDebit->setSender()->setDocument()->withParameters($this->request->card_holder_document_type, $this->request->card_holder_document_value);
         $onlineDebit->setSender()->setHash($this->request->card_hash);
         $onlineDebit->setShipping()->setShipping()->setAddress()->withParameters(
-            'Av. Rio Branco', 
-            '151', 
-            'Centro', 
-            '20040006', 
+            'Rua Santa Clara', 
+            '5', 
+            'Copacabana', 
+            '22041011', 
             'Rio de Janeiro', 
             'RJ', 
             'BRA', 
@@ -65,7 +65,7 @@ class CheckoutEvent implements Checkout
         );
         $onlineDebit->setShipping()->setAddressRequired()->withParameters('FALSE');
         $onlineDebit->setBankName($this->request->bank_name);
-
+dd($onlineDebit);
         return $onlineDebit;
     }
 

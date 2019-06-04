@@ -54,18 +54,19 @@ class CheckoutEvent implements Checkout
         $onlineDebit->setSender()->setDocument()->withParameters($this->request->card_holder_document_type, $this->request->card_holder_document_value);
 
         $onlineDebit->setSender()->setHash($this->request->card_hash);
-                        dd($onlineDebit);
-        $onlineDebit->setShipping()->setShipping()->setAddress()->withParameters(
-            'Rua Santa Clara', 
-            '5', 
-            'Copacabana', 
-            '22041011', 
-            'Rio de Janeiro', 
-            'RJ', 
-            'BRA', 
-            ''
-        );
+                        
+        // $onlineDebit->setShipping()->setShipping()->setAddress()->withParameters(
+        //     'Rua Santa Clara', 
+        //     '5', 
+        //     'Copacabana', 
+        //     '22041011', 
+        //     'Rio de Janeiro', 
+        //     'RJ', 
+        //     'BRA', 
+        //     ''
+        // );
         $onlineDebit->setShipping()->setAddressRequired()->withParameters('FALSE');
+        dd($onlineDebit);
         $onlineDebit->setBankName($this->request->bank_name);
 
         return $onlineDebit;

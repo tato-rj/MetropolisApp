@@ -6,6 +6,7 @@
 	<input type="hidden" name="description" value="{{$bill->description}}">
 
 	<input type="hidden" name="paymentMethod" value="eft">
+	<input type="hidden" name="bank_name">
 
 	<div class="form-group d-flex flex-wrap cards">
 		<p class="m-0 text-muted text-center mt-2 mb-0 w-100"><i>Carregando cartões aceitos...</i></p>
@@ -65,6 +66,14 @@
 		</div>
 	</div>
 
+	<div class="form-group">
+		@if(request()->has('plan_id'))
+			@include('components.form.payment.document.any')
+		@else
+			@include('components.form.payment.document.cpf')
+		@endif
+	</div>
+	
 	<div class="custom-control custom-checkbox mt-4">
 		<input type="checkbox" class="custom-control-input" name="remembercard" id="remembercard">
 		<label class="custom-control-label" for="remembercard">Lembrar os meus dados para reservas mais rápidas</label>

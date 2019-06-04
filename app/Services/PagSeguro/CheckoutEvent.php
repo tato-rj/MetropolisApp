@@ -4,6 +4,7 @@ namespace App\Services\PagSeguro;
 
 use App\{User, Plan};
 use Illuminate\Http\Request;
+use PagSeguro\Domains\Requests\DirectPayment\OnlineDebit;
 use PagSeguro\Domains\Requests\DirectPayment\CreditCard;
 use PagSeguro\Domains\DirectPreApproval\Document;
 use App\Services\PagSeguro\Contracts\Checkout;
@@ -38,7 +39,7 @@ class CheckoutEvent implements Checkout
 
     public function eft($reference)
     {
-        $onlineDebit = new \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit();
+        $onlineDebit = new OnlineDebit();
 
         $onlineDebit->setMode('DEFAULT');
         $onlineDebit->setReceiverEmail(pagseguro('email'));
@@ -52,22 +53,9 @@ class CheckoutEvent implements Checkout
         $onlineDebit->setSender()->setEmail($this->user->email);
         $onlineDebit->setSender()->setPhone()->withParameters($this->user->area_code, $this->user->phone);
         $onlineDebit->setSender()->setDocument()->withParameters($this->request->card_holder_document_type, $this->request->card_holder_document_value);
-
         $onlineDebit->setSender()->setHash($this->request->card_hash);
-                        
-        // $onlineDebit->setShipping()->setShipping()->setAddress()->withParameters(
-        //     'Rua Santa Clara', 
-        //     '5', 
-        //     'Copacabana', 
-        //     '22041011', 
-        //     'Rio de Janeiro', 
-        //     'RJ', 
-        //     'BRA', 
-        //     ''
-        // );
         $onlineDebit->setShipping()->setAddressRequired()->withParameters('FALSE');
-
-        $onlineDebit->setBankName('bradesco');
+        $onlineDebit->setBankName($this->request->bank_name);
 
         return $onlineDebit;
     }

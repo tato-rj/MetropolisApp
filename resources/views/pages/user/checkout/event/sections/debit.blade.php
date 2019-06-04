@@ -79,13 +79,13 @@
 		</div>
 	</div>
 
-<div class="form-group">
-	@if(request()->has('plan_id'))
-		@include('components.form.payment.document.any')
-	@else
-		@include('components.form.payment.document.cpf')
-	@endif
-</div>
+	<div class="form-group">
+		@if(request()->has('plan_id'))
+			@include('components.form.payment.document.any')
+		@else
+			@include('components.form.payment.document.cpf')
+		@endif
+	</div>
 
 	<div class="custom-control custom-checkbox mt-4">
 		<input type="checkbox" class="custom-control-input" name="remembercard" id="remembercard">

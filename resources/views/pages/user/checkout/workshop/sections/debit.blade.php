@@ -3,6 +3,7 @@
 
 	<input type="hidden" name="description" value="{{$workshop->name}}">
 	<input type="hidden" name="paymentMethod" value="eft">
+	<input type="hidden" name="bank_name">
 	<input type="hidden" name="card_token">
 	<input type="hidden" name="card_hash">
 	<input type="hidden" name="card_brand">
@@ -64,6 +65,14 @@
 				</select>
 			</div>
 		</div>
+	</div>
+
+	<div class="form-group">
+		@if(request()->has('plan_id'))
+			@include('components.form.payment.document.any')
+		@else
+			@include('components.form.payment.document.cpf')
+		@endif
 	</div>
 
 	<div class="custom-control custom-checkbox mt-4">

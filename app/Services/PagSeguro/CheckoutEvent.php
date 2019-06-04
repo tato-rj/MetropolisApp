@@ -25,9 +25,25 @@ class CheckoutEvent implements Checkout
         if (app()->environment() == 'testing')
             return true;
 
-        $creditCard = new CreditCard();
+        $method = $this->request->paymentMethod;
 
-        dd($this->request->all());
+        $purchase = $this->$method($reference);
+
+        try {
+            return $purchase->register($this->pagseguro->credentials);
+        } catch (\Exception $error) {
+            return $error;
+        }
+	}
+
+    public function etf($reference)
+    {
+        dd('HERE!');
+    }
+
+    public function creditCard($reference)
+    {
+        $creditCard = new CreditCard();
 
         $creditCard->setReceiverEmail(pagseguro('email'));
         $creditCard->setReference($reference);
@@ -67,17 +83,6 @@ class CheckoutEvent implements Checkout
         $creditCard->setHolder()->setPhone()->withParameters($this->user->area_code, $this->user->phone);
         $creditCard->setHolder()->setDocument()->withParameters($this->request->card_holder_document_type, clean($this->request->card_holder_document_value));
         $creditCard->setMode('DEFAULT');
-
-        try {
-            return $creditCard->register($this->pagseguro->credentials);
-        } catch (\Exception $error) {
-            return $error;
-        }
-	}
-
-    public function method($reference)
-    {
-        
     }
 
 	public function document($type, $value)

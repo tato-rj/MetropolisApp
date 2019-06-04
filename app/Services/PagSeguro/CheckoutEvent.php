@@ -41,8 +41,8 @@ class CheckoutEvent implements Checkout
         $onlineDebit = new \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit();
 
         $onlineDebit->setMode('DEFAULT');
-        dd($onlineDebit);
         $onlineDebit->setReceiverEmail(pagseguro('email'));
+                dd($onlineDebit);
         $onlineDebit->setCurrency("BRL");
         $onlineDebit->addItems()->withParameters(
             $reference, $this->request->description, 1, $this->price

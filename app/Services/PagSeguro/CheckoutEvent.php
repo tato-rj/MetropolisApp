@@ -27,6 +27,8 @@ class CheckoutEvent implements Checkout
 
         $creditCard = new CreditCard();
 
+        dd($this->request);
+
         $creditCard->setReceiverEmail(pagseguro('email'));
         $creditCard->setReference($reference);
         $creditCard->setCurrency("BRL");

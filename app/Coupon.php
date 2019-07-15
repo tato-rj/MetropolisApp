@@ -19,7 +19,7 @@ class Coupon extends Metropolis
 
     	$this->increment('used', 1);
 
-    	$discount = ($fee * $this->discount) / 100;
+    	$discount = floor(($fee * $this->discount) / 100);
 
     	return $fee - $discount;
     }

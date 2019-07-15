@@ -19,6 +19,7 @@ trait SmartUpdate
             'headline' => $this->evaluate($request, 'headline'),
             'description' => $this->evaluate($request, 'description'),
             'fee' => $this->evaluate($request, 'fee'),
+            'discount' => $this->evaluate($request, 'discount'),
             'capacity' => $this->evaluate($request, 'capacity'),
             'starts_at' => $this->evaluate($request, 'starts_at'),
             'ends_at' => $this->evaluate($request, 'ends_at')

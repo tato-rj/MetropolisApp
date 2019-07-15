@@ -20,7 +20,16 @@
 		<div class="bg-teal text-white d-flex flex-wrap">
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
 			<div class="d-flex xs-w-100">
-				<div class="p-3 bg-teal-dark flex-grow"><strong>{{feeTostring($workshop->fee)}}</strong></div>
+				<div class="p-3 bg-teal-dark flex-grow"><strong>
+					@if($workshop->discount)
+					<span class="opacity-6 mr-2" style="text-decoration: line-through;">
+						{{feeToString($workshop->fee)}}
+					</span>
+					{{feeToString($workshop->discount)}}
+					@else
+					{{feeToString($workshop->fee)}}
+					@endif
+				</strong></div>
 			</div>
 			<button id="submit" data-target="#form-credit" class="p-3 btn btn-red btn-block font-weight-bold">CONFIRMAR RESERVA</button>
 		</div>

@@ -50,9 +50,11 @@ class WorkshopsController extends Controller
 
         $user = auth()->user();
 
+        $fee = $workshop->discount ? $workshop->discount : $workshop->fee;
+
         $reference = $pagseguro->generateReference($prefix = 'W', $user);
 
-        $status = $pagseguro->event($user, $request, $workshop->fee)->purchase($reference);
+        $status = $pagseguro->event($user, $request, $fee)->purchase($reference);
         
         if ($status instanceof \Exception)
             return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
@@ -91,6 +93,7 @@ class WorkshopsController extends Controller
             'headline' => $request->headline,
             'description' => $request->description,
             'fee' => $request->fee,
+            'discount' => $request->discount,
             'cover_image' => (new Cropper($request))->make('cover_image')->saveTo('workshops/cover_images/')->getPath(),
             'capacity' => $request->capacity,
             'starts_at' => Carbon::parse($request->date)->setTime($request->start_time,0,0),

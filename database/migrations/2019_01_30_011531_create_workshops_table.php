@@ -20,6 +20,7 @@ class CreateWorkshopsTable extends Migration
             $table->string('headline');
             $table->text('description');
             $table->string('fee')->nullable();
+            $table->string('discount')->nullable();
             $table->string('cover_image')->nullable();
             $table->unsignedInteger('capacity')->nullable();
             $table->timestamp('starts_at')->nullable();

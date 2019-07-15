@@ -174,3 +174,10 @@ $factory->define(App\WorkshopFile::class, function(Faker $faker) {
         'extension' => $faker->word
     ];
 });
+
+$factory->define(App\Coupon::class, function(Faker $faker) {
+    return [
+        'name' => $faker->word,
+        'discount' => $faker->randomDigitNotNull * 10
+    ];
+});

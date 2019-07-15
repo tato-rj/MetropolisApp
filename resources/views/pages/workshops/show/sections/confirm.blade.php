@@ -17,7 +17,16 @@
 		<div class="bg-teal text-white d-flex flex-wrap">
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO</strong></div>
 			<div class="d-flex xs-w-100">
-				<div class="p-3 bg-teal-dark flex-grow"><strong>{{feeTostring($workshop->fee)}}</strong></div>
+				<div class="p-3 bg-teal-dark flex-grow"><strong>
+					@if($workshop->discount)
+					<span class="opacity-6 mr-2" style="text-decoration: line-through;">
+						{{feeToString($workshop->fee)}}
+					</span>
+					{{feeToString($workshop->discount)}}
+					@else
+					{{feeToString($workshop->fee)}}
+					@endif
+				</strong></div>
 				<button type="submit" class="btn btn-red h-100 px-4" title="Clique aqui para continuar"><i class="fas fa-lg fa-angle-right"></i></button>
 			</div>
 		</div>

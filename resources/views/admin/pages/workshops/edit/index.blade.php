@@ -65,6 +65,19 @@
 					@include('components/form/error', ['bag' => 'default', 'field' => 'fee'])
 				</div>
 				<div class="col">
+					@include('components.form.label', ['label' => 'Promoção'])
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text rounded-0">R$</span>
+						</div>
+						<input type="text" name="discount" class="form-control" placeholder="Promoção" value="{{$workshop->discount}}">
+						<div class="input-group-append">
+							<span class="input-group-text rounded-0">,00</span>
+						</div>
+					</div>
+					@include('components/form/error', ['bag' => 'default', 'field' => 'discount'])
+				</div>
+				<div class="col">
 					@include('components.form.label', ['label' => 'Capacidade'])
 					<div class="input-group">
 						<input type="text" name="capacity" class="form-control" placeholder="Capacidade" value="{{$workshop->capacity}}">

@@ -34,7 +34,7 @@ class Plan extends Metropolis
                 break;
             
             default:
-                return 'SEMIANNUALLY';
+                return 'QUARTERLY';
                 break;
         }
     }
@@ -67,7 +67,7 @@ class Plan extends Metropolis
     			break;
     		
     		default:
-    			return $prefix ? 'nesse semestre' : 'semestre';
+    			return $prefix ? 'nesse trimestre' : 'trimestre';
     			break;
     	}
     }
@@ -86,7 +86,7 @@ class Plan extends Metropolis
                 break;
             
             default:
-                return $starts_at->copy()->addMonths(6)->setTime(office()->day_ends_at,0,0);
+                return $starts_at->copy()->addMonths(3)->setTime(office()->day_ends_at,0,0);
                 break;
         }
     }

@@ -6,7 +6,14 @@
 		
 		<div class="mb-1"><strong class="text-teal mr-2">HORÁRIO</strong>{{$workshop->starts_at->format('H:i')}} às {{$workshop->ends_at->format('H:i')}}</div>
 		
-		<div><strong class="text-teal mr-2">INVESTIMENTO</strong><strong class="{{! $workshop->fee ? 'text-red' : null}}">{{$workshop->fee ? feeToString($workshop->fee) : 'Gratuito'}}</strong></div>
+		<div><strong class="text-teal mr-2">{{$workshop->discount ? 'PREÇO PROMOCIONAL' : 'INVESTIMENTO'}}</strong>
+			@if($workshop->discount)
+			<del class="text-muted">{{feeToString($workshop->fee)}}</del>
+			<strong>{{feeToString($workshop->discount)}}</strong>
+			@else
+			<strong class="{{! $workshop->fee ? 'text-red' : null}}">{{$workshop->fee ? feeToString($workshop->fee) : 'Gratuito'}}</strong>
+			@endif
+		</div>
 	</div>
 	<div class="col-lg-8 col-md-8 col-12 d-apart flex-column">
 		<div class="mb-2 w-100">

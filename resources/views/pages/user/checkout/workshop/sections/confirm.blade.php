@@ -19,8 +19,8 @@
 			    border-bottom: 1px solid lightgrey;
 			    background: transparent;">
 			    <button class="btn btn-xs btn-teal" id="validate-coupon" data-url="{{route('coupons.validate')}}">Validar coupon</button>
-				<div class="valid-feedback">Looks good!</div>
-				<div class="invalid-feedback">Looks good!</div>
+				<div class="valid-feedback"></div>
+				<div class="invalid-feedback"></div>
 			</li>
 		</ul>
 

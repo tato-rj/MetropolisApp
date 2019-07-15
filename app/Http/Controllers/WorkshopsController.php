@@ -52,6 +52,8 @@ class WorkshopsController extends Controller
 
         $fee = $workshop->discount ? $workshop->discount : $workshop->fee;
 
+        $fee = coupon($request->coupon, $fee);
+
         $reference = $pagseguro->generateReference($prefix = 'W', $user);
 
         $status = $pagseguro->event($user, $request, $fee)->purchase($reference);

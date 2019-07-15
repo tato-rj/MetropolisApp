@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Coupon;
 use Illuminate\Http\Request;
 
-class CouponController extends Controller
+class CouponsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,17 +14,19 @@ class CouponController extends Controller
      */
     public function index()
     {
-        //
+        $coupons = Coupon::latest()->get();
+
+        return view('admin.pages.coupons.index', compact(['coupons']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function check(Request $request)
     {
-        //
+        $coupon = Coupon::match($request->name);
+
+        if ($coupon->exists())
+            return $coupon->first()->status();
+
+        return response()->json(['message' => 'Este coupon não existe.', 'status' => 'invalid']);
     }
 
     /**
@@ -35,7 +37,16 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $expires_at = str_replace('/', '-', $request->expires_at);
+
+        Coupon::create([
+            'name' => strtoupper($request->name),
+            'discount' => $request->discount,
+            'limit' => $request->limit,
+            'expires_at' => $expires_at ? carbon($expires_at)->setTime(23,59,59) : null
+        ]);
+
+        return redirect()->back()->with(['status', 'O coupon foi criado com sucesso!']);
     }
 
     /**
@@ -80,6 +91,8 @@ class CouponController extends Controller
      */
     public function destroy(Coupon $coupon)
     {
-        //
+        $coupon->delete();
+
+        return redirect()->back()->with(['status' => 'O coupon foi removido com sucesso']);
     }
 }

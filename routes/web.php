@@ -90,6 +90,8 @@ Route::get('/termos-e-condicoes', function () {
     return view('pages.terms.index');
 })->name('terms');
 
+Route::get('/coupons/validate', 'CouponsController@check')->name('coupons.validate');
+
 Route::prefix('planos')->name('plan.')->group(function() {
 
 	Route::get('', 'PlansController@index')->name('index');

@@ -1,5 +1,15 @@
 <?php 
 
+function coupon($coupon, $fee)
+{
+    $coupon = \App\Coupon::match($coupon);
+
+    if ($coupon->exists())
+        return $coupon->first()->apply($fee);
+
+    return $fee;
+}
+
 function testing()
 {
     return app()->environment() == 'testing';

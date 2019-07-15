@@ -139,6 +139,7 @@
 </div>
 
 @include('admin.components.modals.delete', [
+	'showButton' => true,
 	'message' => 'Quero deletar o workshop ' . $workshop->name . '.',
 	'url' => route('admin.workshops.destroy', $workshop->slug)])
 

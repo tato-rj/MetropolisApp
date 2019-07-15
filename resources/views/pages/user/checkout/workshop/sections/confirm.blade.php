@@ -9,9 +9,18 @@
 				<span class="text-teal mr-1"><strong>Data</strong></span>
 				<span class="date-pt" data-date="{{$workshop->starts_at}}"></span>
 			</li>
-			<li>
+			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Horário</strong></span>
 				<span>Das {{$workshop->starts_at->format('H')}} às {{$workshop->ends_at->format('H')}} horas</span>
+			</li>
+			<li>
+				<span class="text-teal mr-1"><strong>Tem um coupon de desconto?</strong></span>
+				<input type="text" placeholder="COUPON" class="text-uppercase mr-2" id="coupon" style="border: 0;
+			    border-bottom: 1px solid lightgrey;
+			    background: transparent;">
+			    <button class="btn btn-xs btn-teal" id="validate-coupon" data-url="{{route('coupons.validate')}}">Validar coupon</button>
+				<div class="valid-feedback">Looks good!</div>
+				<div class="invalid-feedback">Looks good!</div>
 			</li>
 		</ul>
 

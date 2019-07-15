@@ -85,7 +85,16 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 		Route::delete('{bill}', 'BillsController@destroy')->name('destroy');
 
 	});
-	
+
+	Route::prefix('coupons')->name('coupons.')->group(function() {
+
+		Route::get('', 'CouponsController@index')->name('index');
+
+		Route::post('', 'CouponsController@store')->name('store');
+
+		Route::delete('{coupon}', 'CouponsController@destroy')->name('destroy');
+
+	});
 });
 
 Route::prefix('admin')->middleware('guest:admin')->namespace('Auth\Admin')->name('admin.')->group(function() {

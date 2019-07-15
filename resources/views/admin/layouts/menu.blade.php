@@ -8,6 +8,7 @@
                     @include('admin.layouts.menu.item', ['routes' => ['admin.users.index'], 'page' => 'users.index', 'icon' => 'users'])
                     @include('admin.layouts.menu.item', ['routes' => ['admin.workshops.index', 'admin.workshops.create'], 'page' => 'workshops.index', 'icon' => 'chalkboard-teacher'])
                     @include('admin.layouts.menu.item', ['routes' => ['admin.payments.index'], 'page' => 'payments.index', 'icon' => 'credit-card'])
+                    @include('admin.layouts.menu.item', ['routes' => ['admin.coupons.index'], 'page' => 'coupons.index', 'icon' => 'tags'])
                     @include('admin.layouts.menu.collapse', ['routes' => ['admin.bills.create', 'admin.bills.pending'], 'collapseId' => 'bills', 'icon' => 'university'])
                 </ul>
             </div>
@@ -18,6 +19,7 @@
                     @include('admin.layouts.menu.item', ['routes' => ['admin.users.index'], 'page' => 'users.index', 'label' => 'Usuários'])
                     @include('admin.layouts.menu.item', ['routes' => ['admin.workshops.index', 'admin.workshops.create'], 'page' => 'workshops.index', 'label' => 'Workshops'])
                     @include('admin.layouts.menu.item', ['routes' => ['admin.payments.index'], 'page' => 'payments.index', 'label' => 'Pagamentos'])
+                    @include('admin.layouts.menu.item', ['routes' => ['admin.coupons.index'], 'page' => 'coupons.index', 'label' => 'Coupons'])
                     @include('admin.layouts.menu.collapse', ['routes' => ['admin.bills.create', 'admin.bills.pending'], 'collapseId' => 'bills', 'label' => 'Cobranças', 'subLabels' => ['Nova', 'Pendentes']])
                 </ul>
             </div>

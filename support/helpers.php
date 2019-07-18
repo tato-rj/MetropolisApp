@@ -1,5 +1,10 @@
 <?php 
 
+function strhas($str, $needle)
+{
+    return strpos($str, $needle) !== false;
+}
+
 function coupon($coupon, $fee)
 {
     $coupon = \App\Coupon::match($coupon);

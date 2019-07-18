@@ -115,13 +115,17 @@ class User extends Authenticatable implements MustVerifyEmail, Person
 
     public function signup(Workshop $workshop, $reference = null)
     {
-        $status = $reference ? 0 : 3;
+        $status = $reference ? 0 : 4;
         
-        $this->workshops()->attach($workshop->id, 
-            [
-                'reference' => $reference,
-                'status_id' => $status
-            ]);
+        if ($this->workshops->contains($workshop)) {
+            $this->workshops()->updateExistingPivot($workshop->id, ['status_id' => $status]);
+        } else {
+            $this->workshops()->attach($workshop->id, 
+                [
+                    'reference' => $reference ?? 'GRATUITA',
+                    'status_id' => $status
+                ]);
+        }
 
         return $this->workshops()->latest()->first()->reservation;
     }

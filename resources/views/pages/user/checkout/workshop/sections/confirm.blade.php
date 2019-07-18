@@ -11,7 +11,7 @@
 			</li>
 			<li class="mb-2">
 				<span class="text-teal mr-1"><strong>Horário</strong></span>
-				<span>Das {{$workshop->starts_at->format('H')}} às {{$workshop->ends_at->format('H')}} horas</span>
+				<span>Das {{$workshop->starts_at->format('H:i')}} às {{$workshop->ends_at->format('H:i')}}</span>
 			</li>
 			<li>
 				<span class="text-teal mr-1"><strong>Tem um coupon de desconto?</strong></span>

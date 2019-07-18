@@ -99,8 +99,9 @@
 					@include('components.form.label', ['label' => 'Começa às'])
 					<select name="start_time" class="form-control">
 						<option disabled selected>Começa às</option>
-						@for($i = office()->day_starts_at; $i <= office()->day_ends_at + 4; $i++)
-						<option value="{{$i}}" @match($workshop->starts_at->hour, $i) selected @endmatch>{{$i}}:00h</option>
+						@for($i = office()->day_starts_at; $i <= office()->day_ends_at + 3; $i++)
+						<option value="{{$i}}" @if($workshop->starts_at->hour == $i && $workshop->starts_at->minute == 0) selected @endif>{{$i}}:00h</option>
+						<option value="{{$i}}:30" @if($workshop->starts_at->hour == $i && $workshop->starts_at->minute == 30) selected @endif>{{$i}}:30h</option>
 						@endfor
 					</select>
 					@include('components/form/error', ['bag' => 'default', 'field' => 'start_time'])
@@ -110,7 +111,8 @@
 					<select name="end_time" class="form-control">
 						<option disabled selected>Termina às</option>
 						@for($i = office()->day_starts_at; $i <= office()->day_ends_at + 4; $i++)
-						<option value="{{$i}}" @match($workshop->ends_at->hour, $i) selected @endmatch>{{$i}}:00h</option>
+						<option value="{{$i}}" @if($workshop->ends_at->hour == $i && $workshop->ends_at->minute == 0) selected @endif>{{$i}}:00h</option>
+						<option value="{{$i}}:30" @if($workshop->ends_at->hour == $i && $workshop->ends_at->minute == 30) selected @endif>{{$i}}:30h</option>
 						@endfor
 					</select>
 					@include('components/form/error', ['bag' => 'default', 'field' => 'end_time'])

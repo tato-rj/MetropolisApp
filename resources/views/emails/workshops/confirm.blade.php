@@ -6,11 +6,11 @@ O seu pedido foi recebido com sucesso! Por favor aguarde a confirmação do seu 
 	<img src="{{asset($workshop->cover_image_path)}}" style="margin-bottom: .75em">
 	<p style="margin-bottom: 5px"><strong>Workshop:</strong> {{$workshop->name}}</p>
 	<p style="margin-bottom: 5px"><strong>Data:</strong> {{toFormattedDateStringPt($workshop->starts_at)}}</p>
-	<p style="margin-bottom: 5px"><strong>Hora da chegada:</strong> {{$workshop->starts_at->hour}}:00</p>
-	<p style="margin-bottom: 0"><strong>Hora da saída:</strong> {{$workshop->ends_at->hour}}:00</p>
+	<p style="margin-bottom: 5px"><strong>Hora da chegada:</strong> {{$workshop->starts_at->format('H:i')}}</p>
+	<p style="margin-bottom: 0"><strong>Hora da saída:</strong> {{$workshop->ends_at->format('H:i')}}</p>
 </div>
 
-
+@if($workshop->files()->exists())
 <div>
 	<p>Material para download</p>
 
@@ -19,6 +19,7 @@ O seu pedido foi recebido com sucesso! Por favor aguarde a confirmação do seu 
 	@endforeach
 
 </div>
+@endif
 
 <div style="margin: 40px 0;">
 	<p style="text-align: center;">Gostaria de obter mais informações?</p>

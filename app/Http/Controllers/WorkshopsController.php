@@ -46,6 +46,8 @@ class WorkshopsController extends Controller
     {
         $this->authorize('signup', $workshop);
 
+        $reference = null;
+
         $pagseguro = new PagSeguro;
 
         $user = auth()->user();
@@ -54,12 +56,14 @@ class WorkshopsController extends Controller
 
         $fee = coupon($request->coupon, $fee);
 
-        $reference = $pagseguro->generateReference($prefix = 'W', $user);
+        if ($fee > 0) {            
+            $reference = $pagseguro->generateReference($prefix = 'W', $user);
 
-        $status = $pagseguro->event($user, $request, $fee)->purchase($reference);
-        
-        if ($status instanceof \Exception)
-            return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
+            $status = $pagseguro->event($user, $request, $fee)->purchase($reference);
+            
+            if ($status instanceof \Exception)
+                return redirect()->back()->with('error', $pagseguro->errorMessage($status))->withInput();
+        }
 
         if ($request->save_card)
             auth()->user()->updateCard($form);
@@ -89,6 +93,13 @@ class WorkshopsController extends Controller
      */
     public function store(Request $request, CreateWorkshopForm $form)
     {
+        $start_hour = strhas($request->start_time, '30') ? substr($request->start_time, 0, 2) : $request->start_time;
+        $start_minutes = strhas($request->start_time, '30') ? 30 : 0;
+        $end_hour = strhas($request->end_time, '30') ? substr($request->end_time, 0, 2) : $request->end_time;
+        $end_minutes = strhas($request->end_time, '30') ? 30 : 0;
+        $request->starts_at = Carbon::parse($request->date)->setTime($start_hour,$start_minutes,0);
+        $request->ends_at = Carbon::parse($request->date)->setTime($end_hour,$end_minutes,0);
+
         $workshop = Workshop::create([
             'slug' => str_slug($request->name),
             'name' => $request->name,
@@ -98,8 +109,8 @@ class WorkshopsController extends Controller
             'discount' => $request->discount,
             'cover_image' => (new Cropper($request))->make('cover_image')->saveTo('workshops/cover_images/')->getPath(),
             'capacity' => $request->capacity,
-            'starts_at' => Carbon::parse($request->date)->setTime($request->start_time,0,0),
-            'ends_at' => Carbon::parse($request->date)->setTime($request->end_time,0,0)
+            'starts_at' => $request->starts_at,
+            'ends_at' => $request->ends_at
         ]);
 
         return redirect()->route('admin.workshops.edit', $workshop->slug)->with('status', 'O workshop foi criado com sucesso.');

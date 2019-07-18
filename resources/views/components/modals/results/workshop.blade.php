@@ -73,7 +73,7 @@
 		@if($reservation->canBeCancelled())
 		<p class="text-muted mb-2"><small>O pagamento para essa reserva <u>não será mais cobrado</u>.</small></p>
 		@elseif($reservation->canBeReturned())
-			@if($reservation->workshop->fee)
+			@if($reservation->workshop->fee && $reservation->reference != 'GRATUITA')
 			<p class="text-muted mb-2"><small>O pagamento para essa reserva será <u>estornado</u>.</small></p>
 			@endif
 		@else

@@ -62,6 +62,7 @@
 						<option disabled selected>Começa às</option>
 						@for($i = office()->day_starts_at; $i <= office()->day_ends_at + 4; $i++)
 						<option value="{{$i}}" @old('start_time', $i) selected @endold>{{$i}}:00h</option>
+						<option value="{{$i}}:30" @old('start_time', $i) selected @endold>{{$i}}:30h</option>
 						@endfor
 					</select>
 					@include('components/form/error', ['bag' => 'default', 'field' => 'start_time'])
@@ -71,6 +72,7 @@
 						<option disabled selected>Termina às</option>
 						@for($i = office()->day_starts_at; $i <= office()->day_ends_at + 4; $i++)
 						<option value="{{$i}}" @old('end_time', $i) selected @endold>{{$i}}:00h</option>
+						<option value="{{$i}}:30" @old('end_time', $i) selected @endold>{{$i}}:30h</option>
 						@endfor
 					</select>
 					@include('components/form/error', ['bag' => 'default', 'field' => 'end_time'])

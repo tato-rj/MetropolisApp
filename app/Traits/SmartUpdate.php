@@ -10,8 +10,12 @@ trait SmartUpdate
 {
 	public function updateOrIgnore(Request $request)
 	{
-		$request->starts_at = Carbon::parse($request->date)->setTime($request->start_time,0,0);
-		$request->ends_at = Carbon::parse($request->date)->setTime($request->end_time,0,0);
+		$start_hour = strhas($request->start_time, '30') ? substr($request->start_time, 0, 2) : $request->start_time;
+		$start_minutes = strhas($request->start_time, '30') ? 30 : 0;
+		$end_hour = strhas($request->end_time, '30') ? substr($request->end_time, 0, 2) : $request->end_time;
+		$end_minutes = strhas($request->end_time, '30') ? 30 : 0;
+		$request->starts_at = Carbon::parse($request->date)->setTime($start_hour,$start_minutes,0);
+		$request->ends_at = Carbon::parse($request->date)->setTime($end_hour,$end_minutes,0);
 
 		$this->update([
 			'slug' => $this->evaluate($request, 'slug'),

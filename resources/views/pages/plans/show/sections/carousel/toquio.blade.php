@@ -4,7 +4,6 @@
     <li data-target="#carousel-toquio" data-slide-to="1"></li>
     <li data-target="#carousel-toquio" data-slide-to="2"></li>
     <li data-target="#carousel-toquio" data-slide-to="3"></li>
-    <li data-target="#carousel-toquio" data-slide-to="4"></li>
   </ol>
   <div class="carousel-inner h-100">
     <div class="carousel-item active w-100 h-100">
@@ -18,9 +17,6 @@
     </div>
     <div class="carousel-item w-100 h-100">
       <div class="bg-align-center w-100 h-100" style="background-image: url({{asset("images/conference/conference-4.jpg")}})"></div>
-    </div>
-    <div class="carousel-item w-100 h-100">
-      <div class="bg-align-center w-100 h-100" style="background-image: url({{asset("images/conference/conference-5.jpg")}})"></div>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carousel-toquio" role="button" data-slide="prev">

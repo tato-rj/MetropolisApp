@@ -15,6 +15,11 @@
 <div class="container my-5">
 	<div class="row">
 		<div class="col-default mb-4">
+			@if($discount)
+			<div class="alert alert-green">
+				<i class="fas fa-check-circle mr-2"></i>O desconto de {{$discount}}% será aplicado ao valor final. Você irá pagar um total de <strong>R${{coupon(request('coupon'), $workshop->discount ? $workshop->discount : $workshop->fee)}}</strong>.
+			</div>
+			@endif
 			<div class="text-center mb-4">
 				<p class="lead">Escolha a sua forma de pagamento</p>
 			</div>
@@ -50,26 +55,4 @@
 @push('scripts')
 <script type="text/javascript" src="https://stc{{pagseguro('env') == 'sandbox' ? '.sandbox' : null}}.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
 <script type="text/javascript" src="{{mix('js/pagseguro.js')}}"></script>
-<script type="text/javascript">
-$('input#coupon').on('keyup', function() {
-	$('input[name="coupon"]').val($(this).val().toUpperCase());
-});
-
-$('button#validate-coupon').click(function() {
-	let $button = $(this);
-	let $coupon = $('input#coupon');
-	$button.siblings('div').hide();
-	
-	if ($coupon.val()) {
-		$.get($button.attr('data-url'), {name: $coupon.val()}, function(response) {
-			$button.siblings('div.' + response.status + '-feedback').text(response.message).show();
-		}).fail(function(response) {
-			console.log(response);
-			alert('Não foi possível validar este coupon agora.');
-		});
-	} else {
-		alert('Você esqueceu de escrever o nome do coupon');
-	}
-});
-</script>
 @endpush

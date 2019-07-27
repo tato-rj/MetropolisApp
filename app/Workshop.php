@@ -53,7 +53,7 @@ class Workshop extends Metropolis
 
     public function scopeUpcoming($query)
     {
-        return $query->whereDate('ends_at', '>', now());
+        return $query->whereDate('ends_at', '>=', now()->format('Y-m-d'));
     }
 
     public function scopeCurrentWeek($query)

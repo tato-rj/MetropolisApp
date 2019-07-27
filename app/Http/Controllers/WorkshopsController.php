@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Workshop, UserWorkshop};
+use App\{Workshop, UserWorkshop, Coupon};
 use Illuminate\Http\Request;
 use App\Events\WorkshopSignup;
 use App\Services\PagSeguro\PagSeguro;
@@ -29,17 +29,20 @@ class WorkshopsController extends Controller
     {
         $this->authorize('signup', $workshop);
 
-        if ($workshop->isFree) {
+        $coupon = Coupon::match(request('coupon'));
+        $discount = $coupon->exists() && $coupon->first()->isValid() ? $coupon->first()->discount : null;
+
+        if ($workshop->isFree || $discount == 100) {
             auth()->user()->signup($workshop);
 
             event(new WorkshopSignup($workshop));
 
-            return redirect()->route('client.workshops.index')->with('status', 'O seu pedido foi realizado com sucesso. A reserva será confirmada assim que o pagamento estiver completo.');
+            return redirect()->route('client.workshops.index')->with('status', 'O seu pedido foi realizado com sucesso e acabamos de enviar um email com os detalhes da reserva. Nos vemos em breve!');
         }
 
         $pagseguro = new PagSeguro;
 
-        return view('pages.user.checkout.workshop.index', compact(['workshop', 'pagseguro']));
+        return view('pages.user.checkout.workshop.index', compact(['workshop', 'pagseguro', 'discount']));
     }
 
     public function purchase(Workshop $workshop, Request $request, CreditCardForm $form)

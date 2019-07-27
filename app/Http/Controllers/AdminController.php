@@ -36,7 +36,7 @@ class AdminController extends Controller
 
     public function workshops()
     {
-        $workshops = Workshop::orderBy('starts_at')->paginate(6);
+        $workshops = Workshop::orderBy('starts_at', 'DESC')->paginate(6);
 
     	return view('admin.pages.workshops.index', compact('workshops'));
     }

@@ -15,7 +15,7 @@
 	</div>
 	<div class="col-8">
 	  @if($workshop->attendees->isEmpty())
-	  	<div class="py-4 text-muted text-center lead">Este workshop ainda não tem nenhuma reserva</div>
+	  	<div class="py-4 text-muted text-center lead">Este workshop {{$workshop->hasPassed() ? 'não teve' : 'ainda não tem'}} nenhuma reserva</div>
 	  @else
 		<div class="table-responsive-lg">
 			<table class="table table-hover table-bordered">

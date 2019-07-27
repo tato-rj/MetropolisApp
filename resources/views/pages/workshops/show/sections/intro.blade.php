@@ -13,7 +13,7 @@
 		<div class="bg-teal text-white" style="padding: 2.25rem;">
 			<i class="fas fa-3x fa-clock"></i>
 		</div>
-		<h5 class="mb-0 bg-light border-bottom border-teal border-1x text-dark py-2"><strong>{{$workshop->starts_at->format('H')}} horas</strong></h5>
+		<h5 class="mb-0 bg-light border-bottom border-teal border-1x text-dark py-2"><strong>{{$workshop->starts_at->format('H:i')}}</strong></h5>
 	</div>
 	<div class="text-center mx-2 mb-3 {{! $workshop->fee ? 'opacity-4' : null}}">
 		<div class=" {{$workshop->fee ? 'bg-teal' : 'bg-grey'}} text-white" style="padding: 2.25rem;">

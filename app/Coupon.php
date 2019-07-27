@@ -19,7 +19,7 @@ class Coupon extends Metropolis
 
     	$this->increment('used', 1);
 
-    	$discount = floor(($fee * $this->discount) / 100);
+    	$discount = intval(floor(($fee * $this->discount) / 100));
 
     	return $fee - $discount;
     }
@@ -32,7 +32,9 @@ class Coupon extends Metropolis
             return response()->json(['message' => 'Este coupon não é válido.', 'status' => 'invalid']);
         }
 
-        return response()->json(['message' => 'Coupon válido! O desconto de ' . $this->discount . '% será aplicado ao valor final dessa compra.', 'status' => 'valid']);
+        $message = $this->discount == 100 ? 'Essa compra será gratuita.' : 'O desconto de ' . $this->discount . '% será aplicado ao valor final dessa compra.';
+
+        return response()->json(['message' => 'Coupon válido! ' . $message, 'status' => 'valid']);
     }
 
     public function isValid()

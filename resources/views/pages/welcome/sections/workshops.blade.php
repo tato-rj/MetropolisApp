@@ -19,7 +19,7 @@
           <div class="py-2 {{! $loop->last ? 'border-bottom' : null}}">
             <div class="text-truncate font-weight-bold text-dark"><a class="link-inherit" href="{{route('workshops.show', $workshop->slug)}}">{{$workshop->name}}</a></div>
             <span class="text-muted">
-              <small>dia {{$workshop->starts_at->format('d/m')}} às {{$workshop->starts_at->format('H')}} horas</small>
+              <small>dia {{$workshop->starts_at->format('d/m')}} às {{$workshop->starts_at->format('H:i')}} horas</small>
             </span>
           </div>
         </div>

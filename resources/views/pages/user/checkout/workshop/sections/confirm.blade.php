@@ -9,18 +9,9 @@
 				<span class="text-teal mr-1"><strong>Data</strong></span>
 				<span class="date-pt" data-date="{{$workshop->starts_at}}"></span>
 			</li>
-			<li class="mb-2">
+			<li>
 				<span class="text-teal mr-1"><strong>Horário</strong></span>
 				<span>Das {{$workshop->starts_at->format('H:i')}} às {{$workshop->ends_at->format('H:i')}}</span>
-			</li>
-			<li>
-				<span class="text-teal mr-1"><strong>Tem um coupon de desconto?</strong></span>
-				<input type="text" placeholder="COUPON" class="text-uppercase mr-2" id="coupon" style="border: 0;
-			    border-bottom: 1px solid lightgrey;
-			    background: transparent;">
-			    <button class="btn btn-xs btn-teal" id="validate-coupon" data-url="{{route('coupons.validate')}}">Validar coupon</button>
-				<div class="valid-feedback"></div>
-				<div class="invalid-feedback"></div>
 			</li>
 		</ul>
 
@@ -30,13 +21,17 @@
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>
 			<div class="d-flex xs-w-100">
 				<div class="p-3 bg-teal-dark flex-grow"><strong>
-					@if($workshop->discount)
-					<span class="opacity-6 mr-2" style="text-decoration: line-through;">
-						{{feeToString($workshop->fee)}}
-					</span>
-					{{feeToString($workshop->discount)}}
+					@if($discount)
+						{{feeToString(coupon(request('coupon'), $workshop->discount ? $workshop->discount : $workshop->fee))}}
 					@else
-					{{feeToString($workshop->fee)}}
+						@if($workshop->discount)
+						<span class="opacity-6 mr-2" style="text-decoration: line-through;">
+							{{feeToString($workshop->fee)}}
+						</span>
+						{{feeToString($workshop->discount)}}
+						@else
+						{{feeToString($workshop->fee)}}
+						@endif
 					@endif
 				</strong></div>
 			</div>

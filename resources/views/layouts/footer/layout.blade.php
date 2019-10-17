@@ -36,7 +36,7 @@
             </div>
 
             <div class="text-light">
-              <a class="link-none p-2" href="#"><i class="fab fa-facebook-f"></i></a>
+              <a class="link-none p-2" href="{{config('services.social.facebook')}}"><i class="fab fa-facebook-f"></i></a>
               <a class="link-none p-2" href="#"><i class="fab fa-instagram"></i></a>
               <a class="link-none p-2" href="#"><i class="fab fa-twitter"></i></a>
             </div>

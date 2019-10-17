@@ -39,4 +39,8 @@ return [
         'cnpj' => env('PAGSEGURO_CNPJ')
     ],
 
+    'social' => [
+        'facebook' => 'https://www.facebook.com/Metropolis-Rio-440172456830128'
+    ]
+
 ];

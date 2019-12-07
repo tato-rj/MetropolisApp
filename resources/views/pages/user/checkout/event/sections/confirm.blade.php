@@ -38,11 +38,11 @@
 				<div class="p-3 bg-teal-dark flex-grow"><strong>
 					@bonus($form->space)
 					<span class="opacity-6 mr-2" style="text-decoration: line-through;">
-						{{feeToString($form->space->priceFor($form->participants, $form->duration, $discount = 0))}}
+						{{feeToString(coupon(request('coupon'), $form->space->priceFor($form->participants, $form->duration, $discount = 0)))}}
 					</span>
-					{{feeToString($form->space->priceFor($form->participants, $form->duration, $discount = auth()->user()->bonusesLeft($form->space)))}}
+					{{feeToString(coupon(request('coupon'), $form->space->priceFor($form->participants, $form->duration, $discount = auth()->user()->bonusesLeft($form->space))))}}
 					@else
-					{{feeToString($form->space->priceFor($form->participants, $form->duration))}}
+					{{feeToString(coupon(request('coupon'), $form->space->priceFor($form->participants, $form->duration)))}}
 					@endbonus
 				</strong></div>
 			</div>

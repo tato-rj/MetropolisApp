@@ -62,11 +62,15 @@
 				</div>
 			</li>
 			@endif
+
 			@bonus($form->space)
 			<li class="mt-2">
 				<span class="text-red mr-1">Você tem <strong>{{auth()->user()->bonusesLeft($form->space)}} {{trans_choice('horas', auth()->user()->bonusesLeft($form->space))}}</strong> de bônus para usar nessa reserva!</span>
 			</li>
 			@endbonus
+			<li class="mt-2">
+				@include('components.form.payment.coupon')
+			</li>
 		</ul>
 		<div class="bg-teal text-white d-flex flex-wrap">
 			<div class="p-3 flex-grow"><strong>INVESTIMENTO TOTAL</strong></div>

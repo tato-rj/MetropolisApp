@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\{EventCreated, EventUpdated};
-use App\{Event, Space, User};
+use App\{Event, Space, User, Coupon};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\{SpaceSearchForm, CreateEventForm, CreditCardForm};
@@ -52,8 +52,8 @@ class EventsController extends Controller
             return redirect()->back()->with([
                 'error' => $authorization->getMessage(),
                 'form' => $form]);
-        
-        $price = $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space));
+
+        $price = coupon($request->coupon, $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space)));
 
         if ($price == 0) {            
             $event = $form->user->schedule($form);
@@ -96,7 +96,7 @@ class EventsController extends Controller
             $reference = $pagseguro->generateReference($prefix = 'E', $form->user);
         }
         
-        $price = $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space));
+        $price = coupon($request->coupon, $form->space->priceFor($form->participants, $form->duration, $form->user->bonusesLeft($form->space)));
         
         $status = $pagseguro->event($form->user, $request, $price)->purchase($reference);
 

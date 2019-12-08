@@ -68,6 +68,9 @@
 				<span class="text-red mr-1">Você tem <strong>{{auth()->user()->bonusesLeft($form->space)}} {{trans_choice('horas', auth()->user()->bonusesLeft($form->space))}}</strong> de bônus para usar nessa reserva!</span>
 			</li>
 			@endbonus
+			<div class="alert alert-warning mt-3 shadow-sm">
+				<i class="fas fa-gift mr-2"></i><strong><u>Promoção de Natal</u></strong> Até o dia 20 de Dezembro, aproveite a nossa promoção e venha conheçer o mais novo espaço de co-working do Centro do Rio. Insira abaixo o coupon <strong>PROMO_NATAL</strong> e marque a sua reserva de forma 100% gratuita!
+			</div>
 			<li class="mt-2">
 				@include('components.form.payment.coupon')
 			</li>

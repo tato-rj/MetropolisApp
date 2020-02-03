@@ -12,7 +12,7 @@ class CustomDatePicker
                 let string = date.selectedYear + '-' + month + '-' + date.selectedDay;
                 $('input[name="date"]').val(string).trigger('change');
             },
-            beforeShowDay: $.datepicker.noWeekends
+            // beforeShowDay: $.datepicker.noWeekends
         });
     }
 

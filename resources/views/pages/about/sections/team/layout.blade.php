@@ -29,7 +29,7 @@
 		@endslot
 		@endcomponent
 
-		@component('pages.about.sections.team.member', [
+{{-- 		@component('pages.about.sections.team.member', [
 			'image' => 'paulo', 'name' => 'Paulo Henrique Paiva', 'position' => 'financeiro',
 			'fields' => ['INVESTIMENTOS', 'ANÁLISE ECONÔMICA', 'CRIPTOMOEDAS', 'CROWDFUNDING', 'ACESSO A CAPITAL', 'FINANCIAMENTOS', 'AQUISIÇÕES']])
 		@slot('icons')
@@ -37,7 +37,7 @@
 			<a href="" class="p-2 link-inherit"><i class="fab fa-linkedin-in"></i></a>
 			<a href="" class="p-2 link-inherit"><i class="fab fa-facebook-f"></i></a>
 		@endslot
-		@endcomponent
+		@endcomponent --}}
 
 		@component('pages.about.sections.team.member', [
 			'image' => 'marco', 'name' => 'Marco Fernandes', 'position' => 'technologia',
